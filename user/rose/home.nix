@@ -16,6 +16,7 @@
       vesktop
       alejandra
       imhex
+      direnv
       gitkraken
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
@@ -90,10 +91,18 @@
           bbenoist.nix
           kamadorueda.alejandra
           gruntfuggly.todo-tree
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          thenuprojectcontributors.vscode-nushell-lang
+          vscode-icons-team.vscode-icons
+          mkhl.direnv
+          svelte.svelte-vscode
+          ms-python.python
         ];
 
         userSettings = {
           "editor.formatOnSave" = true;
+          "workbench.iconTheme" = "vscode-icons";
         };
       };
     };
