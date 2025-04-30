@@ -120,5 +120,25 @@
         init.defaultBranch = "main";
       };
     };
+
+    nushell = {
+      enable = true;
+      package = pkgs.nushell;
+      configFile.source = ./config.nu;
+    };
+
+    carapace = {
+      enable = true;
+      package = pkgs.carapace;
+      enableNushellIntegration = true;
+    };
+
+    starship = {
+      enable = true;
+      package = pkgs.starship;
+      enableNushellIntegration = true;
+    };
   };
+
+  services.gpg-agent.enableNushellIntegration = true;
 }

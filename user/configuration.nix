@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -8,8 +8,6 @@
     isNormalUser = true;
     description = "Rose Kodsi-Hall";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.nushell;
   };
-
-  # Optionally, use home-manager.extraSpecialArgs to pass
-  # arguments to home.nix
 }
