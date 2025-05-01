@@ -6,16 +6,16 @@
 }: {
   imports = [
     ./components/credentials/configuration.nix
-    ./components/tank-share.nix
+    ./components/fonts.nix
     ./components/i18n.nix
     ./components/ime.nix
     ./components/nix.nix
+    ./components/tank-share.nix
   ];
 
   system.stateVersion = "24.11";
 
   environment.systemPackages = [
-    pkgs.tailscale
     pkgs.cifs-utils
   ];
 
@@ -33,7 +33,9 @@
     };
   };
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+  };
 
   hardware = {
     # TODO: Not working :(
@@ -46,7 +48,6 @@
   security.rtkit.enable = true;
 
   fonts = {
-    fontconfig.useEmbeddedBitmaps = true;
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans

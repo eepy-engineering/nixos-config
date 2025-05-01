@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  isDesktop,
   opnix,
   ...
 }: {
@@ -24,7 +25,7 @@
       direnv
       gitkraken
       qpwgraph
-      opnix.packages.${pkgs.system}.default
+      opnix
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
         jdks = [
@@ -39,10 +40,10 @@
 
   programs = {
     home-manager.enable = true;
-    obs-studio.enable = true;
+    obs-studio.enable = isDesktop;
 
     chromium = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.ungoogled-chromium;
 
       extensions = let
@@ -86,7 +87,7 @@
     };
 
     vscode = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
       enableUpdateCheck = true;

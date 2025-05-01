@@ -39,33 +39,15 @@
   };
   services.libinput.enable = true;
 
-  users.users.aubrey = {
-    description = "Aubrey";
-    isNormalUser = true;
-    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd"];
-    packages = with pkgs; [
-      tree
-    ];
-    shell = pkgs.nushell;
-  };
-
   security.sudo.wheelNeedsPassword = false;
 
-  programs.thunderbird.enable = true;
-
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["aubrey"];
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd = {
     enable = true;
     qemu.vhostUserPackages = with pkgs; [virtiofsd];
   };
 
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = ["aubrey"];
-  };
   environment.etc = {
     "1password/custom_allowed_browsers" = {
       text = ''
@@ -76,12 +58,12 @@
       '';
       mode = "0755";
     };
-  };
-  environment.etc.seat = {
-    target = "udev/rules.d/50-switch.rules";
-    text = ''
-      SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
-    '';
+    seat = {
+      target = "udev/rules.d/50-switch.rules";
+      text = ''
+        SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
+      '';
+    };
   };
 
   programs.steam = {
@@ -102,4 +84,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  home-manager.backupFileExtension = "hmbak";
 }

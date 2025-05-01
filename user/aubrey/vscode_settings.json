@@ -1,0 +1,174 @@
+{
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+
+    "cmake.configureOnOpen": false,
+    "cmake.showConfigureWithDebuggerNotification": false,
+    "cmake.showOptionsMovedNotification": false,
+
+    "debug.onTaskErrors": "abort",
+
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+
+    "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.formatOnSave": true,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.lineNumbers": "relative",
+    "editor.linkedEditing": true,
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": true,
+    "editor.tabSize": 2,
+    "editor.unicodeHighlight.allowedLocales": {
+        "ja": true
+    },
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+
+    "evenBetterToml.formatter.indentString": "",
+    "evenBetterToml.formatter.inlineTableExpand": false,
+
+    "files.associations": {
+        "*.cppm": "cpp"
+    },
+
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 300,
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+
+    "github.copilot.editor.enableAutoCompletions": false,
+    "github.copilot.editor.enableCodeActions": false,
+    "github.copilot.enable": {
+        "*": false,
+        "markdown": false,
+        "plaintext": false,
+        "scminput": false
+    },
+
+    "haskell.manageHLS": "PATH",
+
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    "rust-analyzer.rustfmt.extraArgs": [
+        "+nightly"
+    ],
+    "rust-analyzer.rustfmt.overrideCommand": [
+        "--edition",
+        "2021",
+        "rustfmt"
+    ],
+    "rust-analyzer.server.path": "rust-analyzer",
+    "rust-analyzer.showUnlinkedFileNotification": false,
+
+    "screencastMode.fontSize": 36,
+    "screencastMode.verticalOffset": 10,
+
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+
+    "svelte.enable-ts-plugin": true,
+
+    "terminal.integrated.automationProfile.linux": {
+        "icon": "account",
+        "path": "bash"
+    },
+    "terminal.integrated.defaultProfile.linux": "nushell-term",
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "icon": "terminal-bash",
+            "path": "bash"
+        },
+        "nushell-term": {
+            "icon": "terminal-bash",
+            "path": "nu"
+        }
+    },
+
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    "update.mode": "none",
+
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-c>": false,
+        "<C-f>": false,
+        "<C-h>": false,
+        "<C-p>": false,
+        "<C-v>": false,
+        "<C-x>": false
+    },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "<C-d>"
+            ],
+            "commands": [
+                "editor.action.duplicateSelection"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "after": [
+                "<Right>",
+                "i"
+            ],
+            "before": [
+                "`"
+            ]
+        },
+        {
+            "after": [
+                "i"
+            ],
+            "before": [
+                "<leader>",
+                "r"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            "before": [
+                "<C-i>"
+            ],
+            "commands": [
+                "editor.action.showHover"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "terminal.focus"
+            ]
+        }
+    ],
+    "vim.startInInsertMode": true,
+
+    "vsicons.dontShowNewVersionMessage": true,
+
+    "window.commandCenter": false,
+    "window.customTitleBarVisibility": "never",
+
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.wrapTabs": true,
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.layoutControl.enabled": false,
+    "workbench.startupEditor": "none",
+
+    "zenMode.fullScreen": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideStatusBar": false
+}

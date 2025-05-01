@@ -4,6 +4,7 @@
   inputs = {
     # Use the unstable NixPkgs branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Use community VSCode extensions
     extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -16,6 +17,10 @@
     # Use OpNix for secrets
     opnix.url = "github:brizzbuzz/opnix";
     opnix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Applications
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -23,15 +28,33 @@
     home-manager,
     opnix,
     extensions,
+    zen-browser,
     ...
   }: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-    nixosConfigurations = {
+    nixosConfigurations = let
+      overlays = [
+        extensions.overlays.default
+        (final: _prev: {
+          opnix = opnix.packages.${final.system}.default;
+          zen-browser = zen-browser.packages.${final.system}.default;
+          unstable = import inputs.nixpkgs-unstable {
+            system = final.system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
+      overlaysModule = _: {nixpkgs.overlays = overlays;};
+    in {
       rose-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs opnix;};
+        specialArgs = {
+          inherit inputs opnix;
+          isDesktop = true;
+        };
         modules = [
+          overlaysModule
           opnix.nixosModules.default
           home-manager.nixosModules.home-manager
           ./system/configuration.nix
@@ -43,9 +66,10 @@
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs opnix;
-          extensions = extensions.extensions.x86_64-linux;
+          isDesktop = true;
         };
         modules = [
+          overlaysModule
           opnix.nixosModules.default
           home-manager.nixosModules.home-manager
           ./system/configuration.nix
