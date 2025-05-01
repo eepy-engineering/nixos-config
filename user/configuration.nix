@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+args @ {pkgs, ...}: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -6,7 +6,7 @@
   programs._1password.enable = true;
 
   # Rose's user
-  home-manager.users.rose = import ./rose/home.nix;
+  home-manager.users.rose = import ./rose/home.nix args;
   users.users.rose = {
     isNormalUser = true;
     description = "Rose Kodsi-Hall";

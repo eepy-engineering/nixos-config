@@ -2,8 +2,13 @@
   config,
   pkgs,
   lib,
+  opnix,
   ...
 }: {
+  imports = [
+    opnix.homeManagerModules.default
+  ];
+
   home = {
     stateVersion = "24.11";
 
@@ -19,6 +24,7 @@
       direnv
       gitkraken
       qpwgraph
+      opnix.packages.${pkgs.system}.default
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
         jdks = [
@@ -141,5 +147,7 @@
     };
   };
 
-  services.gpg-agent.enableNushellIntegration = true;
+  services = {
+    gpg-agent.enableNushellIntegration = true;
+  };
 }

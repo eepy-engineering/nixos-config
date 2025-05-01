@@ -52,6 +52,12 @@
       pulse.enable = true;
       jack.enable = true;
     };
+
+    onepassword-secrets = {
+      enable = true;
+      users = ["rose"];
+      configFile = ./secrets.json;
+    };
   };
 
   services.tailscale.enable = true;
@@ -96,20 +102,22 @@
     ];
   };
 
-  # fileSystems."/mnt/tank" = {
-  #   device = "//shared-server-store/tank";
-  #   fsType = "cifs";
-  #   options = [import ../util/cifs-options.nix lib {
-  #     x-systemd = {
-  #       automount = true;
-  #       idle-timeout = 60;
-  #       device-timeout = "5s";
-  #       mount-timeout = "5s";
-  #     };
+  fileSystems."/mnt/tank" = {
+    device = "//shared-server-store/tank";
+    fsType = "cifs";
+    options = [
+      (import ../util/cifs-options.nix lib {
+        x-systemd = {
+          automount = true;
+          idle-timeout = 60;
+          device-timeout = "5s";
+          mount-timeout = "5s";
+        };
 
-  #     noauto = true;
+        noauto = true;
 
-  #     credentials = ./samba-credentials
-  #   }];
-  # };
+        credentials = /var/lib/opnix/secrets/samba/credentials;
+      })
+    ];
+  };
 }
