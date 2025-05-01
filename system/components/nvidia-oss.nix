@@ -1,7 +1,10 @@
-{config}: {
+{
+  config,
+  isDesktop,
+}: {
   services = {
     xserver = {
-      enable = true;
+      enable = isDesktop;
       videoDrivers = ["nvidia"];
       xkb = {
         layout = "us";

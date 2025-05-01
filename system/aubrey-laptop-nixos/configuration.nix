@@ -77,7 +77,6 @@
     package = pkgs.wireshark-qt;
   };
   services.tailscale.enable = true;
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

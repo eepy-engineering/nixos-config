@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  isDesktop,
   ...
 }: {
   imports = [
@@ -20,44 +21,35 @@
   ];
 
   services = {
-    desktopManager.plasma6.enable = true;
+    desktopManager.plasma6.enable = isDesktop;
 
     libinput.enable = true;
 
     pipewire = {
-      enable = true;
+      enable = isDesktop;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
     };
-  };
 
-  services.tailscale = {
-    enable = true;
+    openssh = {
+      enable = true;
+      settings = {
+        X11Forwarding = isDesktop;
+        PermitRootLogin = "no";
+      };
+    };
+    tailscale.enable = true;
   };
 
   hardware = {
     # TODO: Not working :(
-    bluetooth.enable = true;
+    bluetooth.enable = isDesktop;
     bluetooth.powerOnBoot = true;
 
-    graphics.enable = true;
+    graphics.enable = isDesktop;
   };
 
-  security.rtkit.enable = true;
-
-  fonts = {
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts.githubRelease
-      dina-font
-      proggyfonts
-    ];
-  };
+  security.rtkit.enable = isDesktop;
 }
