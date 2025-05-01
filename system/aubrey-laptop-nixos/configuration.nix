@@ -11,7 +11,7 @@
     ./packages.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
   boot.supportedFilesystems = ["btrfs"];
 
   hardware.enableAllFirmware = true;
