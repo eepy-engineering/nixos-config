@@ -7,6 +7,7 @@
 
   imports = [
     ./hardware.nix
+    ../components/nvidia-oss.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
