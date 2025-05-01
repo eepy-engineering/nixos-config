@@ -4,10 +4,17 @@
   lib,
   ...
 }: {
+  imports = [
+    ./components/credentials/configuration.nix
+    ./components/tank-share.nix
+  ];
+
   system.stateVersion = "24.11";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
+
+  boot.extraModulePackages = [];
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -43,20 +50,12 @@
 
     libinput.enable = true;
 
-    pulseaudio.enable = false;
-
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-    };
-
-    onepassword-secrets = {
-      enable = true;
-      users = ["rose"];
-      configFile = ./secrets.json;
     };
   };
 
@@ -70,6 +69,7 @@
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
+    # TODO: Not working :(
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
 
@@ -90,34 +90,6 @@
       mplus-outline-fonts.githubRelease
       dina-font
       proggyfonts
-    ];
-  };
-
-  i18n.inputMethod = {
-    type = "fcitx5";
-    enable = true;
-    fcitx5.addons = with pkgs; [
-      fcitx5-mozc
-      fcitx5-gtk
-    ];
-  };
-
-  fileSystems."/mnt/tank" = {
-    device = "//shared-server-store/tank";
-    fsType = "cifs";
-    options = [
-      (import ../util/cifs-options.nix lib {
-        x-systemd = {
-          automount = true;
-          idle-timeout = 60;
-          device-timeout = "5s";
-          mount-timeout = "5s";
-        };
-
-        noauto = true;
-
-        credentials = /var/lib/opnix/secrets/samba/credentials;
-      })
     ];
   };
 }

@@ -89,28 +89,25 @@
       enable = true;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
+      enableUpdateCheck = true;
+      enableExtensionUpdateCheck = true;
 
-      profiles.default = {
-        enableUpdateCheck = true;
-        enableExtensionUpdateCheck = true;
+      extensions = with pkgs.vscode-extensions; [
+        bbenoist.nix
+        kamadorueda.alejandra
+        gruntfuggly.todo-tree
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
+        thenuprojectcontributors.vscode-nushell-lang
+        vscode-icons-team.vscode-icons
+        mkhl.direnv
+        svelte.svelte-vscode
+        ms-python.python
+      ];
 
-        extensions = with pkgs.vscode-extensions; [
-          bbenoist.nix
-          kamadorueda.alejandra
-          gruntfuggly.todo-tree
-          rust-lang.rust-analyzer
-          tamasfe.even-better-toml
-          thenuprojectcontributors.vscode-nushell-lang
-          vscode-icons-team.vscode-icons
-          mkhl.direnv
-          svelte.svelte-vscode
-          ms-python.python
-        ];
-
-        userSettings = {
-          "editor.formatOnSave" = true;
-          "workbench.iconTheme" = "vscode-icons";
-        };
+      userSettings = {
+        "editor.formatOnSave" = true;
+        "workbench.iconTheme" = "vscode-icons";
       };
     };
 
