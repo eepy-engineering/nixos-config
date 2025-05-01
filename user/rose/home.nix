@@ -18,6 +18,7 @@
       imhex
       direnv
       gitkraken
+      qpwgraph
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
         jdks = [
