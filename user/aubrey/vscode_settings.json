@@ -12,6 +12,8 @@
 
     "debug.onTaskErrors": "abort",
 
+    "direnv.restart.automatic": true,
+
     "dotnetAcquisitionExtension.enableTelemetry": false,
 
     "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
@@ -60,9 +62,9 @@
         "+nightly"
     ],
     "rust-analyzer.rustfmt.overrideCommand": [
+        "rustfmt",
         "--edition",
-        "2021",
-        "rustfmt"
+        "2024"
     ],
     "rust-analyzer.server.path": "rust-analyzer",
     "rust-analyzer.showUnlinkedFileNotification": false,
