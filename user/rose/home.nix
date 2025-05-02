@@ -32,6 +32,7 @@
       kx-aspe-cli
       openssl
       iperf3
+      obsidian
       opnix.packages.${pkgs.system}.default
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
@@ -121,7 +122,6 @@
 
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
-        kamadorueda.alejandra
         gruntfuggly.todo-tree
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
@@ -135,7 +135,9 @@
       userSettings = {
         "editor.formatOnSave" = true;
         "workbench.iconTheme" = "vscode-icons";
-        "window.titleBarStyle" = "custom";
+        "window.titleBarStyle" = "native";
+        "editor.fontFamily" = "'Fira Code', 'monospace', monospace";
+        "editor.fontLigatures" = true;
       };
     };
 
@@ -181,17 +183,87 @@
         ];
       };
     };
+
+    alacritty = {
+      enable = true;
+      package = pkgs.alacritty;
+      settings = {};
+    };
+
+    i3status-rust = {
+      enable = true;
+      bars = {
+        bottom = {
+          blocks = [
+            {
+              block = "cpu";
+            }
+            {
+              alert = 10.0;
+              block = "disk_space";
+              format = " $icon root: $available.eng(w:2) ";
+              info_type = "available";
+              interval = 20;
+              path = "/";
+              warning = 20.0;
+            }
+            {
+              block = "memory";
+              format = " $icon $mem_total_used_percents.eng(w:2) ";
+              format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
+            }
+            {
+              block = "sound";
+              click = [
+                {
+                  button = "left";
+                  cmd = "pavucontrol";
+                }
+              ];
+            }
+            {
+              block = "time";
+              format = " $timestamp.datetime(f:'%a %d/%m %R') ";
+              interval = 5;
+            }
+          ];
+        };
+      };
+    };
+
+    rofi = {
+      enable = true;
+      package = pkgs.rofi;
+      font = "Fira Code 16";
+      extraConfig = {
+        modes = "window,drun,run,ssh,combi";
+      };
+    };
   };
 
   services = {
     gpg-agent.enableNushellIntegration = true;
   };
 
+  systemd.user.services.set-wallpaper = {
+    Unit = {
+      description = "Set my wallpaper";
+    };
+
+    Serivce = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "set-wallpaper.nu" ''
+        #${pkgs.nushell}/bin/nu
+        ${pkgs.feh}/bin/feh -bg ${./wallpaper.png}
+      '';
+    };
+  };
+
   xsession.windowManager.i3 = rec {
     enable = true;
     package = pkgs.i3;
     config = {
-      modifier = "Mod4";
+      modifier = "Mod1";
       keybindings = {
         "${config.modifier}+0" = "workspace number 10";
         "${config.modifier}+1" = "workspace number 1";
@@ -205,7 +277,7 @@
         "${config.modifier}+9" = "workspace number 9";
         "${config.modifier}+Down" = "focus down";
         "${config.modifier}+Left" = "focus left";
-        "${config.modifier}+Return" = "exec nu";
+        "${config.modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
         "${config.modifier}+Right" = "focus right";
         "${config.modifier}+Shift+0" = "move container to workspace number 10";
         "${config.modifier}+Shift+1" = "move container to workspace number 1";
@@ -229,7 +301,8 @@
         "${config.modifier}+Shift+space" = "floating toggle";
         "${config.modifier}+Up" = "focus up";
         "${config.modifier}+a" = "focus parent";
-        "${config.modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+        "${config.modifier}+d" = "exec ${pkgs.writeShellScript "rofi-open.sh" "${pkgs.rofi}/bin/rofi -show combi -combi-modes \"window,drun\""}";
+        "${config.modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${config.modifier}+e" = "layout toggle split";
         "${config.modifier}+f" = "fullscreen toggle";
         "${config.modifier}+h" = "split h";
@@ -251,9 +324,20 @@
           Return = "mode default";
         };
       };
+      bars = [
+        {
+          position = "bottom";
+          fonts = {
+            names = ["Fira Code"];
+            style = "Bold";
+            size = 12.0;
+          };
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-bottom.toml";
+        }
+      ];
     };
     extraConfig = ''
-      # Plasma compatibility improvements
+      # Plasma compatibility improvementsah o
       for_window [window_role="pop-up"]mostl floating enable
       for_window [window_role="task_dialog"] floating enable
 
@@ -268,8 +352,12 @@
       for_window [class="Klipper"] floating enable, border none
       for_window [class="Plasmoidviewer"] floating enable, border none
       for_window [class="(?i)*nextcloud*"] floating disable
-      for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+      for_window [class="plasmashell" window_type="notification"] border none
       no_focus [class="plasmashell" window_type="notification"]
+
+      for_window [title=".* - Chromium"] border none
+      for_window [title=".* - VSCodium"] border none
+      for_window [title="Vesktop"] border none
 
       for_window [title="Desktop @ QRect.*"] kill, floating enable, border none
     '';
