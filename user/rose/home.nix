@@ -25,7 +25,14 @@
       direnv
       gitkraken
       qpwgraph
-      opnix
+      nautilus
+      gnome-tweaks
+      vlc
+      binutils
+      kx-aspe-cli
+      openssl
+      iperf3
+      opnix.packages.${pkgs.system}.default
       (prismlauncher.override {
         # Java runtimes available to Prism Launcher
         jdks = [
@@ -36,6 +43,25 @@
         ];
       })
     ];
+  };
+
+  gtk = {
+    enable = true;
+
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+
+    cursorTheme = {
+      name = "Adwaita";
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      cursor-size = 24;
+    };
   };
 
   programs = {
@@ -109,6 +135,7 @@
       userSettings = {
         "editor.formatOnSave" = true;
         "workbench.iconTheme" = "vscode-icons";
+        "window.titleBarStyle" = "custom";
       };
     };
 
@@ -143,9 +170,108 @@
       package = pkgs.starship;
       enableNushellIntegration = true;
     };
+
+    feh = {
+      enable = true;
+      package = pkgs.feh;
+      themes = {
+        example = [
+          "--info"
+          "foo bar"
+        ];
+      };
+    };
   };
 
   services = {
     gpg-agent.enableNushellIntegration = true;
+  };
+
+  xsession.windowManager.i3 = rec {
+    enable = true;
+    package = pkgs.i3;
+    config = {
+      modifier = "Mod4";
+      keybindings = {
+        "${config.modifier}+0" = "workspace number 10";
+        "${config.modifier}+1" = "workspace number 1";
+        "${config.modifier}+2" = "workspace number 2";
+        "${config.modifier}+3" = "workspace number 3";
+        "${config.modifier}+4" = "workspace number 4";
+        "${config.modifier}+5" = "workspace number 5";
+        "${config.modifier}+6" = "workspace number 6";
+        "${config.modifier}+7" = "workspace number 7";
+        "${config.modifier}+8" = "workspace number 8";
+        "${config.modifier}+9" = "workspace number 9";
+        "${config.modifier}+Down" = "focus down";
+        "${config.modifier}+Left" = "focus left";
+        "${config.modifier}+Return" = "exec nu";
+        "${config.modifier}+Right" = "focus right";
+        "${config.modifier}+Shift+0" = "move container to workspace number 10";
+        "${config.modifier}+Shift+1" = "move container to workspace number 1";
+        "${config.modifier}+Shift+2" = "move container to workspace number 2";
+        "${config.modifier}+Shift+3" = "move container to workspace number 3";
+        "${config.modifier}+Shift+4" = "move container to workspace number 4";
+        "${config.modifier}+Shift+5" = "move container to workspace number 5";
+        "${config.modifier}+Shift+6" = "move container to workspace number 6";
+        "${config.modifier}+Shift+7" = "move container to workspace number 7";
+        "${config.modifier}+Shift+8" = "move container to workspace number 8";
+        "${config.modifier}+Shift+9" = "move container to workspace number 9";
+        "${config.modifier}+Shift+Down" = "move down";
+        "${config.modifier}+Shift+Left" = "move left";
+        "${config.modifier}+Shift+Right" = "move right";
+        "${config.modifier}+Shift+Up" = "move up";
+        "${config.modifier}+Shift+c" = "reload";
+        "${config.modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+        "${config.modifier}+Shift+minus" = "move scratchpad";
+        "${config.modifier}+Shift+q" = "kill";
+        "${config.modifier}+Shift+r" = "restart";
+        "${config.modifier}+Shift+space" = "floating toggle";
+        "${config.modifier}+Up" = "focus up";
+        "${config.modifier}+a" = "focus parent";
+        "${config.modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -show drun";
+        "${config.modifier}+e" = "layout toggle split";
+        "${config.modifier}+f" = "fullscreen toggle";
+        "${config.modifier}+h" = "split h";
+        "${config.modifier}+minus" = "scratchpad show";
+        "${config.modifier}+r" = "mode resize";
+        "${config.modifier}+s" = "layout stacking";
+        "${config.modifier}+space" = "focus mode_toggle";
+        "${config.modifier}+v" = "split v";
+        "${config.modifier}+w" = "layout tabbed";
+      };
+      modes = {
+        resize = {
+          Down = "resize grow height 10 px or 10 ppt";
+          Left = "resize shrink width 10 px or 10 ppt";
+          Right = "resize grow width 10 px or 10 ppt";
+          Up = "resize shrink height 10 px or 10 ppt";
+
+          Escape = "mode default";
+          Return = "mode default";
+        };
+      };
+    };
+    extraConfig = ''
+      # Plasma compatibility improvements
+      for_window [window_role="pop-up"]mostl floating enable
+      for_window [window_role="task_dialog"] floating enable
+
+      for_window [class="yakuake"] floating enable
+      for_window [class="systemsettings"] floating enable
+      for_window [class="plasmashell"] floating enable
+      for_window [class="Plasma"] floating enable, border none
+      for_window [title="plasma-desktop"] floating enable, border none
+      for_window [title="win7"] floating enable, border none
+      for_window [class="krunner"] floating enable, border none
+      for_window [class="Kmix"] floating enable, border none
+      for_window [class="Klipper"] floating enable, border none
+      for_window [class="Plasmoidviewer"] floating enable, border none
+      for_window [class="(?i)*nextcloud*"] floating disable
+      for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+      no_focus [class="plasmashell" window_type="notification"]
+
+      for_window [title="Desktop @ QRect.*"] kill, floating enable, border none
+    '';
   };
 }
