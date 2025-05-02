@@ -1,6 +1,7 @@
 {
   config,
   isDesktop,
+  ...
 }: {
   services = {
     xserver = {
