@@ -16,34 +16,35 @@
     username = "rose";
     homeDirectory = "/home/rose";
 
-    packages = with pkgs; [
-      _1password-cli
-      _1password-gui
-      vesktop
-      alejandra
-      imhex
-      direnv
-      gitkraken
-      qpwgraph
-      nautilus
-      gnome-tweaks
-      vlc
-      binutils
-      kx-aspe-cli
-      openssl
-      iperf3
-      obsidian
-      opnix.packages.${pkgs.system}.default
-      (prismlauncher.override {
-        # Java runtimes available to Prism Launcher
-        jdks = [
-          graalvm-ce
-          zulu8
-          zulu17
-          zulu
-        ];
-      })
-    ];
+    packages = with pkgs;
+      []
+      ++ (
+        if isDesktop
+        then [
+          _1password-cli
+          _1password-gui
+          vesktop
+          alejandra
+          imhex
+          gitkraken
+          qpwgraph
+          nautilus
+          gnome-tweaks
+          kx-aspe-cli
+          vlc
+          obsidian
+          (prismlauncher.override {
+            # Java runtimes available to Prism Launcher
+            jdks = [
+              graalvm-ce
+              zulu8
+              zulu17
+              zulu
+            ];
+          })
+        ]
+        else []
+      );
   };
 
   gtk = {

@@ -12,28 +12,13 @@
     unstable.dotnetCorePackages.dotnet_9.sdk
 
     # cli tools
-    nixos-rebuild
-    unzip
-    ripgrep
-    wget
-    git
-    direnv
-    killall
-    neofetch
-    nmap
     fusee-nano
     miniserve
     libfaketime
-    rclone
     rsync
-    binwalk
-    file
-    dig
     gdb
-    binutils
     tea
     gh
-    opnix
 
     # dependencies
     OVMFFull

@@ -16,47 +16,55 @@
     username = "aubrey";
     homeDirectory = "/home/aubrey";
 
-    packages = with pkgs; [
-      # development
-      neovim # todo: neovim via home manager
-      gitkraken
-      imhex
-      unityhub
-      unstable.jetbrains.rider
-      unstable.jetbrains.clion
-      unstable.jetbrains.idea-community
-      bruno
-      ghidra-bin
-      renderdoc
-      avalonia-ilspy
-      digital
-      alejandra
+    packages = with pkgs;
+      [
+        # development
+        neovim # todo: neovim via home manager
+      ]
+      ++ (
+        if isDesktop
+        then [
+          # development
+          gitkraken
+          imhex
+          unityhub
+          unstable.jetbrains.rider
+          unstable.jetbrains.clion
+          unstable.jetbrains.idea-community
+          bruno
+          ghidra-bin
+          renderdoc
+          avalonia-ilspy
+          digital
+          alejandra
 
-      # art
-      pinta
-      material-maker
-      blender
+          # art
+          pinta
+          material-maker
+          blender
 
-      # social
-      vesktop
-      (discord-canary.override {withVencord = true;})
-      signal-desktop
-      thunderbird
+          # social
+          vesktop
+          (discord-canary.override {withVencord = true;})
+          signal-desktop
+          thunderbird
 
-      # web
-      zen-browser
-      chromium
+          # web
+          zen-browser
+          chromium
 
-      # games
-      prismlauncher
-      ryujinx
+          # games
+          prismlauncher
+          ryujinx
 
-      # tools
-      wl-clipboard
-      kdePackages.plasma-systemmonitor
-      kdePackages.kcalc
-      obsidian
-    ];
+          # tools
+          wl-clipboard
+          kdePackages.plasma-systemmonitor
+          kdePackages.kcalc
+          obsidian
+        ]
+        else []
+      );
   };
 
   programs = {

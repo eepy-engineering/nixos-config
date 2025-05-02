@@ -16,8 +16,27 @@
 
   system.stateVersion = "24.11";
 
-  environment.systemPackages = [
-    pkgs.cifs-utils
+  environment.systemPackages = with pkgs; [
+    cifs-utils
+    opnix
+    binutils
+    direnv
+    openssl
+    iperf3
+    rsync
+    nixos-rebuild
+    unzip
+    ripgrep
+    wget
+    git
+    direnv
+    killall
+    neofetch
+    nmap
+    rclone
+    binwalk
+    file
+    dig
   ];
 
   services = {
