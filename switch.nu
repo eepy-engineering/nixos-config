@@ -7,6 +7,9 @@ def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
   }
   nix fmt
   if $hostname == hostname {
+    rm -rf ~/.config/gtk-3.0/settings.ini;
+    rm -rf ~/.config/gtk-4.0/settings.ini;
+    rm -rf ~/.config/gtk-4.0/gtk.css;  
     sudo nixos-rebuild --flake $".#(hostname)" --impure $subcmd ...$rest
   } else {
     nixos-rebuild --flake $".#($hostname)" --target-host $hostname --use-remote-sudo $subcmd ...$rest;

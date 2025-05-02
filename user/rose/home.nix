@@ -26,13 +26,20 @@
           vesktop
           alejandra
           imhex
+          direnv
           gitkraken
           qpwgraph
           nautilus
           gnome-tweaks
-          kx-aspe-cli
           vlc
+          binutils
+          kx-aspe-cli
+          openssl
+          iperf3
           obsidian
+          rose-pine-gtk-theme
+          rose-pine-cursor
+          opnix.packages.${pkgs.system}.default
           (prismlauncher.override {
             # Java runtimes available to Prism Launcher
             jdks = [
@@ -55,14 +62,23 @@
       package = pkgs.adwaita-icon-theme;
     };
 
-    cursorTheme = {
-      name = "Adwaita";
+    theme = {
+      name = "rose-pine";
+      package = pkgs.rose-pine-gtk-theme;
     };
+
+    cursorTheme = {
+      name = "BreezeX-RosePine-Linux";
+      package = pkgs.rose-pine-cursor;
+    };
+
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      cursor-size = 24;
+      cursor-size = 12;
+      color-scheme = "prefer-dark";
     };
   };
 
@@ -111,6 +127,13 @@
           sha256 = "sha256:0m5gnhrb4wldx9kyypnbh1pal1i6krwpry17lhyw7xgd93bmrbnm";
           version = "5.12.1";
         })
+
+        # Rosé Pine
+        (chromium-extension {
+          id = "noimedcjdohhokijigpfcbjcfcaaahej";
+          sha256 = "sha256:06zrzs96bmrw67q4v5jn5f67l87am5h51qzw0hz4z78h6kz0as7v";
+          version = "2.0.0";
+        })
       ];
     };
 
@@ -131,12 +154,15 @@
         mkhl.direnv
         svelte.svelte-vscode
         ms-python.python
+        kamadorueda.alejandra
+        mvllow.rose-pine
       ];
 
       userSettings = {
         "editor.formatOnSave" = true;
-        "workbench.iconTheme" = "vscode-icons";
-        "window.titleBarStyle" = "native";
+        "workbench.iconTheme" = "rose-pine-icons";
+        "workbench.colorTheme" = "Rosé Pine";
+        "window.titleBarStyle" = "custom";
         "editor.fontFamily" = "'Fira Code', 'monospace', monospace";
         "editor.fontLigatures" = true;
       };
@@ -191,47 +217,6 @@
       settings = {};
     };
 
-    i3status-rust = {
-      enable = true;
-      bars = {
-        bottom = {
-          blocks = [
-            {
-              block = "cpu";
-            }
-            {
-              alert = 10.0;
-              block = "disk_space";
-              format = " $icon root: $available.eng(w:2) ";
-              info_type = "available";
-              interval = 20;
-              path = "/";
-              warning = 20.0;
-            }
-            {
-              block = "memory";
-              format = " $icon $mem_total_used_percents.eng(w:2) ";
-              format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
-            }
-            {
-              block = "sound";
-              click = [
-                {
-                  button = "left";
-                  cmd = "pavucontrol";
-                }
-              ];
-            }
-            {
-              block = "time";
-              format = " $timestamp.datetime(f:'%a %d/%m %R') ";
-              interval = 5;
-            }
-          ];
-        };
-      };
-    };
-
     rofi = {
       enable = true;
       package = pkgs.rofi;
@@ -244,6 +229,29 @@
 
   services = {
     gpg-agent.enableNushellIntegration = true;
+
+    polybar = {
+      enable = true;
+      package = pkgs.polybar;
+      settings = {
+        "module/volume" = {
+          type = "internal/pulseaudio";
+          format.volume = " ";
+          label.muted.text = "🔇";
+          label.muted.foreground = "#666";
+          ramp.volume = ["🔈" "🔉" "🔊"];
+          click.right = "pavucontrol &";
+        };
+      };
+      config = {
+        "bar/bottom" = {
+          width = "100%";
+          height = "3%";
+          radius = 0;
+          modules-center = "volume";
+        };
+      };
+    };
   };
 
   systemd.user.services.set-wallpaper = {
@@ -333,29 +341,10 @@
             style = "Bold";
             size = 12.0;
           };
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-bottom.toml";
         }
       ];
     };
     extraConfig = ''
-      # Plasma compatibility improvementsah o
-      for_window [window_role="pop-up"]mostl floating enable
-      for_window [window_role="task_dialog"] floating enable
-
-      for_window [class="yakuake"] floating enable
-      for_window [class="systemsettings"] floating enable
-      for_window [class="plasmashell"] floating enable
-      for_window [class="Plasma"] floating enable, border none
-      for_window [title="plasma-desktop"] floating enable, border none
-      for_window [title="win7"] floating enable, border none
-      for_window [class="krunner"] floating enable, border none
-      for_window [class="Kmix"] floating enable, border none
-      for_window [class="Klipper"] floating enable, border none
-      for_window [class="Plasmoidviewer"] floating enable, border none
-      for_window [class="(?i)*nextcloud*"] floating disable
-      for_window [class="plasmashell" window_type="notification"] border none
-      no_focus [class="plasmashell" window_type="notification"]
-
       for_window [title=".* - Chromium"] border none
       for_window [title=".* - VSCodium"] border none
       for_window [title="Vesktop"] border none

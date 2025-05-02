@@ -40,8 +40,6 @@
   ];
 
   services = {
-    desktopManager.plasma6.enable = isDesktop;
-
     libinput.enable = true;
 
     pipewire = {
@@ -63,12 +61,10 @@
   };
 
   hardware = {
-    # TODO: Not working :(
-    bluetooth.enable = isDesktop;
-    bluetooth.powerOnBoot = true;
-
     graphics.enable = isDesktop;
   };
+
+  programs.dconf.enable = true;
 
   security.rtkit.enable = isDesktop;
 }
