@@ -78,6 +78,22 @@
           ./user/configuration.nix
         ];
       };
+
+      kokuzo-bosatsu = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs opnix;
+          isDesktop = false;
+        };
+        modules = [
+          overlaysModule
+          opnix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          ./system/configuration.nix
+          ./system/kokuzo-bosatsu/configuration.nix
+          ./user/configuration.nix
+        ];
+      };
     };
   };
 }

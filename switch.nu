@@ -1,27 +1,55 @@
 #!/usr/bin/env nu
-def --wrapped rebuild [subcmd: string, ...rest] {
+def "get hostname" [hostname?: string] { $hostname | default (hostname) };
+def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
+  if (".git" | path exists) {
+    # make sure the goddamn files are added because nix flakes won't include files untracked files
+    git add -A
+  }
   nix fmt
-  git add -A # make sure the goddamn files are added because nix won't include unchecked files
-  let r = echo ...$rest | into string;
-  nix-shell -p nixos-rebuild --command $"sudo nixos-rebuild --flake .#(hostname) ($subcmd) ($r)";
+  if $hostname == hostname {
+    sudo nixos-rebuild --flake $".#(hostname)" --impure $subcmd ...$rest
+  } else {
+    nixos-rebuild --flake $".#($hostname)" --target-host $hostname --use-remote-sudo $subcmd ...$rest;
+  }
 };
 
 def --wrapped "main switch" [
+  --hostname (-h): string, # the hostname of the machine to push to
   ...rest
 ] {
-  rebuild switch ...$rest
+  let hostname = (get hostname $hostname);
+  rebuild switch $hostname ...$rest
 }
 
 def --wrapped "main boot" [
   --restart (-r) # restart after building
+  --hostname (-h): string, # the hostname of the machine to push to
   ...rest
 ] {
-  rebuild boot ...$rest
+  let hostname = (get hostname $hostname);
+  rebuild boot $hostname ...$rest
   if $restart {
-    sudo reboot now
+    ssh $hostname -t "sudo reboot now"
   }
 }
 
-def main [] {
-  main switch
+def --wrapped "main run" [
+  --hostname (-h): string, # the hostname of the machine to push to
+  ...rest
+] {
+  if (".git" | path exists) {
+    # make sure the goddamn files are added because nix flakes won't include files untracked files
+    git add -A
+  }
+  nix fmt
+
+  let hostname = (get hostname $hostname);
+  let r = echo ...$rest | into string;
+  nix-shell -p nixos-rebuild --command $"nixos-rebuild --flake .#($hostname) build-vm"
+  bash $"./result/bin/run-($hostname)-testing-vm"
+}
+
+def --wrapped main [--hostname (-h): string, ...rest] {
+  let hostname = (get hostname $hostname);
+  main switch --hostname $hostname ...$rest
 }

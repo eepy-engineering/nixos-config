@@ -1,5 +1,5 @@
 {lib, ...}: {
-  fileSystems."/mnt/tank" = {
+  fileSystems."/mnt/tank" = lib.mkDefault {
     device = "//shared-server-store/tank";
     fsType = "cifs";
     options = [
