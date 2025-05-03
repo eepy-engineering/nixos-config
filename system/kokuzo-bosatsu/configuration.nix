@@ -9,10 +9,23 @@
     ./hardware-configuration.nix
   ];
 
+  boot.loader = {
+    grub = {
+      enable = true;
+      zfsSupport = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      mirroredBoots = [
+        {
+          devices = ["nodev"];
+          path = "/boot";
+        }
+      ];
+    };
+  };
+
   boot.supportedFilesystems = ["zfs"];
   boot.initrd.supportedFilesystems = ["zfs"];
-
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
