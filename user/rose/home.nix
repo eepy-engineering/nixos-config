@@ -201,7 +201,7 @@
     };
 
     feh = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.feh;
       themes = {
         example = [
@@ -212,15 +212,15 @@
     };
 
     alacritty = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.alacritty;
       settings = {};
     };
 
     rofi = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.rofi;
-      font = "Fira Code 16";
+      theme = ./rose-pine.rasi;
       extraConfig = {
         modes = "window,drun,run,ssh,combi";
       };
@@ -231,24 +231,27 @@
     gpg-agent.enableNushellIntegration = true;
 
     polybar = {
-      enable = true;
-      package = pkgs.polybar;
+      enable = isDesktop;
+      package = pkgs.polybarFull;
+      script = ''
+        for m in $(polybar --list-monitors | cut -d":" -f1); do
+          MONITOR=$m polybar --reload bottom &
+        done
+      '';
       settings = {
-        "module/volume" = {
-          type = "internal/pulseaudio";
-          format.volume = " ";
-          label.muted.text = "🔇";
-          label.muted.foreground = "#666";
-          ramp.volume = ["🔈" "🔉" "🔊"];
-          click.right = "pavucontrol &";
+        "module/hello-world" = {
+          type = "custom/text";
+          format = "woweee";
         };
-      };
-      config = {
         "bar/bottom" = {
+          monitor = "DP-0";
+          monitor-struct = true;
+          bottom = true;
+          font-0 = "Fira Code:pixelsize=16;0";
           width = "100%";
           height = "3%";
           radius = 0;
-          modules-center = "volume";
+          modules-center = "hello-world";
         };
       };
     };
@@ -269,7 +272,7 @@
   };
 
   xsession.windowManager.i3 = rec {
-    enable = true;
+    enable = isDesktop;
     package = pkgs.i3;
     config = {
       modifier = "Mod1";
@@ -333,16 +336,7 @@
           Return = "mode default";
         };
       };
-      bars = [
-        {
-          position = "bottom";
-          fonts = {
-            names = ["Fira Code"];
-            style = "Bold";
-            size = 12.0;
-          };
-        }
-      ];
+      bars = [];
     };
     extraConfig = ''
       for_window [title=".* - Chromium"] border none

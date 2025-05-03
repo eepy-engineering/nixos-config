@@ -58,6 +58,6 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkIf (cfg.package != null) [cfg.package];
 
-    xdg.configFile."discocss/custom.css".text = cfg.css;
+    xdg.configFile."vesktop/settings.json".text = builtins.toJSON;
   };
 }
