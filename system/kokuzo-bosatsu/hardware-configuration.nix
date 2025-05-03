@@ -20,6 +20,7 @@
   fileSystems."/" = {
     device = "root";
     fsType = "tmpfs";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
   fileSystems."/nix" = {
