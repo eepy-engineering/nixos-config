@@ -14,7 +14,7 @@ def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
     sudo nixos-rebuild --flake $".#(hostname)" --impure $subcmd ...$rest
   } else {
     print "Remote...";
-    nixos-rebuild --flake $".#($hostname)" --target-host $hostname --use-remote-sudo $subcmd ...$rest;
+    nixos-rebuild --flake $".#($hostname)" --target-host $"($hostname).tailc38f.ts.net" --use-remote-sudo $subcmd ...$rest;
   }
 };
 
