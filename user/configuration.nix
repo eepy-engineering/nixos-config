@@ -33,4 +33,15 @@ args @ {
   };
   home-manager.users.aubrey = import ./aubrey args;
   programs._1password-gui.polkitPolicyOwners = ["rose" "aubrey"];
+
+  # Walter's user
+  users.users.walter = {
+    isNormalUser = true;
+    description = "Walter Min";
+    extraGroups = ["wheel"];
+    shell = pkgs.bash;
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCOJGRyAn1LVGP17eKMCHV0CDf+1Iyyltd2q1xSa1hS4AoIxdu07mHLFpnSmp/T9t4JMnWhp3eIIlFtolx4oMAXewH/JWL0H6i6CGhe91zhiwGEaxDmB0tZhCORrc8ApJQSHaHgwvziOjwQrtLYLIP4Tp8nojIlT/Rv5T+UAEAlnCV7hFxdbPf5x4s8CKOAj70H0wHlbn6BDuRjnld8dFqkmb4oNyIfxCyDvxw6ZKTTIz6l8EaBeyiIjl7FB4uyfaTPevhT82V8MEAtvs3UNvKSeXUuc1KZxTMKuys6L/qlEezp8uYMs3gHrTHkCJmqYAzMjVk2JFRCoaRKWCgI4hpJ"
+    ];
+  };
 }
