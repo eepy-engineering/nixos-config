@@ -26,7 +26,6 @@
 
   boot.supportedFilesystems = ["zfs"];
   boot.initrd.supportedFilesystems = ["zfs"];
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
     hostName = "kokuzo-bosatsu";
