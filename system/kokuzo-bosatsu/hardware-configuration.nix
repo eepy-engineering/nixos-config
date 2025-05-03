@@ -23,12 +23,12 @@
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/745695fc-c9a3-43fd-a565-1f47abb46ab8";
+    device = "/dev/disk/by-uuid/d429b1fd-e619-4f16-8aeb-e48e21d36cc1";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/7284-3AE6";
+    device = "/dev/disk/by-uuid/58BD-8857";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
