@@ -20,7 +20,7 @@
   fileSystems."/" = {
     device = "root";
     fsType = "tmpfs";
-    options = ["fmask=0022" "dmask=0022"];
+    options = ["mode=0755"];
   };
 
   fileSystems."/nix" = {
@@ -37,16 +37,19 @@
   fileSystems."/home" = {
     device = "tank/nas/home";
     fsType = "zfs";
+    depends = ["/"];
   };
 
   fileSystems."/var" = {
     device = "tank/nas/var";
     fsType = "zfs";
+    depends = ["/"];
   };
 
   fileSystems."/mnt/tank" = {
     device = "tank";
     fsType = "zfs";
+    depends = ["/"];
   };
 
   swapDevices = [];
