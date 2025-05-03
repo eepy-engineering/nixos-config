@@ -50,11 +50,26 @@
   };
 
   services.tailscale = {
-    extraUpFlags = ["--advertise-tags=tag:nixos"];
     extraSetFlags = ["--advertise-exit-node"];
-    authKeyFile = "/var/lib/opnix/secrets/tailscale.key";
     useRoutingFeatures = "server";
-    authKeyParameters.preauthorized = true;
+  };
+
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    settings = {
+      "tank" = {
+        "path" = "/mnt/tank";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "";
+        "force group" = "users";
+      };
+    };
   };
 
   services.getty.autologinUser = "root";
