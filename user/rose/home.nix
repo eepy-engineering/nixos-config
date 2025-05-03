@@ -238,35 +238,24 @@
           MONITOR=$m polybar --reload bottom &
         done
       '';
-      settings = {
-        "module/hello-world" = {
-          type = "custom/text";
-          format = "woweee";
-        };
-        "bar/bottom" = {
-          monitor = "DP-0";
-          monitor-struct = true;
-          bottom = true;
-          font-0 = "Fira Code:pixelsize=16;0";
-          width = "100%";
-          height = "3%";
-          radius = 0;
-          modules-center = "hello-world";
-        };
-      };
+      extraConfig = ''
+        include-directory = ${./polybar}
+        include-directory = ${./polybar}/bar
+        include-directory = ${./polybar}/module
+      '';
     };
   };
 
   systemd.user.services.set-wallpaper = {
     Unit = {
-      description = "Set my wallpaper";
+      Description = "Set my wallpaper";
     };
 
-    Serivce = {
+    Service = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "set-wallpaper.nu" ''
         #${pkgs.nushell}/bin/nu
-        ${pkgs.feh}/bin/feh -bg ${./wallpaper.png}
+        ${pkgs.feh}/bin/feh --no-xinerama --bg-max ${./wallpaper-stretch.png}
       '';
     };
   };
