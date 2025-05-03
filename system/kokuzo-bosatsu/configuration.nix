@@ -75,4 +75,11 @@
   };
 
   services.getty.autologinUser = "root";
+
+  # FIXME: move this to k8s when we have that set up
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/mnt/tank/plex-conf";
+  };
 }

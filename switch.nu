@@ -5,7 +5,7 @@ def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
     # make sure the goddamn files are added because nix flakes won't include files untracked files
     git add -A
   }
-  nix fmt
+  nix fmt .
   let hn = hostname;
   if $hostname == $hn {
     rm -rf ~/.config/gtk-3.0/settings.ini;
@@ -46,7 +46,7 @@ def --wrapped "main run" [
     # make sure the goddamn files are added because nix flakes won't include files untracked files
     git add -A
   }
-  nix fmt
+  nix fmt .
 
   let hostname = (get hostname $hostname);
   let r = echo ...$rest | into string;
