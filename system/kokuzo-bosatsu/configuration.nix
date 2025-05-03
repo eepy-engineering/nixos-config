@@ -36,6 +36,7 @@
       internalInterfaces = ["ve-+"];
       externalInterface = "eno49";
     };
+
     interfaces.eno49 = {
       useDHCP = true;
       ipv4.addresses = [
