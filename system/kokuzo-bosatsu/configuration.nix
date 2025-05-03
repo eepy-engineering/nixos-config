@@ -49,6 +49,8 @@
     };
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   services.tailscale = {
     extraSetFlags = ["--advertise-exit-node"];
     useRoutingFeatures = "server";
@@ -66,7 +68,7 @@
         "guest ok" = "no";
         "create mask" = "0644";
         "directory mask" = "0755";
-        "force user" = "";
+        "force user" = "aubrey";
         "force group" = "users";
       };
     };
