@@ -56,4 +56,6 @@
     useRoutingFeatures = "server";
     authKeyParameters.preauthorized = true;
   };
+
+  services.getty.autologinUser = "root";
 }
