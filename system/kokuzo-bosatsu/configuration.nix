@@ -62,6 +62,30 @@
   services.plex = {
     enable = true;
     openFirewall = true;
-    dataDir = "/mnt/tank/plex-conf";
+    dataDir = "/mnt/tank/plex-conf/Library/Application Support";
+    # cuda support
+    #package = pkgs.plex.overrideAttrs
+  };
+
+  services.sanoid = {
+    enable = true;
+    datasets = {
+      tank = {
+        hourly = 24;
+        daily = 30;
+        autoprune = true;
+        autosnap = true;
+        # from the docs: atomic recursive snapshots, though child datasets
+        # can't be configured independently
+        recursive = "zfs";
+      };
+    };
+  };
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    user = "plex";
+    dataDir = "/mnt/tank/jellyfin";
   };
 }
