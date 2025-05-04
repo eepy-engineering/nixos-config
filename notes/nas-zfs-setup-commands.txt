@@ -1,0 +1,15 @@
+zpool import tank -f
+#zpool import apps
+mount -t tmpfs root -o rw,relatime,mode=755 /mnt
+cd /mnt
+mkdir -p boot nix home var mnt/tank # mnt/ssds
+mount -t zfs tank mnt/tank
+#mount -t zfs apps mnt/ssds
+mount -t zfs tank/nas/var var
+mount -t zfs tank/nas/home home
+mount /dev/disk/by-label/nix nix
+mount /dev/disk/by-label/boot boot
+
+nixos-generate-config --dir . --root .
+# setup uuid 
+nixos-install --flake github:eepy-engineering/nixos-config/94991fb06ec8a5b1567ec4a246634fd6364695ed#kokuzo-bosatsu
