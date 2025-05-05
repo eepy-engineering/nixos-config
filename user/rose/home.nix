@@ -39,6 +39,7 @@
           obsidian
           rose-pine-gtk-theme
           rose-pine-cursor
+          zulip
           opnix.packages.${pkgs.system}.default
           (prismlauncher.override {
             # Java runtimes available to Prism Launcher
@@ -49,6 +50,10 @@
               zulu
             ];
           })
+          (pkgs.python3.withPackages (python-pkgs:
+            with python-pkgs; [
+              numpy
+            ]))
         ]
         else []
       );
@@ -203,12 +208,6 @@
     feh = {
       enable = isDesktop;
       package = pkgs.feh;
-      themes = {
-        example = [
-          "--info"
-          "foo bar"
-        ];
-      };
     };
 
     alacritty = {
@@ -225,23 +224,45 @@
         modes = "window,drun,run,ssh,combi";
       };
     };
+
+    onepassword-secrets = {
+      enable = true;
+      secrets = [
+        {
+          path = ".secrets/polybar/github";
+          reference = "op://5dhshqqml7vv6bgttzilsgqaoq/Github Polybar/credential";
+        }
+      ];
+    };
   };
 
   services = {
     gpg-agent.enableNushellIntegration = true;
 
+    picom = {
+      enable = isDesktop;
+      package = pkgs.picom;
+      vSync = true;
+      backend = "glx";
+      activeOpacity = 1;
+      inactiveOpacity = 1;
+      settings = {
+        unredir-if-possible = false;
+      };
+    };
+
     polybar = {
       enable = isDesktop;
       package = pkgs.polybarFull;
       script = ''
-        for m in $(polybar --list-monitors | cut -d":" -f1); do
-          MONITOR=$m polybar --reload bottom &
+        for m in $(${pkgs.polybarFull}/bin/polybar --list-monitors | ${pkgs.toybox}/bin/cut -d":" -f1); do
+          ${pkgs.polybarFull}/bin/polybar --reload $m &
         done
       '';
       extraConfig = ''
-        include-directory = ${./polybar}
-        include-directory = ${./polybar}/bar
-        include-directory = ${./polybar}/module
+        include-file = ${./polybar}/lib/shapes/config-DP0.ini
+        include-file = ${./polybar}/lib/shapes/config-DP2.ini
+        include-file = ${./polybar}/lib/shapes/config-DP4.ini
       '';
     };
   };
