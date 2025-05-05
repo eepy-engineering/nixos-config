@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./kubernetes-master.nix
   ];
 
   boot.loader = {
