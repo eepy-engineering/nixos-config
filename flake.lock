@@ -117,11 +117,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746472674,
-        "narHash": "sha256-Bz5Y/NDQiMfZSO1+qaCm59s7O25FBfIziIY1Kx2a//k=",
+        "lastModified": 1746482578,
+        "narHash": "sha256-GVLV/2H2LeKlOgJpbq/EmwqIn96ZgxE037QMq1KOo+I=",
         "owner": "Sanae6",
         "repo": "opnix",
-        "rev": "c4a48773503ab045d303682068ddcee1ca9a20b8",
+        "rev": "f5d4defa40c9081aa51cb502c0be6170187802de",
         "type": "github"
       },
       "original": {

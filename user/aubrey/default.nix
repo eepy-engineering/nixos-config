@@ -132,6 +132,16 @@
       };
     };
 
+    onepassword-secrets = {
+      enable = false;
+      tokenFile =
+        if isDesktop
+        then "/etc/opnix-token"
+        else "/var/opnix-token";
+      secrets = [
+      ];
+    };
+
     ssh = {
       enable = true;
       extraConfig = ''
