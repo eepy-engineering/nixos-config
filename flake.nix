@@ -30,70 +30,87 @@
     extensions,
     zen-browser,
     ...
-  }: {
+  }: let
+    lib = nixpkgs.lib;
+    overlays = [
+      extensions.overlays.default
+      (final: _prev: {
+        opnix = opnix.packages.${final.system}.default;
+        zen-browser = zen-browser.packages.${final.system}.default;
+        unstable = import inputs.nixpkgs-unstable {
+          system = final.system;
+          config.allowUnfree = true;
+        };
+        home-manager = home-manager.packages.${final.system};
+      })
+    ];
+    overlaysModule = _: {nixpkgs.overlays = overlays;};
+    configs = {
+      rose-desktop = {
+        # rose's desktop
+        isDesktop = true;
+        system = "x86_64-linux";
+      };
+      aubrey-laptop-nixos = {
+        # aubrey's laptop
+        isDesktop = true;
+        system = "x86_64-linux";
+      };
+      kokuzo-bosatsu = {
+        # nas
+        isDesktop = false;
+        system = "x86_64-linux";
+      };
+    };
+    hmUsers = ["aubrey" "rose"];
+  in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     home-manager.backupFileExtension = "backup";
 
     nixosConfigurations = let
-      overlays = [
-        extensions.overlays.default
-        (final: _prev: {
-          opnix = opnix.packages.${final.system}.default;
-          zen-browser = zen-browser.packages.${final.system}.default;
-          unstable = import inputs.nixpkgs-unstable {
-            system = final.system;
-            config.allowUnfree = true;
+      buildConfig = name: config:
+        lib.nixosSystem {
+          system = config.system;
+          specialArgs = {
+            inherit inputs opnix;
+            isDesktop = config.isDesktop;
           };
-        })
-      ];
-      overlaysModule = _: {nixpkgs.overlays = overlays;};
-    in {
-      rose-desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs opnix;
-          isDesktop = true;
+          modules = [
+            overlaysModule
+            opnix.nixosModules.default
+            home-manager.nixosModules.home-manager
+            ./system/configuration.nix
+            ./system/${name}/configuration.nix
+            ./user/configuration.nix
+          ];
         };
-        modules = [
-          overlaysModule
-          opnix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          ./system/configuration.nix
-          ./system/rose-desktop/configuration.nix
-          ./user/configuration.nix
-        ];
-      };
-      aubrey-laptop-nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs opnix;
-          isDesktop = true;
-        };
-        modules = [
-          overlaysModule
-          opnix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          ./system/configuration.nix
-          ./system/aubrey-laptop-nixos/configuration.nix
-          ./user/configuration.nix
-        ];
-      };
+    in
+      builtins.mapAttrs buildConfig configs;
 
-      kokuzo-bosatsu = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs opnix;
-          isDesktop = false;
+    homeConfigurations = let
+      buildConfig = username: config:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = config.system;
+            inherit overlays;
+
+            config = {
+              allowUnfree = true;
+              allowInsecurePredicate = pkg: true;
+            };
+          };
+          extraSpecialArgs = {
+            inherit inputs opnix;
+            isDesktop = config.isDesktop;
+          };
+          modules = [
+            overlaysModule
+            ./user/${username}
+          ];
         };
-        modules = [
-          overlaysModule
-          opnix.nixosModules.default
-          home-manager.nixosModules.home-manager
-          ./system/configuration.nix
-          ./system/kokuzo-bosatsu/configuration.nix
-          ./user/configuration.nix
-        ];
-      };
-    };
+      configPairs = lib.attrsets.mapAttrsToList lib.attrsets.nameValuePair configs;
+      buildConfigs = lib.lists.flatten (map (username: map (config: {"${username}@${config.name}" = buildConfig username config.value;}) configPairs) hmUsers);
+    in
+      lib.attrsets.mergeAttrsList buildConfigs;
   };
 }

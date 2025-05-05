@@ -37,6 +37,7 @@
     binwalk
     file
     dig
+    home-manager.home-manager
   ];
 
   services = {
