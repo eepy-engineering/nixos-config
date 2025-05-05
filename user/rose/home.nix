@@ -638,6 +638,7 @@
         commit.gpgsign = true;
         user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5oU0aUotQDUEL+WIlbwT6vk1G7w9v+E7+3aQQsYdNT";
         init.defaultBranch = "main";
+        pull.rebase = true;
       };
     };
 
