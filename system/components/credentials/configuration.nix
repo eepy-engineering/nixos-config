@@ -1,7 +1,11 @@
-{isDesktop, ...}: {
+{
+  isDesktop,
+  lib,
+  ...
+}: {
   services.onepassword-secrets = {
     enable = true;
-    users = ["rose"];
+    users = ["rose" "aubrey"];
     tokenFile =
       if isDesktop
       then "/etc/opnix-token"

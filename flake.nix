@@ -15,7 +15,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Use OpNix for secrets
-    opnix.url = "github:brizzbuzz/opnix";
+    opnix.url = "github:Sanae6/opnix";
     opnix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Applications

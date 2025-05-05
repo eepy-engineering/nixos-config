@@ -701,6 +701,10 @@
 
     onepassword-secrets = {
       enable = isDesktop;
+      tokenFile =
+        if isDesktop
+        then "/etc/opnix-token"
+        else "/var/opnix-token";
       secrets = [
         {
           path = ".secrets/polybar/github";
