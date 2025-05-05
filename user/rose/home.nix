@@ -627,7 +627,11 @@
 
     ssh = {
       enable = true;
-      extraConfig = ''IdentityAgent /home/rose/.1password/agent.sock'';
+      extraConfig = ''
+        Host *
+          IdentityAgent /home/rose/.1password/agent.sock
+          ForwardAgent yes
+      '';
     };
 
     nushell = {
@@ -680,15 +684,11 @@
     };
 
     onepassword-secrets = {
-      enable = true;
+      enable = isDesktop;
       secrets = [
         {
           path = ".secrets/polybar/github";
           reference = "op://5dhshqqml7vv6bgttzilsgqaoq/Github Polybar/credential";
-        }
-        {
-          path = ".secrets/last-fm/api-key";
-          reference = "op://5dhshqqml7vv6bgttzilsgqaoq/Last FM Personal Use Key/credential";
         }
       ];
     };
@@ -737,7 +737,7 @@
     };
 
     flameshot = {
-      enable = true;
+      enable = isDesktop;
       package = pkgs.flameshot;
     };
   };

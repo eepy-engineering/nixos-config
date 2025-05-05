@@ -12,6 +12,7 @@
     ./components/ime.nix
     ./components/nix.nix
     ./components/tank-share.nix
+    ./components/ssh/configuration.nix
   ];
 
   system.stateVersion = "24.11";
