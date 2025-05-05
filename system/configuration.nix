@@ -39,6 +39,12 @@
     file
     dig
     home-manager.home-manager
+
+    (writeNushellScriptBin "reboot-kexec" ''
+      let cmdline = $"init=(readlink -f /nix/var/nix/profiles/system/init) $(open /nix/var/nix/profiles/system/kernel-params)";
+      kexec -l /nix/var/nix/profiles/system/kernel --initrd=/nix/var/nix/profiles/system/initrd $"--command-line=($cmdline)"
+      systemctl kexec
+    '')
   ];
 
   services = {

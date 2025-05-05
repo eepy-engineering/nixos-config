@@ -32,18 +32,20 @@
     ...
   }: let
     lib = nixpkgs.lib;
-    overlays = [
-      extensions.overlays.default
-      (final: _prev: {
-        opnix = opnix.packages.${final.system}.default;
-        zen-browser = zen-browser.packages.${final.system}.default;
-        unstable = import inputs.nixpkgs-unstable {
-          system = final.system;
-          config.allowUnfree = true;
-        };
-        home-manager = home-manager.packages.${final.system};
-      })
-    ];
+    overlays =
+      [
+        extensions.overlays.default
+        (final: _prev: {
+          opnix = opnix.packages.${final.system}.default;
+          zen-browser = zen-browser.packages.${final.system}.default;
+          unstable = import inputs.nixpkgs-unstable {
+            system = final.system;
+            config.allowUnfree = true;
+          };
+          home-manager = home-manager.packages.${final.system};
+        })
+      ]
+      ++ import ./overlays;
     overlaysModule = _: {nixpkgs.overlays = overlays;};
     configs = {
       rose-desktop = {

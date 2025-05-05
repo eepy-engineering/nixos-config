@@ -1,0 +1,3 @@
+[
+  (import ./nushell-script.nix)
+]
