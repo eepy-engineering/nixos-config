@@ -51,13 +51,6 @@
       jack.enable = true;
     };
 
-    openssh = {
-      enable = true;
-      settings = {
-        X11Forwarding = isDesktop;
-        PermitRootLogin = "no";
-      };
-    };
     tailscale.enable = true;
   };
 
