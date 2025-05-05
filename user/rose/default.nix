@@ -1,1 +1,1 @@
-args: import ./home.nix args
+import ./home.nix

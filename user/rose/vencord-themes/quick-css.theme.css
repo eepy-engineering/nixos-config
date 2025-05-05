@@ -1,0 +1,32 @@
+/**
+ * @name Quick CSS
+ * @description Personal Theming.
+ * @author Rose Hall
+*/
+
+* {
+  font-family: "Fira Code";
+}
+
+[class^="avatarDecoration_"] {
+  display: none;
+}
+
+[class^="profileEffects_"] {
+  display: none;
+}
+
+/* hide the animated aspect of nameplates */
+[src^="https://cdn.discordapp.com/assets/collectibles/nameplates/nameplates/"] {
+  display: none;
+}
+
+/* nameplates also affect the background of their container,
+ turns out this perfectly handles that case! */
+[class^="container_"][style^="background:"] {
+  background: none !important;
+}
+
+[aria-label="User Badges"] {
+  display: none;
+}

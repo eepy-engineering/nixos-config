@@ -29,7 +29,7 @@
   boot.initrd.supportedFilesystems = ["zfs"];
 
   networking = {
-    hostName = "kokuzo-bosatsu";
+    hostName = "kokuzo";
     hostId = "8626743f";
 
     nat = {

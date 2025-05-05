@@ -23,7 +23,6 @@
         then [
           _1password-cli
           _1password-gui
-          vesktop
           alejandra
           imhex
           direnv
@@ -146,30 +145,463 @@
       enable = isDesktop;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
-      enableUpdateCheck = true;
-      enableExtensionUpdateCheck = true;
 
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        gruntfuggly.todo-tree
-        rust-lang.rust-analyzer
-        tamasfe.even-better-toml
-        thenuprojectcontributors.vscode-nushell-lang
-        vscode-icons-team.vscode-icons
-        mkhl.direnv
-        svelte.svelte-vscode
-        ms-python.python
-        kamadorueda.alejandra
-        mvllow.rose-pine
-      ];
+      profiles.default = {
+        enableUpdateCheck = true;
+        enableExtensionUpdateCheck = true;
 
-      userSettings = {
-        "editor.formatOnSave" = true;
-        "workbench.iconTheme" = "rose-pine-icons";
-        "workbench.colorTheme" = "Rosé Pine";
-        "window.titleBarStyle" = "custom";
-        "editor.fontFamily" = "'Fira Code', 'monospace', monospace";
-        "editor.fontLigatures" = true;
+        extensions = with pkgs.vscode-extensions; [
+          bbenoist.nix
+          gruntfuggly.todo-tree
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          thenuprojectcontributors.vscode-nushell-lang
+          vscode-icons-team.vscode-icons
+          mkhl.direnv
+          svelte.svelte-vscode
+          ms-python.python
+          kamadorueda.alejandra
+          mvllow.rose-pine
+          dbaeumer.vscode-eslint
+          editorconfig.editorconfig
+          stylelint.vscode-stylelint
+        ];
+
+        userSettings = {
+          "editor.formatOnSave" = true;
+          "workbench.iconTheme" = "rose-pine-icons";
+          "workbench.colorTheme" = "Rosé Pine";
+          "window.titleBarStyle" = "custom";
+          "editor.fontFamily" = "'Fira Code', 'monospace', monospace";
+          "editor.fontLigatures" = true;
+        };
+      };
+    };
+
+    vesktop = {
+      enable = isDesktop;
+      package = pkgs.vesktop.override {
+        vencord = pkgs.vencord.overrideAttrs {
+          src = pkgs.fetchFromGitHub {
+            owner = "roobscoob";
+            repo = "Vencord";
+            rev = "7beb90cbc1277725e6c17d5a7aca9f4208d83266";
+            hash = "sha256-8oNIveNRHfFAha5Z0Az3H3PROOo6u10HDY4olCyrkrU=";
+          };
+        };
+      };
+
+      vencord = {
+        useSystem = true;
+
+        themes = {
+          "quick-css.theme" = ./vencord-themes/quick-css.theme.css;
+          "system24-catppuccin-macchiato.theme" = ./vencord-themes/system24-catppuccin-macchiato.theme.css;
+          "system24-catppuccin-mocha.theme" = ./vencord-themes/system24-catppuccin-mocha.theme.css;
+          "system24-nord.theme" = ./vencord-themes/system24-nord.theme.css;
+          "system24-rose-pine-moon.theme" = ./vencord-themes/system24-rose-pine-moon.theme.css;
+          "system24-rose-pine.theme" = ./vencord-themes/system24-rose-pine.theme.css;
+          "system24-tokyo-night.theme" = ./vencord-themes/system24-tokyo-night.theme.css;
+          "system24-vencord.theme" = ./vencord-themes/system24-vencord.theme.css;
+          "system24.theme" = ./vencord-themes/system24.theme.css;
+        };
+
+        settings = {
+          autoUpdate = false;
+          autoUpdateNotification = true;
+          useQuickCss = false;
+          egarPatches = false;
+          enabledThemes = ["system24-rose-pine.theme.css" "quick-css.theme.css"];
+          enableReactDevtools = true;
+          frameless = false;
+          transparent = false;
+          winCtrlQ = true;
+          disableMinSize = true;
+          winNativeTitleBar = false;
+          notifyAboutUpdates = true;
+
+          notifications = {
+            timeout = 5000;
+            position = "bottom-right";
+            useNative = "not-focused";
+            logLimit = 50;
+          };
+
+          cloud = {
+            authenticated = true;
+            url = "https://api.vencord.dev/";
+            settingsSync = false;
+            settingsSyncVersion = 0;
+          };
+
+          plugins = {
+            BadgeAPI.enabled = true;
+            CommandsAPI.enabled = true;
+            ContextMenuAPI.enabled = true;
+            MemberListDecoratorsAPI.enabled = true;
+            MessageAccessoriesAPI.enabled = true;
+            MessageDecorationsAPI.enabled = true;
+            MessageEventsAPI.enabled = true;
+            MessagePopoverAPI.enabled = true;
+            NoticesAPI.enabled = true;
+            ServerListAPI.enabled = true;
+            ChatInputButtonAPI.enabled = true;
+            MessageUpdaterAPI.enabled = true;
+            UserSettingsAPI.enabled = true;
+            DynamicImageModalAPI.enabled = true;
+
+            SupportHelper.enabled = true;
+            BetterStreamPreview.enabled = true;
+            EmoteCloner.enabled = true;
+            F8Break.enabled = true;
+            ForceOwnerCrown.enabled = true;
+            MoreKaomoji.enabled = true;
+            MutualGroupDMs.enabled = true;
+            NoF1.enabled = true;
+            NoTypingAnimation.enabled = true;
+            oneko.enabled = true;
+            PreviewMessage.enabled = true;
+            ReactErrorDecoder.enabled = true;
+            ReverseImageSearch.enabled = true;
+            ThemeAttributes.enabled = true;
+            Unindent.enabled = true;
+            ValidUser.enabled = true;
+            VencordToolbox.enabled = true;
+            WebKeybinds.enabled = true;
+            WhoReacted.enabled = true;
+            FixYoutubeEmbeds.enabled = true;
+            FriendsSince.enabled = true;
+            ImageLink.enabled = true;
+            ServerInfo.enabled = true;
+            AutomodContext.enabled = true;
+            CopyEmojiMarkdown.enabled = true;
+            MaskedLinkPaste.enabled = true;
+            NoDefaultHangStatus.enabled = true;
+            NoOnboardingDelay.enabled = true;
+            ReplyTimestamp.enabled = true;
+            ShowTimeoutDuration.enabled = true;
+            ValidReply.enabled = true;
+            VoiceDownload.enabled = true;
+            YoutubeAdblock.enabled = true;
+            CopyFileContents.enabled = true;
+            FullSearchContext.enabled = true;
+            FullUserInChatbox.enabled = true;
+            WebScreenShareFixes.enabled = true;
+            DisableDeepLinks.enabled = true;
+
+            NoTrack = {
+              enabled = true;
+              disableAnalytics = true;
+            };
+
+            Settings = {
+              enabled = true;
+              settingsLocation = "top";
+            };
+
+            AnonymiseFileNames = {
+              enabled = true;
+              anonymiseByDefault = true;
+              method = 0;
+              randomizedLength = 7;
+              consistent = "image";
+            };
+
+            CallTimer = {
+              enabled = true;
+              format = "human";
+            };
+
+            CrashHandler = {
+              enabled = true;
+              attemptToPreventCrashes = true;
+              attemptToNavigateToHome = false;
+            };
+
+            Experiments = {
+              enabled = true;
+              enableIsStaff = false;
+              toolbarDevMenu = false;
+            };
+
+            LastFMRichPresence = {
+              enabled = true;
+              hideWithSpotify = false;
+              shareUsername = true;
+              statusName = "music";
+              nameFormat = "song";
+              useListeningStatus = "true";
+              missingArt = "placeholder";
+              apiKey = "~/.secrets/last-fm/api-key";
+              username = "roobscoob";
+              showLastFmLogo = true;
+              shareSong = true;
+              hideWithActivity = false;
+            };
+
+            MessageLinkEmbeds = {
+              enabled = true;
+              automodEmbeds = "never";
+              listMode = "blacklist";
+              idList = "";
+              messageBackgroundColor = true;
+            };
+
+            MessageLogger = {
+              enabled = true;
+              deleteStyle = "overlay";
+              ignoreBots = false;
+              ignoreSelf = false;
+              logEdits = true;
+              logDeletes = true;
+              collapseDeleted = true;
+              inlineEdits = true;
+            };
+
+            PermissionsViewer = {
+              enabled = true;
+              permissionsSortOrder = 1;
+              defaultPermissionsDropdownState = false;
+            };
+
+            PictureInPicutre = {
+              enabled = true;
+              loop = false;
+            };
+
+            PlatformIndicators = {
+              enabled = true;
+              colorMobileIndicator = true;
+              list = true;
+              badges = true;
+              messages = true;
+            };
+
+            RelationshipsNotifier = {
+              enabled = true;
+              noticies = true;
+              offlineRemovals = true;
+              friends = true;
+              friendRequestCancels = true;
+              servers = true;
+              groups = true;
+            };
+
+            ReviewDB = {
+              enabled = true;
+              notifyReviews = true;
+              reviewsDropdownState = true;
+              showWarning = true;
+              hideBlockedUsers = true;
+              hideTimestamps = false;
+            };
+
+            RoleColorEverywhere = {
+              enabled = true;
+              chatMentions = true;
+              memberList = true;
+              voiceUsers = true;
+              reactorsList = true;
+              colorChatMessages = false;
+              pollResults = true;
+            };
+
+            SendTimestamps = {
+              enabled = true;
+              replaceMessageContents = true;
+            };
+
+            ServerListIndicators = {
+              enabled = true;
+              mode = 3;
+            };
+
+            ShowConnections = {
+              enabled = true;
+              iconSpacing = 1;
+              iconSize = 32;
+            };
+
+            ShowHiddenChannels = {
+              enabled = true;
+              showMode = 0;
+              hideUnreads = true;
+              defaultAllowedUsersAndRolesDropdownState = true;
+            };
+
+            ShowMeYourName = {
+              enabled = true;
+              displayNames = false;
+              mode = "nick-user";
+              inReplies = false;
+            };
+
+            SilentTyping = {
+              enabled = true;
+              showIcon = true;
+              isEnabled = false;
+              contextMenu = true;
+            };
+
+            SpotifyCrack = {
+              enabled = true;
+              noSpotifyAutoPause = true;
+              keepSpotifyActivityOnIdle = false;
+            };
+
+            Translate = {
+              enabled = true;
+              showChatBarButton = true;
+              serivce = "google";
+              autoTranslate = false;
+              showAutoTranslateTooltip = true;
+              receivedInput = "auto";
+              receivedOutput = "en";
+              sentInput = "auto";
+              sentOutput = "ja";
+              showAutoTranslateAlert = false;
+            };
+
+            TypingIndicator = {
+              enabled = true;
+              includeMutedChannels = true;
+              includeCurrentChannel = true;
+              includeBlockedUsers = false;
+              indicatorMode = 3;
+            };
+
+            TypingTweaks = {
+              enabled = true;
+              alternativeFormatting = true;
+              showRoleColors = true;
+              showAvatars = true;
+            };
+
+            UserVoiceShow = {
+              enabled = true;
+              showVoiceChannelSectionHeader = true;
+              showInUserProfileModal = true;
+              showInMemberList = true;
+              showInMessages = true;
+            };
+
+            ViewIcons = {
+              enabled = true;
+              format = "png";
+              imgSize = "1024";
+            };
+
+            ViewRaw = {
+              enabled = true;
+              clickMethod = "left";
+            };
+
+            VoiceMessages = {
+              enabled = true;
+              noiseSuppression = true;
+              echoCancellation = true;
+            };
+
+            VolumeBooster = {
+              enabled = true;
+              multiplier = 2;
+            };
+
+            NewGuildSettings = {
+              enabled = true;
+              guild = true;
+              everyone = true;
+              role = true;
+              events = true;
+              highlights = true;
+              messages = 3;
+              showAllChannels = true;
+            };
+
+            ShowHiddenThings = {
+              enabled = true;
+              showTimeouts = true;
+              showInvitesPaused = true;
+              showModView = true;
+              disableDiscoveryFilters = true;
+              disableDisallowedDiscoveryFilters = true;
+            };
+
+            BetterSessions = {
+              enabled = true;
+              backgroundCheck = false;
+            };
+
+            ImplicitRelationships = {
+              enabled = true;
+              sortByAffinity = true;
+            };
+
+            UnlockedAvatarZoom = {
+              enabled = true;
+              zoomMultiplier = 4;
+            };
+
+            CtrlEnterSend = {
+              enabled = true;
+              submitRule = "ctrl+enter";
+              sendMessageInTheMiddleOfACodeBlock = true;
+            };
+
+            CustomIdle = {
+              enabled = true;
+              idleTimeout = 10;
+              remainInIdle = true;
+            };
+
+            MessageLatency = {
+              enabled = true;
+              latency = 2;
+              detectDiscordKotlin = true;
+              showMillis = true;
+            };
+
+            AccountPanelServerProfile = {
+              enabled = true;
+              prioritizeServerProfile = false;
+            };
+
+            MentionAvatars = {
+              enabled = true;
+              showAtSymbol = true;
+            };
+
+            UserMessagesPronouns = {
+              enabled = true;
+              showInMessages = true;
+              showSelf = true;
+              pronounSource = 1;
+              pronounsFormat = "LOWERCASE";
+              showInProfile = true;
+            };
+          };
+        };
+      };
+
+      settings = {
+        discordBranch = "stable";
+        minimizeToTray = true;
+        arRPC = true;
+        splashColor = "rgb(192, 189, 219)";
+        splashBackground = "rgb(26, 24, 37)";
+        spellCheckLanguages = ["en-US" "en"];
+        customTitleBar = false;
+        staticTitle = true;
+        hardwareAcceleration = true;
+        enableMenu = false;
+        enableSplashScreen = true;
+        splashTheming = true;
+        tray = true;
+        clickTrayToShowHide = false;
+        disableMinSize = false;
+        disableSmoothScroll = false;
+        appBadge = true;
+        openLinksWithElectron = false;
       };
     };
 
@@ -203,6 +635,17 @@
       enable = true;
       package = pkgs.starship;
       enableNushellIntegration = true;
+      settings = {
+        env_var.__NIX_SHELL_CONTENTS = {
+          variable = "__NIX_SHELL_CONTENTS";
+          default = "";
+          format = "[$env_value]($style)";
+          style = "yellow";
+        };
+        nix_shell = {
+          format = "";
+        };
+      };
     };
 
     feh = {
@@ -231,6 +674,10 @@
         {
           path = ".secrets/polybar/github";
           reference = "op://5dhshqqml7vv6bgttzilsgqaoq/Github Polybar/credential";
+        }
+        {
+          path = ".secrets/last-fm/api-key";
+          reference = "op://5dhshqqml7vv6bgttzilsgqaoq/Last FM Personal Use Key/credential";
         }
       ];
     };

@@ -6,7 +6,8 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
-      (nerdfonts.override {fonts = ["FiraCode" "Iosevka"];})
+      nerd-fonts.fira-code
+      nerd-fonts.iosevka
       fira-code
       fira-code-symbols
       mplus-outline-fonts.githubRelease
