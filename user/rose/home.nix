@@ -90,6 +90,22 @@
     };
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/discord" = "vesktop.desktop";
+      "x-scheme-handler/gitkraken" = "GitKraken.desktop";
+
+      "text/html" = "chromium.desktop";
+      "x-scheme-handler/http" = "chromium.desktop";
+      "x-scheme-handler/https" = "chromium.desktop";
+      "x-scheme-handler/about" = "chromium.desktop";
+      "x-scheme-handler/unknown" = "chromium.desktop";
+
+      "appliction/json" = "codium.desktop";
+    };
+  };
+
   programs = {
     home-manager.enable = true;
     obs-studio.enable = isDesktop;
@@ -629,7 +645,7 @@
       enable = true;
       extraConfig = ''
         Host *
-          IdentityAgent /home/rose/.1password/agent.sock
+          IdentityAgent ~/.1password/agent.sock
           ForwardAgent yes
       '';
     };
