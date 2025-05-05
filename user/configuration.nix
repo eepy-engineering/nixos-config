@@ -17,7 +17,7 @@ args @ {
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPORUkOiHY+U4AyZdsF+gRXB/wcKphX1SOgIwwlervZ5"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmuAVPQUMOZhy+a/54Rh/vwbhx9j5HU2rnhyExw01r"
     ];
   };
 
