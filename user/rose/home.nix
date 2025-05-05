@@ -56,6 +56,10 @@
         ]
         else []
       );
+
+    shell = {
+      enableNushellIntegration = true;
+    };
   };
 
   gtk = {
@@ -180,16 +184,18 @@
 
     vesktop = {
       enable = isDesktop;
-      package = pkgs.vesktop.override {
-        vencord = pkgs.vencord.overrideAttrs {
-          src = pkgs.fetchFromGitHub {
-            owner = "roobscoob";
-            repo = "Vencord";
-            rev = "7beb90cbc1277725e6c17d5a7aca9f4208d83266";
-            hash = "sha256-8oNIveNRHfFAha5Z0Az3H3PROOo6u10HDY4olCyrkrU=";
-          };
-        };
-      };
+      # package = pkgs.vesktop.override {
+      #   vencord = pkgs.vencord.overrideAttrs {
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "roobscoob";
+      #       repo = "Vencord";
+      #       rev = "7beb90cbc1277725e6c17d5a7aca9f4208d83266";
+      #       hash = "sha256-8oNIveNRHfFAha5Z0Az3H3PROOo6u10HDY4olCyrkrU=";
+      #     };
+      #   };
+      # };
+
+      package = pkgs.vesktop;
 
       vencord = {
         useSystem = true;
@@ -332,7 +338,7 @@
               nameFormat = "song";
               useListeningStatus = "true";
               missingArt = "placeholder";
-              apiKey = "~/.secrets/last-fm/api-key";
+              apiKey = "3235e0165b2c0ad38eb22530f64e863e";
               username = "roobscoob";
               showLastFmLogo = true;
               shareSong = true;
@@ -612,11 +618,16 @@
 
       extraConfig = {
         gpg.format = "ssh";
-        "gpg \"ssh\"".program = "${lib.getExe' pkgs._1password-gui "op-ssh-signin"}";
+        "gpg \"ssh\"".program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
         commit.gpgsign = true;
-        user.signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5oU0aUotQDUEL+WIlbwT6vk1G7w9v+E7+3aQQsYdNT";
+        user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5oU0aUotQDUEL+WIlbwT6vk1G7w9v+E7+3aQQsYdNT";
         init.defaultBranch = "main";
       };
+    };
+
+    ssh = {
+      enable = true;
+      extraConfig = ''IdentityAgent /home/rose/.1password/agent.sock'';
     };
 
     nushell = {
@@ -683,6 +694,18 @@
     };
   };
 
+  home.file.".config/1Password/ssh/agent.toml" = {
+    enable = true;
+    force = true;
+    text = ''
+      [[ssh-keys]]
+      vault = "Private"
+
+      [[ssh-keys]]
+      vault = "Rose"
+    '';
+  };
+
   services = {
     gpg-agent.enableNushellIntegration = true;
 
@@ -712,11 +735,19 @@
         include-file = ${./polybar}/lib/shapes/config-DP4.ini
       '';
     };
+
+    flameshot = {
+      enable = true;
+      package = pkgs.flameshot;
+    };
   };
+
+  systemd.user.startServices = true;
 
   systemd.user.services.set-wallpaper = {
     Unit = {
       Description = "Set my wallpaper";
+      After = ["graphical-session.target"];
     };
 
     Service = {

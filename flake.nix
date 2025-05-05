@@ -56,7 +56,7 @@
         isDesktop = true;
         system = "x86_64-linux";
       };
-      kokuzo-bosatsu = {
+      kokuzo = {
         # nas
         isDesktop = false;
         system = "x86_64-linux";
