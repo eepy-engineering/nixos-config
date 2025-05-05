@@ -6,13 +6,13 @@
   ...
 }: {
   imports = [
-    ./components/credentials/configuration.nix
+    ./components/credentials
     ./components/fonts.nix
     ./components/i18n.nix
     ./components/ime.nix
     ./components/nix.nix
     ./components/tank-share.nix
-    ./components/ssh/configuration.nix
+    ./components/ssh
   ];
 
   system.stateVersion = "24.11";

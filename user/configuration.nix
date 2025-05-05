@@ -5,6 +5,7 @@ args @ {
 }: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "hmbak";
 
   programs._1password-gui.enable = isDesktop;
   programs._1password.enable = true;
