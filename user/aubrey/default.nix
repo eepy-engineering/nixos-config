@@ -44,7 +44,6 @@
           blender
 
           # social
-          vesktop
           (discord-canary.override {withVencord = true;})
           signal-desktop
           thunderbird
@@ -68,47 +67,84 @@
   };
 
   programs = {
+    vesktop = {
+      enable = true;
+      settings = {
+        discordBranch = "canary";
+        minimizeToTray = true;
+        arRPC = true;
+        splashTheming = true;
+        splashColor = "rgb(219, 220, 223)";
+        splashBackground = "rgb(12, 12, 14)";
+        spellCheckLanguages = ["en-US" "us"];
+        customTitleBar = false;
+        enableMenu = false;
+        staticTitle = false;
+      };
+
+      vencord = {
+        settings = builtins.fromJSON (builtins.readFile ./vencord.json);
+      };
+    };
+
     vscode = {
       enable = isDesktop;
       package = pkgs.vscodium;
       mutableExtensionsDir = false;
-      enableUpdateCheck = true;
-      enableExtensionUpdateCheck = true;
 
-      userSettings = builtins.fromJSON (builtins.readFile ./vscode_settings.json);
+      profiles.default = {
+        userSettings = builtins.fromJSON (builtins.readFile ./vscode_settings.json);
+        enableUpdateCheck = true;
+        enableExtensionUpdateCheck = true;
 
-      extensions = with pkgs.vscode-marketplace; [
-        # theming
-        trag1c.gleam-theme
-        vscode-icons-team.vscode-icons
+        extensions = with pkgs.vscode-marketplace; [
+          # theming
+          trag1c.gleam-theme
+          vscode-icons-team.vscode-icons
 
-        # nix
-        mkhl.direnv
-        kamadorueda.alejandra
-        bbenoist.nix
+          # nix
+          mkhl.direnv
+          kamadorueda.alejandra
+          bbenoist.nix
 
-        # dx
-        vscodevim.vim
+          # dx
+          vscodevim.vim
 
-        # languages
-        rust-lang.rust-analyzer
-        tamasfe.even-better-toml
-        thenuprojectcontributors.vscode-nushell-lang
-        mkornelsen.vscode-arm64
-        ms-vscode.cpptools-extension-pack
-        llvm-vs-code-extensions.vscode-clangd
-        svelte.svelte-vscode
-        ms-vscode.cmake-tools
-        visualstudiotoolsforunity.vstuc
-        surendrajat.apklab
-        loyieking.smalise
-        denoland.vscode-deno
-        pbkit.vscode-pbkit
-        ms-python.python
-        haskell.haskell
-        justusadam.language-haskell
-        ocamllabs.ocaml-platform
-      ];
+          # languages
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          thenuprojectcontributors.vscode-nushell-lang
+          mkornelsen.vscode-arm64
+          ms-vscode.cpptools-extension-pack
+          llvm-vs-code-extensions.vscode-clangd
+          svelte.svelte-vscode
+          ms-vscode.cmake-tools
+          visualstudiotoolsforunity.vstuc
+          surendrajat.apklab
+          loyieking.smalise
+          denoland.vscode-deno
+          pbkit.vscode-pbkit
+          ms-python.python
+          haskell.haskell
+          justusadam.language-haskell
+          ocamllabs.ocaml-platform
+        ];
+      };
+    };
+
+    ssh = {
+      enable = true;
+      extraConfig = ''
+        Host *
+          IdentityAgent ~/.1password/agent.sock
+          ForwardAgent yes
+        Host sanae6.ca
+          User sanae
+        Host vm-eepy
+          User eepy
+        Host vm-pia
+          User eepy
+      '';
     };
 
     git = {

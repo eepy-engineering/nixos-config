@@ -10,3 +10,5 @@ $env.config.edit_mode = "vi";
 
 $env.config.use_kitty_protocol = true
 $env.config.highlight_resolved_externals = true
+
+alias nsu = nix-shell --command nu
