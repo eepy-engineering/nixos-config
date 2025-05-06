@@ -31,5 +31,6 @@
     vlc
     obs-studio
     qpwgraph
+    kubectl
   ];
 }

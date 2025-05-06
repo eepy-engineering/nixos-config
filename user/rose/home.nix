@@ -701,7 +701,7 @@
     };
 
     onepassword-secrets = {
-      enable = isDesktop;
+      # enable = isDesktop;
       tokenFile =
         if isDesktop
         then "/etc/opnix-token"
