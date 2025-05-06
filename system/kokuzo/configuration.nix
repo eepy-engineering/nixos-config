@@ -57,6 +57,20 @@
     useRoutingFeatures = "server";
   };
 
+  services.openssh = {
+    hostKeys = [
+      {
+        type = "ed25519";
+        path = "/persist/ssh-host-keys/ssh_host_ed25519_key";
+      }
+      {
+        type = "rsa";
+        bits = 4096;
+        path = "/persist/ssh-host-keys/ssh_host_rsa_key";
+      }
+    ];
+  };
+
   services.getty.autologinUser = "root";
 
   # FIXME: move this to k8s when we have that set up
