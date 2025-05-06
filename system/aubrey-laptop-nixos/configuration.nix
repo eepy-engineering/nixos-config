@@ -49,6 +49,9 @@
     enable = true;
     qemu.vhostUserPackages = with pkgs; [virtiofsd];
   };
+  virtualisation.docker = {
+    enable = true;
+  };
 
   environment.etc = {
     "1password/custom_allowed_browsers" = {

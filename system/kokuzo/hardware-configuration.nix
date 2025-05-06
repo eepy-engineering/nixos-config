@@ -52,6 +52,12 @@
     depends = ["/"];
   };
 
+  fileSystems."/persist/ssh-host-keys" = {
+    device = "tank/ssh-host-keys";
+    fsType = "zfs";
+    depends = ["/"];
+  };
+
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

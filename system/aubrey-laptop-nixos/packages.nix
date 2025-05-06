@@ -19,6 +19,9 @@
     gdb
     tea
     gh
+    kubectl
+    cloudflared
+    dive
 
     # dependencies
     OVMFFull
@@ -31,6 +34,5 @@
     vlc
     obs-studio
     qpwgraph
-    kubectl
   ];
 }
