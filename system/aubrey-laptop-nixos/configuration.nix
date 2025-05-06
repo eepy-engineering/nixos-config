@@ -10,6 +10,7 @@
     ./backups.nix
     ./packages.nix
     ../components/bluetooth.nix
+    ../components/rust.nix
   ];
 
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;

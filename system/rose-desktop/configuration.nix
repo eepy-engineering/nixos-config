@@ -10,6 +10,7 @@
     ./hardware.nix
     ../components/nvidia-oss.nix
     ../components/bluetooth.nix
+    ../components/rust.nix
   ];
 
   services = {

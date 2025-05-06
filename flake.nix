@@ -21,6 +21,12 @@
     # Applications
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Fenix (Rust)
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -29,12 +35,14 @@
     opnix,
     extensions,
     zen-browser,
+    fenix,
     ...
   }: let
     lib = nixpkgs.lib;
     overlays =
       [
         extensions.overlays.default
+        fenix.overlays.default
         (final: _prev: {
           opnix = opnix.packages.${final.system}.default;
           zen-browser = zen-browser.packages.${final.system}.default;
