@@ -47,7 +47,7 @@
       '';
     };
 
-    fileSystems."/mnt/tank" = lib.mkDefault {
+    fileSystems."/mnt/tank" = {
       device = "//kokuzo.tailc38f.ts.net/tank";
       fsType = "cifs";
       depends = ["/"];
@@ -59,9 +59,9 @@
             device-timeout = "5s";
             mount-timeout = "5s";
           };
-
+          vers = "3.1.1";
           noauto = true;
-          setuids = true;
+          # setuids = false;
           posix = true;
           # uid = config.tank-mount.username;
           # file_mode = "1755";
