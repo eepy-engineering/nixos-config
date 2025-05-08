@@ -1,12 +1,14 @@
 {
-  lib,
   pkgs,
+  lib,
   ...
 }: {
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
   services.blueman.enable = true;
+  users.groups.bluetooth = {};
+  # Group with the permission to edit bluetooth devices
 
   services.dbus.packages = lib.mkAfter [
     (pkgs.linkFarm "extra-dbus-config"

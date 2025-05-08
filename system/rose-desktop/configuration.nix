@@ -20,6 +20,7 @@
 
       windowManager.i3 = {
         enable = true;
+        package = pkgs.i3-rounded;
         extraPackages = with pkgs; [
           dmenu
           feh

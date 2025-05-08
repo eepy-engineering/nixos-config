@@ -4,11 +4,8 @@
       home-daily = {
         onCalendar = "daily";
         settings = {
-          # ssh_identity = builtins.toString ../../id_ed25519;
-          # ssh_user = "btrbk";
           snapshot_preserve_min = "1m";
           snapshot_preserve = "3m";
-          # target = "raw ssh://shared-vm-nixos/mnt/tank/home/aubrey/btrfsSnapshots";
           volume = {
             "/" = {
               subvolume = "home";

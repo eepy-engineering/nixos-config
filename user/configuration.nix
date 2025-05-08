@@ -15,7 +15,7 @@ args @ {
   users.users.rose = {
     isNormalUser = true;
     description = "Rose Kodsi-Hall";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "bluetooth"];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmuAVPQUMOZhy+a/54Rh/vwbhx9j5HU2rnhyExw01r"
@@ -26,7 +26,7 @@ args @ {
   users.users.aubrey = {
     isNormalUser = true;
     description = "Aubrey";
-    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd"];
+    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd" "bluetooth"];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZn43IczAtHI49eULTaA3GY7Zdoy/gqeEIhev/3ub09"

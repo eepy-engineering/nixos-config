@@ -17,7 +17,12 @@
     homeDirectory = "/home/rose";
 
     packages = with pkgs;
-      []
+      [
+        binutils
+        kx-aspe-cli
+        openssl
+        iperf3
+      ]
       ++ (
         if isDesktop
         then [
@@ -31,14 +36,14 @@
           nautilus
           gnome-tweaks
           vlc
-          binutils
-          kx-aspe-cli
-          openssl
-          iperf3
           obsidian
           rose-pine-gtk-theme
           rose-pine-cursor
           zulip
+          blender
+          shotcut
+          (pkgs.callPackage ./davinci-resolve-paid.nix {})
+          libnotify
           opnix.packages.${pkgs.system}.default
           (prismlauncher.override {
             # Java runtimes available to Prism Launcher
@@ -59,6 +64,30 @@
 
     shell = {
       enableNushellIntegration = true;
+    };
+
+    file = {
+      ".config/1Password/ssh/agent.toml" = {
+        enable = true;
+        force = true;
+        text = ''
+          [[ssh-keys]]
+          vault = "Private"
+
+          [[ssh-keys]]
+          vault = "Rose"
+        '';
+      };
+      ".xprofile" = {
+        enable = true;
+        force = true;
+        text = ''
+          xrandr \
+            --output DP-4 --mode 3840x2160 --rate 60 --pos 0x0 --rotate normal \
+            --output DP-0 --primary --mode 3840x2160 --rate 160 --pos 3840x0 --rotate normal \
+            --output DP-2 --mode 3840x2160 --rate 60 --pos 7680x0 --rotate normal
+        '';
+      };
     };
   };
 
@@ -715,18 +744,6 @@
     };
   };
 
-  home.file.".config/1Password/ssh/agent.toml" = {
-    enable = true;
-    force = true;
-    text = ''
-      [[ssh-keys]]
-      vault = "Private"
-
-      [[ssh-keys]]
-      vault = "Rose"
-    '';
-  };
-
   services = {
     gpg-agent.enableNushellIntegration = true;
 
@@ -750,6 +767,23 @@
           ${pkgs.polybarFull}/bin/polybar --reload $m &
         done
       '';
+      settings = {
+        "module/i3-mode" = {
+          type = "custom/script";
+          exec = pkgs.writeNushellScript "i3-mode" ''
+            let binding_state = i3-msg -t get_binding_state | from json;
+
+            if ($binding_state.name == "default") {
+              print "%{T3}%{F#EBBCBAFF}%{T- F-}";
+            } else {
+              print $"%{F#EB6F92FF}($binding_state.name)%{F-}"
+            }
+          '';
+          interval = 0.1;
+          label = "\" %output%\"";
+          format-background = "#21202e";
+        };
+      };
       extraConfig = ''
         include-file = ${./polybar}/lib/shapes/config-DP0.ini
         include-file = ${./polybar}/lib/shapes/config-DP2.ini
@@ -761,28 +795,67 @@
       enable = isDesktop;
       package = pkgs.flameshot;
     };
+
+    dunst = {
+      enable = isDesktop;
+      package = pkgs.dunst;
+      settings = {
+        global = {
+          width = 300;
+          origin = "bottom-right";
+          font = "Fira Code";
+        };
+      };
+    };
   };
 
   systemd.user.startServices = true;
 
-  systemd.user.services.set-wallpaper = {
-    Unit = {
-      Description = "Set my wallpaper";
-      After = ["graphical-session.target"];
-    };
+  systemd.user = {
+    services = {
+      set-wallpaper = {
+        Unit = {
+          Description = "Set my wallpaper";
+          PartOf = "xsession.target";
+          After = "wait-x.service";
+        };
 
-    Service = {
-      Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "set-wallpaper.nu" ''
-        #${pkgs.nushell}/bin/nu
-        ${pkgs.feh}/bin/feh --no-xinerama --bg-max ${./wallpaper-stretch.png}
-      '';
+        Service = {
+          Type = "oneshot";
+          ExecStart = pkgs.writeShellScript "set-wallpaper.nu" ''
+            #${pkgs.nushell}/bin/nu
+            ${pkgs.feh}/bin/feh --no-xinerama --bg-max ${./wallpaper-stretch.png}
+          '';
+        };
+
+        Install = {
+          WantedBy = ["xsession.target"];
+        };
+      };
+
+      bt-autoconnect = {
+        Unit = {
+          Description = "Auto-Connect WH-1000XM4";
+          After = ["bluetooth.target"];
+          Requires = ["bluetooth.target"];
+        };
+
+        Service = {
+          Type = "oneshot";
+          Group = "bluetooth";
+          ExecStart = "${pkgs.bluez}/bin/bluetoothctl connect AC:80:0A:0B:02:D7";
+        };
+
+        Install = {
+          WantedBy = ["default.target"];
+        };
+      };
     };
   };
 
   xsession.windowManager.i3 = rec {
     enable = isDesktop;
-    package = pkgs.i3;
+    package = pkgs.i3-rounded;
     config = {
       modifier = "Mod1";
       keybindings = {
@@ -853,6 +926,9 @@
       for_window [title="Vesktop"] border none
 
       for_window [title="Desktop @ QRect.*"] kill, floating enable, border none
+
+      gaps outer 10
+      border_radius 2
     '';
   };
 }
