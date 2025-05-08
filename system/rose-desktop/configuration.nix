@@ -11,8 +11,17 @@
     ../components/nvidia-oss.nix
     ../components/bluetooth.nix
     ../components/rust.nix
-    # ../components/tank-share.nix
+    ../components/tank-share.nix
   ];
+
+  tank-mount = {
+    enable = true;
+    username = "rose";
+    opnix-login-references = {
+      username = "op://Services/Rose - Nas SMB/username";
+      password = "op://Services/Rose - Nas SMB/password";
+    };
+  };
 
   services = {
     xserver = {
