@@ -11,6 +11,7 @@
     ./packages.nix
     ../components/bluetooth.nix
     ../components/rust.nix
+    ../components/tank-share.nix
   ];
 
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
@@ -68,6 +69,15 @@
       text = ''
         SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
       '';
+    };
+  };
+
+  tank-mount = {
+    enable = true;
+    username = "aubrey";
+    opnix-login-references = {
+      username = "op://Services/Aubrey - Nas SMB/username";
+      password = "op://Services/Aubrey - Nas SMB/password";
     };
   };
 

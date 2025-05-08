@@ -6,31 +6,33 @@
   ...
 }: {
   imports = [
-    ./components/credentials
+    ./components/credentials.nix
     ./components/fonts.nix
     ./components/i18n.nix
     ./components/ime.nix
     ./components/nix.nix
-    ./components/tank-share.nix
     ./components/ssh
   ];
 
   system.stateVersion = "24.11";
 
   environment.systemPackages = with pkgs; [
-    cifs-utils
+    # nix
     opnix
-    binutils
     direnv
+    nixos-rebuild
+    home-manager.home-manager
+
+    # cli tools
+    cifs-utils
+    binutils
     openssl
     iperf3
     rsync
-    nixos-rebuild
     unzip
     ripgrep
     wget
     git
-    direnv
     killall
     neofetch
     nmap
@@ -38,7 +40,8 @@
     binwalk
     file
     dig
-    home-manager.home-manager
+    bottom
+    htop
 
     (writeNushellScriptBin "reboot-kexec" ''
       let cmdline = $"init=(readlink -f /nix/var/nix/profiles/system/init) $(open /nix/var/nix/profiles/system/kernel-params)";

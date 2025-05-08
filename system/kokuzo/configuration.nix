@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./kubernetes-master.nix
+    ./smb.nix
   ];
 
   boot.loader = {

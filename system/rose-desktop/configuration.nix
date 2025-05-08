@@ -11,6 +11,7 @@
     ../components/nvidia-oss.nix
     ../components/bluetooth.nix
     ../components/rust.nix
+    # ../components/tank-share.nix
   ];
 
   services = {

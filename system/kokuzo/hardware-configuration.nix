@@ -53,7 +53,19 @@
   };
 
   fileSystems."/persist/ssh-host-keys" = {
-    device = "tank/ssh-host-keys";
+    device = "tank/nas/ssh-host-keys";
+    fsType = "zfs";
+    depends = ["/"];
+  };
+
+  fileSystems."/persist/docker-registry" = {
+    device = "tank/nas/docker-registry";
+    fsType = "zfs";
+    depends = ["/"];
+  };
+
+  fileSystems."/persist/tailscale-nginx-cert" = {
+    device = "tank/nas/tailscale-nginx-cert";
     fsType = "zfs";
     depends = ["/"];
   };
