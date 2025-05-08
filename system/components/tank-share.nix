@@ -61,12 +61,7 @@
           };
           vers = "3.1.1";
           noauto = true;
-          # setuids = false;
           posix = true;
-          # uid = config.tank-mount.username;
-          # file_mode = "1755";
-          # dir_mode = "0755";
-          # gid = "users";
 
           credentials = "/var/lib/opnix/secrets/samba/credentials";
         })
