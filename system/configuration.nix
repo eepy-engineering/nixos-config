@@ -22,6 +22,7 @@
     direnv
     nixos-rebuild
     home-manager.home-manager
+    nix-search
 
     # cli tools
     cifs-utils
