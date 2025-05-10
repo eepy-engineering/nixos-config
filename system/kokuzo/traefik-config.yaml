@@ -1,0 +1,20 @@
+# traefik config to prevent it from trampling the internal nginx server
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    ports:
+      web:
+        expose:
+          default: true
+          internal: false
+        hostPort: 8000
+        exposedPort: 8000
+        
+      websecure:
+        expose:
+          default: false
+          internal: false

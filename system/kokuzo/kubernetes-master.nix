@@ -11,10 +11,8 @@
     extraFlags = [
       "--tls-san=100.70.181.9"
       "--tls-san=kokuzo.tailc38f.ts.net"
-      "--no-deploy traefik"
-      "--no-deploy=traefik"
-      "--disable=traefik"
     ];
+    manifests.traefik-config.source = ./traefik-config.yaml;
   };
 
   services.dockerRegistry = {
