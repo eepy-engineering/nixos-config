@@ -17,6 +17,15 @@
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
   boot.supportedFilesystems = ["btrfs"];
 
+  boot.initrd.network.enable = true;
+  boot.initrd.systemd = {
+    enable = true;
+    network = {
+      enable = true;
+      wait-online.extraArgs = ["--dns"];
+    };
+  };
+
   hardware.enableAllFirmware = true;
 
   boot.loader.systemd-boot.enable = true;

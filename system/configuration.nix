@@ -14,7 +14,7 @@
     ./components/ssh
   ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = lib.mkDefault "24.11";
 
   environment.systemPackages = with pkgs; [
     # nix
@@ -25,6 +25,7 @@
     nix-search
 
     # cli tools
+    neovim
     cifs-utils
     binutils
     openssl

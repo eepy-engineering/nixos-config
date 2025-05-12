@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  isDesktop,
+  ...
+}: {
   i18n.inputMethod = {
-    enable = true;
+    enable = isDesktop;
     type = "fcitx5";
     fcitx5 = {
       waylandFrontend = true;

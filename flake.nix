@@ -71,6 +71,11 @@
         isDesktop = false;
         system = "x86_64-linux";
       };
+      compute = {
+        # compute
+        isDesktop = false;
+        system = "x86_64-linux";
+      };
     };
     hmUsers = ["aubrey" "rose"];
   in {
@@ -86,7 +91,6 @@
           };
           modules = [
             overlaysModule
-            opnix.nixosModules.default
             home-manager.nixosModules.home-manager
             ./system/configuration.nix
             ./system/${name}/configuration.nix

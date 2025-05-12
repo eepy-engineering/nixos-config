@@ -25,24 +25,31 @@
   };
 
   config = {
-    opnix.secrets = [
-      {
-        path = "samba/username";
-        reference = config.tank-mount.opnix-login-references.username;
-      }
-      {
-        path = "samba/password";
-        reference = config.tank-mount.opnix-login-references.password;
-      }
-    ];
+    opnix = {
+      secrets = [
+        {
+          path = "samba/username";
+          reference = config.tank-mount.opnix-login-references.username;
+        }
+        {
+          path = "samba/password";
+          reference = config.tank-mount.opnix-login-references.password;
+        }
+      ];
 
-    system.activationScripts.samba-credentials = {
-      deps = ["onepassword-secrets"];
-      text = ''
+      services = ["samba-credentials.service"];
+    };
+
+    systemd.services.samba-credentials = {
+      description = "Prepare secrets from 1Password Service Vault";
+      serviceConfig = {
+        Type = "oneshot";
+      };
+      script = ''
         ${pkgs.nushell}/bin/nu ${builtins.toFile "build-samba-creds.nu" ''
-          let username = open /var/lib/opnix/secrets/samba/username;
-          let password = open /var/lib/opnix/secrets/samba/password;
-          $"username=($username)\npassword=($password)" | save -f /var/lib/opnix/secrets/samba/credentials
+          let username = open ${pkgs.asOpnixPath "samba/username"};
+          let password = open ${pkgs.asOpnixPath "samba/password"};
+          $"username=($username)\npassword=($password)" | save -f ${pkgs.asOpnixPath "samba/credentials"}
         ''}
       '';
     };
@@ -58,12 +65,13 @@
             idle-timeout = 60;
             device-timeout = "5s";
             mount-timeout = "5s";
+            requires = "samba-credentials.service";
           };
           vers = "3.1.1";
           noauto = true;
           posix = true;
 
-          credentials = "/var/lib/opnix/secrets/samba/credentials";
+          credentials = pkgs.asOpnixPath "samba/credentials";
         })
       ];
     };

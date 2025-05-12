@@ -11,8 +11,16 @@
     extraFlags = [
       "--tls-san=100.70.181.9"
       "--tls-san=kokuzo.tailc38f.ts.net"
+      "--node-ip=192.168.2.1"
+      "--debug"
     ];
     manifests.traefik-config.source = ./traefik-config.yaml;
+  };
+
+  users.users.filebrowser = {
+    description = "Filebrowser";
+    isNormalUser = true;
+    createHome = false;
   };
 
   services.dockerRegistry = {
