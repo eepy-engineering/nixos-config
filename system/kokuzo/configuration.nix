@@ -78,7 +78,7 @@
 
   # FIXME: move this to k8s when we have that set up
   services.plex = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     dataDir = "/mnt/tank/plex-conf/Library/Application Support";
     # cuda support
@@ -101,7 +101,7 @@
   };
 
   services.jellyfin = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     user = "plex";
     dataDir = "/mnt/tank/jellyfin";

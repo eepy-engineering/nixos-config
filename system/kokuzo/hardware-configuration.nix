@@ -17,6 +17,8 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.zfs.extraPools = ["apps"];
+
   fileSystems."/" = {
     device = "root";
     fsType = "tmpfs";
@@ -53,19 +55,19 @@
   };
 
   fileSystems."/persist/ssh-host-keys" = {
-    device = "tank/nas/ssh-host-keys";
+    device = "tank/nas/components/ssh-host-keys";
     fsType = "zfs";
     depends = ["/"];
   };
 
   fileSystems."/persist/docker-registry" = {
-    device = "tank/nas/docker-registry";
+    device = "tank/nas/components/docker-registry";
     fsType = "zfs";
     depends = ["/"];
   };
 
   fileSystems."/persist/tailscale-nginx-cert" = {
-    device = "tank/nas/tailscale-nginx-cert";
+    device = "tank/nas/components/tailscale-nginx-cert";
     fsType = "zfs";
     depends = ["/"];
   };
