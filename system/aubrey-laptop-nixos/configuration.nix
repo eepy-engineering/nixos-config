@@ -42,7 +42,7 @@
       enable = true;
     };
   };
-  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = false;
 
   services.printing.enable = true;
   services.pipewire = {
@@ -89,6 +89,8 @@
       password = "op://Services/Aubrey - Nas SMB/password";
     };
   };
+
+  programs.sway.enable = true;
 
   programs.steam = {
     enable = true;

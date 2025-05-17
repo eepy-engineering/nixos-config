@@ -10,11 +10,15 @@ spec:
       web:
         expose:
           default: true
-          internal: false
-        hostPort: 8000
-        exposedPort: 8000
+        exposedPort: 8080
         
       websecure:
-        expose:
-          default: false
-          internal: false
+        expose
+          default: true
+        exposedPort: 8443
+        tls:
+          certResolver: leresolver
+          domains:
+            - main: "kokuzo"
+              sans:
+                - "kokuzo.tailc38f.ts.net"

@@ -61,6 +61,10 @@
           kdePackages.plasma-systemmonitor
           kdePackages.kcalc
           obsidian
+
+          # desktop
+          wev
+          playerctl
         ]
         else []
       );
@@ -192,5 +196,81 @@
       enable = isDesktop;
       extraConfig = builtins.readFile ./wezterm.lua;
     };
+
+    swaylock = {
+      enable = true;
+    };
+  };
+
+  services = {
+    flameshot = {
+      enable = true;
+      package =
+        (pkgs.flameshot.override {enableWlrSupport = true;}).overrideDerivation
+        (oldAttrs: {
+          # qtWrapperArgs = ["--set" "QT_QPA_PLATFORM" "xcb"];
+        });
+      settings = {
+        General = {
+          contrastOpacity = 188;
+          saveAfterCopy = true;
+          saveAsFileExtension = "png";
+          saveLastRegion = true;
+          savePath = "/home/aubrey/Pictures/Screenshots";
+          savePathFixed = false;
+          showHelp = true;
+          showSelectionGeometryHideTime = 3000;
+          showSidePanelButton = false;
+        };
+        Shortcuts = {
+          TYPE_COPY = "Ctrl+C";
+          TYPE_EXIT = "Ctrl+Q";
+        };
+      };
+    };
+  };
+
+  i18n.inputMethod = {
+    enable = isDesktop;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        fcitx5-mozc
+      ];
+    };
+  };
+
+  wayland.windowManager.sway = {
+    enable = isDesktop;
+    extraConfig = with pkgs; ''
+      output eDP-1 pos 0 0 res 2560x1600
+      output DP-2 pos 2560 260 res 1920x1080
+      output DP-4 pos 4480 260 res 1920x1080
+
+      set $mod Mod1
+      set $term wezterm start --always-new-process
+
+      bindsym Print exec flameshot gui
+      bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
+      bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
+      bindsym XF86AudioPrev playerctl pause
+      bindsym XF86AudioPlay playerctl play-pause
+      bindsym XF86AudioNext playerctl
+      bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+      bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+
+      #bindsym $mod+Return exec wezterm start --always-new-process
+
+      exec 1password
+      exec vesktop
+      exec zen
+      exec codium
+
+      for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+
+      bindsym Mod4+L exec swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png
+    '';
   };
 }
