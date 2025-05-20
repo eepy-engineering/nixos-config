@@ -54,13 +54,15 @@
   security.sudo.wheelNeedsPassword = false;
 
   programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.vhostUserPackages = with pkgs; [virtiofsd];
-  };
-  virtualisation.docker = {
-    enable = true;
+  virtualisation = {
+    spiceUSBRedirection.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    };
+    docker = {
+      enable = true;
+    };
   };
 
   environment.etc = {

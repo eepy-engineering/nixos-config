@@ -22,14 +22,6 @@
     kubectl
     cloudflared
     dive
-    (wrapHelm kubernetes-helm {
-      plugins = with pkgs.kubernetes-helmPlugins; [
-        helm-secrets
-        helm-diff
-        helm-s3
-        helm-git
-      ];
-    })
 
     # dependencies
     OVMFFull

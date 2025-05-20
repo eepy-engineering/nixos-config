@@ -244,9 +244,20 @@
   wayland.windowManager.sway = {
     enable = isDesktop;
     extraConfig = with pkgs; ''
+      input "type:touchpad" {
+        dwt enabled
+        tap enabled
+        natural_scroll enabled
+        middle_emulation enabled
+      }
+
       output eDP-1 pos 0 0 res 2560x1600
       output DP-2 pos 2560 260 res 1920x1080
       output DP-4 pos 4480 260 res 1920x1080
+
+      workspace 1 output eDP-1
+      workspace 2 output DP-2
+      workspace 3 output DP-4
 
       set $mod Mod1
       set $term wezterm start --always-new-process
@@ -270,7 +281,15 @@
 
       for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
-      bindsym Mod4+L exec swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png
+      bindsym Mod4+L exec swayidle \
+        timeout 1 'swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -f -c 000000; pkill swayidle -n' \
+        timeout 10 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+        before-sleep 'swaylock -f -c 000000'
+
+      exec swayidle -w \
+        timeout 300 'swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -f -c 000000; ' \
+        timeout 315 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+        before-sleep 'swaylock -f -c 000000'
     '';
   };
 }

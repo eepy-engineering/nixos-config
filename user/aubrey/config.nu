@@ -12,3 +12,6 @@ $env.config.use_kitty_protocol = true
 $env.config.highlight_resolved_externals = true
 
 alias nsu = nix-shell --command nu
+
+$env.OP_PLUGIN_ALIASES_SOURCED = 1
+alias gh = op plugin run -- gh

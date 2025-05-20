@@ -46,6 +46,15 @@
     htop
     tmux
     ffmpeg
+    (wrapHelm kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+        helm-s3
+        helm-git
+      ];
+    })
+    argocd
 
     (writeNushellScriptBin "reboot-kexec" ''
       let cmdline = $"init=(readlink -f /nix/var/nix/profiles/system/init) $(open /nix/var/nix/profiles/system/kernel-params)";

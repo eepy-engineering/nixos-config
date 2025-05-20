@@ -695,7 +695,7 @@
   "cloud": {
     "authenticated": true,
     "url": "https://api.vencord.dev/",
-    "settingsSync": true,
+    "settingsSync": false,
     "settingsSyncVersion": 1746406111285
   },
   "notifyAboutUpdates": true,
