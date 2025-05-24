@@ -61,6 +61,7 @@
           kdePackages.plasma-systemmonitor
           kdePackages.kcalc
           obsidian
+          rustdesk
 
           # desktop
           wev

@@ -36,6 +36,8 @@
 
   time.timeZone = "America/Regina";
 
+  services.logind.powerKey = "suspend";
+
   services.displayManager.sddm = {
     enable = true;
     wayland = {
