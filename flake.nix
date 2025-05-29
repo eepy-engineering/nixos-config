@@ -4,7 +4,6 @@
   inputs = {
     # Use the unstable NixPkgs branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Use community VSCode extensions
     extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -27,6 +26,11 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -36,6 +40,7 @@
     extensions,
     zen-browser,
     fenix,
+    microvm,
     ...
   }: let
     lib = nixpkgs.lib;
@@ -46,10 +51,6 @@
         (final: _prev: {
           opnix = opnix.packages.${final.system}.default;
           zen-browser = zen-browser.packages.${final.system}.default;
-          unstable = import inputs.nixpkgs-unstable {
-            system = final.system;
-            config.allowUnfree = true;
-          };
           home-manager = home-manager.packages.${final.system};
         })
       ]
@@ -86,7 +87,7 @@
         lib.nixosSystem {
           system = config.system;
           specialArgs = {
-            inherit inputs opnix;
+            inherit inputs opnix microvm;
             isDesktop = config.isDesktop;
           };
           modules = [

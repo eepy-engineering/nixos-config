@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./kubernetes-master.nix
     ./smb.nix
+    ./vms
   ];
 
   boot.loader = {
@@ -31,6 +32,10 @@
 
   boot.supportedFilesystems = ["zfs"];
   boot.initrd.supportedFilesystems = ["zfs"];
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = "2097152";
+    "fs.inotify.max_user_instances" = "1024";
+  };
 
   networking = {
     hostName = "kokuzo";
@@ -76,15 +81,6 @@
 
   services.getty.autologinUser = "root";
 
-  # FIXME: move this to k8s when we have that set up
-  services.plex = {
-    enable = false;
-    openFirewall = true;
-    dataDir = "/mnt/tank/plex-conf/Library/Application Support";
-    # cuda support
-    #package = pkgs.plex.overrideAttrs
-  };
-
   services.sanoid = {
     enable = true;
     datasets = {
@@ -98,12 +94,5 @@
         recursive = "zfs";
       };
     };
-  };
-
-  services.jellyfin = {
-    enable = false;
-    openFirewall = true;
-    user = "plex";
-    dataDir = "/mnt/tank/jellyfin";
   };
 }

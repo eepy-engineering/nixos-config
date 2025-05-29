@@ -8,7 +8,10 @@
   options.opnix = {
     users = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = ["aubrey" "rose"];
+      default =
+        if config.boot.isContainer
+        then ["aubrey" "rose"]
+        else [];
       description = "Users that should have access to the 1Password token through group membership";
       example = ["alice" "bob"];
     };
@@ -66,8 +69,8 @@
         mkdir -p ${cfg.outputDir}
         chmod 750 ${cfg.outputDir}
 
-        # Set up token file with correct group permissions if it exists
-        if [ -f ${tokenFile} ]; then
+        # Set up token file with correct group permissions if it exists and is writable
+        if [ -f ${tokenFile} ] && [ -w ${tokenFile} ]; then
           # Ensure token file has correct ownership and permissions
           chown root:${opnixGroup} ${tokenFile}
           chmod 640 ${tokenFile}

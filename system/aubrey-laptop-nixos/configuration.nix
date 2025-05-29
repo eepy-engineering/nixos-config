@@ -14,7 +14,7 @@
     ../components/tank-share.nix
   ];
 
-  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["btrfs"];
 
   boot.initrd.network.enable = true;

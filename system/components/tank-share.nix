@@ -62,7 +62,7 @@
         (import ../../util/cifs-options.nix lib {
           x-systemd = {
             automount = true;
-            idle-timeout = 60;
+            # idle-timeout = 60;
             device-timeout = "5s";
             mount-timeout = "5s";
             requires = "samba-credentials.service";

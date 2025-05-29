@@ -28,9 +28,9 @@
           gitkraken
           imhex
           unityhub
-          unstable.jetbrains.rider
-          unstable.jetbrains.clion
-          unstable.jetbrains.idea-community
+          jetbrains.rider
+          jetbrains.clion
+          jetbrains.idea-community
           bruno
           ghidra-bin
           renderdoc

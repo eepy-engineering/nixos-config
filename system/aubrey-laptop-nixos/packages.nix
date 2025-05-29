@@ -9,7 +9,7 @@
     pnpm
     nodejs
     jdk23
-    unstable.dotnetCorePackages.dotnet_9.sdk
+    dotnetCorePackages.dotnet_9.sdk
 
     # cli tools
     fusee-nano
@@ -22,6 +22,7 @@
     kubectl
     cloudflared
     dive
+    everest-mons
 
     # dependencies
     OVMFFull
