@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   services.k3s = {
@@ -47,6 +48,11 @@
   };
 
   systemd = {
+    services.k3s = {
+      serviceConfig = {
+        "LimitNOFILE" = lib.mkForce "infinity";
+      };
+    };
     services.tailscale-cert-refresh = {
       requires = ["network-online.target"];
       requiredBy = ["nginx.service"];
