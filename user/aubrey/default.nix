@@ -203,34 +203,6 @@
     };
   };
 
-  services = {
-    flameshot = {
-      enable = true;
-      package =
-        (pkgs.flameshot.override {enableWlrSupport = true;}).overrideDerivation
-        (oldAttrs: {
-          # qtWrapperArgs = ["--set" "QT_QPA_PLATFORM" "xcb"];
-        });
-      settings = {
-        General = {
-          contrastOpacity = 188;
-          saveAfterCopy = true;
-          saveAsFileExtension = "png";
-          saveLastRegion = true;
-          savePath = "/home/aubrey/Pictures/Screenshots";
-          savePathFixed = false;
-          showHelp = true;
-          showSelectionGeometryHideTime = 3000;
-          showSidePanelButton = false;
-        };
-        Shortcuts = {
-          TYPE_COPY = "Ctrl+C";
-          TYPE_EXIT = "Ctrl+Q";
-        };
-      };
-    };
-  };
-
   i18n.inputMethod = {
     enable = isDesktop;
     type = "fcitx5";
@@ -263,13 +235,20 @@
       set $mod Mod1
       set $term wezterm start --always-new-process
 
-      bindsym Print exec flameshot gui
+      bindsym Print exec ${writeNushellScript "flameshot-screenie" ''
+        let success = (${flameshot}/bin/flameshot gui -p ~/Pictures/Screenshots/ | complete | get exit_code) == 0;
+
+        if $success {
+          ls ~/Pictures/Screenshots/ | sort-by modified | last | get name | open | ${wl-clipboard}/bin/wl-copy
+        }
+      ''}
+
       bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
       bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
       bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
-      bindsym XF86AudioPrev playerctl pause
+      bindsym XF86AudioPrev playerctl previous
       bindsym XF86AudioPlay playerctl play-pause
-      bindsym XF86AudioNext playerctl
+      bindsym XF86AudioNext playerctl next
       bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
       bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 
