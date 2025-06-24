@@ -34,6 +34,10 @@
   networking.hostName = "aubrey-laptop-nixos";
   networking.networkmanager.enable = true;
 
+  users.users = {
+    walter.enable = false;
+  };
+
   time.timeZone = "America/Regina";
 
   services.logind.powerKey = "suspend";
@@ -45,6 +49,17 @@
     };
   };
   services.desktopManager.plasma6.enable = false;
+
+  xdg = {
+    mime.enable = true;
+    portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+  };
 
   services.printing.enable = true;
   services.pipewire = {
@@ -100,6 +115,18 @@
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+  };
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi #optional AMD hardware acceleration
+      obs-gstreamer
+      obs-vkcapture
+    ];
   };
 
   programs.wireshark = {

@@ -6,6 +6,7 @@ args @ {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "hmbak";
+  environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
 
   programs._1password-gui.enable = isDesktop;
   programs._1password.enable = true;

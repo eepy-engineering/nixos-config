@@ -20,6 +20,7 @@
       [
         # development
         neovim # todo: neovim via home manager
+        nix-index
       ]
       ++ (
         if isDesktop
@@ -37,6 +38,7 @@
           avalonia-ilspy
           digital
           alejandra
+          nixd
 
           # art
           pinta
@@ -47,6 +49,7 @@
           (discord-canary.override {withVencord = true;})
           signal-desktop
           thunderbird
+          bluebubbles
 
           # web
           zen-browser
@@ -73,7 +76,7 @@
 
   programs = {
     vesktop = {
-      enable = true;
+      enable = isDesktop;
       settings = {
         discordBranch = "canary";
         minimizeToTray = true;
@@ -137,6 +140,29 @@
       };
     };
 
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "lua"
+        "nix"
+        "nushell"
+        "vscode-dark-plus"
+        "wgsl"
+      ];
+      userSettings = {
+        features = {
+          copilot = false;
+        };
+        telemetry.metrics = false;
+        vim_mode = true;
+        load_direnv = "shell_hook";
+        buffer_font_family = "Comic Mono";
+        buffer_font_fallbacks = ["Zed Plus Mono"];
+        autosave.after_delay.milliseconds = 300;
+        relative_line_numbers = true;
+      };
+    };
+
     onepassword-secrets = {
       enable = false;
       tokenFile =
@@ -149,10 +175,10 @@
 
     ssh = {
       enable = true;
+      forwardAgent = true;
       extraConfig = ''
         Host *
           IdentityAgent ~/.1password/agent.sock
-          ForwardAgent yes
         Host sanae6.ca
           User sanae
         Host vm-eepy
@@ -181,6 +207,9 @@
       enable = true;
       package = pkgs.nushell;
       configFile.source = ./config.nu;
+      extraConfig = ''
+        $env.config.hooks.command_not_found = source ${pkgs.nix-index}/etc/profile.d/command-not-found.nu
+      '';
     };
 
     carapace = {
@@ -199,7 +228,7 @@
     };
 
     swaylock = {
-      enable = true;
+      enable = isDesktop;
     };
   };
 
@@ -213,6 +242,12 @@
       ];
     };
   };
+
+  # services = {
+  #   mako = {
+  #     enable = isDesktop;
+  #   };
+  # };
 
   wayland.windowManager.sway = with pkgs; {
     enable = isDesktop;

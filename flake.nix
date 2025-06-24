@@ -20,6 +20,8 @@
     # Applications
     zen-browser.url = "github:youwen5/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index.url = "github:nix-community/nix-index";
+    nix-index.inputs.nixpkgs.follows = "nixpkgs";
 
     # Fenix (Rust)
     fenix = {
@@ -27,8 +29,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Microvm
     microvm = {
       url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nixGL
+    nixGL = {
+      url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -39,8 +48,10 @@
     opnix,
     extensions,
     zen-browser,
+    nix-index,
     fenix,
     microvm,
+    nixGL,
     ...
   }: let
     lib = nixpkgs.lib;
@@ -48,9 +59,11 @@
       [
         extensions.overlays.default
         fenix.overlays.default
+        nixGL.overlay
         (final: _prev: {
           opnix = opnix.packages.${final.system}.default;
           zen-browser = zen-browser.packages.${final.system}.default;
+          nix-index = nix-index.packages.${final.system}.default;
           home-manager = home-manager.packages.${final.system};
         })
       ]
@@ -81,6 +94,17 @@
     hmUsers = ["aubrey" "rose"];
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
+    packages.x86_64-linux = import ./packages (import nixpkgs {
+      system = "x86_64-linux";
+
+      overlays = overlays;
+
+      config = {
+        allowUnfree = true;
+        allowInsecurePredicate = pkg: true;
+      };
+    });
 
     nixosConfigurations = let
       buildConfig = name: config:

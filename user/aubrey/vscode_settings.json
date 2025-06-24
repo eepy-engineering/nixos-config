@@ -154,6 +154,15 @@
             "commands": [
                 "terminal.focus"
             ]
+        },
+        {
+            "before": [
+                "g",
+                "e"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
         }
     ],
     "vim.startInInsertMode": true,

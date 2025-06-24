@@ -40,9 +40,15 @@
         sslCertificate = "/persist/tailscale-nginx-cert/nginx.cert";
         forceSSL = true;
         locations."/" = {
+          extraConfig = "deny 100.67.130.106;";
           recommendedProxySettings = true;
           proxyPass = "http://127.0.0.1:5000";
         };
+      };
+      "s3.hall.ly" = {
+        serverName = "s3.hall.ly";
+        root = "/mnt/tank/s3";
+        locations."/" = {};
       };
     };
   };
