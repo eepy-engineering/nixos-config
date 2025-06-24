@@ -32,7 +32,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "aubrey-laptop-nixos";
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = false;
+
+  networking.wireless = {
+    enable = true;
+    userControlled.enable = true;
+
+    secrets = {
+      homePsk = "op://Services/tfohn2xlz72a75pmhl3k26wcou/password";
+    };
+    networks = {
+      "Private Network".pskRaw = "ext:homePsk";
+    };
+  };
 
   users.users = {
     walter.enable = false;

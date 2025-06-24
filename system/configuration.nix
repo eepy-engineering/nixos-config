@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./components/credentials.nix
+    ./components/wireless.nix
     ./components/fonts.nix
     ./components/i18n.nix
     ./components/ime.nix

@@ -61,5 +61,6 @@
       remmina
       vlc
       qpwgraph
+      wpa_supplicant_gui
     ];
 }
