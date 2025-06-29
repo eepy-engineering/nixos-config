@@ -4,10 +4,10 @@
   ...
 }: {
   nix = {
-    package = pkgs.lix;
+    package = pkgs.nix;
     settings = {
       trusted-users = ["@wheel"];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = ["nix-command" "flakes" "local-overlay-store"];
     };
   };
 
