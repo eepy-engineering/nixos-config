@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = let
     dotnet-combined = (with pkgs.dotnetCorePackages;
       combinePackages [
@@ -49,6 +53,7 @@
       dive
       everest-mons
       nix-index
+      config.boot.kernelPackages.perf
 
       # dependencies
       OVMFFull
