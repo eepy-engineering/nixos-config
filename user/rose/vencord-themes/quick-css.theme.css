@@ -30,3 +30,8 @@
 [aria-label="User Badges"] {
   display: none;
 }
+
+[class^="messagesWrapper"] {
+  /* HACK: discord added a mask as a direct style on the element. no idea why. getting rid of it :3 */
+  mask: unset !important;
+}

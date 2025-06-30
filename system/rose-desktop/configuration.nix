@@ -38,14 +38,21 @@
           rofi
         ];
       };
+    };
 
-      displayManager.lightdm = {
+    displayManager.sddm = {
+      enable = true;
+
+      wayland = {
         enable = true;
-
-        greeters.gtk = {
-          enable = true;
-        };
+        compositor = "weston";
       };
+    };
+  };
+
+  programs = {
+    steam = {
+      enable = true;
     };
   };
 

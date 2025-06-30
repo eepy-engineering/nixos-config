@@ -26,8 +26,14 @@
       ++ (
         if isDesktop
         then [
+          rustdesk
+          nomachine-client
+          activate-linux
+          bruno
+          bluebubbles
           _1password-cli
           _1password-gui
+          signal-desktop
           alejandra
           imhex
           direnv
@@ -83,9 +89,9 @@
         force = true;
         text = ''
           xrandr \
-            --output DP-4 --mode 3840x2160 --rate 60 --pos 0x0 --rotate normal \
-            --output DP-0 --primary --mode 3840x2160 --rate 160 --pos 3840x0 --rotate normal \
-            --output DP-2 --mode 3840x2160 --rate 60 --pos 7680x0 --rotate normal
+            --output HDMI-0 --mode 3840x2160 --rate 60 --pos 3840x0 --rotate normal \
+            --output DP-0 --mode 3840x2160 --rate 60 --pos 7680x0 --rotate right \
+            --output DP-2 --primary --mode 3840x2160 --rate 160 --pos 0x0 --rotate normal
         '';
       };
     };
@@ -114,7 +120,7 @@
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      cursor-size = 12;
+      cursor-size = 6;
       color-scheme = "prefer-dark";
     };
   };
@@ -243,7 +249,7 @@
       package = pkgs.vesktop;
 
       vencord = {
-        useSystem = true;
+        useSystem = false;
 
         themes = {
           "quick-css.theme" = ./vencord-themes/quick-css.theme.css;
@@ -747,6 +753,12 @@
   services = {
     gpg-agent.enableNushellIntegration = true;
 
+    remmina = {
+      enable = true;
+      systemdService.enable = false;
+    };
+
+    # Compositor
     picom = {
       enable = isDesktop;
       package = pkgs.picom;
@@ -787,7 +799,7 @@
       extraConfig = ''
         include-file = ${./polybar}/lib/shapes/config-DP0.ini
         include-file = ${./polybar}/lib/shapes/config-DP2.ini
-        include-file = ${./polybar}/lib/shapes/config-DP4.ini
+        include-file = ${./polybar}/lib/shapes/config-HDMI0.ini
       '';
     };
 
@@ -824,7 +836,7 @@
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "set-wallpaper.nu" ''
             #${pkgs.nushell}/bin/nu
-            ${pkgs.feh}/bin/feh --no-xinerama --bg-max ${./wallpaper-stretch.png}
+            ${pkgs.feh}/bin/feh --no-xinerama --bg-max ${./wallpaper-stretch-right.png}
           '';
         };
 
