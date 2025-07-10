@@ -54,24 +54,6 @@
     depends = ["/"];
   };
 
-  fileSystems."/persist/ssh-host-keys" = {
-    device = "tank/nas/components/ssh-host-keys";
-    fsType = "zfs";
-    depends = ["/"];
-  };
-
-  fileSystems."/persist/docker-registry" = {
-    device = "tank/nas/components/docker-registry";
-    fsType = "zfs";
-    depends = ["/"];
-  };
-
-  fileSystems."/persist/tailscale-nginx-cert" = {
-    device = "tank/nas/components/tailscale-nginx-cert";
-    fsType = "zfs";
-    depends = ["/"];
-  };
-
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

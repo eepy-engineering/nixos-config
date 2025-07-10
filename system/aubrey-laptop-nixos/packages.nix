@@ -54,10 +54,14 @@
       everest-mons
       nix-index
       config.boot.kernelPackages.perf
+      v4l-utils
+      swtpm
 
       # dependencies
-      OVMFFull
       icu
+      dnsmasq
+      phodav
+      config.virtualisation.libvirtd.qemu.package
 
       # gui
       mako
@@ -67,5 +71,6 @@
       vlc
       qpwgraph
       wpa_supplicant_gui
+      dolphin-emu
     ];
 }

@@ -16,11 +16,11 @@ def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
   if $hostname == $hn {
     rm -rf ~/.config/gtk-3.0/settings.ini;
     rm -rf ~/.config/gtk-4.0/settings.ini;
-    rm -rf ~/.config/gtk-4.0/gtk.css;  
+    rm -rf ~/.config/gtk-4.0/gtk.css;
     sudo nixos-rebuild --flake $"(get flake uri)#(hostname)" --impure $subcmd ...$rest
   } else {
     print "Remote...";
-    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($hostname).tailc38f.ts.net" --use-remote-sudo $subcmd ...$rest;
+    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($hostname).tailc38f.ts.net" --sudo $subcmd ...$rest;
   }
 };
 

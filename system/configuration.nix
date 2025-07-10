@@ -47,6 +47,7 @@
     htop
     tmux
     ffmpeg
+    p7zip
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets

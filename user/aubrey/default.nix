@@ -3,6 +3,7 @@
   pkgs,
   lib,
   opnix,
+  inputs,
   isDesktop,
   ...
 }: {
@@ -28,7 +29,7 @@
           # development
           gitkraken
           imhex
-          unityhub
+          # unityhub
           jetbrains.rider
           jetbrains.clion
           jetbrains.idea-community
@@ -39,6 +40,7 @@
           digital
           alejandra
           nixd
+          logisim-evolution
 
           # art
           pinta
@@ -72,6 +74,12 @@
         ]
         else []
       );
+  };
+
+  nix.settings = {
+    experimental-features = "nix-command flakes local-overlay-store";
+    accept-flake-config = true;
+    warn-dirty = false;
   };
 
   programs = {
@@ -117,6 +125,7 @@
 
           # dx
           vscodevim.vim
+          tauri-apps.tauri-vscode
 
           # languages
           rust-lang.rust-analyzer
@@ -127,7 +136,6 @@
           llvm-vs-code-extensions.vscode-clangd
           svelte.svelte-vscode
           ms-vscode.cmake-tools
-          visualstudiotoolsforunity.vstuc
           surendrajat.apklab
           loyieking.smalise
           denoland.vscode-deno
@@ -136,12 +144,13 @@
           haskell.haskell
           justusadam.language-haskell
           ocamllabs.ocaml-platform
+          bradlc.vscode-tailwindcss
         ];
       };
     };
 
     zed-editor = {
-      enable = true;
+      enable = isDesktop;
       extensions = [
         "lua"
         "nix"
@@ -207,7 +216,9 @@
       enable = true;
       package = pkgs.nushell;
       configFile.source = ./config.nu;
-      extraConfig = ''
+      extraConfig = let
+        nu-scripts = inputs.nu-scripts;
+      in ''
         $env.config.hooks.command_not_found = source ${pkgs.nix-index}/etc/profile.d/command-not-found.nu
       '';
     };

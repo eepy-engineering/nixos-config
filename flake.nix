@@ -22,6 +22,10 @@
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     nix-index.url = "github:nix-community/nix-index";
     nix-index.inputs.nixpkgs.follows = "nixpkgs";
+    nu-scripts = {
+      url = "github:nushell/nu_scripts";
+      flake = false;
+    };
 
     # Fenix (Rust)
     fenix = {

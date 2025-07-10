@@ -33,8 +33,20 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "aubrey-laptop-nixos";
-  networking.networkmanager.enable = false;
-
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = ["~."];
+    fallbackDns = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    dnsovertls = "true";
+  };
   networking.wireless = {
     enable = true;
     userControlled.enable = true;
@@ -88,12 +100,32 @@
     spiceUSBRedirection.enable = true;
     libvirtd = {
       enable = true;
-      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+
+      qemu = {
+        runAsRoot = true;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = [pkgs.OVMFFull.fd];
+        };
+        vhostUserPackages = with pkgs; [virtiofsd];
+      };
     };
+
     docker = {
       enable = true;
     };
   };
+
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.gcadapter-oc-kmod
+  ];
+
+  # to autoload at boot:
+  boot.kernelModules = [
+    "gcadapter_oc"
+  ];
+  services.udev.packages = [pkgs.dolphin-emu];
 
   environment.etc = {
     "1password/custom_allowed_browsers" = {
@@ -110,6 +142,20 @@
       text = ''
         SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
       '';
+    };
+    seat2 = {
+      target = "udev/rules.d/52-dolphin.rules";
+      text = ''
+        SUBSYSTEM=="usb", ATTRS{idVendor}=="0e8d", ATTRS{idProduct}=="e616", TAG+="uaccess"
+      '';
+    };
+    qemu = {
+      target = "qemu/package";
+      source = config.virtualisation.libvirtd.qemu.package;
+    };
+    virtiofsd = {
+      target = "qemu/virtiofsd-package";
+      source = pkgs.virtiofsd;
     };
   };
 
@@ -140,6 +186,24 @@
       obs-gstreamer
       obs-vkcapture
     ];
+    package = pkgs.obs-studio.overrideAttrs (oldAttrs: {
+      src = pkgs.fetchFromGitHub {
+        owner = "obsproject";
+        repo = "obs-studio";
+        rev = "12c6febae21f369da50f09d511b54eadc1dc1342"; # https://github.com/obsproject/obs-studio/pull/11906
+        sha256 = "sha256-DIlAMCdve7wfbMV5YCd3qJnZ2xwJMmQD6LamGP7ECOA=";
+        fetchSubmodules = true;
+      };
+      version = "31.1.0-beta1";
+      patches =
+        builtins.filter (
+          patch:
+            !(
+              builtins.baseNameOf (toString patch) == "Enable-file-access-and-universal-access-for-file-URL.patch"
+            )
+        )
+        oldAttrs.patches;
+    });
   };
 
   programs.wireshark = {

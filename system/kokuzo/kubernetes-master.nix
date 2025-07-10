@@ -12,7 +12,8 @@
     extraFlags = [
       "--tls-san=100.70.181.9"
       "--tls-san=kokuzo.tailc38f.ts.net"
-      "--node-ip=192.168.2.1"
+      "--node-ip=0.0.0.0"
+      "--node-external-ip=100.70.181.9"
       "--debug"
     ];
     manifests.traefik-config.source = ./traefik-config.yaml;

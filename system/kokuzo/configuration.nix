@@ -10,6 +10,8 @@
     ./kubernetes-master.nix
     ./smb.nix
     ./vms
+    ./filesystems.nix
+    ./hall-dns.nix
   ];
 
   boot.loader = {

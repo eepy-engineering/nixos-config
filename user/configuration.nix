@@ -11,6 +11,8 @@ args @ {
   programs._1password-gui.enable = isDesktop;
   programs._1password.enable = true;
 
+  users.groups.plugdev = {};
+
   # Rose's user
   home-manager.users.rose = import ./rose/home.nix args;
   users.users.rose = {
@@ -27,7 +29,7 @@ args @ {
   users.users.aubrey = {
     isNormalUser = true;
     description = "Aubrey";
-    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd" "bluetooth"];
+    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd" "kvm" "bluetooth"];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZn43IczAtHI49eULTaA3GY7Zdoy/gqeEIhev/3ub09"
