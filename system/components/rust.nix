@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    fenix.stable.completeToolchain
+    fenix.stable.toolchain
     rust-analyzer-nightly
   ];
 }
