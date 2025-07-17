@@ -145,6 +145,7 @@
           justusadam.language-haskell
           ocamllabs.ocaml-platform
           bradlc.vscode-tailwindcss
+          mshr-h.veriloghdl
         ];
       };
     };
