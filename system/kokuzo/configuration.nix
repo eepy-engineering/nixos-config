@@ -43,6 +43,8 @@
     hostName = "kokuzo";
     hostId = "8626743f";
 
+    firewall.enable = false;
+
     nat = {
       enable = true;
       internalInterfaces = ["ve-+"];
