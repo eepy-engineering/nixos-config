@@ -250,11 +250,19 @@
     };
   };
 
-  # services = {
-  #   mako = {
-  #     enable = isDesktop;
-  #   };
-  # };
+  services = {
+    flameshot = {
+      enable = true;
+      settings = {
+        General = {
+          showHelp = false;
+          showSidePanelButton = false;
+          showDesktopNotification = false;
+          disabledGrimWarning = true;
+        };
+      };
+    };
+  };
 
   wayland.windowManager.sway = with pkgs; {
     enable = isDesktop;
