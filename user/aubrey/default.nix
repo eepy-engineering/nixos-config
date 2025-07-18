@@ -9,7 +9,7 @@
 }: {
   imports = [
     opnix.homeManagerModules.default
-    ../components
+    ../components/nix-index.nix
   ];
 
   home = {
@@ -22,7 +22,6 @@
       [
         # development
         neovim # todo: neovim via home manager
-        nix-index
       ]
       ++ (
         if isDesktop
