@@ -126,6 +126,7 @@
           # dx
           vscodevim.vim
           tauri-apps.tauri-vscode
+          altairengineering.dsim-studio
 
           # languages
           rust-lang.rust-analyzer

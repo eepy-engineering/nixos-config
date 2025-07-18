@@ -172,7 +172,7 @@
     "window.commandCenter": false,
     "window.customTitleBarVisibility": "never",
 
-    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorTheme": "Gleam Classic",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.wrapTabs": true,
     "workbench.iconTheme": "vscode-icons",
