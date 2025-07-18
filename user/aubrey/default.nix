@@ -9,6 +9,7 @@
 }: {
   imports = [
     opnix.homeManagerModules.default
+    ../components
   ];
 
   home = {
@@ -217,11 +218,6 @@
       enable = true;
       package = pkgs.nushell;
       configFile.source = ./config.nu;
-      extraConfig = let
-        nu-scripts = inputs.nu-scripts;
-      in ''
-        $env.config.hooks.command_not_found = source ${pkgs.nix-index}/etc/profile.d/command-not-found.nu
-      '';
     };
 
     carapace = {
