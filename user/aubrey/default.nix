@@ -20,8 +20,7 @@
 
     packages = with pkgs;
       [
-        # development
-        neovim # todo: neovim via home manager
+        ripgrep
       ]
       ++ (
         if isDesktop
@@ -29,7 +28,6 @@
           # development
           gitkraken
           imhex
-          # unityhub
           jetbrains.rider
           jetbrains.clion
           jetbrains.idea-community
@@ -41,6 +39,9 @@
           alejandra
           nixd
           logisim-evolution
+          surfer-unstable
+          gtkwave
+          swim-unstable
 
           # art
           pinta
@@ -82,7 +83,69 @@
     warn-dirty = false;
   };
 
+  editorconfig = {
+    enable = true;
+    settings = {
+      "*" = {
+        charset = "utf-8";
+        end_of_line = "lf";
+        trim_trailing_whitespace = true;
+        insert_final_newline = true;
+        indent_style = "space";
+        indent_size = 2;
+      };
+    };
+  };
+
   programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+
+      plugins = with pkgs.vimPlugins; let
+        spade-nvim = pkgs.vimUtils.buildVimPlugin {
+          name = "spade-nvim";
+          src = inputs.spade-nvim;
+        };
+      in [
+        nvim-lspconfig
+        nvim-treesitter.withAllGrammars
+        plenary-nvim
+        gruvbox-material
+        mini-nvim
+        telescope-nvim
+        spade-nvim
+        rustaceanvim
+      ];
+
+      extraLuaConfig = let
+        grammarsPath = pkgs.symlinkJoin {
+          name = "nvim-treesitter-grammars";
+          paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+        };
+      in
+        ''
+          -- also make sure to append treesitter since it bundles some languages
+          vim.opt.runtimepath:append("${pkgs.vimPlugins.nvim-treesitter}")
+          -- append all *.so files
+          vim.opt.runtimepath:append("${grammarsPath}")
+        ''
+        + builtins.readFile ./neovim.lua;
+      extraConfig = builtins.readFile ./neovim.vimrc;
+    };
+
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+
+    fzf = {
+      enable = true;
+    };
+
     vesktop = {
       enable = isDesktop;
       settings = {
@@ -217,7 +280,23 @@
     nushell = {
       enable = true;
       package = pkgs.nushell;
-      configFile.source = ./config.nu;
+      configFile.source = lib.mkAfter ./config.nu;
+      extraConfig = ''
+         def "nu-complete zoxide path" [context: string] {
+         let parts = $context | split row " " | skip 1
+             {
+               options: {
+                 sort: false,
+                 completion_algorithm: substring,
+                 case_sensitive: false,
+               },
+               completions: (^zoxide query --list --exclude $env.PWD -- ...$parts | lines),
+             }
+           }
+        def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
+          __zoxide_z ...$rest
+        }
+      '';
     };
 
     carapace = {

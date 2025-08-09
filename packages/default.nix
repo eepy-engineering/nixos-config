@@ -1,4 +1,6 @@
 pkgs: rec {
+  swim-unstable = pkgs.callPackage ./swim.nix {};
+  surfer-unstable = pkgs.callPackage ./surfer.nix {};
   gamemaker = pkgs.callPackage ./gamemaker.nix {
     gamemakerFlavor = "Beta";
     gamemakerVersion = "2024.1400.0.815";

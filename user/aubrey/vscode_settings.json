@@ -81,21 +81,19 @@
         "icon": "account",
         "path": "bash"
     },
-    "terminal.integrated.defaultProfile.linux": "nushell-term",
+    "terminal.integrated.defaultProfile.linux": "Nushell",
     "terminal.integrated.profiles.linux": {
         "bash": {
             "icon": "terminal-bash",
             "path": "bash"
-        },
-        "nushell-term": {
-            "icon": "terminal-bash",
-            "path": "nu"
         }
     },
 
     "typescript.updateImportsOnFileMove.enabled": "always",
 
     "update.mode": "none",
+
+    "verilog.formatting.verilogHDL.formatter": "verible-verilog-format",
 
     "vim.handleKeys": {
         "<C-a>": false,

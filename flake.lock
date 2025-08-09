@@ -278,6 +278,9 @@
         "nixpkgs": "nixpkgs",
         "nu-scripts": "nu-scripts",
         "opnix": "opnix",
+        "spade-nvim": "spade-nvim",
+        "surfer": "surfer",
+        "swim": "swim",
         "zen-browser": "zen-browser"
       }
     },
@@ -298,6 +301,22 @@
         "type": "github"
       }
     },
+    "spade-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739350201,
+        "narHash": "sha256-OFE5Tys1hWyZKYcRODecbv224QDzqyKsUBTI1JIBBuk=",
+        "owner": "ethanuppal",
+        "repo": "spade.nvim",
+        "rev": "201a696ecf39e0456466287c37abf04d289f7c92",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ethanuppal",
+        "repo": "spade.nvim",
+        "type": "github"
+      }
+    },
     "spectrum": {
       "flake": false,
       "locked": {
@@ -312,6 +331,42 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
+    "surfer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753784860,
+        "narHash": "sha256-OVMYi0forVFswbPx7UBSlvKG1psm5oZp0lj3HwxW/JM=",
+        "ref": "refs/heads/main",
+        "rev": "b8a496a7c94405f25d8cd5ccfe9f8f1897897eb0",
+        "revCount": 1006,
+        "submodules": true,
+        "type": "git",
+        "url": "https://gitlab.com/surfer-project/surfer.git/"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://gitlab.com/surfer-project/surfer.git/"
+      }
+    },
+    "swim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753122727,
+        "narHash": "sha256-We45B40cANcqMQiZxgn8ghdZ7ZLY5EWYrfXAWUszoWU=",
+        "ref": "refs/heads/main",
+        "rev": "4de420d74087596876f32c441b238e4e2c5dc391",
+        "revCount": 283,
+        "submodules": true,
+        "type": "git",
+        "url": "https://gitlab.com/spade-lang/swim.git/"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://gitlab.com/spade-lang/swim.git/"
       }
     },
     "systems": {

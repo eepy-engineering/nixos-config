@@ -1,5 +1,5 @@
 {
-  description = "Rose's NixOS Configuration";
+  description = "Rose and Aubrey's NixOS Configuration";
 
   inputs = {
     # Use the unstable NixPkgs branch
@@ -26,6 +26,14 @@
       url = "github:nushell/nu_scripts";
       flake = false;
     };
+    surfer = {
+      url = "git+https://gitlab.com/surfer-project/surfer.git/?submodules=1";
+      flake = false;
+    };
+    swim = {
+      url = "git+https://gitlab.com/spade-lang/swim.git/?submodules=1";
+      flake = false;
+    };
 
     # Fenix (Rust)
     fenix = {
@@ -43,6 +51,12 @@
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Neovim Plugins
+    spade-nvim = {
+      url = "github:ethanuppal/spade.nvim";
+      flake = false;
     };
   };
 
@@ -64,12 +78,15 @@
         extensions.overlays.default
         fenix.overlays.default
         nixGL.overlay
-        (final: _prev: {
-          opnix = opnix.packages.${final.system}.default;
-          zen-browser = zen-browser.packages.${final.system}.default;
-          nix-index = nix-index.packages.${final.system}.default;
-          home-manager = home-manager.packages.${final.system};
-        })
+        (final: prev:
+          {
+            inherit inputs;
+            opnix = opnix.packages.${final.system}.default;
+            zen-browser = zen-browser.packages.${final.system}.default;
+            nix-index = nix-index.packages.${final.system}.default;
+            home-manager = home-manager.packages.${final.system};
+          }
+          // (import ./packages prev))
       ]
       ++ import ./overlays;
     overlaysModule = _: {nixpkgs.overlays = overlays;};
@@ -103,6 +120,9 @@
       system = "x86_64-linux";
 
       overlays = overlays;
+      specialArgs = {
+        inherit inputs;
+      };
 
       config = {
         allowUnfree = true;

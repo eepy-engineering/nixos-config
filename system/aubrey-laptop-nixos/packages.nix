@@ -56,6 +56,7 @@
       config.boot.kernelPackages.perf
       v4l-utils
       swtpm
+      openfpgaloader
 
       # dependencies
       icu

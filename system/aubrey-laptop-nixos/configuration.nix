@@ -53,9 +53,15 @@
 
     secrets = {
       homePsk = "op://Services/tfohn2xlz72a75pmhl3k26wcou/password";
+      hotspotPsk = "op://Services/dspuw2m3qpcrmefgzdcqliieiy/password";
+      kirgPsk = "op://Services/KIRG22 - Aubrey/password";
+      pamPsk = "op://Services/Pam Wifi - Aubrey/password";
     };
     networks = {
       "Private Network".pskRaw = "ext:homePsk";
+      "KIRG22".pskRaw = "ext:kirgPsk";
+      "nn::oe::FinishStartupLogo".pskRaw = "ext:hotspotPsk";
+      "WIFI-D316".pskRaw = "ext:pamPsk";
     };
   };
 
@@ -125,7 +131,26 @@
   boot.kernelModules = [
     "gcadapter_oc"
   ];
-  services.udev.packages = [pkgs.dolphin-emu];
+  services.udev = {
+    extraRules = ''
+      # nintendo switch in rcm
+      SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
+      # bluetooth hci for dolphin
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="0e8d", ATTRS{idProduct}=="e616", TAG+="uaccess"
+    '';
+    packages = [
+      pkgs.dolphin-emu
+      (pkgs.stdenv.mkDerivation {
+        name = "openfpgaloader-udev";
+        src = pkgs.openfpgaloader.src;
+
+        buildPhase = ''
+          mkdir -p $out/etc/udev/rules.d
+          ln -s $src/99-openfpgaloader.rules $out/etc/udev/rules.d
+        '';
+      })
+    ];
+  };
 
   environment.etc = {
     "1password/custom_allowed_browsers" = {
@@ -136,18 +161,6 @@
         .zen-bin-wrapped
       '';
       mode = "0755";
-    };
-    seat = {
-      target = "udev/rules.d/50-switch.rules";
-      text = ''
-        SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
-      '';
-    };
-    seat2 = {
-      target = "udev/rules.d/52-dolphin.rules";
-      text = ''
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="0e8d", ATTRS{idProduct}=="e616", TAG+="uaccess"
-      '';
     };
     qemu = {
       target = "qemu/package";
