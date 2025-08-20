@@ -447,7 +447,7 @@
       "enabled": false
     },
     "Translate": {
-      "enabled": false
+      "enabled": true
     },
     "TypingIndicator": {
       "enabled": true,

@@ -73,5 +73,6 @@
       qpwgraph
       wpa_supplicant_gui
       dolphin-emu
+      _010editor
     ];
 }

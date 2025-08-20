@@ -1,6 +1,7 @@
 args @ {
   pkgs,
   isDesktop,
+  specialArgs,
   ...
 }: {
   home-manager.useGlobalPkgs = true;
@@ -13,6 +14,7 @@ args @ {
 
   users.groups.plugdev = {};
 
+  home-manager.extraSpecialArgs = specialArgs;
   # Rose's user
   home-manager.users.rose = import ./rose/home.nix args;
   users.users.rose = {
@@ -35,7 +37,11 @@ args @ {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZn43IczAtHI49eULTaA3GY7Zdoy/gqeEIhev/3ub09"
     ];
   };
-  home-manager.users.aubrey = import ./aubrey args;
+  home-manager.users.aubrey = {
+    imports = [
+      ./aubrey
+    ];
+  };
   programs._1password-gui.polkitPolicyOwners = ["rose" "aubrey"];
 
   # Walter's user

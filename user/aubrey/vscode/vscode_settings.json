@@ -95,14 +95,12 @@
 
     "verilog.formatting.verilogHDL.formatter": "verible-verilog-format",
 
+    "vim.useSystemClipboard": true,
     "vim.handleKeys": {
         "<C-a>": false,
-        "<C-c>": false,
         "<C-f>": false,
         "<C-h>": false,
-        "<C-p>": false,
-        "<C-v>": false,
-        "<C-x>": false
+        "<C-p>": false
     },
     "vim.insertModeKeyBindings": [
         {

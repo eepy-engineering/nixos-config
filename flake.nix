@@ -34,6 +34,10 @@
       url = "git+https://gitlab.com/spade-lang/swim.git/?submodules=1";
       flake = false;
     };
+    O10editor = {
+      url = "github:Sanae6/010editor-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Fenix (Rust)
     fenix = {
@@ -58,6 +62,8 @@
       url = "github:ethanuppal/spade.nvim";
       flake = false;
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = inputs @ {
@@ -70,6 +76,8 @@
     fenix,
     microvm,
     nixGL,
+    O10editor,
+    catppuccin,
     ...
   }: let
     lib = nixpkgs.lib;
@@ -85,6 +93,7 @@
             zen-browser = zen-browser.packages.${final.system}.default;
             nix-index = nix-index.packages.${final.system}.default;
             home-manager = home-manager.packages.${final.system};
+            _010editor = O10editor.packages.${final.system}.default;
           }
           // (import ./packages prev))
       ]
