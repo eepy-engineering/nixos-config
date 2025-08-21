@@ -18,6 +18,8 @@ in {
 
   wayland.windowManager.sway = with pkgs; {
     enable = isDesktop;
+    systemd.enable = true;
+    wrapperFeatures = {gtk = true;};
     config = let
     in {
       assigns = {
@@ -25,12 +27,6 @@ in {
         "2" = [{class = "VSCodium";} {app_id = "org.wezfurlong.wezterm";}];
         "3" = [{class = "1Password";} {app_id = "zen";}];
       };
-
-      bars = [
-        {
-          statusCommand = "i3bar";
-        }
-      ];
 
       input = {
         "type:touchpad" = {
@@ -115,6 +111,7 @@ in {
         }
       ];
 
+      workspaceAutoBackAndForth = true;
       workspaceLayout = "tabbed";
       workspaceOutputAssign = [
         {
@@ -134,6 +131,14 @@ in {
   };
 
   programs = {
+    wofi = {
+      enable = true;
+      settings = {
+        allow_markup = true;
+        width = 250;
+      };
+    };
+
     swaylock = {
       enable = isDesktop;
     };

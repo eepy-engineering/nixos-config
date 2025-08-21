@@ -13,8 +13,11 @@
       mplus-outline-fonts.githubRelease
       dina-font
       proggyfonts
+      nerd-fonts.comic-shanns-mono
+      nerd-fonts.jetbrains-mono
       comic-mono
       iosevka
+      inter
     ];
   };
 }

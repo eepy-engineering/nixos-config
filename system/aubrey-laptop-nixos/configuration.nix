@@ -6,8 +6,10 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
     ./backups.nix
+    ./desktop.nix
+    ./hardware-configuration.nix
+    ./networking.nix
     ./packages.nix
     ../components/bluetooth.nix
     ../components/rust.nix
@@ -32,72 +34,17 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "aubrey-laptop-nixos";
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
-  services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = ["~."];
-    fallbackDns = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
-    dnsovertls = "true";
-  };
-  networking.wireless = {
-    enable = true;
-    userControlled.enable = true;
-
-    secrets = {
-      homePsk = "op://Services/tfohn2xlz72a75pmhl3k26wcou/password";
-      hotspotPsk = "op://Services/dspuw2m3qpcrmefgzdcqliieiy/password";
-      kirgPsk = "op://Services/KIRG22 - Aubrey/password";
-      pamPsk = "op://Services/Pam Wifi - Aubrey/password";
-    };
-    networks = {
-      "Private Network".pskRaw = "ext:homePsk";
-      "KIRG22".pskRaw = "ext:kirgPsk";
-      "nn::oe::FinishStartupLogo".pskRaw = "ext:hotspotPsk";
-      "WIFI-D316".pskRaw = "ext:pamPsk";
-    };
-  };
-
   users.users = {
     walter.enable = false;
+    rose.enable = false;
+  };
+  home-manager.users = lib.mkForce {
+    aubrey = ../../user/aubrey;
   };
 
   time.timeZone = "America/Regina";
 
   services.logind.powerKey = "suspend";
-
-  services.displayManager.sddm = {
-    enable = true;
-    wayland = {
-      enable = true;
-    };
-  };
-  services.desktopManager.plasma6.enable = false;
-
-  xdg = {
-    mime.enable = true;
-    portal = {
-      enable = true;
-      wlr.enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-      ];
-    };
-  };
-
-  services.printing.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-  services.libinput.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -181,8 +128,6 @@
     };
   };
 
-  programs.sway.enable = true;
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -199,24 +144,6 @@
       obs-gstreamer
       obs-vkcapture
     ];
-    package = pkgs.obs-studio.overrideAttrs (oldAttrs: {
-      src = pkgs.fetchFromGitHub {
-        owner = "obsproject";
-        repo = "obs-studio";
-        rev = "12c6febae21f369da50f09d511b54eadc1dc1342"; # https://github.com/obsproject/obs-studio/pull/11906
-        sha256 = "sha256-DIlAMCdve7wfbMV5YCd3qJnZ2xwJMmQD6LamGP7ECOA=";
-        fetchSubmodules = true;
-      };
-      version = "31.1.0-beta1";
-      patches =
-        builtins.filter (
-          patch:
-            !(
-              builtins.baseNameOf (toString patch) == "Enable-file-access-and-universal-access-for-file-URL.patch"
-            )
-        )
-        oldAttrs.patches;
-    });
   };
 
   programs.wireshark = {

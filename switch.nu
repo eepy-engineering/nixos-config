@@ -1,5 +1,5 @@
 #!/usr/bin/env nu
-def "get hostname" [hostname?: string] { $hostname | default (hostname) };
+def "fetch hostname" [hostname?: string] { $hostname | default (sys host | get hostname) };
 def prebuild [] {
   if (".git" | path exists) {
     # make sure the goddamn files are added because nix flakes won't include files untracked files
@@ -17,7 +17,7 @@ def --wrapped rebuild [subcmd: string, hostname: string, ...rest] {
     rm -rf ~/.config/gtk-3.0/settings.ini;
     rm -rf ~/.config/gtk-4.0/settings.ini;
     rm -rf ~/.config/gtk-4.0/gtk.css;
-    sudo nixos-rebuild --flake $"(get flake uri)#(hostname)" --impure $subcmd ...$rest
+    sudo nixos-rebuild --flake $"(get flake uri)#($hostname)" $subcmd ...$rest
   } else {
     print "Remote...";
     nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($hostname).tailc38f.ts.net" --sudo $subcmd ...$rest;
@@ -28,7 +28,7 @@ def --wrapped "main switch" [
   --hostname (-h): string, # the hostname of the machine to push to
   ...rest
 ] {
-  let hostname = (get hostname $hostname);
+  let hostname = (fetch hostname $hostname);
   rebuild switch $hostname ...$rest
 }
 
@@ -37,7 +37,7 @@ def --wrapped "main boot" [
   --hostname (-h): string, # the hostname of the machine to push to
   ...rest
 ] {
-  let hostname = (get hostname $hostname);
+  let hostname = (fetch hostname $hostname);
   rebuild boot $hostname ...$rest
   if $restart {
     ssh $hostname -t "sudo reboot now"
@@ -50,14 +50,14 @@ def --wrapped "main run" [
 ] {
   prebuild
 
-  let hostname = (get hostname $hostname);
+  let hostname = (fetch hostname $hostname);
   let r = echo ...$rest | into string;
   nix-shell -p nixos-rebuild --command $"nixos-rebuild --flake .#($hostname) build-vm"
   bash $"./result/bin/run-($hostname)-testing-vm"
 }
 
 def --wrapped main [--hostname (-h): string, ...rest] {
-  let hostname = (get hostname $hostname);
+  let hostname = (fetch hostname $hostname);
   main switch --hostname $hostname ...$rest
 }
 

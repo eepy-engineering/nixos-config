@@ -1,6 +1,7 @@
 {isDesktop, ...}: {
   programs.zed-editor = {
-    enable = isDesktop;
+    # enable = isDesktop;
+    enable = false;
     extensions = [
       "lua"
       "nix"

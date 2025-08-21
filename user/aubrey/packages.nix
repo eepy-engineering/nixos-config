@@ -46,7 +46,7 @@
 
         # games
         prismlauncher
-        ryujinx
+        ryubing
 
         # tools
         wl-clipboard
