@@ -25,11 +25,11 @@ def main [tokenPath: path] {
         };
 
         print "updated ip"
-      } catch {|err| 
+      } catch {|err|
         $err.rendered | print
       }
       break;
     }
-    sleep 3sec
+    sleep 60sec
   }
 }

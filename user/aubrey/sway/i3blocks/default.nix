@@ -17,10 +17,14 @@
       time = {
         interval = 1;
         format = "json";
+        current_tz = 1;
       };
       volume = {
         interval = 1;
         format = "json";
+      };
+      storage = {
+        interval = 30;
       };
     };
   in

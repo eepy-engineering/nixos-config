@@ -11,9 +11,9 @@ in {
     ./i3blocks
   ];
   catppuccin = {
-    sway.enable = true;
-    mako.enable = true;
-    bottom.enable = true;
+    sway.enable = isDesktop;
+    mako.enable = isDesktop;
+    bottom.enable = isDesktop;
   };
 
   wayland.windowManager.sway = with pkgs; {
@@ -41,14 +41,14 @@ in {
         modifier = config.wayland.windowManager.sway.config.modifier;
       in
         lib.mkOptionDefault {
-          XF86AudioMute = "exec wpctl set-mute @DEFAULT_SINK@ toggle";
-          XF86AudioLowerVolume = "exec wpctl set-volume @DEFAULT_SINK@ 5%-";
-          XF86AudioRaiseVolume = "exec wpctl set-volume @DEFAULT_SINK@ 5%+";
-          XF86AudioPrev = "exec playerctl previous";
-          XF86AudioPlay = "exec playerctl play-pause";
-          XF86AudioNext = "exec playerctl next";
-          XF86MonBrightnessDown = "exec brightnessctl set 5%-";
-          XF86MonBrightnessUp = "exec brightnessctl set 5%+";
+          XF86AudioMute = "exec ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
+          XF86AudioLowerVolume = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
+          XF86AudioRaiseVolume = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
+          XF86AudioPrev = "exec ${playerctl}/bin/playerctl previous";
+          XF86AudioPlay = "exec ${playerctl}/bin/playerctl play-pause";
+          XF86AudioNext = "exec ${playerctl}/bin/playerctl next";
+          XF86MonBrightnessDown = "exec ${brightnessctl}/bin/brightnessctl set 5%-";
+          XF86MonBrightnessUp = "exec ${brightnessctl}/bin/brightnessctl set 5%+";
 
           "Mod4+L" = "exec ${writeNushellScript "sleep" ''
             swaymsg "exec swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"
@@ -107,7 +107,9 @@ in {
       window.commands = [
         {
           command = "border pixel 0, floating enable, fullscreen disable, move absolute position 0 0";
-          criteria = {app_id = "flameshot";};
+          criteria = {
+            title = "flameshot";
+          };
         }
       ];
 
@@ -132,7 +134,7 @@ in {
 
   programs = {
     wofi = {
-      enable = true;
+      enable = isDesktop;
       settings = {
         allow_markup = true;
         width = 250;

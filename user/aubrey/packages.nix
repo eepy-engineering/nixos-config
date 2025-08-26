@@ -7,6 +7,7 @@
     packages = with pkgs;
     [
       ripgrep
+      inetutils
     ]
     ++ (
       if isDesktop
@@ -54,10 +55,13 @@
         kdePackages.kcalc
         obsidian
         rustdesk
+        filezilla
+        fontpreview
 
         # desktop
         wev
         playerctl
+        brightnessctl
       ]
       else []
     );
