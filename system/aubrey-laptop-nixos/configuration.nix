@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./packages.nix
+    ./wireless.nix
     ../components/bluetooth.nix
     ../components/rust.nix
     ../components/tank-share.nix
@@ -44,7 +45,7 @@
 
   time.timeZone = "America/Regina";
 
-  services.logind.powerKey = "suspend";
+  services.logind.settings.Login.HandlePowerKey = "suspend";
 
   security.sudo.wheelNeedsPassword = false;
 

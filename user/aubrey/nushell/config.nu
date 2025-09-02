@@ -12,6 +12,7 @@ $env.config.use_kitty_protocol = true
 $env.config.highlight_resolved_externals = true
 
 alias nsu = nix-shell --command nu
+alias nsc = nix-shell 
 alias fg = job unfreeze
 alias de = direnv exec . nu
 

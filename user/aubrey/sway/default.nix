@@ -17,15 +17,17 @@ in {
   };
 
   wayland.windowManager.sway = with pkgs; {
-    enable = isDesktop;
+    enable = true;
     systemd.enable = true;
     wrapperFeatures = {gtk = true;};
     config = let
     in {
       assigns = {
-        "1" = [{class = "vesktop";}];
-        "2" = [{class = "VSCodium";} {app_id = "org.wezfurlong.wezterm";}];
-        "3" = [{class = "1Password";} {app_id = "zen";}];
+        "8" = [{class = "vesktop";}];
+        "1" = [{class = "VSCodium";}];
+        "2" = [{app_id = "zen";}];
+        "3" = [{app_id = "org.wezfurlong.wezterm";}];
+        "9" = [{class = "1Password";}];
       };
 
       input = {
@@ -118,15 +120,23 @@ in {
       workspaceOutputAssign = [
         {
           output = "eDP-1";
-          workspace = "1";
+          workspace = "8";
         }
         {
           output = "DP-2";
           workspace = "2";
         }
         {
-          output = "DP-4";
+          output = "DP-2";
           workspace = "3";
+        }
+        {
+          output = "DP-2";
+          workspace = "1";
+        }
+        {
+          output = "DP-4";
+          workspace = "9";
         }
       ];
     };

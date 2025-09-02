@@ -11,7 +11,7 @@
     vendorStaging = older.vendorStaging.overrideAttrs (lib.const {
       version = "0.4.0-dev";
       src = inputs.surfer;
-      outputHash = "sha256-PDgqa5UfDykxebkxPi2sEtbFB9VOkcHH5Bzp381S8bQ=";
+      outputHash = "sha256";
     });
   });
 }))

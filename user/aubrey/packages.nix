@@ -26,14 +26,14 @@
         alejandra
         nixd
         logisim-evolution
-        surfer-unstable
-        gtkwave
-        swim-unstable
+        surfer
+        swim
 
         # art
         pinta
         material-maker
         blender
+        aseprite
 
         # social
         (discord-canary.override {withVencord = true;})
@@ -54,7 +54,6 @@
         kdePackages.plasma-systemmonitor
         kdePackages.kcalc
         obsidian
-        rustdesk
         filezilla
         fontpreview
 
