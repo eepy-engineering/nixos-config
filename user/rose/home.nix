@@ -679,11 +679,13 @@
 
     ssh = {
       enable = true;
-      extraConfig = ''
-        Host *
-          IdentityAgent ~/.1password/agent.sock
-          ForwardAgent yes
-      '';
+      enableDefaultConfig = false;
+      matchBlocks = {
+        "*" = {
+          forwardAgent = true;
+          identityAgent = "~/.1password/agent.sock";
+        };
+      };
     };
 
     nushell = {
