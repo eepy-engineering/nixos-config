@@ -12,6 +12,7 @@
     ./vms
     ./filesystems.nix
     ./hall-dns.nix
+    ./networking.nix
   ];
 
   boot.loader = {
@@ -37,29 +38,6 @@
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = "2097152";
     "fs.inotify.max_user_instances" = "1024";
-  };
-
-  networking = {
-    hostName = "kokuzo";
-    hostId = "8626743f";
-
-    firewall.enable = false;
-
-    nat = {
-      enable = true;
-      internalInterfaces = ["ve-+"];
-      externalInterface = "eno49";
-    };
-
-    interfaces.eno49 = {
-      useDHCP = true;
-      ipv4.addresses = [
-        {
-          address = "192.168.2.1";
-          prefixLength = 16;
-        }
-      ];
-    };
   };
 
   security.sudo.wheelNeedsPassword = false;

@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   networking.hostName = "aubrey-laptop-nixos";
   networking.nameservers = [
     "1.1.1.1"
@@ -14,4 +14,15 @@ _: {
     ];
     dnsovertls = "true";
   };
+
+  opnix = {
+    secrets = [
+      {
+        path = "ny.ovpn";
+        reference = "op://Services/TP-Link VPN Config/notesPlain";
+      }
+    ];
+    services = ["openvpn-ny.service"];
+  };
+  services.openvpn.servers.ny.config = "config ${pkgs.asOpnixPath "ny.ovpn"}";
 }

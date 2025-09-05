@@ -1,0 +1,3 @@
+to rollback, run the two commands
+`nixos-rebuild list-generations` for the generations
+`/nix/var/nix/profiles/system-<gen>-link/bin/switch-to-configuration switch`

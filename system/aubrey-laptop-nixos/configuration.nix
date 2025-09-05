@@ -29,6 +29,8 @@
     };
   };
 
+  boot.loader.systemd-boot.configurationLimit = 16;
+
   hardware.enableAllFirmware = true;
   services.power-profiles-daemon.enable = true;
 

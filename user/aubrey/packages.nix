@@ -8,6 +8,7 @@
     [
       ripgrep
       inetutils
+      hactool
     ]
     ++ (
       if isDesktop

@@ -67,6 +67,7 @@
         mac = "02:00:00:00:00:01";
       }
     ];
+
     shares = [
       {
         tag = "ro-store";
@@ -85,20 +86,20 @@
 
   systemd.network.enable = true;
 
-  systemd.network.networks."10-lan-bridge" = {
-    matchConfig.Name = "br0";
+  systemd.network.networks."20-lan" = {
+    matchConfig.Type = "ether";
     networkConfig = {
-      Address = ["192.168.3.1/24" "2001:db8::a/64"];
+      Address = ["192.168.3.1/24" "2001:db8::b/64"];
       Gateway = "192.168.1.1";
       DNS = ["192.168.1.1"];
       IPv6AcceptRA = true;
+      DHCP = "no";
     };
-    linkConfig.RequiredForOnline = "routable";
   };
 
   services.resolved.enable = true;
 
   # no change don't change do not change
-  system.stateVersion = "24.11"; # very no touchy
+  system.stateVersion = "25.05"; # very no touchy
   # no change don't change do not change
 }
