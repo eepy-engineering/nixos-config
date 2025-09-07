@@ -8,11 +8,13 @@
       };
       tank = {
         "path" = "/mnt/tank";
-        "browseable" = "yes";
+        # "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
+        # "create mask" = "0644";
+        # "directory mask" = "0755";
+        # "map acl inherit" = "yes";
+        # "inherit acls" = "yes";
       };
     };
     openFirewall = true;

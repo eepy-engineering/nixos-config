@@ -13,6 +13,8 @@
     ./filesystems.nix
     ./hall-dns.nix
     ./networking.nix
+    ./torrent
+    ./music.nix
   ];
 
   boot.loader = {
@@ -41,6 +43,11 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+
+  programs.fuse = {
+    enable = true;
+    userAllowOther = true;
+  };
 
   services.tailscale = {
     extraSetFlags = ["--advertise-exit-node"];

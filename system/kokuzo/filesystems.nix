@@ -41,6 +41,12 @@
     depends = ["/"];
   };
 
+  fileSystems."/persist/transmission" = {
+    device = "tank/nas/components/transmission";
+    fsType = "zfs";
+    depends = ["/"];
+  };
+
   fileSystems."/mnt/apps/filebrowser-config" = {
     device = "apps/filebrowser-config";
     fsType = "zfs";

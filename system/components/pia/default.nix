@@ -13,8 +13,18 @@ with pkgs; {
     region = lib.mkOption {
       type = lib.types.str;
     };
+    rerouteExitNodeTraffic = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+    forwardingPort = lib.mkOption {
+      type = lib.types.nullOr lib.types.number;
+      default = null;
+    };
   };
-  config = {
+  config = let
+    cfg = config.services.pia-vpn;
+  in {
     environment.systemPackages = [
       curl
       wireguard-tools
@@ -24,7 +34,7 @@ with pkgs; {
 
     services.resolved = {
       enable = true;
-      dnsovertls = "opportunistic";
+      dnsovertls = lib.mkDefault "opportunistic";
     };
 
     opnix = {
@@ -52,13 +62,25 @@ with pkgs; {
           iproute2
           nftables
         ];
-        script = let
-          auth = data.pia.authUserPass;
-        in "${nushell}/bin/nu ${./pia-setup.nu} ${pkgs.asOpnixPath "pia/username"} ${pkgs.asOpnixPath "pia/password"} ${config.services.pia-vpn.region} ${./ca.rsa.4096.crt}";
+        script = "${nushell}/bin/nu ${./pia-setup.nu} ${pkgs.asOpnixPath "pia/username"} ${pkgs.asOpnixPath "pia/password"} ${cfg.region} ${./ca.rsa.4096.crt} ${lib.boolToString cfg.rerouteExitNodeTraffic}";
         serviceConfig = {
+          RemainAfterExit = true;
           Type = "oneshot";
         };
       };
+      wg-pia-forwarding =
+        if cfg.forwardingPort != null
+        then {
+          requires = ["wg-pia-setup.service"];
+          wantedBy = ["multi-user.target"];
+          path = [
+            curl
+            iproute2
+            nftables
+          ];
+          script = "${nushell}/bin/nu ${./pia-setup.nu} forwarding ${./ca.rsa.4096.crt} ${toString cfg.forwardingPort}";
+        }
+        else {};
     };
 
     networking = {

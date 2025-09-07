@@ -37,7 +37,7 @@
   # };
 
   microvm = {
-    host.enable = true;
+    host.enable = false;
 
     vms = {
       pia = {

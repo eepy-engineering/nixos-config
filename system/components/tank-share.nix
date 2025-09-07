@@ -9,7 +9,11 @@
       enable = lib.mkEnableOption "tank mount";
       username = lib.mkOption {
         type = lib.types.str;
-        description = "The username of the user that will own the files";
+        description = "The name of the user that will own the files";
+      };
+      group = lib.mkOption {
+        type = lib.types.str;
+        description = "The name of the group that will own the files";
       };
       opnix-login-references = {
         username = lib.mkOption {
@@ -70,6 +74,8 @@
           vers = "3.1.1";
           noauto = true;
           posix = true;
+          uid = config.tank-mount.username;
+          gid = config.tank-mount.group;
 
           credentials = pkgs.asOpnixPath "samba/credentials";
         })

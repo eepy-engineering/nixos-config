@@ -25,4 +25,8 @@
     services = ["openvpn-ny.service"];
   };
   services.openvpn.servers.ny.config = "config ${pkgs.asOpnixPath "ny.ovpn"}";
+
+  services.pia-vpn = {
+    region = "ca_toronto";
+  };
 }

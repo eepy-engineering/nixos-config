@@ -15,6 +15,7 @@
     ../components/bluetooth.nix
     ../components/rust.nix
     ../components/tank-share.nix
+    ../components/pia
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -125,6 +126,7 @@
   tank-mount = {
     enable = true;
     username = "aubrey";
+    group = "users";
     opnix-login-references = {
       username = "op://Services/Aubrey - Nas SMB/username";
       password = "op://Services/Aubrey - Nas SMB/password";

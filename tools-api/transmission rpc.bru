@@ -1,0 +1,29 @@
+meta {
+  name: transmission rpc
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://kokuzo:9091/transmission/rpc
+  body: json
+  auth: inherit
+}
+
+headers {
+  X-Transmission-Session-Id: Qo1joY9w8fKJa8NsclEHinIBu2LcdroTHv1CUENxAvZmIQp2
+}
+
+body:json {
+  {
+    "method": "session-get",
+    "arguments": {
+      "port-forwarding-enabled": false
+    },
+    "tag": 0
+  }
+}
+
+settings {
+  encodeUrl: true
+}

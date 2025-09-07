@@ -59,6 +59,7 @@
     argocd
     jdk24
     usbutils
+    bindfs
 
     (writeNushellScriptBin "reboot-kexec" ''
       let cmdline = $"init=(readlink -f /nix/var/nix/profiles/system/init) $(open /nix/var/nix/profiles/system/kernel-params)";
