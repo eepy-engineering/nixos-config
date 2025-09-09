@@ -356,6 +356,7 @@
         "spade-nvim": "spade-nvim",
         "surfer": "surfer",
         "swim": "swim",
+        "tetra-config": "tetra-config",
         "zen-browser": "zen-browser"
       }
     },
@@ -516,6 +517,29 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tetra-config": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757379022,
+        "narHash": "sha256-Vm88hzrg47weft4CNNbCKmRDPxLFSDaRDipKy6uXpGA=",
+        "owner": "tetraxile",
+        "repo": "nixos-config",
+        "rev": "314586aa1c6c9713380ccc85bb00d4eadbaf063b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tetraxile",
+        "repo": "nixos-config",
         "type": "github"
       }
     },

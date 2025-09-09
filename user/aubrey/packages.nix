@@ -29,6 +29,8 @@
         logisim-evolution
         surfer
         swim
+        arduino
+        arduino-cli
 
         # art
         pinta
@@ -57,11 +59,11 @@
 
         # tools
         wl-clipboard
-        kdePackages.plasma-systemmonitor
         kdePackages.kcalc
         obsidian
         filezilla
         fontpreview
+        acpi
 
         # desktop
         wev

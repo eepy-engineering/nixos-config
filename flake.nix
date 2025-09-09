@@ -6,22 +6,39 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Use community VSCode extensions
-    extensions.url = "github:nix-community/nix-vscode-extensions";
-    extensions.inputs.nixpkgs.follows = "nixpkgs";
+    extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Use home-manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # add tetra's user
+    tetra-config = {
+      url = "github:tetraxile/nixos-config";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
     # Use OpNix for secrets
-    opnix.url = "github:Sanae6/opnix";
-    opnix.inputs.nixpkgs.follows = "nixpkgs";
+    opnix = {
+      url = "github:Sanae6/opnix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Applications
-    zen-browser.url = "github:youwen5/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
-    nix-index.url = "github:nix-community/nix-index";
-    nix-index.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-index = {
+      url = "github:nix-community/nix-index";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nu-scripts = {
       url = "github:nushell/nu_scripts";
       flake = false;
@@ -105,7 +122,7 @@
         isDesktop = true;
         system = "x86_64-linux";
       };
-      aubrey-laptop-nixos = {
+      puppygirl = {
         # aubrey's laptop
         isDesktop = true;
         system = "x86_64-linux";
@@ -124,6 +141,7 @@
     hmUsers = ["aubrey" "rose"];
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    inherit inputs;
 
     packages.x86_64-linux = import ./packages (import nixpkgs {
       system = "x86_64-linux";

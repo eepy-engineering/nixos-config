@@ -1,5 +1,6 @@
 args @ {
   pkgs,
+  config,
   isDesktop,
   specialArgs,
   ...
@@ -43,6 +44,17 @@ args @ {
     ];
   };
   programs._1password-gui.polkitPolicyOwners = ["rose" "aubrey"];
+
+  users.users.tetra = {
+    isNormalUser = true;
+    enable = !isDesktop || config.networking.hostName == "puppygirl";
+    description = "Tetra";
+    shell = pkgs.nushell;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmGxomnzFUz6CMy9NyghrhN1vQ0oeFw2bBdJEd6M9uH tetraxile@proton.me"
+    ];
+  };
+  home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home.nix";
 
   # Walter's user
   users.users.walter = {

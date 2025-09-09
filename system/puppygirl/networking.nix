@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  networking.hostName = "aubrey-laptop-nixos";
+  networking.hostName = "puppygirl";
   networking.nameservers = [
     "1.1.1.1"
     "1.0.0.1"
