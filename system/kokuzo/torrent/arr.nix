@@ -11,6 +11,7 @@
   #   ''}";
   # };
   services = {
+    sonarr.enable = true;
     lidarr = {
       enable = true;
       # environmentFiles = [

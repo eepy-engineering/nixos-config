@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./pia.nix
-    ./music.nix
+    ./arr.nix
     ./transmission.nix
   ];
 }
