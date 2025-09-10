@@ -15,6 +15,7 @@
     ./networking.nix
     ./torrent
     ./music.nix
+    ./jellyfin.nix
   ];
 
   boot.loader = {
