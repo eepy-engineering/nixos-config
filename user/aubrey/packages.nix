@@ -52,6 +52,7 @@
         # music
         strawberry
         nicotine-plus
+        pavucontrol
 
         # games
         prismlauncher
