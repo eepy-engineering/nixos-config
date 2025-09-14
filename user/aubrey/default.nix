@@ -31,5 +31,6 @@
     ./ssh.nix
     ./zed.nix
     ./zoxide.nix
+    ./1password.nix
   ];
 }

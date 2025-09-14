@@ -1,9 +1,9 @@
 $env.config.show_banner = false
 $env.config.history = {
-    max_size: 100_000
-    sync_on_enter: true
-    file_format: "sqlite"
-    isolation: true
+  max_size: 100_000
+  sync_on_enter: true
+  file_format: "sqlite"
+  isolation: true
 };
 
 $env.config.edit_mode = "vi";
@@ -15,6 +15,7 @@ alias nsu = nix-shell --command nu
 alias nsc = nix-shell 
 alias fg = job unfreeze
 alias de = direnv exec . nu
+alias cat = open
 
 $env.OP_PLUGIN_ALIASES_SOURCED = 1
 alias gh = op plugin run -- gh

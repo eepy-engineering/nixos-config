@@ -16,6 +16,7 @@
     ./torrent
     ./music.nix
     ./jellyfin.nix
+    ./cloudflared.nix
   ];
 
   boot.loader = {

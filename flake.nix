@@ -164,6 +164,7 @@
           specialArgs = {
             inherit inputs opnix microvm;
             isDesktop = config.isDesktop;
+            hostName = name;
           };
           modules = [
             overlaysModule
@@ -177,7 +178,7 @@
       builtins.mapAttrs buildConfig configs;
 
     homeConfigurations = let
-      buildConfig = username: config:
+      buildConfig = username: hostname: config:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = config.system;
@@ -191,6 +192,7 @@
           extraSpecialArgs = {
             inherit inputs opnix;
             isDesktop = config.isDesktop;
+            hostName = hostname;
           };
           modules = [
             overlaysModule
@@ -198,7 +200,7 @@
           ];
         };
       configPairs = lib.attrsets.mapAttrsToList lib.attrsets.nameValuePair configs;
-      buildConfigs = lib.lists.flatten (map (username: map (config: {"${username}@${config.name}" = buildConfig username config.value;}) configPairs) hmUsers);
+      buildConfigs = lib.lists.flatten (map (username: map (config: {"${username}@${config.name}" = buildConfig username config.name config.value;}) configPairs) hmUsers);
     in
       lib.attrsets.mergeAttrsList buildConfigs;
   };

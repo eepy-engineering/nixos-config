@@ -24,7 +24,7 @@
 
     secrets = lib.mkOption {
       default = [];
-      type = lib.types.listOf (lib.types.submodule ({config, ...}: {
+      type = lib.types.listOf (lib.types.submodule {
         options = {
           path = lib.mkOption {
             type = lib.types.str;
@@ -37,7 +37,7 @@
             example = "op://Services/SMB Login/password";
           };
         };
-      }));
+      });
     };
 
     services = lib.mkOption {
@@ -62,8 +62,13 @@
       wantedBy = cfg.services;
       before = cfg.services;
       serviceConfig = {
+        RemainAfterExit = true;
         Type = "oneshot";
       };
+      path = with pkgs; [
+        _1password-cli
+        nushell
+      ];
       script = ''
         # Ensure output directory exists with correct permissions
         mkdir -p ${cfg.outputDir}
@@ -94,10 +99,7 @@
         fi
 
         # Run the secrets retrieval tool
-        ${pkgs.opnix}/bin/opnix secret \
-          -token-file ${tokenFile} \
-          -config ${configFile} \
-          -output ${cfg.outputDir}
+        nu ${./credentials.nu} ${tokenFile} ${configFile}
       '';
     };
   in {

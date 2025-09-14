@@ -3,8 +3,7 @@
   isDesktop,
   ...
 }: {
-  home.
-    packages = with pkgs;
+  home.packages = with pkgs;
     [
       ripgrep
       inetutils

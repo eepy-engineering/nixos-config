@@ -32,7 +32,7 @@ args @ {
   users.users.aubrey = {
     isNormalUser = true;
     description = "Aubrey";
-    extraGroups = ["wheel" "plugdev" "wireshark" "libvirtd" "kvm" "bluetooth"];
+    extraGroups = ["wheel" "plugdev" "networkmanager" "wireshark" "libvirtd" "kvm" "bluetooth"];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZn43IczAtHI49eULTaA3GY7Zdoy/gqeEIhev/3ub09"

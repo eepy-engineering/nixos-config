@@ -1,5 +1,7 @@
-let current_tz = $env | get -o current_tz | default 0 | into int;
-mut btn = $env | get -o button | default (-1) | into int;
+use utils.nu *
+
+let current_tz = env int current_tz 0;
+mut btn = env int button -1;
 let offset = match $btn {
   4 => 1,
   5 => -1,
