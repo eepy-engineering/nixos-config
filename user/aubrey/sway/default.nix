@@ -17,7 +17,7 @@ in {
   };
 
   wayland.windowManager.sway = with pkgs; {
-    enable = true;
+    enable = isDesktop;
     systemd.enable = true;
     wrapperFeatures = {gtk = true;};
     config = let
@@ -53,9 +53,9 @@ in {
           XF86MonBrightnessUp = "exec ${brightnessctl}/bin/brightnessctl set 5%+";
 
           "Mod4+L" = "exec ${writeNushellScript "sleep" ''
-            swaymsg "exec swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"
+            swaymsg "exec ${swayidle}/bin/swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"
 
-            swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -c 000000
+            ${swaylock}/bin/swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -c 000000
             pkill -n swayidle
 
             # safety call in case resume didn't finish executing
