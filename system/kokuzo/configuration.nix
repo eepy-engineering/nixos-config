@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./kubernetes-master.nix
+    ./nginx.nix
     ./smb.nix
     ./vms
     ./filesystems.nix
