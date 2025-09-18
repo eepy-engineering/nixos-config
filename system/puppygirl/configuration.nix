@@ -88,6 +88,7 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="0955", MODE="0664", GROUP="plugdev"
       # bluetooth hci for dolphin
       SUBSYSTEM=="usb", ATTRS{idVendor}=="0e8d", ATTRS{idProduct}=="e616", TAG+="uaccess"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", MODE:="0664", GROUP="plugdev"
     '';
     packages = [
       pkgs.dolphin-emu
