@@ -11,7 +11,8 @@ def main [
   }
   let servers = http get https://serverlist.piaservers.net/vpninfo/servers/v6 | lines | get 0 | from json;
   let wg_port = $servers.groups.wg.ports.0.0
-  let user_token = http post https://www.privateinternetaccess.com/api/client/v2/token --content-type "multipart/form-data" { username: (open $username -r), password: (open $password -r) } | get token
+  print $username $password
+  let user_token = http post https://www.privateinternetaccess.com/api/client/v2/token --content-type "multipart/form-data" { username: (cat $username), password: (cat $password) } | get token
 
   let region = $servers.regions | where id == $region | get 0;
 

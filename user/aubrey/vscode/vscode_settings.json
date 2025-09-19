@@ -97,7 +97,6 @@
 
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
-        "<C-a>": false,
         "<C-f>": false,
         "<C-h>": false,
         "<C-p>": false
