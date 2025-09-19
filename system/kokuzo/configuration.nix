@@ -4,7 +4,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./kubernetes-master.nix
@@ -28,7 +29,7 @@
       efiInstallAsRemovable = false;
       mirroredBoots = [
         {
-          devices = ["nodev"];
+          devices = [ "nodev" ];
           path = "/boot";
         }
       ];
@@ -38,8 +39,8 @@
 
   virtualisation.docker.enable = true;
 
-  boot.supportedFilesystems = ["zfs"];
-  boot.initrd.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = "2097152";
     "fs.inotify.max_user_instances" = "1024";
@@ -53,7 +54,7 @@
   };
 
   services.tailscale = {
-    extraSetFlags = ["--advertise-exit-node"];
+    extraSetFlags = [ "--advertise-exit-node" ];
     useRoutingFeatures = "server";
   };
 

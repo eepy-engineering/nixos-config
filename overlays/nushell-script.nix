@@ -1,5 +1,6 @@
 final: _prev: {
-  writeNushellScript = name: contents:
+  writeNushellScript =
+    name: contents:
     final.writeTextFile {
       inherit name;
       executable = true;
@@ -11,7 +12,8 @@ final: _prev: {
         ${contents}
       '';
     };
-  writeNushellScriptBin = name: contents:
+  writeNushellScriptBin =
+    name: contents:
     final.writeTextFile {
       inherit name;
       executable = true;

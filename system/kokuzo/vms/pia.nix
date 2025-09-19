@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # ./seedbox.nix
     ../../components/credentials.nix
@@ -20,13 +21,19 @@
 
   systemd.services = {
     tailscaled-autoconnect = {
-      after = ["network-connected.service" "wg-pia-setup.service"];
+      after = [
+        "network-connected.service"
+        "wg-pia-setup.service"
+      ];
     };
     tailscaled-set = {
-      after = ["network-connected.service" "wg-pia-setup.service"];
+      after = [
+        "network-connected.service"
+        "wg-pia-setup.service"
+      ];
     };
     tailscaled = {
-      after = ["wg-pia-setup.service"];
+      after = [ "wg-pia-setup.service" ];
     };
   };
 
@@ -37,13 +44,17 @@
         reference = "op://Services/a3rsm553bty6eec24l6j6se6re/credential";
       }
     ];
-    users = [];
-    services = ["tailscaled-autoconnect.service"];
+    users = [ ];
+    services = [ "tailscaled-autoconnect.service" ];
   };
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = ["--advertise-tags=tag:nixos" "--advertise-exit-node" "--netfilter-mode=off"];
+    extraUpFlags = [
+      "--advertise-tags=tag:nixos"
+      "--advertise-exit-node"
+      "--netfilter-mode=off"
+    ];
     authKeyFile = pkgs.asOpnixPath "tailscale/authKey";
     authKeyParameters.preauthorized = true;
     useRoutingFeatures = "both";
@@ -89,9 +100,12 @@
   systemd.network.networks."20-lan" = {
     matchConfig.Type = "ether";
     networkConfig = {
-      Address = ["192.168.3.1/24" "2001:db8::b/64"];
+      Address = [
+        "192.168.3.1/24"
+        "2001:db8::b/64"
+      ];
       Gateway = "192.168.1.1";
-      DNS = ["192.168.1.1"];
+      DNS = [ "192.168.1.1" ];
       IPv6AcceptRA = true;
       DHCP = "no";
     };

@@ -3,7 +3,8 @@
   hexdump,
   replaceDependencies,
   ...
-}: let
+}:
+let
   nonFhsOriginalDavici = davinci-resolve-studio.passthru.davinci;
   davinciPatched = nonFhsOriginalDavici.overrideAttrs (
     finalAttrs: prevAttrs: {
@@ -26,12 +27,12 @@
     }
   );
 in
-  replaceDependencies {
-    drv = davinci-resolve-studio;
-    replacements = [
-      {
-        oldDependency = nonFhsOriginalDavici;
-        newDependency = davinciPatched;
-      }
-    ];
-  }
+replaceDependencies {
+  drv = davinci-resolve-studio;
+  replacements = [
+    {
+      oldDependency = nonFhsOriginalDavici;
+      newDependency = davinciPatched;
+    }
+  ];
+}

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts = {
     fontconfig.useEmbeddedBitmaps = true;
     packages = with pkgs; [

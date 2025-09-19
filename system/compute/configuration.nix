@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # imports = [
   #   ../components/iso.nix
   # ];
@@ -14,7 +15,7 @@
     enable = true;
     network = {
       enable = true;
-      wait-online.extraArgs = ["--dns"];
+      wait-online.extraArgs = [ "--dns" ];
     };
   };
 
@@ -31,12 +32,12 @@
         reference = "op://Services/a3rsm553bty6eec24l6j6se6re/credential";
       }
     ];
-    services = ["tailscaled-autoconnect.service"];
+    services = [ "tailscaled-autoconnect.service" ];
   };
 
   services.tailscale = {
-    extraUpFlags = ["--advertise-tags=tag:nixos"];
-    extraSetFlags = ["--advertise-exit-node"];
+    extraUpFlags = [ "--advertise-tags=tag:nixos" ];
+    extraSetFlags = [ "--advertise-exit-node" ];
     useRoutingFeatures = "server";
     authKeyFile = pkgs.asOpnixPath "tailscale/authKey";
     authKeyParameters.preauthorized = true;

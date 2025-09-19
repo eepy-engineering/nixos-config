@@ -2,12 +2,17 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   nix = {
     package = pkgs.nix;
     settings = {
-      trusted-users = ["@wheel"];
-      experimental-features = ["nix-command" "flakes" "local-overlay-store"];
+      trusted-users = [ "@wheel" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "local-overlay-store"
+      ];
     };
   };
 
@@ -20,7 +25,7 @@
     overlays = [
       # Opnix overlay for ease of addition
       (final: prev: {
-        opnix = inputs.opnix.packages.${pkgs.system}.default {pkgs = final;};
+        opnix = inputs.opnix.packages.${pkgs.system}.default { pkgs = final; };
       })
     ];
   };

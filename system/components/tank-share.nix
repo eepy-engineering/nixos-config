@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     tank-mount = {
       enable = lib.mkEnableOption "tank mount";
@@ -41,7 +42,7 @@
         }
       ];
 
-      services = ["samba-credentials.service"];
+      services = [ "samba-credentials.service" ];
     };
 
     systemd.services.samba-credentials = {
@@ -61,7 +62,7 @@
     fileSystems."/mnt/tank" = {
       device = "//kokuzo.tailc38f.ts.net/tank";
       fsType = "cifs";
-      depends = ["/"];
+      depends = [ "/" ];
       options = [
         (import ../../util/cifs-options.nix lib {
           x-systemd = {

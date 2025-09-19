@@ -3,12 +3,14 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   # i3blocks hm module doesn't root keys
-  xdg.configFile."i3blocks/bottom".text = let
-    # wrapNushell = filename: "${pkgs.writeNushellScript "${filename}.nu" (builtins.readFile (./. + "/${filename}.nu"))}";
-  in
-    lib.generators.toINIWithGlobalSection {} {
+  xdg.configFile."i3blocks/bottom".text =
+    let
+      # wrapNushell = filename: "${pkgs.writeNushellScript "${filename}.nu" (builtins.readFile (./. + "/${filename}.nu"))}";
+    in
+    lib.generators.toINIWithGlobalSection { } {
       globalSection = {
         command = "${pkgs.nushell}/bin/nu ${./.}/$BLOCK_NAME.nu";
         separator = true;
@@ -44,7 +46,7 @@
     bars = [
       {
         fonts = {
-          names = ["pango:monospace"];
+          names = [ "pango:monospace" ];
           size = 14.5;
         };
         statusCommand = "i3blocks -c ${config.xdg.configHome}/i3blocks/bottom";

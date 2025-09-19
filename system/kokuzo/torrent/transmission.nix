@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   services.transmission = {
     enable = true;
     home = "/persist/transmission";
@@ -16,27 +17,29 @@
     };
   };
   services.pia-vpn.forwardingPort = config.services.transmission.settings.peer-port;
-  systemd.services.transmission = let
-    settingsDir = "${config.services.transmission.home}/.config/transmission-daemon";
-  in {
-    requires = ["wg-pia-setup.service"];
-    environment = {
-      TR_CURL_SSL_NO_VERIFY = "1";
-    };
-    serviceConfig = {
-      ExecStartPre = [
-        "+${pkgs.writeNushellScript "set-bind-address" ''
-          loop {
-            if ("/tmp/pia.ip" | path exists) { break }
-            sleep 1sec
-          }
+  systemd.services.transmission =
+    let
+      settingsDir = "${config.services.transmission.home}/.config/transmission-daemon";
+    in
+    {
+      requires = [ "wg-pia-setup.service" ];
+      environment = {
+        TR_CURL_SSL_NO_VERIFY = "1";
+      };
+      serviceConfig = {
+        ExecStartPre = [
+          "+${pkgs.writeNushellScript "set-bind-address" ''
+            loop {
+              if ("/tmp/pia.ip" | path exists) { break }
+              sleep 1sec
+            }
 
-          mut json = open ${settingsDir}/settings.json;
-          let ip = open /tmp/pia.ip
-          $json = $json | upsert "bind-address-ipv4" $ip
-          $json | save -f ${settingsDir}/settings.json
-        ''}"
-      ];
+            mut json = open ${settingsDir}/settings.json;
+            let ip = open /tmp/pia.ip
+            $json = $json | upsert "bind-address-ipv4" $ip
+            $json | save -f ${settingsDir}/settings.json
+          ''}"
+        ];
+      };
     };
-  };
 }

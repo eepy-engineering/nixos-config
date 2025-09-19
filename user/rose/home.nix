@@ -5,7 +5,8 @@
   isDesktop,
   opnix,
   ...
-}: {
+}:
+{
   imports = [
     opnix.homeManagerModules.default
   ];
@@ -16,7 +17,8 @@
     username = "rose";
     homeDirectory = "/home/rose";
 
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         binutils
         kx-aspe-cli
@@ -24,48 +26,50 @@
         iperf3
       ]
       ++ (
-        if isDesktop
-        then [
-          rustdesk
-          nomachine-client
-          activate-linux
-          bruno
-          bluebubbles
-          _1password-cli
-          _1password-gui
-          signal-desktop
-          alejandra
-          imhex
-          direnv
-          gitkraken
-          qpwgraph
-          nautilus
-          gnome-tweaks
-          vlc
-          obsidian
-          rose-pine-gtk-theme
-          rose-pine-cursor
-          zulip
-          blender
-          shotcut
-          (pkgs.callPackage ./davinci-resolve-paid.nix {})
-          libnotify
-          opnix.packages.${pkgs.system}.default
-          (prismlauncher.override {
-            # Java runtimes available to Prism Launcher
-            jdks = [
-              graalvm-ce
-              zulu8
-              zulu17
-              zulu
-            ];
-          })
-          (pkgs.python3.withPackages (python-pkgs:
-            with python-pkgs; [
-              numpy
-            ]))
-        ]
-        else []
+        if isDesktop then
+          [
+            rustdesk
+            nomachine-client
+            activate-linux
+            bruno
+            bluebubbles
+            _1password-cli
+            _1password-gui
+            signal-desktop
+            alejandra
+            imhex
+            direnv
+            gitkraken
+            qpwgraph
+            nautilus
+            gnome-tweaks
+            vlc
+            obsidian
+            rose-pine-gtk-theme
+            rose-pine-cursor
+            zulip
+            blender
+            shotcut
+            (pkgs.callPackage ./davinci-resolve-paid.nix { })
+            libnotify
+            opnix.packages.${pkgs.system}.default
+            (prismlauncher.override {
+              # Java runtimes available to Prism Launcher
+              jdks = [
+                graalvm-ce
+                zulu8
+                zulu17
+                zulu
+              ];
+            })
+            (pkgs.python3.withPackages (
+              python-pkgs: with python-pkgs; [
+                numpy
+              ]
+            ))
+          ]
+        else
+          [ ]
       );
 
     shell = {
@@ -149,51 +153,55 @@
       enable = isDesktop;
       package = pkgs.ungoogled-chromium;
 
-      extensions = let
-        chromium-extension = import ./../../util/chromium-extension.nix (lib.versions.major pkgs.ungoogled-chromium.version);
-      in [
-        # Web Scrobbler
-        (chromium-extension {
-          id = "hhinaapppaileiechjoiifaancjggfjm";
-          sha256 = "sha256:0dsdygrl5gvyxn3y95xzfrmbgfr22iyhzrbv8ind6a8rj6l55x6f";
-          version = "3.13.0";
-        })
+      extensions =
+        let
+          chromium-extension = import ./../../util/chromium-extension.nix (
+            lib.versions.major pkgs.ungoogled-chromium.version
+          );
+        in
+        [
+          # Web Scrobbler
+          (chromium-extension {
+            id = "hhinaapppaileiechjoiifaancjggfjm";
+            sha256 = "sha256:0dsdygrl5gvyxn3y95xzfrmbgfr22iyhzrbv8ind6a8rj6l55x6f";
+            version = "3.13.0";
+          })
 
-        # 1Password
-        (chromium-extension {
-          id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
-          sha256 = "sha256:0g79j2qsmnhg0fq3d2asj632v88cipcbq56aimgaqsxl7yv079i8";
-          version = "8.10.72.27";
-        })
+          # 1Password
+          (chromium-extension {
+            id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
+            sha256 = "sha256:0g79j2qsmnhg0fq3d2asj632v88cipcbq56aimgaqsxl7yv079i8";
+            version = "8.10.72.27";
+          })
 
-        # Dark Reader
-        (chromium-extension {
-          id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";
-          sha256 = "sha256:0x9l2m260y0g7l7w988sghgh8qvfghydx8pbd1gd023zkqf1nrv2";
-          version = "4.9.103";
-        })
+          # Dark Reader
+          (chromium-extension {
+            id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";
+            sha256 = "sha256:0x9l2m260y0g7l7w988sghgh8qvfghydx8pbd1gd023zkqf1nrv2";
+            version = "4.9.103";
+          })
 
-        # uBlock Origin
-        (chromium-extension {
-          id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-          sha256 = "sha256:1lnk0k8zy0w33cxpv93q1am0d7ds2na64zshvbwdnbjq8x4sw5p6";
-          version = "1.63.2";
-        })
+          # uBlock Origin
+          (chromium-extension {
+            id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
+            sha256 = "sha256:1lnk0k8zy0w33cxpv93q1am0d7ds2na64zshvbwdnbjq8x4sw5p6";
+            version = "1.63.2";
+          })
 
-        # SponsorBlock
-        (chromium-extension {
-          id = "mnjggcdmjocbbbhaepdhchncahnbgone";
-          sha256 = "sha256:0m5gnhrb4wldx9kyypnbh1pal1i6krwpry17lhyw7xgd93bmrbnm";
-          version = "5.12.1";
-        })
+          # SponsorBlock
+          (chromium-extension {
+            id = "mnjggcdmjocbbbhaepdhchncahnbgone";
+            sha256 = "sha256:0m5gnhrb4wldx9kyypnbh1pal1i6krwpry17lhyw7xgd93bmrbnm";
+            version = "5.12.1";
+          })
 
-        # Rosé Pine
-        (chromium-extension {
-          id = "noimedcjdohhokijigpfcbjcfcaaahej";
-          sha256 = "sha256:06zrzs96bmrw67q4v5jn5f67l87am5h51qzw0hz4z78h6kz0as7v";
-          version = "2.0.0";
-        })
-      ];
+          # Rosé Pine
+          (chromium-extension {
+            id = "noimedcjdohhokijigpfcbjcfcaaahej";
+            sha256 = "sha256:06zrzs96bmrw67q4v5jn5f67l87am5h51qzw0hz4z78h6kz0as7v";
+            version = "2.0.0";
+          })
+        ];
     };
 
     vscode = {
@@ -268,7 +276,10 @@
           autoUpdateNotification = true;
           useQuickCss = false;
           egarPatches = false;
-          enabledThemes = ["system24-rose-pine.theme.css" "quick-css.theme.css"];
+          enabledThemes = [
+            "system24-rose-pine.theme.css"
+            "quick-css.theme.css"
+          ];
           enableReactDevtools = true;
           frameless = false;
           transparent = false;
@@ -646,7 +657,10 @@
         arRPC = true;
         splashColor = "rgb(192, 189, 219)";
         splashBackground = "rgb(26, 24, 37)";
-        spellCheckLanguages = ["en-US" "en"];
+        spellCheckLanguages = [
+          "en-US"
+          "en"
+        ];
         customTitleBar = false;
         staticTitle = true;
         hardwareAcceleration = true;
@@ -725,7 +739,7 @@
     alacritty = {
       enable = isDesktop;
       package = pkgs.alacritty;
-      settings = {};
+      settings = { };
     };
 
     rofi = {
@@ -739,10 +753,7 @@
 
     onepassword-secrets = {
       # enable = isDesktop;
-      tokenFile =
-        if isDesktop
-        then "/etc/opnix-token"
-        else "/var/opnix-token";
+      tokenFile = if isDesktop then "/etc/opnix-token" else "/var/opnix-token";
       secrets = [
         {
           path = ".secrets/polybar/github";
@@ -843,15 +854,15 @@
         };
 
         Install = {
-          WantedBy = ["xsession.target"];
+          WantedBy = [ "xsession.target" ];
         };
       };
 
       bt-autoconnect = {
         Unit = {
           Description = "Auto-Connect WH-1000XM4";
-          After = ["bluetooth.target"];
-          Requires = ["bluetooth.target"];
+          After = [ "bluetooth.target" ];
+          Requires = [ "bluetooth.target" ];
         };
 
         Service = {
@@ -861,7 +872,7 @@
         };
 
         Install = {
-          WantedBy = ["default.target"];
+          WantedBy = [ "default.target" ];
         };
       };
     };
@@ -902,14 +913,16 @@
         "${config.modifier}+Shift+Right" = "move right";
         "${config.modifier}+Shift+Up" = "move up";
         "${config.modifier}+Shift+c" = "reload";
-        "${config.modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+        "${config.modifier}+Shift+e" =
+          "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
         "${config.modifier}+Shift+minus" = "move scratchpad";
         "${config.modifier}+Shift+q" = "kill";
         "${config.modifier}+Shift+r" = "restart";
         "${config.modifier}+Shift+space" = "floating toggle";
         "${config.modifier}+Up" = "focus up";
         "${config.modifier}+a" = "focus parent";
-        "${config.modifier}+d" = "exec ${pkgs.writeShellScript "rofi-open.sh" "${pkgs.rofi}/bin/rofi -show combi -combi-modes \"window,drun\""}";
+        "${config.modifier}+d" =
+          "exec ${pkgs.writeShellScript "rofi-open.sh" "${pkgs.rofi}/bin/rofi -show combi -combi-modes \"window,drun\""}";
         "${config.modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -show window";
         "${config.modifier}+e" = "layout toggle split";
         "${config.modifier}+f" = "fullscreen toggle";
@@ -932,7 +945,7 @@
           Return = "mode default";
         };
       };
-      bars = [];
+      bars = [ ];
     };
     extraConfig = ''
       for_window [title=".* - Chromium"] border none

@@ -2,7 +2,8 @@
   inputs,
   opnix,
   ...
-}: {
+}:
+{
   home = {
     stateVersion = "24.11";
 

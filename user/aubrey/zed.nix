@@ -1,4 +1,5 @@
-{isDesktop, ...}: {
+{ isDesktop, ... }:
+{
   programs.zed-editor = {
     # enable = isDesktop;
     enable = false;
@@ -17,7 +18,7 @@
       vim_mode = true;
       load_direnv = "shell_hook";
       buffer_font_family = "Comic Mono";
-      buffer_font_fallbacks = ["Zed Plus Mono"];
+      buffer_font_fallbacks = [ "Zed Plus Mono" ];
       autosave.after_delay.milliseconds = 300;
       relative_line_numbers = true;
     };

@@ -3,7 +3,8 @@
   pkgs,
   isDesktop,
   ...
-}: {
+}:
+{
   wayland.windowManager.hyprland = {
     enable = isDesktop;
     package = pkgs.hyprland;

@@ -4,7 +4,8 @@
   lib,
   isDesktop,
   ...
-}: {
+}:
+{
   imports = [
     ./components/credentials.nix
     ./components/wireless.nix

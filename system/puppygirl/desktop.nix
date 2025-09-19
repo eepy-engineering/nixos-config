@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   #services.displayManager.sddm = {
   #  enable = false;
   #  wayland = {
@@ -12,7 +13,7 @@
   programs.hyprland.enable = true;
 
   security.polkit.enable = true;
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 
   services = {
     greetd = {

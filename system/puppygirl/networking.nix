@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   networking.hostName = "puppygirl";
   networking.nameservers = [
     "1.1.1.1"
@@ -7,7 +8,7 @@
   services.resolved = {
     enable = true;
     dnssec = "true";
-    domains = ["~."];
+    domains = [ "~." ];
     fallbackDns = [
       "1.1.1.1"
       "1.0.0.1"
@@ -22,7 +23,7 @@
         reference = "op://Services/TP-Link VPN Config/notesPlain";
       }
     ];
-    services = ["openvpn-ny.service"];
+    services = [ "openvpn-ny.service" ];
   };
   services.openvpn.servers.ny.config = "config ${pkgs.asOpnixPath "ny.ovpn"}";
 

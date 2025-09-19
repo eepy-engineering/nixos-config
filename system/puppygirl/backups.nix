@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.btrbk = {
     instances = {
       home-daily = {

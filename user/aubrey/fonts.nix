@@ -1,8 +1,12 @@
-{isDesktop, ...}: {
+{ isDesktop, ... }:
+{
   fonts.fontconfig = {
     enable = isDesktop;
     defaultFonts = {
-      monospace = ["Comic Mono" "Jetbrains Mono"];
+      monospace = [
+        "Comic Mono"
+        "Jetbrains Mono"
+      ];
     };
   };
 }

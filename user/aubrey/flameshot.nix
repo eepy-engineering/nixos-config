@@ -1,4 +1,5 @@
-{isDesktop, ...}: {
+{ isDesktop, ... }:
+{
   services = {
     flameshot = {
       enable = isDesktop;

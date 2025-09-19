@@ -7,52 +7,63 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = ["amdgpu"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
     fsType = "btrfs";
-    options = ["subvol=root"];
+    options = [ "subvol=root" ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6B14-24A1";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
     fsType = "btrfs";
-    options = ["subvol=nix"];
+    options = [ "subvol=nix" ];
   };
 
   fileSystems."/persist" = {
     device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
     fsType = "btrfs";
-    options = ["subvol=persist"];
+    options = [ "subvol=persist" ];
   };
 
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
     fsType = "btrfs";
-    options = ["subvol=log"];
+    options = [ "subvol=log" ];
     neededForBoot = true;
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
     fsType = "btrfs";
-    options = ["subvol=home"];
+    options = [ "subvol=home" ];
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

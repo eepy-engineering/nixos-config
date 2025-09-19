@@ -4,7 +4,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./backups.nix
     ./desktop.nix
@@ -19,14 +20,14 @@
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.supportedFilesystems = ["btrfs"];
+  boot.supportedFilesystems = [ "btrfs" ];
 
   boot.initrd.network.enable = true;
   boot.initrd.systemd = {
     enable = true;
     network = {
       enable = true;
-      wait-online.extraArgs = ["--dns"];
+      wait-online.extraArgs = [ "--dns" ];
     };
   };
 
@@ -63,9 +64,9 @@
         swtpm.enable = true;
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMFFull.fd];
+          packages = [ pkgs.OVMFFull.fd ];
         };
-        vhostUserPackages = with pkgs; [virtiofsd];
+        vhostUserPackages = with pkgs; [ virtiofsd ];
       };
     };
 
@@ -146,7 +147,7 @@
       wlrobs
       obs-backgroundremoval
       obs-pipewire-audio-capture
-      obs-vaapi #optional AMD hardware acceleration
+      obs-vaapi # optional AMD hardware acceleration
       obs-gstreamer
       obs-vkcapture
     ];

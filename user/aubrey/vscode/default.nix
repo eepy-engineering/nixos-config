@@ -2,7 +2,8 @@
   pkgs,
   isDesktop,
   ...
-}: {
+}:
+{
   programs.vscode = {
     enable = isDesktop;
     package = pkgs.vscodium;

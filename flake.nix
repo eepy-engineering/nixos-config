@@ -83,27 +83,29 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    home-manager,
-    opnix,
-    extensions,
-    zen-browser,
-    nix-index,
-    fenix,
-    microvm,
-    nixGL,
-    O10editor,
-    catppuccin,
-    ...
-  }: let
-    lib = nixpkgs.lib;
-    overlays =
-      [
+  outputs =
+    inputs@{
+      nixpkgs,
+      home-manager,
+      opnix,
+      extensions,
+      zen-browser,
+      nix-index,
+      fenix,
+      microvm,
+      nixGL,
+      O10editor,
+      catppuccin,
+      ...
+    }:
+    let
+      lib = nixpkgs.lib;
+      overlays = [
         extensions.overlays.default
         fenix.overlays.default
         nixGL.overlay
-        (final: prev:
+        (
+          final: prev:
           {
             inherit inputs;
             opnix = opnix.packages.${final.system}.default;
@@ -112,96 +114,114 @@
             home-manager = home-manager.packages.${final.system};
             _010editor = O10editor.packages.${final.system}.default;
           }
-          // (import ./packages prev))
+          // (import ./packages prev)
+        )
       ]
       ++ import ./overlays;
-    overlaysModule = _: {nixpkgs.overlays = overlays;};
-    configs = {
-      rose-desktop = {
-        # rose's desktop
-        isDesktop = true;
-        system = "x86_64-linux";
+      overlaysModule = _: { nixpkgs.overlays = overlays; };
+      configs = {
+        rose-desktop = {
+          # rose's desktop
+          isDesktop = true;
+          system = "x86_64-linux";
+        };
+        puppygirl = {
+          # aubrey's laptop
+          isDesktop = true;
+          system = "x86_64-linux";
+        };
+        kokuzo = {
+          # nas
+          isDesktop = false;
+          system = "x86_64-linux";
+        };
+        compute = {
+          # compute
+          isDesktop = false;
+          system = "x86_64-linux";
+        };
       };
-      puppygirl = {
-        # aubrey's laptop
-        isDesktop = true;
-        system = "x86_64-linux";
-      };
-      kokuzo = {
-        # nas
-        isDesktop = false;
-        system = "x86_64-linux";
-      };
-      compute = {
-        # compute
-        isDesktop = false;
-        system = "x86_64-linux";
-      };
-    };
-    hmUsers = ["aubrey" "rose"];
-  in {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-    inherit inputs;
+      hmUsers = [
+        "aubrey"
+        "rose"
+      ];
+    in
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+      inherit inputs;
 
-    packages.x86_64-linux = import ./packages (import nixpkgs {
-      system = "x86_64-linux";
+      packages.x86_64-linux = import ./packages (
+        import nixpkgs {
+          system = "x86_64-linux";
 
-      overlays = overlays;
-      specialArgs = {
-        inherit inputs;
-      };
-
-      config = {
-        allowUnfree = true;
-        allowInsecurePredicate = pkg: true;
-      };
-    });
-
-    nixosConfigurations = let
-      buildConfig = name: config:
-        lib.nixosSystem {
-          system = config.system;
+          overlays = overlays;
           specialArgs = {
-            inherit inputs opnix microvm;
-            isDesktop = config.isDesktop;
-            hostName = name;
+            inherit inputs;
           };
-          modules = [
-            overlaysModule
-            home-manager.nixosModules.home-manager
-            ./system/configuration.nix
-            ./system/${name}/configuration.nix
-            ./user/configuration.nix
-          ];
-        };
-    in
-      builtins.mapAttrs buildConfig configs;
 
-    homeConfigurations = let
-      buildConfig = username: hostname: config:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = config.system;
-            inherit overlays;
+          config = {
+            allowUnfree = true;
+            allowInsecurePredicate = pkg: true;
+          };
+        }
+      );
 
-            config = {
-              allowUnfree = true;
-              allowInsecurePredicate = pkg: true;
+      nixosConfigurations =
+        let
+          buildConfig =
+            name: config:
+            lib.nixosSystem {
+              system = config.system;
+              specialArgs = {
+                inherit inputs opnix microvm;
+                isDesktop = config.isDesktop;
+                hostName = name;
+              };
+              modules = [
+                overlaysModule
+                home-manager.nixosModules.home-manager
+                ./system/configuration.nix
+                ./system/${name}/configuration.nix
+                ./user/configuration.nix
+              ];
             };
-          };
-          extraSpecialArgs = {
-            inherit inputs opnix;
-            isDesktop = config.isDesktop;
-            hostName = hostname;
-          };
-          modules = [
-            overlaysModule
-            ./user/${username}
-          ];
-        };
-      configPairs = lib.attrsets.mapAttrsToList lib.attrsets.nameValuePair configs;
-      buildConfigs = lib.lists.flatten (map (username: map (config: {"${username}@${config.name}" = buildConfig username config.name config.value;}) configPairs) hmUsers);
-    in
-      lib.attrsets.mergeAttrsList buildConfigs;
-  };
+        in
+        builtins.mapAttrs buildConfig configs;
+
+      homeConfigurations =
+        let
+          buildConfig =
+            username: hostname: config:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                system = config.system;
+                inherit overlays;
+
+                config = {
+                  allowUnfree = true;
+                  allowInsecurePredicate = pkg: true;
+                };
+              };
+              extraSpecialArgs = {
+                inherit inputs opnix;
+                isDesktop = config.isDesktop;
+                hostName = hostname;
+              };
+              modules = [
+                overlaysModule
+                ./user/${username}
+              ];
+            };
+          configPairs = lib.attrsets.mapAttrsToList lib.attrsets.nameValuePair configs;
+          buildConfigs = lib.lists.flatten (
+            map (
+              username:
+              map (config: {
+                "${username}@${config.name}" = buildConfig username config.name config.value;
+              }) configPairs
+            ) hmUsers
+          );
+        in
+        lib.attrsets.mergeAttrsList buildConfigs;
+    };
 }

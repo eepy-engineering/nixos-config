@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   networking = {
     hostName = "kokuzo";
     hostId = "8626743f";
@@ -7,13 +8,13 @@
 
     nat = {
       enable = true;
-      internalInterfaces = ["ve-+"];
+      internalInterfaces = [ "ve-+" ];
       externalInterface = "eno49";
     };
 
     useDHCP = true;
     defaultGateway = "192.168.1.1";
-    nameservers = ["192.168.1.1"];
+    nameservers = [ "192.168.1.1" ];
     interfaces.eno49 = {
       useDHCP = true;
       ipv4.addresses = [
@@ -29,7 +30,10 @@
     enable = false;
 
     networks."10-lan" = {
-      matchConfig.Name = ["eno49" "vm-*"];
+      matchConfig.Name = [
+        "eno49"
+        "vm-*"
+      ];
       networkConfig = {
         Bridge = "br0";
       };

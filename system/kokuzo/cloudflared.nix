@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   opnix = {
     secrets = [
       {
@@ -10,7 +11,7 @@
         reference = "op://Services/dd5hu33p5yx34qxgxbayqpjyza/notesPlain";
       }
     ];
-    services = ["cloudflared-tunnel-9407ea8e-0f2c-45d0-9265-9797d2bbe5d1.service"];
+    services = [ "cloudflared-tunnel-9407ea8e-0f2c-45d0-9265-9797d2bbe5d1.service" ];
   };
   services.cloudflared = {
     enable = true;

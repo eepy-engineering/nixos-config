@@ -1,6 +1,7 @@
-{pkgs, ...}:
-with pkgs; {
-  home.packages = [pkgs.nix-index];
+{ pkgs, ... }:
+with pkgs;
+{
+  home.packages = [ pkgs.nix-index ];
   programs.nushell.extraConfig = ''
     $env.config.hooks.command_not_found = { |cmd_name|
       let install = { |pkgs|

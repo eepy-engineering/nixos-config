@@ -3,7 +3,8 @@
   microvm,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     microvm.nixosModules.host
   ];
