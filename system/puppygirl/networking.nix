@@ -1,10 +1,16 @@
 { pkgs, ... }:
 {
-  networking.hostName = "puppygirl";
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
+  networking = {
+    hostName = "puppygirl";
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    hosts = {
+      dovecote = [ "100.123.120.127" ];
+      catbox = [ "100.77.206.54" ];
+    };
+  };
   services.resolved = {
     enable = true;
     dnssec = "true";
