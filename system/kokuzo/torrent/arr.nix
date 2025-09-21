@@ -1,8 +1,18 @@
 { pkgs, ... }:
 {
-  services = {
-    sonarr.enable = true;
-    lidarr.enable = true;
-    bazarr.enable = true;
-  };
+  services =
+    let
+      service = {
+        enable = true;
+        group = "media";
+      };
+    in
+    {
+      sonarr = service;
+      lidarr = service;
+      radarr = service;
+      bazarr = service;
+
+      jackett = service;
+    };
 }

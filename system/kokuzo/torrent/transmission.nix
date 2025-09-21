@@ -6,6 +6,7 @@
 {
   services.transmission = {
     enable = true;
+    group = "media";
     home = "/persist/transmission";
     settings = {
       rpc-bind-address = "0.0.0.0";

@@ -4,10 +4,15 @@ meta {
   seq: 2
 }
 
-get {
+post {
   url: https://www.privateinternetaccess.com/api/client/v2/token
-  body: none
+  body: multipartForm
   auth: inherit
+}
+
+body:multipart-form {
+  username: {{pia-username}}
+  password: {{pia-password}}
 }
 
 settings {

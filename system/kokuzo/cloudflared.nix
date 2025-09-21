@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   opnix = {
     secrets = [
@@ -19,7 +19,10 @@
     tunnels = {
       "9407ea8e-0f2c-45d0-9265-9797d2bbe5d1" = {
         credentialsFile = pkgs.asOpnixPath "tunnel.json";
-        default = "status:404";
+        default = "http_status:404";
+        ingress = {
+          "jellyfin.hall.ly" = "http://localhost:8096";
+        };
       };
     };
   };
