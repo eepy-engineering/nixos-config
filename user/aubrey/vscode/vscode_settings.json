@@ -5,17 +5,12 @@
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
-
     "cmake.configureOnOpen": false,
     "cmake.showConfigureWithDebuggerNotification": false,
     "cmake.showOptionsMovedNotification": false,
-
     "debug.onTaskErrors": "abort",
-
     "direnv.restart.automatic": true,
-
     "dotnetAcquisitionExtension.enableTelemetry": false,
-
     "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
     "editor.formatOnSave": true,
     "editor.inlayHints.enabled": "offUnlessPressed",
@@ -28,23 +23,18 @@
         "ja": true
     },
     "editor.unicodeHighlight.ambiguousCharacters": false,
-
     "evenBetterToml.formatter.indentString": "",
     "evenBetterToml.formatter.inlineTableExpand": false,
-
     "files.associations": {
         "*.cppm": "cpp"
     },
-
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
     "files.eol": "\n",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-
     "git.autofetch": true,
     "git.enableSmartCommit": true,
-
     "github.copilot.editor.enableAutoCompletions": false,
     "github.copilot.editor.enableCodeActions": false,
     "github.copilot.enable": {
@@ -53,11 +43,8 @@
         "plaintext": false,
         "scminput": false
     },
-
     "haskell.manageHLS": "PATH",
-
     "javascript.updateImportsOnFileMove.enabled": "always",
-
     "rust-analyzer.rustfmt.extraArgs": [
         "+nightly"
     ],
@@ -68,15 +55,11 @@
     ],
     "rust-analyzer.server.path": "rust-analyzer",
     "rust-analyzer.showUnlinkedFileNotification": false,
-
     "screencastMode.fontSize": 36,
     "screencastMode.verticalOffset": 10,
-
     "security.workspace.trust.enabled": false,
     "security.workspace.trust.untrustedFiles": "open",
-
     "svelte.enable-ts-plugin": true,
-
     "terminal.integrated.automationProfile.linux": {
         "icon": "account",
         "path": "bash"
@@ -88,13 +71,9 @@
             "path": "bash"
         }
     },
-
     "typescript.updateImportsOnFileMove.enabled": "always",
-
     "update.mode": "none",
-
     "verilog.formatting.verilogHDL.formatter": "verible-verilog-format",
-
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
         "<C-f>": false,
@@ -161,20 +140,35 @@
         }
     ],
     "vim.startInInsertMode": true,
-
     "vsicons.dontShowNewVersionMessage": true,
-
     "window.commandCenter": false,
     "window.customTitleBarVisibility": "never",
-
     "workbench.colorTheme": "Gleam Classic",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.wrapTabs": true,
     "workbench.iconTheme": "vscode-icons",
     "workbench.layoutControl.enabled": false,
     "workbench.startupEditor": "none",
-
     "zenMode.fullScreen": false,
     "zenMode.hideLineNumbers": false,
-    "zenMode.hideStatusBar": false
+    "zenMode.hideStatusBar": false,
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    "nix.serverSettings": {
+        "nixd": {
+            "formatting": {
+                "command": [
+                    "nixfmt"
+                ]
+            },
+            "options": {
+                "nixos": {
+                    "expr": "(builtins.getFlake \"/home/aubrey/Projects/nixos-config\").nixosConfigurations.puppygirl.options"
+                },
+                "home-manager": {
+                    "expr": "(builtins.getFlake \"/home/aubrey/Projects/nixos-config\").nixosConfigurations.\"aubrey@puppygirl\".options"
+                }
+            }
+        }
+    }
 }

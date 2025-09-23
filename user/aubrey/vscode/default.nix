@@ -21,8 +21,7 @@
 
         # nix
         mkhl.direnv
-        kamadorueda.alejandra
-        bbenoist.nix
+        jnoortheen.nix-ide
 
         # dx
         vscodevim.vim

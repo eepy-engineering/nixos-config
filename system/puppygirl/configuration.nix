@@ -83,6 +83,7 @@
   boot.kernelModules = [
     "gcadapter_oc"
   ];
+
   services.udev = {
     extraRules = ''
       # nintendo switch in rcm
@@ -140,6 +141,7 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
+
   programs.obs-studio = {
     enable = true;
     enableVirtualCamera = true;
@@ -157,7 +159,6 @@
     enable = true;
     package = pkgs.wireshark-qt;
   };
-  services.tailscale.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

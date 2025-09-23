@@ -11,6 +11,7 @@
       catbox = [ "100.77.206.54" ];
     };
   };
+
   services.resolved = {
     enable = true;
     dnssec = "true";
@@ -20,6 +21,10 @@
       "1.0.0.1"
     ];
     dnsovertls = "true";
+  };
+
+  services.tailscale = {
+    enable = true;
   };
 
   opnix = {

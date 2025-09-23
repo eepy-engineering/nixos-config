@@ -25,7 +25,8 @@
           renderdoc
           avalonia-ilspy
           digital
-          alejandra
+          nixfmt-tree
+          nixfmt-rfc-style
           nixd
           logisim-evolution
           surfer
