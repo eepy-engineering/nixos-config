@@ -33,6 +33,7 @@
           swim
           arduino
           arduino-cli
+          platformio
 
           # art
           pinta

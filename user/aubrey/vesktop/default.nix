@@ -17,9 +17,5 @@
       enableMenu = false;
       staticTitle = false;
     };
-
-    vencord = {
-      settings = builtins.fromJSON (builtins.readFile ./vencord.json);
-    };
   };
 }
