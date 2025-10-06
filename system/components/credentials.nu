@@ -13,5 +13,7 @@ def main [
     let secretPath = ([$config.outputDir $secret.path] | path join);
     mkdir ($secretPath | path dirname)
     op read $secret.reference | save -f $secretPath
-  }
+  };
+
+  chown -R root:onepassword-secrets $config.outputDir
 }

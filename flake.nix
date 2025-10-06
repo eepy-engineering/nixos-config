@@ -22,6 +22,7 @@
       url = "github:tetraxile/nixos-config";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
+      inputs.zen-browser.follows = "zen-browser";
     };
 
     # Use OpNix for secrets

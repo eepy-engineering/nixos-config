@@ -28,6 +28,7 @@ in
       let
       in
       {
+        # modifier = "Alt_L";
         assigns = {
           "8" = [ { class = "vesktop"; } ];
           "1" = [ { class = "VSCodium"; } ];

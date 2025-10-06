@@ -46,6 +46,7 @@
           signal-desktop
           thunderbird
           bluebubbles
+          whatsapp-for-linux
 
           # web
           zen-browser
@@ -68,11 +69,14 @@
           filezilla
           fontpreview
           acpi
+          anki
 
           # desktop
           wev
           playerctl
           brightnessctl
+          swaylock
+          swayidle
         ]
       else
         [ ]

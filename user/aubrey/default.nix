@@ -30,6 +30,7 @@
     ./packages.nix
     ./secrets.nix
     ./ssh.nix
+    ./tmux.nix
     ./zed.nix
     ./zoxide.nix
     ./1password.nix

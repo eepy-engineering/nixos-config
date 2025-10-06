@@ -77,7 +77,7 @@ args@{
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmGxomnzFUz6CMy9NyghrhN1vQ0oeFw2bBdJEd6M9uH tetraxile@proton.me"
     ];
   };
-  home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home.nix";
+  home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home";
 
   # Walter's user
   users.users.walter = {

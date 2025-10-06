@@ -4,19 +4,33 @@
   ...
 }:
 {
+  opnix = {
+    secrets = [
+      {
+        path = "nginx/switchAuthFile";
+        reference = "op://Services/Nginx - Intuition/hashedAuthFile";
+      }
+    ];
+    users = [ "nginx" ];
+    services = [ "nginx.service" ];
+  };
   services.nginx = {
     enable = true;
     clientMaxBodySize = "256m";
     virtualHosts = {
       "kokuzo" = {
         serverName = "kokuzo.tailc38f.ts.net";
+        serverAliases = [
+          "kokuzo-access.arc-runners.svc.cluster.local"
+        ];
         sslCertificateKey = "/persist/tailscale-nginx-cert/nginx.key";
         sslCertificate = "/persist/tailscale-nginx-cert/nginx.cert";
         forceSSL = true;
         extraConfig = "
           allow 192.168.0.0/16;
           allow 100.64.0.0/10;
-          deny all;
+          allow 10.0.0.0/8;
+          allow 172.16.0.0/12;
         ";
         locations = {
           "/" = {
@@ -28,6 +42,7 @@
             root = "/mnt/tank/emu";
             extraConfig = "autoindex on;";
             priority = 80;
+            basicAuthFile = pkgs.asOpnixPath "nginx/switchAuthFile";
           };
         };
       };

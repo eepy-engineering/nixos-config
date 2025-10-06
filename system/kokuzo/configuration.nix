@@ -19,6 +19,7 @@
     ./music.nix
     ./jellyfin.nix
     ./cloudflared.nix
+    ./calendar.nix
   ];
 
   boot.loader = {
