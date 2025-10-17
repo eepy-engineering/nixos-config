@@ -1,11 +1,4 @@
 {
-  pkgs,
-  inputs,
-  lib,
-  config,
-  ...
-}:
-{
   imports = [
     ./hardware-configuration.nix
     ./kubernetes-master.nix
@@ -20,6 +13,7 @@
     ./jellyfin.nix
     ./cloudflared.nix
     ./calendar.nix
+    ./analytics
   ];
 
   boot.loader = {
@@ -39,6 +33,8 @@
   };
 
   virtualisation.docker.enable = true;
+
+  time.timeZone = "America/New_York";
 
   boot.supportedFilesystems = [ "zfs" ];
   boot.initrd.supportedFilesystems = [ "zfs" ];

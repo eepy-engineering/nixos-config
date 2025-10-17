@@ -46,6 +46,7 @@
         ocamllabs.ocaml-platform
         bradlc.vscode-tailwindcss
         mshr-h.veriloghdl
+        dalance.vscode-veryl
       ];
     };
   };

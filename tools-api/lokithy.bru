@@ -1,0 +1,15 @@
+meta {
+  name: lokithy
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://kokuzo:9030/loki/api/v1/push
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
