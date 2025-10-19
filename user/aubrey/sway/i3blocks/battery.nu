@@ -1,1 +1,1 @@
-acpi -b
+$" (acpi -b | parse -r '(\d{1,3}%)' | get 0.capture0)"

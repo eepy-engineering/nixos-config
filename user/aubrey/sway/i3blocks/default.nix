@@ -1,42 +1,52 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }:
 {
-  # i3blocks hm module doesn't root keys
-  xdg.configFile."i3blocks/bottom".text =
-    let
-      # wrapNushell = filename: "${pkgs.writeNushellScript "${filename}.nu" (builtins.readFile (./. + "/${filename}.nu"))}";
-    in
-    lib.generators.toINIWithGlobalSection { } {
-      globalSection = {
-        command = "${pkgs.nushell}/bin/nu ${./.}/$BLOCK_NAME.nu";
-        separator = true;
-        separator_block_width = 15;
-        markup = "pango";
-      };
-      sections = {
-        time = {
-          interval = 1;
-          format = "json";
-          current_tz = 1;
-        };
-        volume = {
-          interval = 1;
-          format = "json";
-        };
-        storage = {
-          interval = 60;
-        };
-        wifi = {
-          interval = 3;
-          signal = 1;
-          format = "json";
-        };
-      };
+  imports = [
+    ./module.nix
+  ];
+
+  i3blocks = {
+    global = {
+      command = "${pkgs.nushell}/bin/nu ${./.}/$BLOCK_NAME.nu";
+      separator = true;
+      separator_block_width = 15;
+      markup = "pango";
     };
+
+    blocks = [
+      {
+        name = "time";
+        interval = 1;
+        json = true;
+        vars = {
+          current_tz = "1";
+          mode = "true";
+        };
+      }
+      {
+        name = "battery";
+        interval = 20;
+      }
+      {
+        name = "volume";
+        interval = 1;
+        json = true;
+      }
+      {
+        name = "storage";
+        interval = 60;
+      }
+      {
+        name = "wifi";
+        interval = 3;
+        signal = 1;
+        json = true;
+      }
+    ];
+  };
 
   home.packages = [
     pkgs.i3blocks
@@ -49,7 +59,7 @@
           names = [ "pango:monospace" ];
           size = 14.5;
         };
-        statusCommand = "i3blocks -c ${config.xdg.configHome}/i3blocks/bottom";
+        statusCommand = "i3blocks -c ${config.xdg.configHome}/i3blocks/config";
       }
     ];
   };

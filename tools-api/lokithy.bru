@@ -6,8 +6,24 @@ meta {
 
 post {
   url: http://kokuzo:9030/loki/api/v1/push
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "streams": [
+      {
+        "stream": {
+          "label": "hello world"
+        },
+        "values": [
+            [ "1760676370255710476", "cool log line" ],
+            [ "1760676370255710476", "cooler log line" ]
+        ]
+      }
+    ]
+  }
 }
 
 settings {

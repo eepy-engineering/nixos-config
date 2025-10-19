@@ -99,7 +99,7 @@ in
           { command = "${zen-browser}/bin/zen"; }
           { command = "${wezterm}/bin/wezterm"; }
           { command = "${_1password-gui}/bin/1password"; }
-          { command = "${vscodium}/bin/codium"; }
+          { command = "${vscodium}/bin/zeditor"; }
           { command = "${vesktop}/bin/vesktop"; }
           {
             command = lib.concatStringsSep " " [

@@ -17,6 +17,9 @@
   services.nginx = {
     enable = true;
     clientMaxBodySize = "256m";
+    appendHttpConfig = ''
+      charset UTF-8;
+    '';
     virtualHosts = {
       "kokuzo" = {
         serverName = "kokuzo.tailc38f.ts.net";
@@ -50,6 +53,15 @@
         serverName = "s3.hall.ly";
         root = "/mnt/tank/s3";
         locations."/" = { };
+      };
+      "argocd.hall.ly" = {
+        serverName = "argocd.hall.ly";
+        locations = {
+          "/api/webhook" = {
+            recommendedProxySettings = true;
+            proxyPass = "https://127.0.0.1:30808";
+          };
+        };
       };
     };
   };

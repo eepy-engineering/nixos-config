@@ -25,6 +25,7 @@
           "jellyfin.hall.ly" = "http://localhost:8096";
           "chair.hall.ly" = "http://localhost:5173";
           "cal.hall.ly" = "http://localhost:5232";
+          "argocd.hall.ly" = "http://localhost:80";
         };
       };
     };
