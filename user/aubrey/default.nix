@@ -26,6 +26,7 @@
     ./fzf.nix
     ./git.nix
     ./ime.nix
+    ./jujutsu.nix
     ./nix.nix
     ./packages.nix
     ./secrets.nix
