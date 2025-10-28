@@ -26,6 +26,8 @@
         # dx
         vscodevim.vim
         tauri-apps.tauri-vscode
+        jjk.jjk
+        bradlc.vscode-tailwindcss
 
         # languages
         rust-lang.rust-analyzer
@@ -44,7 +46,6 @@
         haskell.haskell
         justusadam.language-haskell
         ocamllabs.ocaml-platform
-        bradlc.vscode-tailwindcss
         mshr-h.veriloghdl
         dalance.vscode-veryl
       ];
