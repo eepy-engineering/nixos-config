@@ -6,6 +6,7 @@
 {
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     group = "media";
     home = "/persist/transmission";
     settings = {

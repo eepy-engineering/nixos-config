@@ -16,7 +16,6 @@
         [
           # development
           gitkraken
-          imhex
           jetbrains.rider
           jetbrains.clion
           jetbrains.idea-community
@@ -46,7 +45,6 @@
           signal-desktop
           thunderbird
           bluebubbles
-          whatsapp-for-linux
 
           # web
           zen-browser

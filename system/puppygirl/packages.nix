@@ -13,7 +13,6 @@
     lua51Packages.luarocks
     pnpm
     nodejs
-    jdk23
     (dotnetCorePackages.combinePackages [
       dotnet-sdk_6
       dotnet-runtime_6

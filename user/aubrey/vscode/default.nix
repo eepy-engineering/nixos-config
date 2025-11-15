@@ -28,6 +28,7 @@
         tauri-apps.tauri-vscode
         jjk.jjk
         bradlc.vscode-tailwindcss
+        slint.slint
 
         # languages
         rust-lang.rust-analyzer

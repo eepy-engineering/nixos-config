@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   isDesktop,
@@ -58,7 +57,7 @@
       ];
     })
     argocd
-    jdk24
+    jdk25
     usbutils
     bindfs
     screen

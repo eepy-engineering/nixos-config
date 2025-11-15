@@ -1,5 +1,5 @@
 {
-  config,
+  # config,
   pkgs,
   lib,
   isDesktop,
@@ -48,17 +48,17 @@ in
 
         keybindings =
           let
-            modifier = config.wayland.windowManager.sway.config.modifier;
+            # modifier = config.wayland.windowManager.sway.config.modifier;
           in
           lib.mkOptionDefault {
-            XF86AudioMute = "exec ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
-            XF86AudioLowerVolume = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
-            XF86AudioRaiseVolume = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
-            XF86AudioPrev = "exec ${playerctl}/bin/playerctl previous";
-            XF86AudioPlay = "exec ${playerctl}/bin/playerctl play-pause";
-            XF86AudioNext = "exec ${playerctl}/bin/playerctl next";
-            XF86MonBrightnessDown = "exec ${brightnessctl}/bin/brightnessctl set 5%-";
-            XF86MonBrightnessUp = "exec ${brightnessctl}/bin/brightnessctl set 5%+";
+            "--locked XF86AudioMute" = "exec ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
+            "--locked XF86AudioLowerVolume" = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
+            "--locked XF86AudioRaiseVolume" = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
+            "--locked XF86AudioPrev" = "exec ${playerctl}/bin/playerctl previous";
+            "--locked XF86AudioPlay" = "exec ${playerctl}/bin/playerctl play-pause";
+            "--locked XF86AudioNext" = "exec ${playerctl}/bin/playerctl next";
+            "--locked XF86MonBrightnessDown" = "exec ${brightnessctl}/bin/brightnessctl set 5%-";
+            "--locked XF86MonBrightnessUp" = "exec ${brightnessctl}/bin/brightnessctl set 5%+";
 
             "Mod4+L" = "exec ${writeNushellScript "sleep" ''
               swaymsg "exec ${swayidle}/bin/swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"

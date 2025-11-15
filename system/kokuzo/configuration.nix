@@ -14,6 +14,7 @@
     ./cloudflared.nix
     ./calendar.nix
     ./analytics
+    ./calibre.nix
   ];
 
   boot.loader = {
