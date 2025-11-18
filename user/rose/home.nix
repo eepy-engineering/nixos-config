@@ -678,14 +678,16 @@
 
     git = {
       enable = true;
-      userName = "Rose Kodsi-Hall";
-      userEmail = "rose@hall.ly";
 
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Rose Kodsi-Hall";
+          email = "rose@hall.ly";
+          signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5oU0aUotQDUEL+WIlbwT6vk1G7w9v+E7+3aQQsYdNT";
+        };
         gpg.format = "ssh";
         "gpg \"ssh\"".program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
         commit.gpgsign = true;
-        user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL5oU0aUotQDUEL+WIlbwT6vk1G7w9v+E7+3aQQsYdNT";
         init.defaultBranch = "main";
         pull.rebase = true;
       };

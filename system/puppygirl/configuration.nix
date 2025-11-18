@@ -48,6 +48,7 @@
   };
 
   time.timeZone = "America/Regina";
+  services.ntp.enable = true;
 
   services.logind.settings.Login.HandlePowerKey = "suspend";
 

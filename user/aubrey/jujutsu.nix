@@ -8,7 +8,10 @@
     {
       enable = true;
       settings = {
-        user = gitCfg.user;
+        user = {
+          name = gitCfg.user.name;
+          email = gitCfg.user.email;
+        };
         signing = {
           backend = "ssh";
           behavior = "own";

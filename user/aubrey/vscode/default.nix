@@ -48,7 +48,9 @@
         justusadam.language-haskell
         ocamllabs.ocaml-platform
         mshr-h.veriloghdl
-        dalance.vscode-veryl
+        veryl-lang.veryl-vscode
+        sunshaoce.risc-v
+        zixuanwang.linkerscript
       ];
     };
   };

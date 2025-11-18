@@ -2,9 +2,6 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
--- enforce nushell supremacy
--- config.default_prog = { "" }
-
 -- i like it
 config.tab_bar_at_bottom = true
 config.color_scheme = 'AdventureTime'

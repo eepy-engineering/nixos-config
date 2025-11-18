@@ -25,7 +25,7 @@
     overlays = [
       # Opnix overlay for ease of addition
       (final: prev: {
-        opnix = inputs.opnix.packages.${pkgs.system}.default { pkgs = final; };
+        opnix = inputs.opnix.packages.${pkgs.stdenv.hostPlatform.system}.default { pkgs = final; };
       })
     ];
   };
