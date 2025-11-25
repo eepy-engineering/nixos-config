@@ -5,6 +5,7 @@
     ./nginx.nix
     ./smb.nix
     ./vms
+    ./databases.nix
     ./filesystems.nix
     ./hall-dns.nix
     ./networking.nix

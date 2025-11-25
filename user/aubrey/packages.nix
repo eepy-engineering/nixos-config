@@ -33,6 +33,7 @@
           arduino
           arduino-cli
           platformio
+          antigravity
 
           # art
           pinta

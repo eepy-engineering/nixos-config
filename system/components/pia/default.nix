@@ -74,6 +74,7 @@ with pkgs;
         wg-pia-forwarding =
           if cfg.forwardingPort != null then
             {
+              enable = false;
               requires = [ "wg-pia-setup.service" ];
               wantedBy = [ "multi-user.target" ];
               path = [
@@ -89,11 +90,6 @@ with pkgs;
 
       networking = {
         nftables.enable = true;
-
-        startupOnlineCheckUrls = [
-          "https://serverlist.piaservers.net/vpninfo/servers/v6"
-          "https://www.privateinternetaccess.com"
-        ];
       };
     };
 }

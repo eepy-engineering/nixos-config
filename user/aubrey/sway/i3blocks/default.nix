@@ -22,7 +22,7 @@
         interval = 1;
         json = true;
         vars = {
-          current_tz = "1";
+          current_tz = "0";
           mode = "true";
         };
       }

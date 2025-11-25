@@ -4,6 +4,7 @@
   inputs = {
     # Use the unstable NixPkgs branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
 
     # Use community VSCode extensions
     extensions = {
@@ -81,12 +82,18 @@
       flake = false;
     };
 
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
     inputs@{
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       opnix,
       extensions,
@@ -96,6 +103,7 @@
       microvm,
       nixGL,
       O10editor,
+      antigravity-nix,
       catppuccin,
       ...
     }:
@@ -109,11 +117,15 @@
           final: prev:
           {
             inherit inputs;
+            stable-pkgs = import nixpkgs-stable {
+              system = prev.system;
+            };
             opnix = opnix.packages.${final.system}.default;
             zen-browser = zen-browser.packages.${final.system}.default;
             nix-index = nix-index.packages.${final.system}.default;
             home-manager = home-manager.packages.${final.system};
             _010editor = O10editor.packages.${final.system}.default;
+            antigravity = antigravity-nix.packages.${final.system}.default;
           }
           // (import ./packages prev)
         )

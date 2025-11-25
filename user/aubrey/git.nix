@@ -6,6 +6,7 @@
 {
   programs.git = {
     enable = true;
+    package = pkgs.stable-pkgs.git;
 
     lfs.enable = true;
 
