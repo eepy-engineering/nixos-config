@@ -26,7 +26,8 @@
         # dx
         vscodevim.vim
         tauri-apps.tauri-vscode
-        jjk.jjk
+        # jjk.jjk
+        visualjj.visualjj
         bradlc.vscode-tailwindcss
         slint.slint
 

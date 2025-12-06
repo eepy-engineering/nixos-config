@@ -56,6 +56,7 @@
           strawberry
           nicotine-plus
           pavucontrol
+          puddletag
 
           # games
           prismlauncher

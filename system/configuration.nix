@@ -32,6 +32,7 @@
     openssl
     iperf3
     rsync
+    unzrip
     unzip
     ripgrep
     wget
