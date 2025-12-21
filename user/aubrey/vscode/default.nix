@@ -52,6 +52,7 @@
         veryl-lang.veryl-vscode
         sunshaoce.risc-v
         zixuanwang.linkerscript
+        oven.bun-vscode
       ];
     };
   };

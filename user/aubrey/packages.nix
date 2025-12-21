@@ -10,6 +10,7 @@
       ripgrep
       inetutils
       hactool
+      zulip-term
     ]
     ++ (
       if isDesktop then
@@ -33,7 +34,8 @@
           arduino
           arduino-cli
           platformio
-          antigravity
+          bun
+          zellij
 
           # art
           pinta
@@ -45,6 +47,7 @@
           (discord-canary.override { withVencord = true; })
           signal-desktop
           thunderbird
+          zulip
           bluebubbles
 
           # web
@@ -61,6 +64,7 @@
           # games
           prismlauncher
           ryubing
+          wineWowPackages.unstableFull
 
           # tools
           wl-clipboard
