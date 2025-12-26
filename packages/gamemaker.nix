@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   version = gamemakerVersion;
 
   src = fetchurl {
-    url = "https://download.opr.gg/GameMaker-${gamemakerFlavor}-${gamemakerVersion}.deb";
+    url = "https://gms.yoyogames.com/GameMaker-${gamemakerFlavor}-${gamemakerVersion}.deb";
     hash = gamemakerHash;
   };
 
@@ -44,7 +44,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [
     dpkg
-    autoPatchelfHook
+    # autoPatchelfHook
     nushell
   ];
 

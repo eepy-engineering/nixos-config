@@ -3,8 +3,8 @@ pkgs: rec {
   surfer-unstable = pkgs.callPackage ./surfer.nix { };
   gamemaker = pkgs.callPackage ./gamemaker.nix {
     gamemakerFlavor = "Beta";
-    gamemakerVersion = "2024.1400.0.815";
-    gamemakerHash = "sha256-tMpVdlk9J6/nQHAVX8xUN2+RF4rloxSDuvWtMJmYQlM=";
+    gamemakerVersion = "2024.1400.2.941";
+    gamemakerHash = "sha256-Mng4iwbrGWKj7wl5+yCv/S3LEi+bYPGiCkEaqq9htIQ=";
   };
   gamemakerEnv =
     let
@@ -19,6 +19,12 @@ pkgs: rec {
           libva
           libxkbcommon
           wayland
+          bzip2
+          libpng
+          brotli
+          vulkan-tools
+          vulkan-loader
+          dotnetCorePackages.dotnet_8.vmr
         ];
       gmRunner = pkgs.writeNushellScriptBin "gamemaker-studio" ''
         def --wrapped main [...args] {
@@ -27,7 +33,7 @@ pkgs: rec {
       '';
     in
     pkgs.buildFHSEnv {
-      name = "gamemaker-env";
+      name = "gamemaker-studio";
       targetPkgs =
         pkgs: with pkgs; [
           gamemaker
@@ -37,7 +43,7 @@ pkgs: rec {
 
           SDL2
           fna3d
-          glxinfo
+          mesa-demos
           gtk3
           libGL
           libdrm
@@ -48,11 +54,18 @@ pkgs: rec {
           vulkan-headers
           vulkan-loader
           vulkan-tools
+          libz
+          bzip2
+
+          dotnetCorePackages.dotnet_8.sdk
+          dotnetCorePackages.dotnet_8.vmr
         ];
       profile = ''
         export LD_LIBRARY_PATH=${libPath}
+        export DOTNET_BIN=${pkgs.dotnetCorePackages.dotnet_8.sdk}/bin/dotnet
+        export TMPDIR=
       '';
-      runScript = with pkgs; "bash";
-      # runScript = with pkgs; "${gamemaker}/opt/GameMaker-Beta/GameMaker";
+      # runScript = with pkgs; "bash";
+      runScript = with pkgs; "bash -c 'steam-run ${gamemaker}/opt/GameMaker-Beta/GameMaker'";
     };
 }

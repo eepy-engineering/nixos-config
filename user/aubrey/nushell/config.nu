@@ -46,3 +46,5 @@ $env.config.hooks.env_change.PWD = (
     toolkit setup --name "tk" --color "yellow_bold"
   )
 )
+
+$env.XDG_DATA_DIRS = $"($env.XDG_DATA_DIRS):/usr/share:/var/lib/flatpak/exports/share:($env.HOME)/.local/share/flatpak/exports/share";

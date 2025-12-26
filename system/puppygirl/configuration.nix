@@ -92,6 +92,7 @@
     '';
     packages = [
       pkgs.dolphin-emu
+      (pkgs.callPackage ./controllers.nix { })
       (pkgs.stdenv.mkDerivation {
         name = "openfpgaloader-udev";
         src = pkgs.openfpgaloader.src;

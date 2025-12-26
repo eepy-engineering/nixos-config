@@ -127,7 +127,7 @@
             _010editor = O10editor.packages.${final.system}.default;
             antigravity = antigravity-nix.packages.${final.system}.default;
           }
-          // (import ./packages prev)
+          // (import ./packages final)
         )
       ]
       ++ import ./overlays;

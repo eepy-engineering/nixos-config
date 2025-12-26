@@ -36,6 +36,7 @@
           platformio
           bun
           zellij
+          gamemakerEnv
 
           # art
           pinta
