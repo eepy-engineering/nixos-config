@@ -4,6 +4,7 @@
   inputs = {
     # Use the unstable NixPkgs branch
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
 
     # Use community VSCode extensions
@@ -94,6 +95,7 @@
     inputs@{
       nixpkgs,
       nixpkgs-stable,
+      nixpkgs-master,
       home-manager,
       opnix,
       extensions,
@@ -118,7 +120,10 @@
           {
             inherit inputs;
             stable-pkgs = import nixpkgs-stable {
-              system = prev.system;
+              system = final.system;
+            };
+            master-pkgs = import nixpkgs-master {
+              system = final.system;
             };
             opnix = opnix.packages.${final.system}.default;
             zen-browser = zen-browser.packages.${final.system}.default;

@@ -1,16 +1,16 @@
 vim.opt.runtimepath:prepend("/home/aubrey/.local/share/nvim/ts-parsers")
 
-require('nvim-treesitter.configs').setup({
-  parser_install_dir = "/home/aubrey/.local/share/nvim/ts-parsers",
+-- require('nvim-treesitter.configs').setup({
+--   parser_install_dir = "/home/aubrey/.local/share/nvim/ts-parsers",
+--
+--   highlight = {
+--     enable = true,
+--   }
+-- })
 
-  highlight = {
-    enable = true,
-  }
-})
-
-require("spade").setup({
-  lsp_command = "spade-language-server",
-})
+-- require("spade").setup({
+--   lsp_command = "spade-language-server",
+-- })
 
 vim.lsp.inlay_hint.enable(true)
 

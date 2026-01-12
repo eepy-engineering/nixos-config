@@ -53,6 +53,7 @@
         sunshaoce.risc-v
         zixuanwang.linkerscript
         oven.bun-vscode
+        wgsl-analyzer.wgsl-analyzer
       ];
     };
   };

@@ -74,7 +74,7 @@ with pkgs;
         wg-pia-forwarding =
           if cfg.forwardingPort != null then
             {
-              enable = false;
+              enable = true;
               requires = [ "wg-pia-setup.service" ];
               wantedBy = [ "multi-user.target" ];
               path = [

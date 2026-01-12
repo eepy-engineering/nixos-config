@@ -34,10 +34,11 @@
     dive
     everest-mons
     nix-index
-    config.boot.kernelPackages.perf
+    perf
     v4l-utils
     swtpm
     openfpgaloader
+    pkgs.android-tools
 
     # dependencies
     icu

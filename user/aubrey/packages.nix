@@ -19,14 +19,15 @@
           gitkraken
           jetbrains.rider
           jetbrains.clion
-          jetbrains.idea-community
+          jetbrains.idea
+          jetbrains.rust-rover
+          android-studio
           bruno
           ghidra-bin
           renderdoc
           avalonia-ilspy
           digital
           nixfmt-tree
-          nixfmt-rfc-style
           nixd
           logisim-evolution
           surfer
@@ -37,12 +38,12 @@
           bun
           zellij
           gamemakerEnv
+          wgsl-analyzer
 
           # art
           pinta
           material-maker
           blender
-          aseprite
 
           # social
           (discord-canary.override { withVencord = true; })
@@ -75,6 +76,7 @@
           fontpreview
           acpi
           anki
+          nautilus
 
           # desktop
           wev

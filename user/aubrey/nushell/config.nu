@@ -6,6 +6,8 @@ $env.config.history = {
   isolation: true
 };
 
+$env.config.filesize.unit = "binary";
+
 $env.config.edit_mode = "vi";
 
 $env.config.use_kitty_protocol = true

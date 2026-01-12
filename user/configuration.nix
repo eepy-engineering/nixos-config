@@ -51,6 +51,7 @@ args@{
       "kvm"
       "bluetooth"
       "media"
+      "adbusers"
     ];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
@@ -71,13 +72,15 @@ args@{
     isNormalUser = true;
     enable = !isDesktop || config.networking.hostName == "puppygirl";
     description = "Tetra";
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
     extraGroups = [ "media" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmGxomnzFUz6CMy9NyghrhN1vQ0oeFw2bBdJEd6M9uH tetraxile@proton.me"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfXC+Ahq8kKXBPJK0IGbsvugMHYF3J8HF8ncWrGjp8v tetra@catbox"
     ];
   };
   home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home";
+  programs.zsh.enable = true;
 
   # Walter's user
   users.users.walter = {
