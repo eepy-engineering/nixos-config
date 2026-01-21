@@ -39,6 +39,7 @@
           zellij
           gamemakerEnv
           wgsl-analyzer
+          antigravity
 
           # art
           pinta
@@ -77,6 +78,8 @@
           acpi
           anki
           nautilus
+          bluetui
+          croc
 
           # desktop
           wev

@@ -28,7 +28,7 @@ in
       let
       in
       {
-        # modifier = "Alt_L";
+        modifier = "Super";
         assigns = {
           "8" = [ { class = "vesktop"; } ];
           "1" = [ { class = "VSCodium"; } ];
@@ -59,20 +59,20 @@ in
             "${cfg.modifier}+Shift+q" = "kill";
             "${cfg.modifier}+d" = "exec ${cfg.menu}";
 
-            "${cfg.modifier}+${cfg.left}" = "focus left";
-            "${cfg.modifier}+${cfg.down}" = "focus down";
-            "${cfg.modifier}+${cfg.up}" = "focus up";
-            "${cfg.modifier}+${cfg.right}" = "focus right";
+            # "${cfg.modifier}+${cfg.left}" = "focus left";
+            # "${cfg.modifier}+${cfg.down}" = "focus down";
+            # "${cfg.modifier}+${cfg.up}" = "focus up";
+            # "${cfg.modifier}+${cfg.right}" = "focus right";
 
             "${cfg.modifier}+Left" = "focus left";
             "${cfg.modifier}+Down" = "focus down";
             "${cfg.modifier}+Up" = "focus up";
             "${cfg.modifier}+Right" = "focus right";
 
-            "${cfg.modifier}+Shift+${cfg.left}" = "move left";
-            "${cfg.modifier}+Shift+${cfg.down}" = "move down";
-            "${cfg.modifier}+Shift+${cfg.up}" = "move up";
-            "${cfg.modifier}+Shift+${cfg.right}" = "move right";
+            # "${cfg.modifier}+Shift+${cfg.left}" = "move left";
+            # "${cfg.modifier}+Shift+${cfg.down}" = "move down";
+            # "${cfg.modifier}+Shift+${cfg.up}" = "move up";
+            # "${cfg.modifier}+Shift+${cfg.right}" = "move right";
 
             "${cfg.modifier}+Shift+Left" = "move left";
             "${cfg.modifier}+Shift+Down" = "move down";

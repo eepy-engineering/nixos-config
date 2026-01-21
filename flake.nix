@@ -1,5 +1,5 @@
 {
-  description = "Rose and Aubrey's NixOS Configuration";
+  description = "Aubrey and Rose's NixOS Configuration";
 
   inputs = {
     # Use the unstable NixPkgs branch
