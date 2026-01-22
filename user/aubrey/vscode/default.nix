@@ -27,12 +27,12 @@
         vscodevim.vim
         tauri-apps.tauri-vscode
         # jjk.jjk
-        visualjj.visualjj
+        vscode-extensions.visualjj.visualjj
         bradlc.vscode-tailwindcss
         slint.slint
 
         # languages
-        rust-lang.rust-analyzer
+        pkgs.fenix.rust-analyzer-vscode-extension
         tamasfe.even-better-toml
         thenuprojectcontributors.vscode-nushell-lang
         mkornelsen.vscode-arm64
