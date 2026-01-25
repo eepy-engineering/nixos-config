@@ -17,6 +17,7 @@
     ../components/rust.nix
     ../components/tank-share.nix
     ../components/pia
+    ../components/virtualization.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -53,24 +54,6 @@
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
   security.sudo.wheelNeedsPassword = false;
-
-  programs.virt-manager.enable = true;
-  virtualisation = {
-    spiceUSBRedirection.enable = true;
-    libvirtd = {
-      enable = true;
-
-      qemu = {
-        runAsRoot = true;
-        swtpm.enable = true;
-        vhostUserPackages = with pkgs; [ virtiofsd ];
-      };
-    };
-
-    docker = {
-      enable = true;
-    };
-  };
 
   boot.extraModulePackages = [
     config.boot.kernelPackages.gcadapter-oc-kmod

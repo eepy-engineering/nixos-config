@@ -16,6 +16,7 @@
     ./calendar.nix
     ./analytics
     ./calibre.nix
+    ../components/virtualization.nix
   ];
 
   boot.loader = {

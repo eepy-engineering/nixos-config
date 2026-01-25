@@ -34,20 +34,20 @@ with lib;
       };
     in
     mkIf cfg.enable {
-      services.tailscale.enable = false;
+      # services.tailscale.enable = false;
 
-      systemd.services."container@wgcontainer" = {
-        requires = [
-          "lo@wgns.service"
-          "veth@wgns.service"
-          "wg@wgns.service"
-        ];
-        after = [
-          "lo@wgns.service"
-          "veth@wgns.service"
-          "wg@wgns.service"
-        ];
-      };
+      # systemd.services."container@wgcontainer" = {
+      #   requires = [
+      #     "lo@wgns.service"
+      #     "veth@wgns.service"
+      #     "wg@wgns.service"
+      #   ];
+      #   after = [
+      #     "lo@wgns.service"
+      #     "veth@wgns.service"
+      #     "wg@wgns.service"
+      #   ];
+      # };
 
       containers = {
         wgcontainer = {

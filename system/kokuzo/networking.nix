@@ -25,25 +25,4 @@
       ];
     };
   };
-
-  systemd.network = {
-    enable = false;
-
-    networks."10-lan" = {
-      matchConfig.Name = [
-        "eno49"
-        "vm-*"
-      ];
-      networkConfig = {
-        Bridge = "br0";
-      };
-    };
-
-    netdevs."br0" = {
-      netdevConfig = {
-        Name = "br0";
-        Kind = "bridge";
-      };
-    };
-  };
 }

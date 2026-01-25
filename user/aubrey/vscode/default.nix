@@ -27,7 +27,7 @@
         vscodevim.vim
         tauri-apps.tauri-vscode
         # jjk.jjk
-        vscode-extensions.visualjj.visualjj
+        pkgs.vscode-extensions.visualjj.visualjj
         bradlc.vscode-tailwindcss
         slint.slint
 

@@ -31,6 +31,8 @@ args@{
       "wheel"
       "bluetooth"
       "media"
+      "libvirtd"
+      "kvm"
     ];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
