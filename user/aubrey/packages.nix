@@ -40,7 +40,7 @@
           gamemakerEnv
           wgsl-analyzer
           antigravity
-          godot-mono
+          master-pkgs.godot-mono
 
           # art
           pinta
