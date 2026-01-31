@@ -191,6 +191,13 @@ in
               title = "flameshot";
             };
           }
+          {
+            command = "floating enable, resize set 1000 700";
+            criteria = {
+              title = ".*(?!Godot Engine)";
+              instance = "Godot_Engine";
+            };
+          }
         ];
 
         workspaceAutoBackAndForth = true;

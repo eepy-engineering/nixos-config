@@ -54,6 +54,7 @@
         zixuanwang.linkerscript
         oven.bun-vscode
         wgsl-analyzer.wgsl-analyzer
+        geequlim.godot-tools
       ];
     };
   };
