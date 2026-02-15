@@ -192,7 +192,7 @@ in
             };
           }
           {
-            command = "floating enable, resize set 1000 700";
+            command = "floating enable";
             criteria = {
               title = ".*(?!Godot Engine)";
               instance = "Godot_Engine";

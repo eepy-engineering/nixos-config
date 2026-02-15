@@ -6,8 +6,6 @@
 {
   environment.systemPackages = with pkgs; [
     # language frameworks
-    clang
-    llvmPackages_19.clang-unwrapped
     python3
     lua51Packages.lua
     lua51Packages.luarocks

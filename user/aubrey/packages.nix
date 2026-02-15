@@ -81,6 +81,7 @@
           nautilus
           bluetui
           croc
+          electrum
 
           # desktop
           wev
