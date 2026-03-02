@@ -68,7 +68,7 @@
           # games
           prismlauncher
           ryubing
-          wineWowPackages.unstableFull
+          # wineWowPackages.unstableFull
 
           # tools
           wl-clipboard
@@ -77,11 +77,10 @@
           filezilla
           fontpreview
           acpi
-          anki
+          # anki
           nautilus
           bluetui
           croc
-          electrum
 
           # desktop
           wev
