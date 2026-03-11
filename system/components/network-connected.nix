@@ -29,7 +29,7 @@
           for var in "''${array[@]}"
           do
             echo 'checking' $var
-            until ${pkgs.curl}/bin/curl --output /dev/null --silent --head --fail $var; do
+            until ${pkgs.curl}/bin/curl -k --output /dev/null --silent --head --fail $var; do
               printf '.'
               sleep 5
             done

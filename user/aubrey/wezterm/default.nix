@@ -1,7 +1,7 @@
 { isDesktop, ... }:
 {
   programs.wezterm = {
-    enable = isDesktop;
+    enable = true;
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 }

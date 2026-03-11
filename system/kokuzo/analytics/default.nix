@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   services = {
     grafana = {
@@ -15,6 +15,9 @@
           # domain = "your.domain";
           # root_url = "https://your.domain/grafana/";
           # serve_from_sub_path = true;
+        };
+        security = {
+          secret_key = "$__file{${pkgs.asOpnixPath "grafana/secret_key"}}";
         };
 
         # Prevents Grafana from phoning home
@@ -118,5 +121,14 @@
     prometheus = {
       enable = true;
     };
+  };
+
+  opnix = {
+    secrets = [
+      {
+        path = "grafana/secret_key";
+        reference = "op://Services/Grafana Secret Key/password";
+      }
+    ];
   };
 }

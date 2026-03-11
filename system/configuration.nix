@@ -62,6 +62,7 @@
     usbutils
     bindfs
     screen
+    chromium
 
     (writeNushellScriptBin "reboot-kexec" ''
       let cmdline = $"init=(readlink -f /nix/var/nix/profiles/system/init) $(open /nix/var/nix/profiles/system/kernel-params)";
@@ -85,7 +86,7 @@
   };
 
   hardware = {
-    graphics.enable = isDesktop;
+    graphics.enable = true;
   };
 
   programs.dconf.enable = true;

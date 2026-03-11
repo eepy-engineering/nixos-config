@@ -1,7 +1,7 @@
 {
   services = {
     calibre-web = {
-      enable = true;
+      enable = false;
       listen = {
         ip = "0.0.0.0";
         port = 8448;

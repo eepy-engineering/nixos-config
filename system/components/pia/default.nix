@@ -37,7 +37,11 @@ with pkgs;
 
       services.resolved = {
         enable = true;
-        dnsovertls = lib.mkDefault "opportunistic";
+        settings = {
+          Resolve = {
+            DNSOverTLS = lib.mkDefault "opportunistic";
+          };
+        };
       };
 
       opnix = {

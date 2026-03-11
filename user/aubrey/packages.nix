@@ -11,6 +11,7 @@
       inetutils
       hactool
       zulip-term
+      waypipe
     ]
     ++ (
       if isDesktop then
