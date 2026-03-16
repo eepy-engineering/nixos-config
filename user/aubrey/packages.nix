@@ -20,7 +20,7 @@
           gitkraken
           jetbrains.rider
           jetbrains.clion
-          jetbrains.idea
+          jetbrains.idea-oss
           jetbrains.rust-rover
           android-studio
           bruno

@@ -5,6 +5,7 @@
     ./nginx.nix
     ./smb.nix
     ./vms
+    ./zfs-notifs
     ./databases.nix
     ./filesystems.nix
     ./hall-dns.nix
