@@ -9,10 +9,10 @@ let offset = match $btn {
 };
 
 const timezones = [
-#  ["PT", "America/Los_Angeles"],
+# ["PT", "America/Los_Angeles"],
   ["CST", "Canada/Saskatchewan"],
-#  ["ET", "Canada/Eastern"],
-  ["Éire", "Europe/Dublin"],
+# ["ET", "Canada/Eastern"],
+# ["Éire", "Europe/Dublin"],
   ["CET", "Europe/Berlin"],
 ];
 
@@ -22,19 +22,19 @@ let date = date now | date to-timezone $tz.1;
 
 mut shortened = env bool shortened true;
 if $btn == 3 {
-    $shortened = not $shortened
+  $shortened = not $shortened
 }
 
 let full_text = if $shortened {
-    $"($date | format date "%T") ($tz.0)"
-} else { 
-    let current_time = $date | format date "%a %B %d %G %T";
-    
-    $"($current_time) ($tz.0) ($date | format date "UTC%:::z")"
+  $"($date | format date "%T") ($tz.0)"
+} else {
+  let current_time = $date | format date "%a %B %d %G %T";
+
+  $"($current_time) ($tz.0) ($date | format date "UTC%:::z")"
 }
 
 {
-    full_text: $full_text,
-    current_tz: $current_tz,
-    shortened: $shortened,
+  full_text: $full_text,
+  current_tz: $current_tz,
+  shortened: $shortened,
 } | to json | print
