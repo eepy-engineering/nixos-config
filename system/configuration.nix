@@ -38,7 +38,7 @@
     wget
     git
     killall
-    neofetch
+    fastfetch
     nmap
     rclone
     binwalk

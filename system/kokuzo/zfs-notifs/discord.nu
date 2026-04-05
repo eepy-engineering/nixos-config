@@ -1,5 +1,4 @@
-
-if ($env.ZEVENT_SUBCLASS == "history_event") {
+if ($env.ZEVENT_SUBCLASS in ["history_event" "trim_finish" "trim_start"]) {
   exit 0
 }
 

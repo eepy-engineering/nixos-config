@@ -16,7 +16,6 @@
     ../components/bluetooth.nix
     ../components/rust.nix
     ../components/tank-share.nix
-    ../components/pia
     ../components/virtualization.nix
   ];
 
@@ -43,6 +42,7 @@
   users.users = {
     walter.enable = false;
     rose.enable = false;
+    tetra.extraGroups = [ "wheel" ];
   };
   home-manager.users = lib.mkForce {
     aubrey = ../../user/aubrey;

@@ -20,6 +20,12 @@
         };
         ui = {
           default-command = "log";
+          movement.edit = true;
+        };
+        aliases = {
+          a = [ "abandon" ];
+          n = [ "next" ];
+          p = [ "prev" ];
         };
         git = {
           sign-on-push = true;
