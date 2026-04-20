@@ -15,9 +15,13 @@ $env.config.highlight_resolved_externals = true
 
 alias nsu = nix-shell --command nu
 alias nsc = nix-shell 
+def --wrapped nsd [...args] {
+  nix develop ...$args
+}
 alias fg = job unfreeze
 alias de = direnv exec . nu
 alias cat = open
+alias inhibit-idle = systemd-inhibit --what=idle --why="Prevent screen lock" sleep infinity
 
 $env.OP_PLUGIN_ALIASES_SOURCED = 1
 alias gh = op plugin run -- gh
@@ -48,5 +52,8 @@ $env.config.hooks.env_change.PWD = (
     toolkit setup --name "tk" --color "yellow_bold"
   )
 )
+
+# tab as 2 space indentation
+tabs 2
 
 $env.XDG_DATA_DIRS = $"($env.XDG_DATA_DIRS):/usr/share:/var/lib/flatpak/exports/share:($env.HOME)/.local/share/flatpak/exports/share";

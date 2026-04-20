@@ -24,6 +24,8 @@
         def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {
           __zoxide_z ...$rest
         }
+
+        ${builtins.readFile ./commands.nu}
       '';
     };
 

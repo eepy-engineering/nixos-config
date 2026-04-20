@@ -55,7 +55,12 @@
         oven.bun-vscode
         wgsl-analyzer.wgsl-analyzer
         geequlim.godot-tools
+        pest.pest-ide-tools
       ];
     };
   };
+
+  home.packages = with pkgs; [
+    pest-ide-tools
+  ];
 }

@@ -17,6 +17,7 @@
     ./calendar.nix
     ./analytics
     ./calibre.nix
+    ./syncplay.nix
     ../components/virtualization.nix
   ];
 

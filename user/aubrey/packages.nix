@@ -58,13 +58,16 @@
           # web
           zen-browser
           chromium
-          transmission_4-qt6
+          floorp-bin
 
-          # music
+          # media
           strawberry
           nicotine-plus
           pavucontrol
           puddletag
+          syncplay
+          mpv
+          transmission_4-qt6
 
           # games
           prismlauncher

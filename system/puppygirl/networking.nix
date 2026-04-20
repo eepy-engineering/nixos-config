@@ -9,10 +9,10 @@
       "2606:4700:4700::1001"
     ];
     hosts = {
-      dovecote = [ "100.123.120.127" ];
-      catbox = [ "100.77.206.54" ];
+      "100.70.181.9" = [ "kokuzo" ];
     };
     useNetworkd = true;
+    networkmanager.wifi.powersave = false;
   };
 
   systemd.network.wait-online.enable = false;
