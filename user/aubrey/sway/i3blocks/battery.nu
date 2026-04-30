@@ -1,6 +1,10 @@
-let battery_level = acpi -b | parse -r '(\d{1,3})%' | get 0.capture0 | into int;
+let a = acpi -b;
+let battery_level = $a | parse -r '(\d{1,3})%' | get 0.capture0 | into int;
+let charging = $a | str contains "Charging";
+let icon = if $charging { "󱥵󱥩" } else if $battery_level < 20 { "󱥵󱤨" } else { "󱥵󱥣" }
+
 if $battery_level < 20 {
-  $'<span color="#FF4444"> ($battery_level)%</span>'
+  $'<span color="#FF4444">($icon)($battery_level)%</span>'
 } else {
-  $" ($battery_level)%"
+  $"($icon)($battery_level)%"
 }

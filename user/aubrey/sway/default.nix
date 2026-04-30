@@ -5,18 +5,15 @@
   isDesktop,
   ...
 }:
-let
-  # isDesktop = abort specialArgs;
-in
 {
   imports = [
     ./i3blocks
   ];
-  catppuccin = {
-    sway.enable = isDesktop;
-    mako.enable = isDesktop;
-    bottom.enable = isDesktop;
-  };
+
+  home.packages = with pkgs; [
+    grim
+    slurp
+  ];
 
   wayland.windowManager.sway = with pkgs; {
     enable = isDesktop;
@@ -133,18 +130,16 @@ in
             "Mod4+L" = "exec ${writeNushellScript "sleep" ''
               swaymsg "exec ${swayidle}/bin/swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"
 
-              ${swaylock}/bin/swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -c 000000
+              ${swaylock}/bin/swaylock -i ${./lock.png} -c 000000
               pkill -n swayidle
 
               # safety call in case resume didn't finish executing
               swaymsg "output * power on"
             ''}";
-            Print = "exec ${writeNushellScript "flameshot-screenie" ''
-              let success = (${flameshot}/bin/flameshot gui -p ~/Pictures/Screenshots/ | complete | get exit_code) == 0;
-
-              if $success {
-                ls ~/Pictures/Screenshots/ | sort-by modified | last | get name | open | ${wl-clipboard}/bin/wl-copy
-              }
+            Print = "exec ${writeNushellScript "grim-screenie" ''
+              let path = $"/home/aubrey/Pictures/Screenshots/(date now | format date "%F_%H-%M-%S.png")";
+              ${grim}/bin/grim -g (${slurp}/bin/slurp) $path
+              open $path | wl-copy
             ''}";
           };
 
@@ -167,14 +162,14 @@ in
           # todo: something like this? maybe a whole ass nushell script that does this
           # exec --no-startup-id i3-msg 'workspace 3; exec iceweasel; workspace 1'
           { command = "${zen-browser}/bin/zen"; }
-          { command = "${wezterm}/bin/wezterm"; }
+          { command = "${rio}/bin/rio"; }
           { command = "${_1password-gui}/bin/1password"; }
           { command = "${vscodium}/bin/zeditor"; }
           { command = "${vesktop}/bin/vesktop"; }
           {
             command = lib.concatStringsSep " " [
               "swayidle -w"
-              "timeout 300 'swaylock -i /home/aubrey/Pictures/yuri/wintersunrise.png -f -c 000000; '"
+              "timeout 300 'swaylock -i ${./lock.png} -f -c 000000; '"
               "timeout 315 'swaymsg \"output * power off\"'"
               "resume 'swaymsg \"output * power on\"'"
               "before-sleep 'swaylock -f -c 000000'"

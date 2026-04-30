@@ -24,10 +24,9 @@
         jnoortheen.nix-ide
 
         # dx
+        wakatime.vscode-wakatime
         vscodevim.vim
         tauri-apps.tauri-vscode
-        # jjk.jjk
-        pkgs.vscode-extensions.visualjj.visualjj
         bradlc.vscode-tailwindcss
         slint.slint
 

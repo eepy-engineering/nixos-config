@@ -27,6 +27,9 @@ _: {
           RequestTTY = "force";
         };
       };
+      "catbox" = {
+        user = "tetra";
+      };
     };
   };
 }

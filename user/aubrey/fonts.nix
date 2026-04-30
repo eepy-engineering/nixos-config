@@ -5,7 +5,7 @@
     defaultFonts = {
       monospace = [
         "Comic Mono"
-        "Jetbrains Mono"
+        "nasin-nanpa"
       ];
     };
   };

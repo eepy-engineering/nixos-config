@@ -24,7 +24,6 @@
       url = "github:tetraxile/nixos-config";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
-      inputs.zen-browser.follows = "zen-browser";
     };
 
     # Use OpNix for secrets
@@ -89,6 +88,7 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+    nixcord.url = "github:FlameFlag/nixcord";
   };
 
   outputs =
@@ -118,19 +118,18 @@
         (
           final: prev:
           {
-            inherit inputs;
             stable-pkgs = import nixpkgs-stable {
-              system = final.system;
+              system = final.stdenv.hostPlatform.system;
             };
             master-pkgs = import nixpkgs-master {
-              system = final.system;
+              system = final.stdenv.hostPlatform.system;
             };
-            opnix = opnix.packages.${final.system}.default;
-            zen-browser = zen-browser.packages.${final.system}.default;
-            nix-index = nix-index.packages.${final.system}.default;
-            home-manager = home-manager.packages.${final.system};
-            _010editor = O10editor.packages.${final.system}.default;
-            antigravity = antigravity-nix.packages.${final.system}.default;
+            opnix = opnix.packages.${final.stdenv.hostPlatform.system}.default;
+            zen-browser = zen-browser.packages.${final.stdenv.hostPlatform.system}.default;
+            nix-index = nix-index.packages.${final.stdenv.hostPlatform.system}.default;
+            home-manager = home-manager.packages.${final.stdenv.hostPlatform.system};
+            _010editor = O10editor.packages.${final.stdenv.hostPlatform.system}.default;
+            antigravity = antigravity-nix.packages.${final.stdenv.hostPlatform.system}.default;
           }
           // (import ./packages final)
         )

@@ -1,4 +1,4 @@
-{ isDesktop, ... }:
+{ isDesktop, inputs, ... }:
 {
   programs.vesktop = {
     enable = isDesktop;

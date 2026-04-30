@@ -113,11 +113,6 @@
       };
     };
 
-    promtail = {
-      enable = true;
-      configFile = ./promtail-config.yaml;
-    };
-
     prometheus = {
       enable = true;
     };

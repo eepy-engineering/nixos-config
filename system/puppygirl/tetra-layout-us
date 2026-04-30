@@ -1,0 +1,64 @@
+
+partial alphanumeric_keys modifier_keys
+xkb_symbols "tetra" {
+	
+	name[Group1]= "tetra's custom layout (US)";
+
+	key <TLDE>  {[        grave,  asciitilde,      dead_tilde,            NoSymbol ]};
+	key <AE01>  {[            1,      exclam,      exclamdown,         onesuperior ]};
+	key <AE02>  {[            2,          at,     twosuperior,  doublelowquotemark ]};
+	key <AE03>  {[            3,  numbersign,   threesuperior,           copyright ]}; 
+	key <AE04>  {[            4,      dollar,        EuroSign,                cent ]};
+	key <AE05>  {[            5,     percent,        permille,            NoSymbol ]};
+	key <AE06>  {[            6, asciicircum, dead_circumflex,            NoSymbol ]};
+	key <AE07>  {[            7,   ampersand,       paragraph,               U204A ]}; // Tironian Et
+	key <AE08>  {[            8,    asterisk,         section,              dagger ]};
+	key <AE09>  {[            9,   parenleft,          oslash,              Oslash ]};
+	key <AE10>  {[            0,  parenright,          degree,      dead_abovering ]};
+	key <AE11>  {[        minus,  underscore,             yen,              emdash ]};
+	key <AE12>  {[        equal,        plus,        notequal,           plusminus ]};
+
+	key <AD01>  {[            q,           Q,      adiaeresis,          Adiaeresis ]}; 
+	key <AD02>  {[            w,           W,      ediaeresis,          Ediaeresis ]};
+	key <AD03>  {[            e,           E,          eacute,              Eacute ]};
+	key <AD04>  {[            r,           R,      registered,           trademark ]};
+	key <AD05>  {[            t,           T,           thorn,               THORN ]};
+	key <AD06>  {[            y,           Y,      udiaeresis,          Udiaeresis ]};
+	key <AD07>  {[            u,           U,          uacute,              Uacute ]};
+	key <AD08>  {[            i,           I,          iacute,              Iacute ]};
+	key <AD09>  {[            o,           O,          oacute,              Oacute ]};
+	key <AD10>  {[            p,           P,      odiaeresis,          Odiaeresis ]};
+	key <AD11>  {[  bracketleft,   braceleft,   guillemetleft, kana_openingbracket ]};
+	key <AD12>  {[ bracketright,  braceright,  guillemetright, kana_closingbracket ]};
+
+	key <AC01>  {[            a,           A,          aacute,              Aacute ]};
+	key <AC02>  {[            s,           S,          ssharp,               U1E9E ]}; // Capital Letter Sharp S
+	key <AC03>  {[            d,           D,             eth,                 ETH ]};
+	key <AC04>  {[            f,           F,         dstroke,             Dstroke ]};
+	key <AC05>  {[            g,           G,       dead_horn,           dead_hook ]};
+	key <AC06>  {[            h,           H,         hstroke,             Hstroke ]};
+	key <AC07>  {[            j,           J,        idotless,           Iabovedot ]};
+	key <AC08>  {[            k,           K,              oe,                  OE ]};
+	key <AC09>  {[            l,           L,         lstroke,             Lstroke ]};
+	key <AC10>  {[    semicolon,       colon,  dead_diaeresis,            NoSymbol ]};
+	key <AC11>  {[   apostrophe,    quotedbl,      dead_acute,       dead_abovedot ]};
+	key <BKSL>  {[    backslash,         bar,      dead_grave,         dead_ogonek ]};
+
+	key <LSGT>  {[    backslash,         bar,    dead_cedilla,      periodcentered ]};
+	key <AB01>  {[            z,           Z,              ae,                  AE ]};
+	key <AB02>  {[            x,           X,        multiply,            approxeq ]};
+	key <AB03>  {[            c,           C,        ccedilla,            Ccedilla ]};
+	key <AB04>  {[            v,           V,      dead_caron,            NoSymbol ]};
+	key <AB05>  {[            b,           B,      dead_breve,            NoSymbol ]};
+	key <AB06>  {[            n,           N,          ntilde,              Ntilde ]};
+	key <AB07>  {[            m,           M,     dead_macron,                  mu ]};
+	key <AB08>  {[        comma,        less,        NoSymbol,       lessthanequal ]};
+	key <AB09>  {[       period,     greater,        ellipsis,    greaterthanequal ]};
+	key <AB10>  {[        slash,    question,        division,        questiondown ]};
+
+	key <SPCE>  {[        space,       space,    nobreakspace,        nobreakspace ]};
+
+	include "level3(ralt_switch)"
+
+	include "compose(rwin)"
+};

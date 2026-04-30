@@ -20,7 +20,6 @@
     ./sway
     ./vesktop
     ./vscode
-    ./wezterm
     ./editorconfig.nix
     ./flameshot.nix
     ./fzf.nix
@@ -29,6 +28,7 @@
     ./jujutsu.nix
     ./nix.nix
     ./packages.nix
+    ./rio.nix
     ./secrets.nix
     ./ssh.nix
     ./tmux.nix

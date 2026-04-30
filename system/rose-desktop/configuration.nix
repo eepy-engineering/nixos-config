@@ -13,6 +13,7 @@
     ../components/bluetooth.nix
     ../components/rust.nix
     ../components/tank-share.nix
+    ../components/fonts.nix
   ];
 
   tank-mount = {

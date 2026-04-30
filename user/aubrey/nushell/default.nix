@@ -27,6 +27,9 @@
 
         ${builtins.readFile ./commands.nu}
       '';
+      shellAliases = {
+        ghidra = "_JAVA_AWT_WM_NONREPARENTING=1 ${pkgs.stable-pkgs.ghidra}/lib/ghidra/ghidraRun";
+      };
     };
 
     carapace = {
@@ -37,6 +40,9 @@
     starship = {
       enable = true;
       enableNushellIntegration = true;
+      presets = [
+        "plain-text-symbols"
+      ];
     };
   };
 }

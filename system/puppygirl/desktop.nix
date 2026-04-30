@@ -1,11 +1,5 @@
 { pkgs, ... }:
 {
-  #services.displayManager.sddm = {
-  #  enable = false;
-  #  wayland = {
-  #    enable = true;
-  #  };
-  #};
   environment.systemPackages = [
     pkgs.sway
   ];
@@ -59,6 +53,14 @@
         }))
         xdg-desktop-portal-gtk
       ];
+    };
+  };
+
+  services.xserver.xkb.extraLayouts = {
+    tetra-us = {
+      description = "tetra's awesome layout (us)";
+      languages = [ "custom" ];
+      symbolsFile = ./tetra-layout-us;
     };
   };
 

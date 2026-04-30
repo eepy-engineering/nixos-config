@@ -9,6 +9,7 @@
     ./backups.nix
     ./bluetooth.nix
     ./desktop.nix
+    ./fonts.nix
     ./hardware-configuration.nix
     ./networking.nix
     ./packages.nix

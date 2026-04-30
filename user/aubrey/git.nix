@@ -10,6 +10,7 @@
 
     lfs.enable = true;
 
+    signing.format = "openpgp";
     settings = {
       user = {
         name = "Aubrey Taylor";

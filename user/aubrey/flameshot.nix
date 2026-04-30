@@ -8,7 +8,6 @@
           showHelp = false;
           showSidePanelButton = false;
           showDesktopNotification = false;
-          disabledGrimWarning = true;
         };
       };
     };

@@ -13,8 +13,8 @@ let networks = nmcli -f IN-USE,SSID,BARS,SECURITY -t -c yes d w l
   }}
 
 let active = if ($networks | any {$in.active}) {
-  $"󰖩 ($networks | where {$in.active} | first | get ssid)"
-} else { "󰖪 " }
+  $"󱦤 ($networks | where {$in.active} | first | get ssid)"
+} else { "󱦤󱤂" }
 
 {
   full_text: $active,

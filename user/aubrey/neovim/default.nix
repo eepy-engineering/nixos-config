@@ -11,6 +11,10 @@
     vimAlias = true;
     vimdiffAlias = true;
 
+    withRuby = false;
+    withPython3 = true;
+    withNodeJs = false;
+
     plugins =
       with pkgs.vimPlugins;
       let
@@ -21,16 +25,16 @@
       in
       [
         nvim-lspconfig
-        nvim-treesitter.withAllGrammars
-        plenary-nvim
+        # nvim-treesitter.withAllGrammars
+        # plenary-nvim
         gruvbox-material
-        mini-nvim
+        # mini-nvim
         telescope-nvim
-        spade-nvim
-        rustaceanvim
+        # spade-nvim
+        # rustaceanvim
       ];
 
-    extraLuaConfig =
+    initLua =
       let
         grammarsPath = pkgs.symlinkJoin {
           name = "nvim-treesitter-grammars";
