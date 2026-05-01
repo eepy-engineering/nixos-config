@@ -15,16 +15,17 @@
     opnix.homeManagerModules.default
     inputs.catppuccin.homeModules.catppuccin
     ../components/nix-index.nix
+    ./fcitx5
     ./neovim
     ./nushell
     ./sway
     ./vesktop
     ./vscode
+    ./wezterm
     ./editorconfig.nix
     ./flameshot.nix
     ./fzf.nix
     ./git.nix
-    ./ime.nix
     ./jujutsu.nix
     ./nix.nix
     ./packages.nix

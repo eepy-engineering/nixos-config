@@ -11,7 +11,7 @@
     "debug.onTaskErrors": "abort",
     "direnv.restart.automatic": true,
     "dotnetAcquisitionExtension.enableTelemetry": false,
-    "editor.fontFamily": "'Comic Mono', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontFamily": "'nasin-nanpa', 'Comic Mono', monospace",
     "editor.formatOnSave": true,
     "editor.inlayHints.enabled": "offUnlessPressed",
     "editor.lineNumbers": "relative",

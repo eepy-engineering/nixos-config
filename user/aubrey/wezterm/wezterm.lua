@@ -24,8 +24,4 @@ config.window_padding = {
   bottom = 0,
 }
 
-config.font = wezterm.font_with_fallback {
-  "monospace",
-}
-
 return config

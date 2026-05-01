@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   environment.systemPackages = [
     pkgs.sway
@@ -56,15 +56,34 @@
     };
   };
 
-  services.xserver.xkb.extraLayouts = {
-    tetra-us = {
-      description = "tetra's awesome layout (us)";
-      languages = [ "custom" ];
-      symbolsFile = ./tetra-layout-us;
-    };
+  services.xserver.xkb = {
+    extraLayouts = import ./keyboard-layouts.nix;
+    options = "lv3:ralt_switch";
   };
+  system.activationScripts.chromiumXkb = ''
+    mkdir -p /usr/share/X11
+    ln -sfn ${config.services.xserver.xkb.dir} /usr/share/X11/xkb
+  '';
+  nixpkgs.overlays = [
+    (self: super: {
+      sway-unwrapped = super.sway-unwrapped.override {
+        libxkbcommon = super.libxkbcommon.override {
+          xkeyboard_config = super.xkeyboard-config_custom {
+            layouts = config.services.xserver.xkb.extraLayouts;
+          };
+        };
+      };
+      m17n_db = super.m17n_db.overrideAttrs {
+        postFixup = ''
+          cp ${./sitelen-pona.mim} $out/share/m17n/sitelen-pona.mim
+        '';
+      };
+    })
+  ];
 
   environment.sessionVariables = {
     "NIXOS_OZONE_WL" = "1";
   };
+
+  programs.zoom-us.enable = true;
 }

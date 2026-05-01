@@ -61,5 +61,6 @@
 
   home.packages = with pkgs; [
     pest-ide-tools
+    clang-tools
   ];
 }

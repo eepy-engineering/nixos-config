@@ -6,7 +6,6 @@
 {
   environment.systemPackages = with pkgs; [
     # language frameworks
-    python3
     lua51Packages.lua
     lua51Packages.luarocks
     pnpm

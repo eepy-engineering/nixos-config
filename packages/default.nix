@@ -1,4 +1,5 @@
 pkgs: rec {
+  ilo-sitelen = pkgs.callPackage ./ilo-sitelen.nix { };
   swim-unstable = pkgs.callPackage ./swim.nix { };
   surfer-unstable = pkgs.callPackage ./surfer.nix { };
   gamemaker = pkgs.callPackage ./gamemaker.nix {

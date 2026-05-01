@@ -1,0 +1,65 @@
+default partial alphanumeric_keys modifier_keys
+xkb_symbols "intl" {
+
+  name[Group1]="sitelen pona";
+
+  // Sitelen Pona keyboard layout
+  // by Rebecca Bettencourt
+  // http://www.kreativekorp.com
+
+  key <TLDE> { [ parenleft,  parenright, less,         greater    ] }; // `    ( ) < >
+  key <AE01> { [ UF1973,     UF1939,     UF1957,       UF1979     ] }; // 1    󱥳　󱤹　󱥗　󱥹  wan / mu / seli / kin
+  key <AE02> { [ UF196E,     UF193E,     UF1951,       UF1901     ] }; // 2    󱥮　󱤾　󱥑　󱤁  tu / nasa / pipi / akesi
+  key <AE03> { [ UF193C,     UF193D,     UF190B,       UF197D     ] }; // 3    󱤼　󱤽　󱤋　󱥽  mute / nanpa / esun / monsuta
+  key <AE04> { [ UF1969,     UF1908,     UF1932,       UF19A4     ] }; // 4    󱥩　󱤈　󱤲　󱦤  tawa / awen / mani / linluwi
+  key <AE05> { [ UF192D,     UF194C,     UF1943,       UF197B     ] }; // 5    󱤭　󱥌　󱥃　󱥻  luka / pana / noka / kipisi
+  key <AE06> { [ UF1928,     UF1963,     UF1966,       UF1983     ] }; // 6    󱤨　󱥣　󱥦　󱦃  lili / suli / suwi / epiku
+  key <AE07> { [ UF190A,     UF1962,     UF1974,       UF1980     ] }; // 7    󱤊　󱥢　󱥴　󱦀  en / soweli / waso / kijetesantakalu
+  key <AE08> { [ UF1916,     UF1976,     UF1926,       UF1978     ] }; // 8    󱤖　󱥶　󱤦　󱥸  kama / weka / lete / namako
+  key <AE09> { [ UF1904,     UF1990,     UF1947,     NoSymbol     ] }; // 9    󱤄　󱦐  󱥇　　  ale / START CARTOUCHE / open
+  key <AE10> { [ UF1902,     UF1991,     UF194B,       U1F5E7     ] }; // 0    󱤂　󱦑  󱥋　　  ala / END CARTOUCHE / pan
+  key <AE11> { [ U200D,      UF199E,   NoSymbol,     NoSymbol     ] }; // -    ZERO WIDTH JOINER / COMBINING TALLY MARK
+  key <AE12> { [ UF1995,     UF1996,   NoSymbol,     NoSymbol     ] }; // =    STACKING JOINER / SCALING JOINER
+
+  key <AD01> { [ UF1959,     UF1964,     UF191C,       UF193A     ] }; // q    󱥙　󱥤　󱤜　󱤺  seme / suno / ko / mun
+  key <AD02> { [ UF1921,     UF1975,     UF195A,       UF1972     ] }; // w    󱤡　󱥵　󱥚　󱥲  la / wawa / sewi / walo
+  key <AD03> { [ UF1909,     UF1956,     UF1953,       UF197C     ] }; // e    󱤉　󱥖　󱥓　󱥼  e / sama / poki / leko
+  key <AD04> { [ UF196B,     UF1924,     UF192B,       UF1987     ] }; // r    󱥫　󱤤　󱤫　󱦇  tenpo / lawa / loje / misikeke
+  key <AD05> { [ UF196C,     UF196D,     UF1965,       UF197E     ] }; // t    󱥬　󱥭　󱥥　󱥾  toki / tomo / supa / tonsi
+  key <AD06> { [ UF192C,     UF1907,     UF1917,       UF1981     ] }; // y    󱤬　󱤇　󱤗　󱦁  lon / anu / kasi / soko
+  key <AD07> { [ UF195E,     UF1915,     UF1970,       UF196F     ] }; // u    󱥞　󱤕　󱥰　󱥯  sina / kalama / uta / unpa
+  key <AD08> { [ UF190D,     UF190E,     UF190F,       UF1982     ] }; // i    󱤍　󱤎　󱤏　󱦂  ike / ilo / insa / meso
+  key <AD09> { [ UF1944,     UF190C,     UF195C,       UF197A     ] }; // o    󱥄　󱤌　󱥜　󱥺  o / ijo / sike / oko
+  key <AD10> { [ UF1954,     UF1948,     UF1952,       UF1955     ] }; // p    󱥔　󱥈　󱥒　󱥕  pona / pakala / poka / pu
+  key <AD11> { [ UF1997,   NoSymbol,     bracketleft,  braceleft  ] }; // [    START OF LONG GLYPH / ... / [ / {
+  key <AD12> { [ UF1998,   NoSymbol,     bracketright, braceright ] }; // ]    END OF LONG GLYPH / ... / ] / } 
+  key <BKSL> { [ slash,      underscore, backslash,    bar        ] }; // #    / _ \ |
+
+  key <AC01> { [ UF1900,     UF1906,     UF1914,       UF1905     ] }; // a   　󱤀　󱤆　󱤔　󱤅  a / ante / kala / anpa
+  key <AC02> { [ UF1961,     UF1960,     UF195B,       UF1958     ] }; // s   　󱥡　󱥠　󱥛　󱥘  sona / sitelen / sijelo / selo
+  key <AC03> { [ UF1968,     UF192A,     UF1925,       UF1903     ] }; // d   　󱥨　󱤪　󱤥　󱤃  taso / lipu / len / alasa
+  key <AC04> { [ UF194D,     UF1950,     UF191A,     NoSymbol     ] }; // f   　󱥍　󱥐　󱤚　󱦠  pi / pini / kili
+  key <AC05> { [ UF1946,     UF191F,     UF1923,       UF1985     ] }; // g   　󱥆　󱤟　󱤣　󱦅  ona / kulupu / laso / lanpan
+  key <AC06> { [ UF1942,     UF195D,     UF194A,       UF19A2     ] }; // h   　󱥂　󱥝　󱥊　󱦢  nimi / sin / palisa / majuna
+  key <AC07> { [ UF1911,     UF1913,     UF1910,       UF1912     ] }; // j   　󱤑　󱤓　󱤐　󱤒  jan / jo / jaki / jelo
+  key <AC08> { [ UF1918,     UF1919,     UF191B,       UF1988     ] }; // k   　󱤘　󱤙　󱤛　󱦈  ken / kepeken / kiwen / ku
+  key <AC09> { [ UF1927,     UF192E,     UF1929,       UF192F     ] }; // l   　󱤧　󱤮　󱤩　󱤯  li / lukin / linja / lupa
+  key <AC10> { [ UF199C,     UF199D,     semicolon,    colon      ] }; // ;   　󱦜　󱦝　;　:   MIDDLE DOT / COLON
+  key <AC11> { [ apostrophe, quotedbl,   plus,         asterisk   ] }; // '   　' " + *
+
+  key <AB01> { [ UF1967,     UF1922,     UF1937,       UF1938     ] }; // z   　󱥧　󱤢　󱤷　󱤸  tan / lape / moli / monsi
+  key <AB02> { [ UF1949,     UF1936,     UF1971,       UF195F     ] }; // x   　󱥉　󱤶　󱥱　󱥟  pali / moku / utala / sinpin
+  key <AB03> { [ UF194E,     UF1945,     UF191E,     NoSymbol     ] }; // c   　󱥎　󱥅　󱤞　󱦄  pilin / olin / kule
+  key <AB04> { [ UF1977,     UF196A,     UF191D,       UF197F     ] }; // v   　󱥷　󱥪　󱤝　󱥿  wile / telo / kon / jasima
+  key <AB05> { [ UF1941,     UF193F,     UF194F,       UF1935     ] }; // b   　󱥁　󱤿　󱥏　󱤵  ni / nasin / pimeja / mije
+  key <AB06> { [ UF1986,     UF193B,     UF1920,       UF1940     ] }; // n   　󱦆　󱤻　󱤠　󱥀  n / musi / kute / nena
+  key <AB07> { [ UF1934,     UF1930,     UF1931,       UF1933     ] }; // m   　󱤴　󱤰　󱤱　󱤳  mi / ma / mama / meli
+  key <AB08> { [ U3001,      U300C,      comma,        U300E      ] }; // ,   　、 「 , 』
+  key <AB09> { [ U3002,      U300D,      period,       U300F      ] }; // .   　。 」 . 』
+  key <AB10> { [ minus,      equal,      exclam,       question   ] }; // /   　- = ! ?
+
+  key <SPCE> { [ U3000,      U3000,      space,        space      ] };
+
+  include "level3(ralt_switch)"
+
+};

@@ -81,13 +81,15 @@
           filezilla
           fontpreview
           acpi
-          # anki
           nautilus
           bluetui
           croc
+          jq
+          kdePackages.qttools
 
           # desktop
           wev
+          xev
           playerctl
           brightnessctl
           swaylock
