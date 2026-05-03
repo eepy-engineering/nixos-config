@@ -42,6 +42,7 @@
           wgsl-analyzer
           antigravity
           master-pkgs.godot-mono
+          python3
 
           # art
           pinta

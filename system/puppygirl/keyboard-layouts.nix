@@ -1,6 +1,6 @@
 {
   tetra-us = {
-    description = "tetra's awesome layout (us)";
+    description = "tetra's custom layout (US)";
     languages = [ "us" ];
     symbolsFile = ./tetra-layout-us;
   };

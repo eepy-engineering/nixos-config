@@ -18,6 +18,7 @@
         kdePackages.fcitx5-configtool
         ilo-sitelen
         fcitx5-m17n
+        fcitx-passthrough
       ];
     };
   };

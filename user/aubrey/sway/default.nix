@@ -140,22 +140,10 @@
             open $path | wl-copy
           ''}";
 
-          "--locked ${cfg.modifier}+Tab" = "exec ${writeNushellScript "ime-tetra" ''
-            swaymsg "input type:keyboard xkb_switch_layout 0"
-            fcitx5-remote -g "tetra"
-          ''}";
-          "${cfg.modifier}+p" = "exec ${writeNushellScript "ime-pona" ''
-            swaymsg "input type:keyboard xkb_switch_layout 1"
-            fcitx5-remote -s keyboard-sitelen-pona
-          ''}";
-          "${cfg.modifier}+j" = "exec ${writeNushellScript "ime-mozc" ''
-            swaymsg "input type:keyboard xkb_switch_layout 0"
-            fcitx5-remote -s mozc
-          ''}";
-          "${cfg.modifier}+i" = "exec ${writeNushellScript "ime-ipa" ''
-            swaymsg "input type:keyboard xkb_switch_layout 0"
-            fcitx5-remote -s ipa-x-sampa
-          ''}";
+          "--locked ${cfg.modifier}+Tab" = "exec fcitx5-remote -s tetra";
+          "${cfg.modifier}+i" = "exec fcitx5-remote -s ipa-x-sampa";
+          "${cfg.modifier}+j" = "exec fcitx5-remote -s mozc";
+          "${cfg.modifier}+p" = "exec fcitx5-remote -s passthrough";
         };
 
       input = {

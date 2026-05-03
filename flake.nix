@@ -32,6 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    fcitx-passthrough = {
+      url = "github:Sanae6/fcitx5-passthrough";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Applications
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
@@ -107,6 +112,7 @@
       O10editor,
       antigravity-nix,
       catppuccin,
+      fcitx-passthrough,
       ...
     }:
     let
@@ -130,6 +136,7 @@
             home-manager = home-manager.packages.${final.stdenv.hostPlatform.system};
             _010editor = O10editor.packages.${final.stdenv.hostPlatform.system}.default;
             antigravity = antigravity-nix.packages.${final.stdenv.hostPlatform.system}.default;
+            fcitx-passthrough = fcitx-passthrough.packages.${final.stdenv.hostPlatform.system}.default;
           }
           // (import ./packages final)
         )

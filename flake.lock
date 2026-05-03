@@ -67,16 +67,37 @@
         ]
       },
       "locked": {
-        "lastModified": 1775964551,
-        "narHash": "sha256-PFqgleO6rpvnLsSWzkihL1fLTbE2DW9qtpXJZjyNMTg=",
+        "lastModified": 1777866180,
+        "narHash": "sha256-F6DrT3DNNhzz8B4FKADRxPCFPpdax/PFSTykwkgD9R8=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "rev": "8cb99bb38a916ac38c73003730d7bdd9f67ab657",
+        "rev": "cadfc931421c1c1c200469ffaa3b4ff8b1cbe1f9",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
+        "type": "github"
+      }
+    },
+    "fcitx-passthrough": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778014193,
+        "narHash": "sha256-pq/sp5bJJYSPENpPwTdn0oSq38mnk7XSG1Dui4jv78w=",
+        "owner": "Sanae6",
+        "repo": "fcitx5-passthrough",
+        "rev": "a395ffcdd7645a0a8f5be4809d99aa451426c316",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sanae6",
+        "repo": "fcitx5-passthrough",
         "type": "github"
       }
     },
@@ -240,6 +261,24 @@
         "systems": "systems_4"
       },
       "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_5": {
+      "inputs": {
+        "systems": "systems_5"
+      },
+      "locked": {
         "lastModified": 1710146030,
         "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
@@ -317,7 +356,7 @@
     },
     "nixGL": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -555,11 +594,11 @@
     "nu-scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1766949840,
-        "narHash": "sha256-Cq814VegRIWRR0UfRz3xV3pHm4C1701I5BoPRsEi+ZQ=",
+        "lastModified": 1777324911,
+        "narHash": "sha256-t8OCSDI7MqA9Q9Tv4mjd/yRac2SZvhX2x8rfcbIUT9o=",
         "owner": "nushell",
         "repo": "nu_scripts",
-        "rev": "1cb6d6c460949b989b7fb1a6d02456a560521366",
+        "rev": "32cd1d53649bc024edd65326a5b988cd7bcf4810",
         "type": "github"
       },
       "original": {
@@ -570,7 +609,7 @@
     },
     "opnix": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -595,6 +634,7 @@
         "antigravity-nix": "antigravity-nix",
         "catppuccin": "catppuccin",
         "extensions": "extensions",
+        "fcitx-passthrough": "fcitx-passthrough",
         "fenix": "fenix",
         "home-manager": "home-manager",
         "microvm": "microvm",
@@ -758,6 +798,21 @@
         "type": "github"
       }
     },
+    "systems_5": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "tetra-config": {
       "inputs": {
         "home-manager": [
@@ -770,11 +825,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1777144614,
-        "narHash": "sha256-gE0au9RFAMxNVFst9LxNiXGWeT55bExXuy9o9RAJO5c=",
+        "lastModified": 1777518744,
+        "narHash": "sha256-9ohjWYNzW5J2QpyC43tsf4GrYkm3jOHlUxXkh/owgaw=",
         "owner": "tetraxile",
         "repo": "nixos-config",
-        "rev": "bed3e319a69cc09eb053b3f71f5ab16c55215510",
+        "rev": "a0ca21da3c1c481752ff597b0a9a667f23905061",
         "type": "github"
       },
       "original": {
@@ -790,11 +845,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774759885,
-        "narHash": "sha256-Y3D2GnZTO6BhGWeVcO6qUkiO5g0dDL2tmokLVWNC1WY=",
+        "lastModified": 1777612697,
+        "narHash": "sha256-h+tXBNMDrsKbD1UnYw0IeSIT4RalHtIJ1GLOviib7/8=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "16e3f4cd221a030186a96015d82dcb3fb4afa4d6",
+        "rev": "f9f70d14f9a57c7962c5cfe589461c1391044448",
         "type": "github"
       },
       "original": {
