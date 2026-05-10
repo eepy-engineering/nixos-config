@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /index.php
+Disallow: *?action=edit
+Disallow: *?veaction=edit
+Disallow: */history
+Disallow: /Special:
+Disallow: /User_talk:
+Disallow: /Template:
+Disallow: /Template_talk:
+Disallow: /User:
+Disallow: /Help:

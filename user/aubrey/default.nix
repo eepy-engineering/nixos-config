@@ -28,6 +28,7 @@
     ./git.nix
     ./jujutsu.nix
     ./nix.nix
+    ./misc.nix
     ./packages.nix
     ./rio.nix
     ./secrets.nix

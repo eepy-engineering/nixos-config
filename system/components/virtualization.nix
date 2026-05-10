@@ -5,11 +5,11 @@
   ...
 }:
 {
-  programs.virt-manager.enable = true;
+  programs.virt-manager.enable = false;
   virtualisation = {
     spiceUSBRedirection.enable = true;
     libvirtd = {
-      enable = true;
+      enable = false;
 
       qemu = {
         runAsRoot = true;
@@ -21,5 +21,7 @@
     docker = {
       enable = true;
     };
+    containers.enable = true;
   };
+  boot.enableContainers = true;
 }

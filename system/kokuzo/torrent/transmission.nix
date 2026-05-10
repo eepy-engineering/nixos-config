@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
@@ -16,6 +17,7 @@
       bind-address-ipv4 = "0.0.0.0"; # overwritten by script
       bind-address-ipv6 = "::1"; # never bind to any ipv6, pia doesn't support it
       port-forwarding-enabled = false; # leaks public ip currently
+      message-level = 3;
     };
   };
   services.pia-vpn.forwardingPort = config.services.transmission.settings.peer-port;
@@ -29,6 +31,10 @@
         TR_CURL_SSL_NO_VERIFY = "1";
       };
       serviceConfig = {
+        # RootDirectoryStartOnly = lib.mkForce false;
+        # RootDirectory = lib.mkForce null;
+        # PrivateMounts = lib.mkForce false;
+        # PrivateUsers = lib.mkForce false;
         ExecStartPre = [
           "+${pkgs.writeNushellScript "set-bind-address" ''
             loop {

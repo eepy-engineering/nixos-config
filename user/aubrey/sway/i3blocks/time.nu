@@ -26,7 +26,8 @@ if $btn == 3 {
 }
 
 let full_text = if $shortened {
-  $"($date | format date "%T") ($tz.0)"
+  let formatted = $date | format date "W%V %a %T";
+  $"($formatted) ($tz.0)"
 } else {
   let current_time = $date | format date "%a %B %d %G %T";
 

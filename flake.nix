@@ -169,6 +169,31 @@
         "aubrey"
         "rose"
       ];
+      systemConfigs =
+        let
+          buildConfig =
+            name: config:
+            lib.nixosSystem {
+              system = config.system;
+              specialArgs = {
+                inherit
+                  inputs
+                  opnix
+                  microvm
+                  ;
+                isDesktop = config.isDesktop;
+                hostName = name;
+              };
+              modules = [
+                overlaysModule
+                home-manager.nixosModules.home-manager
+                ./system/configuration.nix
+                ./system/${name}/configuration.nix
+                ./user/configuration.nix
+              ];
+            };
+        in
+        builtins.mapAttrs buildConfig configs;
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
@@ -190,27 +215,7 @@
         }
       );
 
-      nixosConfigurations =
-        let
-          buildConfig =
-            name: config:
-            lib.nixosSystem {
-              system = config.system;
-              specialArgs = {
-                inherit inputs opnix microvm;
-                isDesktop = config.isDesktop;
-                hostName = name;
-              };
-              modules = [
-                overlaysModule
-                home-manager.nixosModules.home-manager
-                ./system/configuration.nix
-                ./system/${name}/configuration.nix
-                ./user/configuration.nix
-              ];
-            };
-        in
-        builtins.mapAttrs buildConfig configs;
+      nixosConfigurations = systemConfigs;
 
       homeConfigurations =
         let

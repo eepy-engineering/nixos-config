@@ -87,6 +87,7 @@
           croc
           jq
           kdePackages.qttools
+          pciutils
 
           # desktop
           wev

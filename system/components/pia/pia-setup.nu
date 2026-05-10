@@ -60,22 +60,22 @@ def main [
   wg setconf pia /private/pia.wg.conf
   resolvectl dns pia ...$json.dns_servers
 
-  # $"table wg-pia {
-  #   chain preraw {
-  #     type filter hook prerouting priority raw;
-  #     iifname != \"pia\" ip daddr ($json.peer_ip) drop;
-  #   };
+  $"table wg-pia {
+    chain preraw {
+      type filter hook prerouting priority raw;
+      iifname != \"pia\" ip daddr ($json.peer_ip) drop;
+    };
 
-  #   chain premangle {
-  #     type filter hook prerouting priority mangle;
-  #     meta l4proto udp mark 0x($fwmark_hex) ct mark set mark;
-  #   };
-
-  #   chain postmangle {
-  #     type filter hook postrouting priority mangle;
-  #     meta l4proto udp meta mark set ct mark;
-  #   };
-  # }
+    chain premangle {
+      type filter hook prerouting priority mangle;
+      meta l4proto udp mark 0x($fwmark_hex) ct mark set mark;
+    };
+    
+    chain postmangle {
+      type filter hook postrouting priority mangle;
+      meta l4proto udp meta mark set ct mark;
+    };
+  }
 
   # table ip tailscale-pia {
   #   chain preraw {
@@ -88,18 +88,18 @@ def main [
   #     iifname \"tailscale0\" masquerade;
   #   }
   # }
-  # " | nft -ef -
+  " | nft -ef -
 
-  # ip rule add fwmark $fwmark table $fwmark
+  ip rule add fwmark $fwmark table $fwmark
   ip link set up dev pia
 
   # if $route_exit_node_traffic {
-  #   ip route add 0.0.0.0/0 dev pia table $fwmark
+  try { ip route add 0.0.0.0/0 dev pia table $fwmark }
   # }
 
   # # needed for binding other apps
-  # ip -4 route add default dev pia table $fwmark
-  # ip rule add from $json.peer_ip lookup $fwmark
+  try { ip -4 route add default dev pia table $fwmark }
+  try { ip rule add from $json.peer_ip lookup $fwmark }
 }
 
 def revert [] {

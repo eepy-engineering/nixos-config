@@ -5,21 +5,21 @@
   pkgs,
   ...
 }:
-with pkgs;
 {
   imports = [
     ../network-connected.nix
   ];
-  options.services.pia-vpn = {
-    region = lib.mkOption {
-      type = lib.types.str;
+  options.services.pia-vpn = with lib; {
+    enable = mkEnableOption "pia vpn";
+    region = mkOption {
+      type = types.str;
     };
-    rerouteExitNodeTraffic = lib.mkOption {
-      type = lib.types.bool;
+    rerouteExitNodeTraffic = mkOption {
+      type = types.bool;
       default = false;
     };
-    forwardingPort = lib.mkOption {
-      type = lib.types.nullOr lib.types.number;
+    forwardingPort = mkOption {
+      type = types.nullOr types.number;
       default = null;
     };
   };
@@ -27,8 +27,8 @@ with pkgs;
     let
       cfg = config.services.pia-vpn;
     in
-    {
-      environment.systemPackages = [
+    lib.mkIf cfg.enable {
+      environment.systemPackages = with pkgs; [
         curl
         wireguard-tools
         iproute2
@@ -59,7 +59,7 @@ with pkgs;
         services = [ "wg-pia-setup.service" ];
       };
 
-      systemd.services = {
+      systemd.services = with pkgs; {
         wg-pia-setup = {
           after = [ "network-connected.service" ];
           wantedBy = [ "multi-user.target" ];

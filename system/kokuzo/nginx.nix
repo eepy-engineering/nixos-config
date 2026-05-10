@@ -67,22 +67,33 @@
   };
 
   systemd = {
-    services.tailscale-cert-refresh = {
-      requires = [ "network-online.target" ];
-      requiredBy = [ "nginx.service" ];
-      script = ''
-        rm -f /persist/tailscale-nginx-cert/nginx.cert /persist/tailscale-nginx-cert/nginx.key
-        ${pkgs.tailscale}/bin/tailscale cert --cert-file /persist/tailscale-nginx-cert/nginx.cert --key-file /persist/tailscale-nginx-cert/nginx.key kokuzo.tailc38f.ts.net
-        chown ${config.services.nginx.user}:${config.services.nginx.group} /persist/tailscale-nginx-cert/nginx.cert /persist/tailscale-nginx-cert/nginx.key
-      '';
-      serviceConfig = {
-        Type = "oneshot";
+    services = {
+      nginx = {
+        requiredBy = [ "k3s.service" ];
+      };
+      tailscale-cert-refresh = {
+        requires = [
+          "network-online.target"
+          "tailscaled.service"
+        ];
+        requiredBy = [ "nginx.service" ];
+        script = ''
+          rm -f /persist/tailscale-nginx-cert/nginx.cert /persist/tailscale-nginx-cert/nginx.key
+          ${pkgs.tailscale}/bin/tailscale cert --cert-file /persist/tailscale-nginx-cert/nginx.cert --key-file /persist/tailscale-nginx-cert/nginx.key kokuzo.tailc38f.ts.net
+          chown ${config.services.nginx.user}:${config.services.nginx.group} /persist/tailscale-nginx-cert/nginx.cert /persist/tailscale-nginx-cert/nginx.key
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+        };
       };
     };
 
     timers.tailscale-cert-refresh = {
       wantedBy = [ "timers.target" ];
-      requires = [ "network-online.target" ];
+      requires = [
+        "network-online.target"
+        "tailscaled.service"
+      ];
       timerConfig = {
         OnCalendar = "Sat 00:00:00";
         Persistent = true;

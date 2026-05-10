@@ -18,6 +18,7 @@
     ../components/rust.nix
     ../components/tank-share.nix
     ../components/virtualization.nix
+    ./virt.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_zen;

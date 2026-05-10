@@ -13,7 +13,6 @@
   home.packages = with pkgs; [
     grim
     slurp
-    xorg.setxkbmap
   ];
 
   wayland.windowManager.sway = with pkgs; {
