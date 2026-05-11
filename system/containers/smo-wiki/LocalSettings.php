@@ -3,8 +3,8 @@
 $wgDebugLogGroups = [ 'rewrite' => '/tmp/rewrite.log' ];
 $wgDebugLogFile = "/tmp/mediawiki-debug.log";
 
-$wgSitename = "SMO.wiki";
-$wgMetaNamespace = "SMO.wiki";
+$wgSitename = "Super Mario Odyssey Wiki";
+$wgMetaNamespace = "SMO_Wiki";
 
 ## The URL base path to the directory containing the wiki;
 
@@ -26,11 +26,11 @@ foreach ( $actions as $action ) {
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
-	'1x' => "/w/images/6/6f/Logo.svg",
-	'icon' => "/w/images/6/6f/Logo.svg",
+	'1x' => "/static/logo.svg",
+	'icon' => "/static/logo.svg",
 ];
 
-$wgFavicon = "/w/images/2/26/Favicon.png";
+$wgFavicon = "/static/logo-144x144.png";
 
 ## UPO means: this is also a user preference option
 

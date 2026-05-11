@@ -133,11 +133,14 @@
     nginx.virtualHosts.${config.services.mediawiki.nginx.hostName} = {
       listenAddresses = [ "unix:/run/nginx/nginx.sock" ];
       locations = {
+        "~ ^/static/(.+)$" = {
+          alias = "${./static}/$1";
+        };
         "/".extraConfig = lib.mkForce ''
           rewrite ^/(?<pagename>.*)$ /w/index.php;
         '';
         "= /robots.txt" = {
-          alias = "" + ./robots.txt;
+          alias = ./robots.txt;
         };
         "= /".extraConfig = lib.mkForce ''
           return 301 /Home;
