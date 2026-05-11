@@ -1,5 +1,8 @@
 { pkgs, config, ... }:
 {
+  imports = [
+    ./tablet
+  ];
   environment.systemPackages = [
     pkgs.sway
   ];
@@ -61,7 +64,7 @@
     options = "lv3:ralt_switch";
   };
   system.activationScripts.chromiumXkb = ''
-    # deadass no clue 
+    # deadass no clue what this does, i forgot already
        mkdir -p /usr/share/X11
        ln -sfn ${config.services.xserver.xkb.dir} /usr/share/X11/xkb
   '';

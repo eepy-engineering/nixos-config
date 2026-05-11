@@ -12,6 +12,7 @@
       hactool
       zulip-term
       waypipe
+      python3
     ]
     ++ (
       if isDesktop then
@@ -42,12 +43,16 @@
           wgsl-analyzer
           antigravity
           master-pkgs.godot-mono
-          python3
 
           # art
-          pinta
+          krita
           material-maker
           blender
+
+          # school
+          lorien
+          texliveFull
+          texstudio
 
           # social
           (discord-canary.override { withVencord = true; })
@@ -73,6 +78,7 @@
           # games
           prismlauncher
           ryubing
+          osu-lazer-bin
           # wineWowPackages.unstableFull
 
           # tools

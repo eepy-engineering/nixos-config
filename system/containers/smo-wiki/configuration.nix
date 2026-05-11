@@ -26,7 +26,8 @@
         "CategoryTree" = null;
         "Cite" = null;
         # "ConfirmEdit" = null;
-        "ConfirmEdit/QuestyCaptcha" = null;
+        # "ConfirmEdit/QuestyCaptcha" = null;
+        "ConfirmEdit/Turnstile" = null;
         "ChangeAuthor" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/ChangeAuthor";
           rev = "122d33c4a302e30035c1b958306cea61c4621994";
@@ -142,8 +143,11 @@
         "= /robots.txt" = {
           alias = ./robots.txt;
         };
+        "= /favicon.ico" = {
+          alias = ./static/logo-144x144.png;
+        };
         "= /".extraConfig = lib.mkForce ''
-          return 301 /Home;
+          rewrite ^/(?<pagename>.*)$ /w/index.php;
         '';
       };
       extraConfig = ''

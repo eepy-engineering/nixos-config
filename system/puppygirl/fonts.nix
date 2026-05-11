@@ -8,6 +8,7 @@
       # mono
       comic-mono
       inputs.tetra-config.packages.${pkgs.stdenv.hostPlatform.system}.klee-one
+      jetbrains-mono
       # toki pona
       nasin-nanpa-ucsur
       nasin-nanpa-helvetica
@@ -44,6 +45,7 @@
           "nasin\\-nanpa"
           "Comic Mono"
           "Klee One"
+          "JetBrainsMonoNL"
         ];
       };
     };
