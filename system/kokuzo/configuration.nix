@@ -6,6 +6,7 @@
     ./smb.nix
     ./vms
     ./zfs-notifs
+    ./containers.nix
     ./databases.nix
     ./filesystems.nix
     ./hall-dns.nix

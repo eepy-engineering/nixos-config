@@ -61,8 +61,9 @@
     options = "lv3:ralt_switch";
   };
   system.activationScripts.chromiumXkb = ''
-    mkdir -p /usr/share/X11
-    ln -sfn ${config.services.xserver.xkb.dir} /usr/share/X11/xkb
+    # deadass no clue 
+       mkdir -p /usr/share/X11
+       ln -sfn ${config.services.xserver.xkb.dir} /usr/share/X11/xkb
   '';
   nixpkgs.overlays = [
     (self: super: {

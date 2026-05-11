@@ -1,13 +1,7 @@
 #$wgReadOnly = 'Backing up database, access will be restored shortly';
 
-## uncomment this to debug mediawiki errors
-$wgShowExceptionDetails = true;
-
-$wgDebugLogGroups = [ 'rewrite' => '/tmp/rewrite.log'];
+$wgDebugLogGroups = [ 'rewrite' => '/tmp/rewrite.log' ];
 $wgDebugLogFile = "/tmp/mediawiki-debug.log";
-
-## Uncomment this to disable output compression
-# $wgDisableOutputCompression = true;
 
 $wgSitename = "SMO.wiki";
 $wgMetaNamespace = "SMO.wiki";
@@ -28,9 +22,6 @@ $actions = array( 'edit', 'watch', 'unwatch', 'delete', 'revert', 'rollback',
 foreach ( $actions as $action ) {
   $wgActionPaths[$action] = "/$1/$action";
 }
-
-## The protocol and server name to use in fully-qualified URLs
-# nixos
 
 ## The URL paths to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
@@ -65,7 +56,8 @@ $wgGenerateThumbnailOnParse = true;
 $wgFileExtensions[] = 'svg';
 $wgFileExtensions[] = 'webm';
 $wgAllowTitlesInSVG = true;
-$wgSVGConverters = [ 'rsvg' => '/usr/bin/rsvg-convert -w $width -h $height -o $output $input' ];
+# moved to nixos config
+#$wgSVGConverters = [ 'rsvg' => 'rsvg-convert -w $width -h $height -o $output $input' ];
 $wgSVGConverter = 'rsvg';
 
 $wgMaxAnimatedGifArea = 10e7;
@@ -84,11 +76,6 @@ $wgLanguageCode = "en";
 # Time zone
 $wgLocaltimezone = "UTC";
 
-## Set $wgCacheDirectory to a writable directory on the web server
-## to make your wiki go slightly faster. The directory should not
-## be publicly accessible from the web.
-#$wgCacheDirectory = "$IP/cache";
-
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
@@ -101,12 +88,12 @@ $wgRightsText = "Creative Commons Attribution-ShareAlike";
 $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 
 # Path to the GNU diff3 utility. Used for conflict resolution.
-$wgDiff3 = "/usr/bin/diff3";
 
 # User group permissions
 $wgGroupPermissions['*'   ]['createpage'] = false;
 $wgGroupPermissions['user']['createpage'] = true;
 $wgGroupPermissions['*'   ]['edit'      ] = false;
+$wgGroupPermissions['*'   ]['createaccount'  ] = false;
 
 $wgGroupPermissions['sysop']['deleterevision'] = true;
 $wgGroupPermissions['sysop']['deletelogentry'] = true;
@@ -267,7 +254,7 @@ $wgTranscodeBackgroundTimeLimit = 0;
 
 
 #StopForumSpam
-$wgSFSIPListLocation = "/var/lib/mediawiki/denied_ips";
+$wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";
 
 #function prettyDiffURLs( $title, &$url, $query ) {
 #	if ( preg_match( '/^diff=(\w+)&oldid=(\w+)$/', $query, $matches ) ) {
@@ -278,7 +265,8 @@ $wgSFSIPListLocation = "/var/lib/mediawiki/denied_ips";
 #}
 #$wgHooks['GetLocalURL::Internal'][] = 'prettyDiffURLs';
 
-#$wgShowExceptionDetails = true;
+## uncomment this to debug mediawiki errors
+$wgShowExceptionDetails = true;
 #$wgShowDBErrorBacktrace = true;
 #$wgShowSQLErrors = true;
 #$wgDebugDumpSql = true;

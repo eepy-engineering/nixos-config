@@ -2,7 +2,7 @@
 {
   services = {
     grafana = {
-      enable = true;
+      enable = false;
       settings = {
         server = {
           http_addr = "0.0.0.0";
