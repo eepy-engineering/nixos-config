@@ -190,12 +190,6 @@
 
       window.commands = [
         {
-          command = "border pixel 0, floating enable, fullscreen disable, move absolute position 0 0";
-          criteria = {
-            title = "flameshot";
-          };
-        }
-        {
           command = "floating enable";
           criteria = {
             title = ".*(?!Godot Engine)";

@@ -22,9 +22,10 @@
     ./vesktop
     ./vscode
     ./wezterm
+    ./anki.nix
     ./editorconfig.nix
-    ./flameshot.nix
     ./fzf.nix
+    ./ghidra.nix
     ./git.nix
     ./jujutsu.nix
     ./nix.nix

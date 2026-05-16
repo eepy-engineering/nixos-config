@@ -55,6 +55,7 @@
         wgsl-analyzer.wgsl-analyzer
         geequlim.godot-tools
         pest.pest-ide-tools
+        tohoyn2.guile-vscode
       ];
     };
   };
