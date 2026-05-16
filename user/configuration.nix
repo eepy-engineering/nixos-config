@@ -97,4 +97,19 @@ args@{
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCOJGRyAn1LVGP17eKMCHV0CDf+1Iyyltd2q1xSa1hS4AoIxdu07mHLFpnSmp/T9t4JMnWhp3eIIlFtolx4oMAXewH/JWL0H6i6CGhe91zhiwGEaxDmB0tZhCORrc8ApJQSHaHgwvziOjwQrtLYLIP4Tp8nojIlT/Rv5T+UAEAlnCV7hFxdbPf5x4s8CKOAj70H0wHlbn6BDuRjnld8dFqkmb4oNyIfxCyDvxw6ZKTTIz6l8EaBeyiIjl7FB4uyfaTPevhT82V8MEAtvs3UNvKSeXUuc1KZxTMKuys6L/qlEezp8uYMs3gHrTHkCJmqYAzMjVk2JFRCoaRKWCgI4hpJ"
     ];
   };
+
+  # Cyrene's user
+  programs.fish.enable = true;
+  users.users.cysabi = {
+    isNormalUser = true;
+    description = "Cyrene";
+    extraGroups = [
+      "wheel"
+      "media"
+    ];
+    shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGeT8qUWVfr1OQZJ/vs19tX1iYtOcrpi0KuouVWa8Hw/"
+    ];
+  };
 }
