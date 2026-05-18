@@ -140,6 +140,7 @@
           ''}";
 
           "--locked ${cfg.modifier}+Tab" = "exec fcitx5-remote -s tetra";
+          "--locked Caps_Lock" = "exec fcitx5-remote -s tetra";
           "${cfg.modifier}+i" = "exec fcitx5-remote -s ipa-x-sampa";
           "${cfg.modifier}+j" = "exec fcitx5-remote -s mozc";
           "${cfg.modifier}+p" = "exec fcitx5-remote -s passthrough";

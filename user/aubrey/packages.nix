@@ -48,6 +48,7 @@
           krita
           material-maker
           blender
+          lmms-full
 
           # school
           lorien

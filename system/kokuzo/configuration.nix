@@ -38,8 +38,6 @@
     efi.canTouchEfiVariables = true;
   };
 
-  virtualisation.docker.enable = true;
-
   time.timeZone = "America/New_York";
 
   boot.supportedFilesystems = [ "zfs" ];

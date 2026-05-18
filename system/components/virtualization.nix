@@ -18,8 +18,9 @@
       };
     };
 
-    docker = {
+    podman = {
       enable = true;
+      dockerCompat = true;
     };
     containers.enable = true;
   };

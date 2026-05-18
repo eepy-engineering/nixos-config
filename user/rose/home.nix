@@ -104,6 +104,7 @@
   gtk = {
     enable = true;
 
+    gtk4.theme = null;
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
@@ -691,6 +692,7 @@
         init.defaultBranch = "main";
         pull.rebase = true;
       };
+      signing.format = "openpgp";
     };
 
     ssh = {

@@ -21,7 +21,7 @@ def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ..
   } else {
     let remote_user = ($user | default $env.USER);
     print "Remote...";
-    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($remote_user)@($hostname).tailc38f.ts.net" --use-remote-sudo $subcmd ...$rest;
+    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($remote_user)@($hostname).tailc38f.ts.net" --sudo $subcmd ...$rest;
   }
 };
 

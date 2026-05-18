@@ -44,6 +44,7 @@
   users.users = {
     walter.enable = false;
     rose.enable = false;
+    cysabi.enable = false;
     tetra.extraGroups = [ "wheel" ];
   };
   home-manager.users = lib.mkForce {

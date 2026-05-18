@@ -54,6 +54,7 @@ args@{
       "bluetooth"
       "media"
       "adbusers"
+      "podman"
     ];
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [

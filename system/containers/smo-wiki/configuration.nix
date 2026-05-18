@@ -33,11 +33,11 @@
           rev = "122d33c4a302e30035c1b958306cea61c4621994";
           sha256 = "sha256-AtbB/kOqZLOKyY+gqoYExOtS6rNQ6rzcAM7LugWE6ig=";
         };
-        "DarkMode" = pkgs.fetchgit {
-          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode";
-          rev = "ab2578451d5fc99007cd019d174d79c5a8b13aaf";
-          sha256 = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
-        };
+        # "DarkMode" = pkgs.fetchgit {
+        #   url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode";
+        #   rev = "ab2578451d5fc99007cd019d174d79c5a8b13aaf";
+        #   sha256 = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
+        # };
         "DiscordNotifications" = pkgs.fetchzip {
           url = "https://github.com/miraheze/DiscordNotifications/archive/997d64722dcd0697d002612d9b890e3c0e3e1906.zip";
           sha256 = "sha256-yJaCcq1S8sRLnnlswy0R5Nv/j2ZboLLdKxoOtMjp2BM=";
@@ -140,11 +140,17 @@
         "/".extraConfig = lib.mkForce ''
           rewrite ^/(?<pagename>.*)$ /w/index.php;
         '';
+        "/mediawiki".extraConfig = ''
+          rewrite ^/mediawiki/(.*)$ /w/$1 permanent;
+        '';
         "= /robots.txt" = {
           alias = ./robots.txt;
         };
         "= /favicon.ico" = {
           alias = ./static/logo-144x144.png;
+        };
+        "= /Home" = {
+          return = "301 /";
         };
         "= /".extraConfig = lib.mkForce ''
           rewrite ^/(?<pagename>.*)$ /w/index.php;

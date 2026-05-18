@@ -1,5 +1,6 @@
 #$wgReadOnly = 'Backing up database, access will be restored shortly';
 
+$wgFixDoubleRedirects = true;
 $wgDebugLogGroups = [ 'rewrite' => '/tmp/rewrite.log' ];
 $wgDebugLogFile = "/tmp/mediawiki-debug.log";
 
@@ -93,7 +94,7 @@ $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 $wgGroupPermissions['*'   ]['createpage'] = false;
 $wgGroupPermissions['user']['createpage'] = true;
 $wgGroupPermissions['*'   ]['edit'      ] = false;
-$wgGroupPermissions['*'   ]['createaccount'  ] = false;
+$wgGroupPermissions['*'   ]['createaccount'  ] = true;
 
 $wgGroupPermissions['sysop']['deleterevision'] = true;
 $wgGroupPermissions['sysop']['deletelogentry'] = true;
@@ -176,6 +177,13 @@ $wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";
 #	return true;
 #}
 #$wgHooks['GetLocalURL::Internal'][] = 'prettyDiffURLs';
+
+#DarkMode
+# this does fuck all
+# $wgDarkModeTogglePosition = "footer";
+$wgVectorNightMode['beta'] = false;
+$wgVectorNightMode['logged_out'] = true;
+$wgVectorNightMode['logged_in'] = true;
 
 ## uncomment this to debug mediawiki errors
 $wgShowExceptionDetails = true;

@@ -28,7 +28,11 @@
       }
       {
         name = "battery";
-        interval = 20;
+        interval = 60;
+      }
+      {
+        name = "powerprofiles";
+        interval = 60;
       }
       {
         name = "volume";

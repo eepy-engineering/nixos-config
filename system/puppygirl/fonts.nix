@@ -46,6 +46,7 @@
           "Comic Mono"
           "Klee One"
           "JetBrainsMonoNL"
+          "Noto Sans Math"
         ];
       };
     };

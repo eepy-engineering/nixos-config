@@ -77,4 +77,6 @@
     #   '';
     # }))
   ];
+
+  services.flatpak.enable = true;
 }

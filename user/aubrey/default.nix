@@ -29,6 +29,7 @@
     ./git.nix
     ./jujutsu.nix
     ./nix.nix
+    ./micro.nix
     ./misc.nix
     ./packages.nix
     ./rio.nix
