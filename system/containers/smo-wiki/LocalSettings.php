@@ -29,6 +29,11 @@ foreach ( $actions as $action ) {
 $wgLogos = [
 	'1x' => "/static/logo.svg",
 	'icon' => "/static/logo.svg",
+	'wordmark' => [
+	  'src' => "/static/wordmark2.png",
+		'width' => 263,
+		'height' => 28,
+	]
 ];
 
 $wgFavicon = "/static/logo-144x144.png";
@@ -184,6 +189,7 @@ $wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";
 $wgVectorNightMode['beta'] = false;
 $wgVectorNightMode['logged_out'] = true;
 $wgVectorNightMode['logged_in'] = true;
+$wgDefaultUserOptions['vector-theme'] = 'os';
 
 ## uncomment this to debug mediawiki errors
 $wgShowExceptionDetails = true;
