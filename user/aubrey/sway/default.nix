@@ -115,14 +115,29 @@
             "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${cfg.modifier}+r" = "mode resize";
-          "--locked XF86AudioMute" = "exec ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle";
-          "--locked XF86AudioLowerVolume" = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-";
-          "--locked XF86AudioRaiseVolume" = "exec ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+";
+          "--locked XF86AudioMute" = "exec ${writeNushellScript "mute" ''
+            ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle
+            ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
+          ''}";
+          "--locked XF86AudioLowerVolume" = "exec ${writeNushellScript "mute" ''
+            ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-
+            ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
+          ''}";
+          "--locked XF86AudioRaiseVolume" = "exec ${writeNushellScript "mute" ''
+            ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+
+            ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
+          ''}";
           "--locked XF86AudioPrev" = "exec ${playerctl}/bin/playerctl previous";
           "--locked XF86AudioPlay" = "exec ${playerctl}/bin/playerctl play-pause";
           "--locked XF86AudioNext" = "exec ${playerctl}/bin/playerctl next";
-          "--locked XF86MonBrightnessDown" = "exec ${brightnessctl}/bin/brightnessctl set 5%-";
-          "--locked XF86MonBrightnessUp" = "exec ${brightnessctl}/bin/brightnessctl set 5%+";
+          "--locked XF86MonBrightnessDown" = "exec ${writeNushellScript "mute" ''
+            ${brightnessctl}/bin/brightnessctl set 5%-
+            ${procps}/bin/pkill -SIGRTMIN+2 i3blocks
+          ''}";
+          "--locked XF86MonBrightnessUp" = "exec ${writeNushellScript "mute" ''
+            ${brightnessctl}/bin/brightnessctl set 5%+
+            ${procps}/bin/pkill -SIGRTMIN+2 i3blocks
+          ''}";
 
           "Mod4+L" = "exec ${writeNushellScript "sleep" ''
             swaymsg "exec ${swayidle}/bin/swayidle timeout 2 'swaymsg \"output * power off\"' resume 'swaymsg \"output * power on\"'"

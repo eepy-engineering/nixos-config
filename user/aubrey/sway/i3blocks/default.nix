@@ -35,8 +35,13 @@
         interval = 60;
       }
       {
+        name = "brightness";
+        interval = "once";
+        signal = 2;
+      }
+      {
         name = "volume";
-        interval = 1;
+        signal = 3;
         json = true;
       }
       {
