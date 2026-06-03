@@ -1,7 +1,8 @@
 pkgs: rec {
   ilo-sitelen = pkgs.callPackage ./ilo-sitelen.nix { };
-  swim-unstable = pkgs.callPackage ./swim.nix { };
-  surfer-unstable = pkgs.callPackage ./surfer.nix { };
+  # swim-unstable = pkgs.callPackage ./swim.nix { };
+  # surfer-unstable = pkgs.callPackage ./surfer.nix { };
+  manpages-l10n = pkgs.callPackage ./manpages-l10n.nix { };
   gamemaker = pkgs.callPackage ./gamemaker.nix {
     gamemakerFlavor = "Beta";
     gamemakerVersion = "2024.1400.2.941";

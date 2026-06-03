@@ -25,6 +25,7 @@
     ./anki.nix
     ./editorconfig.nix
     ./fzf.nix
+    ./gdb.nix
     ./ghidra.nix
     ./git.nix
     ./jujutsu.nix
@@ -36,6 +37,7 @@
     ./secrets.nix
     ./ssh.nix
     ./tmux.nix
+    ./zen.nix
     ./zed.nix
     ./zoxide.nix
     ./1password.nix

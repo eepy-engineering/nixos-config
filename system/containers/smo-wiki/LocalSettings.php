@@ -98,7 +98,9 @@ $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 # User group permissions
 $wgGroupPermissions['*'   ]['createpage'] = false;
 $wgGroupPermissions['user']['createpage'] = true;
-$wgGroupPermissions['*'   ]['edit'      ] = false;
+#$wgGroupPermissions['*'   ]['edit'      ] = false;
+$wgCaptchaTriggers['edit'] = true;
+$wgGroupPermissions['user']['skipcaptcha'] = true;
 $wgGroupPermissions['*'   ]['createaccount'  ] = true;
 
 $wgGroupPermissions['sysop']['deleterevision'] = true;

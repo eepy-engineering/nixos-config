@@ -11,6 +11,8 @@
     ./desktop.nix
     ./fonts.nix
     ./hardware-configuration.nix
+    ./language.nix
+    ./manpages.nix
     ./networking.nix
     ./packages.nix
     ./wireless.nix

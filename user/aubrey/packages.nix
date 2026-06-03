@@ -54,6 +54,7 @@
           lorien
           texliveFull
           texstudio
+          graphviz
 
           # social
           (discord-canary.override { withVencord = true; })
@@ -63,7 +64,6 @@
           bluebubbles
 
           # web
-          zen-browser
           chromium
           floorp-bin
 

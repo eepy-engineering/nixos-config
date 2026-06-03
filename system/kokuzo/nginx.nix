@@ -70,6 +70,7 @@
     services = {
       nginx = {
         requiredBy = [ "k3s.service" ];
+        before = [ "k3s.service" ];
       };
       tailscale-cert-refresh = {
         requires = [
@@ -77,6 +78,7 @@
           "tailscaled.service"
         ];
         requiredBy = [ "nginx.service" ];
+        before = [ "nginx.service" ];
         script = ''
           rm -f /persist/tailscale-nginx-cert/nginx.cert /persist/tailscale-nginx-cert/nginx.key
           ${pkgs.tailscale}/bin/tailscale cert --cert-file /persist/tailscale-nginx-cert/nginx.cert --key-file /persist/tailscale-nginx-cert/nginx.key kokuzo.tailc38f.ts.net
