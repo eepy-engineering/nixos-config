@@ -6,35 +6,16 @@
 {
   environment.systemPackages = with pkgs; [
     # language frameworks
-    lua51Packages.lua
-    lua51Packages.luarocks
-    pnpm
-    nodejs
-    (dotnetCorePackages.combinePackages [
-      dotnet-sdk_6
-      dotnet-runtime_6
-      dotnet-sdk_8
-      dotnet-sdk_9
-    ])
-    # dotnet-sdk_10
 
     # cli tools
-    fusee-nano
-    miniserve
     libfaketime
-    rsync
     gdb
-    tea
-    gh
-    kubectl
-    cloudflared
     dive
     everest-mons
     nix-index
     perf
     v4l-utils
     swtpm
-    openfpgaloader
     pkgs.android-tools
 
     # dependencies
@@ -44,9 +25,7 @@
     config.virtualisation.libvirtd.qemu.package
 
     # gui
-    mako
     shutter
-    libreoffice-still
     remmina
     vlc
     qpwgraph

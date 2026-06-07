@@ -55,6 +55,7 @@
           texliveFull
           texstudio
           graphviz
+          libreoffice-qt
 
           # social
           (discord-canary.override { withVencord = true; })
@@ -103,6 +104,7 @@
           brightnessctl
           swaylock
           swayidle
+          mako
         ]
       else
         [ ]

@@ -1,5 +1,5 @@
 {
-  imports = [ ../containers/smo-wiki ];
+  imports = [ ../../containers/smo-wiki ];
 
   smo-wiki = {
     enable = false;
