@@ -7,7 +7,7 @@
     walter.enable = false;
     rose.enable = false;
     cysabi.enable = false;
-    tetra.enable = false;
+    tetra.enable = lib.mkForce false;
     tetra.extraGroups = [ "wheel" ];
   };
   home-manager = {
