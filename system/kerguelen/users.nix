@@ -10,6 +10,7 @@
     tetra.enable = lib.mkForce false;
     tetra.extraGroups = [ "wheel" ];
   };
+  security.sudo.wheelNeedsPassword = false;
   home-manager = {
     extraSpecialArgs = specialArgs;
     users = lib.mkForce {
