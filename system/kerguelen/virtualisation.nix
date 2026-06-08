@@ -1,0 +1,3 @@
+{
+  boot.enableContainers = true;
+}

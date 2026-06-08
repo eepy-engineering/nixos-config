@@ -2,33 +2,29 @@ _: {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        forwardAgent = true;
-        identityAgent = "~/.1password/agent.sock";
+        ForwardAgent = true;
+        IdentityAgent = "~/.1password/agent.sock";
       };
       "sanae6.ca" = {
-        user = "sanae";
+        User = "sanae";
       };
       "titan" = {
-        user = "amt693";
-        hostname = "titan.cs.uregina.ca";
-        extraOptions = {
-          RemoteCommand = "bin/nu";
-          RequestTTY = "force";
-        };
+        User = "amt693";
+        HostName = "titan.cs.uregina.ca";
+        RemoteCommand = "bin/nu";
+        RequestTTY = "force";
       };
       "os1" = {
-        user = "amt693";
-        hostname = "os1.cs.uregina.ca";
-        proxyJump = "titan";
-        extraOptions = {
-          RemoteCommand = "bin/nu";
-          RequestTTY = "force";
-        };
+        User = "amt693";
+        HostName = "os1.cs.uregina.ca";
+        ProxyJump = "titan";
+        RemoteCommand = "bin/nu";
+        RequestTTY = "force";
       };
       "catbox" = {
-        user = "tetra";
+        User = "tetra";
       };
     };
   };

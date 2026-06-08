@@ -11,6 +11,13 @@
       "1.0.0.1#one.one.one.one"
     ];
     firewall.enable = false;
+    # nftables.enable = true;
+    nat = {
+      enable = true;
+      internalInterfaces = [ "ve-+" ];
+      externalInterface = "enp0s25";
+      enableIPv6 = true;
+    };
   };
   systemd.network = {
     enable = true;
@@ -24,12 +31,18 @@
   };
   services.resolved = {
     enable = true;
-    dnssec = "true";
-    domains = [ "~." ];
-    fallbackDns = [
-      "1.1.1.1#one.one.one.one"
-      "1.0.0.1#one.one.one.one"
-    ];
-    dnsovertls = "true";
+    settings = {
+      Resolve = {
+        DNSSEC = "true";
+        Domains = [ "~." ];
+        FallbackDNS = [
+          "1.1.1.1#one.one.one.one"
+          "1.0.0.1#one.one.one.one"
+          "2606:4700:4700::1111"
+          "2606:4700:4700::1001"
+        ];
+        DNSOverTLS = "true";
+      };
+    };
   };
 }

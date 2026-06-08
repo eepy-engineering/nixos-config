@@ -5,8 +5,10 @@
     ./filesystem.nix
     ./hardware.nix
     ./networking
-    ./users.nix
     ../components/nix.nix
+    ./services
+    ./users.nix
+    ./virtualisation.nix
   ];
 
   networking.hostName = "kerguelen";

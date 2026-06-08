@@ -3,6 +3,7 @@
   imports = [
     ../../user/configuration.nix
   ];
+
   users.users = {
     walter.enable = false;
     rose.enable = false;
@@ -11,6 +12,7 @@
     tetra.extraGroups = [ "wheel" ];
   };
   security.sudo.wheelNeedsPassword = false;
+
   home-manager = {
     extraSpecialArgs = specialArgs;
     users = lib.mkForce {

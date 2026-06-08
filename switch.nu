@@ -9,6 +9,11 @@ def prebuild [] {
 }
 def "get flake uri" [] { $"($env.CURRENT_FILE)/.." | path expand }
 
+const hostname_map = {
+  "kokuzo": "kokuzo.tailc38f.ts.net",
+  "kerguelen": "kerguelen.tail6c2ee5.ts.net"
+};
+
 def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ...rest] {
   prebuild
 
@@ -20,8 +25,9 @@ def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ..
     sudo nixos-rebuild --flake $"(get flake uri)#($hostname)" $subcmd ...$rest
   } else {
     let remote_user = ($user | default $env.USER);
-    print "Remote...";
-    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($remote_user)@($hostname).tailc38f.ts.net" --sudo $subcmd ...$rest;
+    let actual_hostname = $hostname_map | get -o $hostname | default $hostname;
+    print $"remote switch on ($hostname) \(($actual_hostname)\)";
+    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($remote_user)@($actual_hostname)" --sudo $subcmd ...$rest;
   }
 };
 
