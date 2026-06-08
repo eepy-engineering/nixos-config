@@ -11,8 +11,8 @@ if [ -d /mnt ]; then
   umount /mnt/
 fi
 mkdir /mnt
-chmod 755 /mnt
 mount -t tmpfs tmpfs /mnt
+chmod 755 /mnt
 mkdir /mnt/{boot,nix,persist,swap}
 mount /dev/sda1 /mnt/boot
 mount -o compress=zstd,subvol=persist /dev/sda2 /mnt/persist
