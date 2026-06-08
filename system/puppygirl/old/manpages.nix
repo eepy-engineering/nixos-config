@@ -6,7 +6,7 @@
     man-pages
     man-pages.out
     man-pages-posix
-    manpages-l10n
+    # manpages-l10n
   ];
 
   i18n = {

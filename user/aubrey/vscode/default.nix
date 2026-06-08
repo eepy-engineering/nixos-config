@@ -4,7 +4,7 @@
   ...
 }:
 {
-  programs.vscode = {
+  programs.vscodium = {
     enable = isDesktop;
     package = pkgs.vscodium;
     mutableExtensionsDir = false;
