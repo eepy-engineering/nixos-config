@@ -1,8 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, isDesktop, ... }:
 {
-  home.packages = with pkgs; if isDesktop then [
-    anki-bin
-  ]else [];
+  home.packages =
+    with pkgs;
+    if isDesktop then
+      [
+        anki-bin
+      ]
+    else
+      [ ];
 
   programs.nushell.extraEnv = ''
     $env.ANKI_WAYLAND = 1;
