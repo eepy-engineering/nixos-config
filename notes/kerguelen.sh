@@ -5,6 +5,7 @@ cd /root/nixos-config
 git pull
 if [ -d /mnt ]; then 
   umount /mnt/*
+  umount /mnt
 fi
 rm -rf /mnt
 mkdir /mnt
