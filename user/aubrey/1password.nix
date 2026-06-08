@@ -1,6 +1,6 @@
-{
+{isDesktop, ...}:{
   xdg.configFile."1Password/ssh/agent.toml" = {
-    enable = true;
+    enable = isDesktop;
     force = true;
     text = ''
       [[ssh-keys]]
