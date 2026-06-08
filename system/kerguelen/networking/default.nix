@@ -4,6 +4,11 @@
     ../../components/ssh
   ];
 
+  networking = {
+    useNetworkd = true;
+    
+    firewall.enable = false;
+  };
   systemd.network = {
     enable = true;
     networks = {
@@ -21,5 +26,4 @@
     };
   };
   
-  networking.firewall.enable = false;
 }
