@@ -5,10 +5,10 @@ cd /root/nixos-config
 git pull
 if [ -d /mnt ]; then 
   umount /mnt/*
-  umount /mnt
+  umount /mnt/
 fi
-rm -rf /mnt
 mkdir /mnt
+chmod 755 /mnt
 mount -t tmpfs tmpfs /mnt
 mkdir /mnt/{boot,nix,persist,swap}
 mount -o compress=zstd,subvol=persist /dev/sda2 /mnt/persist
