@@ -16,7 +16,7 @@
         matchConfig.Name = "enp0s25";
         address = [
           # configure addresses including subnet mask
-          "192.168.2.1/24"
+          "192.168.2.1/16"
         ];
         routes = [
           { Gateway = "192.168.1.1"; }
