@@ -3,6 +3,9 @@ if [ ! -d /root/nixos-config ]; then
 fi
 cd /root/nixos-config
 git pull
+if [ -d /mnt ]; then 
+  umount /mnt/*
+fi
 rm -rf /mnt
 mkdir /mnt
 mount -t tmpfs tmpfs /mnt
