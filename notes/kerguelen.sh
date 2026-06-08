@@ -4,13 +4,17 @@ fi
 cd /root/nixos-config
 git pull
 if [ -d /mnt ]; then 
-  umount /mnt/*
+  umount /mnt/boot
+  umount /mnt/nix
+  umount /mnt/persist
+  umount /mnt/swap
   umount /mnt/
 fi
 mkdir /mnt
 chmod 755 /mnt
 mount -t tmpfs tmpfs /mnt
 mkdir /mnt/{boot,nix,persist,swap}
+mount /dev/sda1 /mnt/boot
 mount -o compress=zstd,subvol=persist /dev/sda2 /mnt/persist
 mount -o compress=zstd,noatime,subvol=nix /dev/sda2 /mnt/nix
 mount -o subvol=swap /dev/sda2 /mnt/swap
