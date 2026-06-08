@@ -3,6 +3,7 @@
     "/" = {
       device = "tmpfs";
       fsType = "tmpfs";
+      options = [ "mode=0755" ];
     };
     "/boot" = {
       device = "/dev/disk/by-partuuid/7594381a-8ef1-487b-b1ad-1ca83f128216";
