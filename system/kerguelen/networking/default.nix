@@ -1,7 +1,7 @@
 {
   imports = [
     ./tailscale.nix
-    ../../components/ssh.nix
+    ../../components/ssh
   ];
 
   systemd.network = {
