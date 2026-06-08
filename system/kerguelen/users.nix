@@ -12,7 +12,7 @@
   home-manager = {
     extraSpecialArgs = specialArgs;
     users = lib.mkForce {
-      aubrey = ../../../user/aubrey;
+      aubrey = ../../user/aubrey;
       tetra = "${specialArgs.inputs.tetra-config.outPath}/home";
     };
   };
