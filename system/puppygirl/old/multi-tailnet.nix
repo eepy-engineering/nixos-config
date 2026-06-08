@@ -7,6 +7,7 @@
 # work in progress
 # https://uint.one/posts/all-internet-over-wireguard-using-systemd-networkd-on-nixos/
 # https://jamesguthrie.ch/blog/multi-tailnet-unlocking-access-to-multiple-tailscale-networks/
+# https://gist.github.com/rajsinghtech/c279beb50a63f231457e7087525e8f52
 
 {
   options = with lib; {

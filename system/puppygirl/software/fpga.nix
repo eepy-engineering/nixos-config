@@ -1,8 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     openfpgaloader
   ];
-  
+
   services.udev = {
     packages = [
       (pkgs.stdenv.mkDerivation {

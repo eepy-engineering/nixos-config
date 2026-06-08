@@ -164,6 +164,10 @@
           isDesktop = false;
           system = "x86_64-linux";
         };
+        kerguelen = {
+          isDesktop = false;
+          system = "x86_64-linux";
+        };
       };
       hmUsers = [
         "aubrey"
@@ -187,9 +191,7 @@
               modules = [
                 overlaysModule
                 home-manager.nixosModules.home-manager
-                ./system/configuration.nix
                 ./system/${name}/configuration.nix
-                ./user/configuration.nix
               ];
             };
         in

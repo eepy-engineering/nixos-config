@@ -20,6 +20,9 @@
     ./calibre.nix
     ./syncplay.nix
     ../components/virtualization.nix
+
+    ../configuration.nix
+    ../../user/configuration.nix
   ];
 
   boot.loader = {

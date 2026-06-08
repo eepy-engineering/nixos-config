@@ -27,6 +27,11 @@
         "Cite" = null;
         # "ConfirmEdit" = null;
         # "ConfirmEdit/QuestyCaptcha" = null;
+        "Comments" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Comments";
+          rev = "581397fc431b2f000928614366bd2aa084ef2bc2";
+          sha256 = "sha256-E1JN+z/l3PC7N/uNbG2lvpcky2josIpwdUZY8OK52rM=";
+        };
         "ConfirmEdit/Turnstile" = null;
         "ChangeAuthor" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/ChangeAuthor";

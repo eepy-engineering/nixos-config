@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs;[
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
     (dotnetCorePackages.combinePackages [
       dotnet-runtime_6
       dotnet-sdk_6

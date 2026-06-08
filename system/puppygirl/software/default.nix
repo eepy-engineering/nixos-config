@@ -1,7 +1,8 @@
 {
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./dotnet.nix
     ./fpga.nix
@@ -13,12 +14,12 @@
     pnpm
     nodejs
 
-    # 
+    #
     fusee-nano
     miniserve
     rsync
     cloudflared
-    
+
     gdb
 
     tea

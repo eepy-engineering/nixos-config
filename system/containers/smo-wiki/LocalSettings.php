@@ -109,6 +109,8 @@ $wgGroupPermissions['sysop']['deletelogentry'] = true;
 # ChangeAuthor
 $wgGroupPermissions['sysop']['changeauthor'] = true;
 
+# Comments
+$wgGroupPermissions['sysop']['commentadmin'] = true;
 
 # ConfirmEdit
 wfLoadExtension('ConfirmEdit');

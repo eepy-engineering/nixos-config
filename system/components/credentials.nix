@@ -30,6 +30,12 @@
       description = "Directory to store retrieved secrets";
     };
 
+    tokenPath = lib.mkOption {
+      type = lib.types.str;
+      default = if isDesktop then "/etc/opnix-token" else "/var/opnix-token";
+      description = "Where the token is stored";
+    };
+
     secrets = lib.mkOption {
       default = [ ];
       type = lib.types.listOf (
@@ -61,7 +67,7 @@
     let
       cfg = config.opnix;
       opnixGroup = "onepassword-secrets";
-      tokenFile = if isDesktop then "/etc/opnix-token" else "/var/opnix-token";
+      tokenFile = cfg.tokenPath;
       configFile = builtins.toFile "config.json" (builtins.toJSON config.opnix);
       service = lib.mkIf (cfg.secrets != [ ]) {
         description = "Prepare secrets from 1Password Service Vault";
