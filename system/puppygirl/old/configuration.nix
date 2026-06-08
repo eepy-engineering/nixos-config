@@ -6,10 +6,8 @@
 }:
 {
   imports = [
-    ./backups.nix
     ./bluetooth.nix
     ./desktop.nix
-    ./fonts.nix
     ./hardware-configuration.nix
     ./language.nix
     ./manpages.nix

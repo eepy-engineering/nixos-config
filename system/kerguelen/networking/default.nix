@@ -6,7 +6,7 @@
 
   networking = {
     useNetworkd = true;
-    
+
     firewall.enable = false;
   };
   systemd.network = {
@@ -25,5 +25,5 @@
       };
     };
   };
-  
+
 }
