@@ -43,6 +43,8 @@
           wgsl-analyzer
           antigravity
           master-pkgs.godot-mono
+          spade
+          swim
 
           # art
           krita

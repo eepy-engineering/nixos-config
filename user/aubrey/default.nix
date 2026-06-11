@@ -28,6 +28,7 @@
     ./gdb.nix
     ./ghidra.nix
     ./git.nix
+    ./hyfetch.nix
     ./jujutsu.nix
     ./nix.nix
     ./micro.nix
