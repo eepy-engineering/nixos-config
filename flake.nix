@@ -92,6 +92,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    komisch-mono = {
+      url = "github:Sanae6/komisch-mono-font";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin.url = "github:catppuccin/nix";
     nixcord.url = "github:FlameFlag/nixcord";
   };
@@ -113,6 +117,7 @@
       antigravity-nix,
       catppuccin,
       fcitx-passthrough,
+      komisch-mono,
       ...
     }:
     let
@@ -137,6 +142,7 @@
             _010editor = O10editor.packages.${final.stdenv.hostPlatform.system}.default;
             antigravity = antigravity-nix.packages.${final.stdenv.hostPlatform.system}.default;
             fcitx-passthrough = fcitx-passthrough.packages.${final.stdenv.hostPlatform.system}.default;
+            komisch-mono = komisch-mono.packages.${final.stdenv.hostPlatform.system}.komisch-mono;
           }
           // (import ./packages final)
         )

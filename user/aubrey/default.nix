@@ -25,7 +25,7 @@
     ./anki.nix
     ./editorconfig.nix
     ./fzf.nix
-    ./gdb.nix
+    ./debugging.nix
     ./ghidra.nix
     ./git.nix
     ./hyfetch.nix

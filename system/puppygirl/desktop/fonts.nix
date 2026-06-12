@@ -6,6 +6,7 @@
       noto-fonts
       noto-fonts-color-emoji
       # mono
+      komisch-mono
       comic-mono
       inputs.tetra-config.packages.${pkgs.stdenv.hostPlatform.system}.klee-one
       jetbrains-mono
@@ -43,7 +44,7 @@
         monospace = [
           "nasin-nanpa"
           "nasin\\-nanpa"
-          "Comic Mono"
+          "Komisch Mono"
           "Klee One"
           "JetBrainsMonoNL"
           "Noto Sans Math"
