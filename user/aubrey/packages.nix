@@ -41,7 +41,6 @@
           zellij
           gamemakerEnv
           wgsl-analyzer
-          antigravity
           master-pkgs.godot-mono
           spade
           swim
@@ -97,6 +96,7 @@
           croc
           jq
           kdePackages.qttools
+          kdePackages.kdeconnect-kde
           pciutils
 
           # desktop

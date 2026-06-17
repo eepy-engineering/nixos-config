@@ -30,6 +30,7 @@
     ./git.nix
     ./hyfetch.nix
     ./jujutsu.nix
+    ./kdeconnect.nix
     ./nix.nix
     ./micro.nix
     ./misc.nix
