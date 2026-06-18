@@ -1,16 +1,11 @@
 {
   pkgs,
-  lib,
-  isDesktop,
   ...
 }:
 {
-  programs.virt-manager.enable = false;
   virtualisation = {
     spiceUSBRedirection.enable = true;
     libvirtd = {
-      enable = false;
-
       qemu = {
         runAsRoot = true;
         swtpm.enable = true;
@@ -18,10 +13,11 @@
       };
     };
 
-    podman = {
-      enable = true;
-      dockerCompat = true;
-    };
+    # podman = {
+    #   enable = true;
+    #   dockerCompat = true;
+    # };
+    docker.enable = true;
     containers.enable = true;
   };
   boot.enableContainers = true;

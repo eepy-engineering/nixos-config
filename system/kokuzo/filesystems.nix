@@ -65,4 +65,10 @@
     fsType = "zfs";
     depends = [ "/" ];
   };
+
+  fileSystems."/mnt/apps/minecraft" = {
+    device = "apps/minecraft";
+    fsType = "zfs";
+    depends = [ "/" ];
+  };
 }

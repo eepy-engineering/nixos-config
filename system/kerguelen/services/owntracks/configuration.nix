@@ -26,11 +26,6 @@ in
     useHostResolvConf = lib.mkForce false;
   };
 
-  services.httpd = {
-    enable = true;
-    adminAddr = "admin@example.org";
-  };
-
   services = {
     resolved.enable = true;
     mosquitto = {

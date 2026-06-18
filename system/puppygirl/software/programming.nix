@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../../components/rust.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     pnpm
     nodejs

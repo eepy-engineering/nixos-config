@@ -5,8 +5,19 @@
 {
   imports = [
     ./dotnet.nix
+    ./dolphin.nix
+    ./flatpak.nix
     ./fpga.nix
     ./js.nix
+    ./manpages.nix
+    ./nix.nix
+    ./ntp.nix
+    ./obs.nix
+    ./ppd.nix
+    ./programming.nix
+    ./qemu.nix
+    ./steam.nix
+    ./wireshark.nix
   ];
   environment.systemPackages = with pkgs; [
     lua51Packages.lua
@@ -26,4 +37,7 @@
     gh
     kubectl
   ];
+
+  # doesn't deserve its own file
+  programs.zoom-us.enable = true;
 }

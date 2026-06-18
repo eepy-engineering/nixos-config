@@ -11,7 +11,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-        "local-overlay-store"
       ];
     };
   };

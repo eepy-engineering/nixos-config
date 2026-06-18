@@ -77,11 +77,13 @@
           syncplay
           mpv
           transmission_4-qt6
+          vlc
 
           # games
           prismlauncher
           ryubing
           osu-lazer-bin
+          everest-mons
           # wineWowPackages.unstableFull
 
           # tools
@@ -98,6 +100,17 @@
           kdePackages.qttools
           kdePackages.kdeconnect-kde
           pciutils
+          perf
+          v4l-utils
+          pkgs.android-tools
+          dive
+          gdb
+          lldb
+          llvmPackages.bintools-unwrapped
+          remmina
+          qpwgraph
+          _010editor
+          libfaketime
 
           # desktop
           wev

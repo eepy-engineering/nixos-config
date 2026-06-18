@@ -1,9 +1,12 @@
 {
+  imports = [
+    ../components/bluetooth.nix
+  ];
+
   services.pulseaudio.extraConfig = ''
     load-module module-bluetooth-policy
     load-module module-bluetooth-discover
   '';
 
   services.joycond.enable = true;
-
 }

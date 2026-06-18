@@ -1,9 +1,16 @@
 {
   imports = [
     ./backups.nix
+    ./bluetooth.nix
+    ./boot.nix
     ./desktop
+    ./filesystems.nix
+    ./locale.nix
+    ./networking
     ./software
-    ./old/configuration.nix
+    ./users.nix
+    ./wireless.nix
+
     ../configuration.nix
     ../../user/configuration.nix
   ];

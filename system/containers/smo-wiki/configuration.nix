@@ -194,6 +194,7 @@
       ];
       location = "/mnt/backup-mysql";
       calendar = "Mon";
+      singleTransaction = true;
     };
 
     cloudflared = {
