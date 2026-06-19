@@ -1,10 +1,17 @@
 {
   imports = [ ../containers/smo-wiki ];
 
-  fileSystems."/persist/smo-wiki-mysql" = {
-    device = "apps/smo-wiki-mysql";
-    fsType = "zfs";
-    depends = [ "/" ];
+  fileSystems = {
+    "/persist/smo-wiki-mysql" = {
+      device = "apps/smo-wiki-mysql";
+      fsType = "zfs";
+      depends = [ "/" ];
+    };
+    "/persist/smo-wiki-mediawiki-storage" = {
+      device = "apps/smo-wiki";
+      fsType = "zfs";
+      depends = [ "/" ];
+    };
   };
 
   smo-wiki = {
@@ -12,6 +19,10 @@
     site = "smo.wiki";
     mysqlDataDir = "/persist/smo-wiki-mysql";
     mysqlBackupDir = "/mnt/tank/smo-wiki-backups";
+    mediawikiDir = "/persist/smo-wiki-mediawiki-storage";
+    cloudflaredPem = "h3ewjwxbus3gops6qi4naiwpn4";
+    cloudflaredTunnel = "ty24aofrqct3solie6v2iv7fke";
+    cloudflaredTunnelId = "9594cc82-a65e-427b-bc88-35c3985402b6";
   };
 
   virtualisation = {

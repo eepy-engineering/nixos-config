@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   ...
 }:
@@ -12,6 +13,15 @@
 
   services.traccar = {
     enable = true;
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."kerguelen" = {
+      locations = {
+        "/".alias = "${pkgs.traccar}/web/$1";
+      };
+    };
   };
 
   system.stateVersion = "26.11";

@@ -1,10 +1,13 @@
 {
   imports = [
+    ./audio.nix
     ./backups.nix
     ./bluetooth.nix
     ./boot.nix
     ./desktop
     ./filesystems.nix
+    ./hardware.nix
+    ./input.nix
     ./locale.nix
     ./networking
     ./software

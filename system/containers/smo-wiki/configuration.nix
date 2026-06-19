@@ -3,7 +3,7 @@
   pkgs,
   config,
   site,
-  shouldBackup,
+  cloudflaredTunnelId,
   ...
 }:
 {
@@ -29,8 +29,8 @@
         # "ConfirmEdit/QuestyCaptcha" = null;
         "Comments" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Comments";
-          rev = "581397fc431b2f000928614366bd2aa084ef2bc2";
-          sha256 = "sha256-E1JN+z/l3PC7N/uNbG2lvpcky2josIpwdUZY8OK52rM=";
+          rev = "161348fb15d63a239e95dbb67a4f08318d8000e3"; # master
+          sha256 = "sha256-Oq+MvCpNSUzBm/ulD453MmhLHQsqqOV7Z40tPko+ldM=";
         };
         "ConfirmEdit/Turnstile" = null;
         "ChangeAuthor" = pkgs.fetchgit {
@@ -43,6 +43,12 @@
         #   rev = "ab2578451d5fc99007cd019d174d79c5a8b13aaf";
         #   sha256 = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
         # };
+        "Diagrams" = pkgs.fetchFromGitHub {
+          owner = "samwilson";
+          repo = "diagrams-extension";
+          rev = "10cfd40b53c5bdff2c47c849e8d24df3b1f9b612";
+          hash = "sha256-i+k6OTttIjwUWfoF/uJkFx/kn+0wzykVlZgskbg31yU=";
+        };
         "DiscordNotifications" = pkgs.fetchzip {
           url = "https://github.com/miraheze/DiscordNotifications/archive/997d64722dcd0697d002612d9b890e3c0e3e1906.zip";
           sha256 = "sha256-yJaCcq1S8sRLnnlswy0R5Nv/j2ZboLLdKxoOtMjp2BM=";
@@ -62,6 +68,12 @@
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Nuke";
           rev = "2774fccbe931c1041c2268942aff27db7eb34637";
           sha256 = "sha256-rpDpl31eGO+DAiINjWhXWY2FyxQuHRSVLDQ5sA/MM7Y=";
+        };
+        "NiceCategoryList3" = pkgs.fetchFromGitHub {
+          owner = "JLTRY";
+          repo = "NiceCategoryList3";
+          rev = "686ac89bff8871c59dd27032366248ef3649a3ce";
+          hash = "sha256-Hw+78yWIVIX0N/Nf1MfT/I5v95WUHyvwCzuczvDZku8=";
         };
         "PageImages" = null;
         "ParserFunctions" = null;
@@ -91,6 +103,16 @@
           sha256 = "sha256-OSpmRogd2UEXFMQz2bEfj6tLEe9OPX+tB82hZZElQrY=";
         };
         "TitleBlacklist" = null;
+        "Translate" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Translate";
+          rev = "c5f12bdf434878471c9b3f2f86e8604c389f8b12";
+          hash = "sha256-2KTdgVWT7lzMUBQPld0jA5jLtwb9nBzO0CoCoDA4slc=";
+        };
+        "UniversalLanguageSelector" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/UniversalLanguageSelector";
+          rev = "86340981f2cd44bb2f8170b2a7bae9f54763a5f9";
+          hash = "sha256-P6VtMoE2fm4aAqXvKB3BDoqxiJvWwXxum9zem/wg4Lo=";
+        };
         "VisualEditor" = null;
         "Widgets" = pkgs.symlinkJoin {
           name = "widgets-smarty";
@@ -123,6 +145,14 @@
         $wgDiff3 = "${pkgs.diffutils}/bin/diff3";
         $wgSVGConverters = [ 'rsvg' => '${pkgs.librsvg}/bin/rsvg-convert -w $width -h $height -o $output $input' ];
         $wgImageMagickConvertCommand = "${pkgs.imagemagick}/bin/convert";
+        $wgDiagramsLocalCommands = [
+          "dot"   => "${pkgs.graphviz}/bin/dot",
+          "neato" => "${pkgs.graphviz}/bin/neato",
+          "fdp"   => "${pkgs.graphviz}/bin/fdp",
+          "sfdp"  => "${pkgs.graphviz}/bin/sfdp",
+          "circo" => "${pkgs.graphviz}/bin/circo",
+          "twopi" => "${pkgs.graphviz}/bin/twopi",
+        ];
       '';
       path = with pkgs; [
         diffutils
@@ -136,7 +166,7 @@
       };
     };
 
-    nginx.virtualHosts.${config.services.mediawiki.nginx.hostName} = {
+    nginx.virtualHosts.${site} = {
       listenAddresses = [ "unix:/run/nginx/nginx.sock" ];
       locations = {
         "~ ^/static/(.+)$" = {
@@ -188,7 +218,7 @@
     };
 
     mysqlBackup = {
-      enable = shouldBackup;
+      enable = true;
       databases = [
         "mediawiki"
       ];
@@ -201,7 +231,7 @@
       enable = true;
       certificateFile = pkgs.asOpnixPath "smo-wiki/cloudflared.pem";
       tunnels = {
-        "9594cc82-a65e-427b-bc88-35c3985402b6" = {
+        ${cloudflaredTunnelId} = {
           credentialsFile = pkgs.asOpnixPath "smo-wiki/tunnel.json";
           default = "http_status:404";
           ingress = {
@@ -214,7 +244,7 @@
 
   systemd = {
     services = {
-      cloudflared-tunnel-9594cc82-a65e-427b-bc88-35c3985402b6 = {
+      "cloudflared-tunnel-${cloudflaredTunnelId}" = {
         serviceConfig = {
           SupplementaryGroups = [ config.services.nginx.group ];
           BindPaths = "/run/nginx";
@@ -242,14 +272,37 @@
           Type = "oneshot";
         };
       };
+      mediawiki-job-queue = {
+        path = [
+          (lib.findFirst (pk: pk.name == "mediawiki-scripts") null config.environment.systemPackages)
+        ];
+        script = ''
+          mediawiki-maintenance runJobs --maxtime 3600
+        '';
+        serviceConfig = {
+          PrivateTmp = true;
+          Type = "oneshot";
+          User = "mediawiki";
+        };
+      };
     };
-    timers.ip-list-refresh = {
-      wantedBy = [ "timers.target" ];
-      requires = [ "network-online.target" ];
-      timerConfig = {
-        OnCalendar = "00:00:00";
-        Persistent = true;
-        Unit = [ "ip-list-refresh.service" ];
+    timers = {
+      ip-list-refresh = {
+        wantedBy = [ "timers.target" ];
+        requires = [ "network-online.target" ];
+        timerConfig = {
+          OnCalendar = "00:00:00";
+          Persistent = true;
+          Unit = [ "ip-list-refresh.service" ];
+        };
+      };
+      mediawiki-job-queue = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "hourly";
+          Persistent = true;
+          Unit = [ "mediawiki-job-queue.service" ];
+        };
       };
     };
   };

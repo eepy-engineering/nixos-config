@@ -103,6 +103,9 @@ $wgCaptchaTriggers['edit'] = true;
 $wgGroupPermissions['user']['skipcaptcha'] = true;
 $wgGroupPermissions['*'   ]['createaccount'  ] = true;
 
+$wgGroupPermissions['user']['translate'] = true;
+$wgGroupPermissions['sysop']['pagetranslation'] = true;
+
 $wgGroupPermissions['sysop']['deleterevision'] = true;
 $wgGroupPermissions['sysop']['deletelogentry'] = true;
 
@@ -116,6 +119,7 @@ $wgGroupPermissions['sysop']['commentadmin'] = true;
 wfLoadExtension('ConfirmEdit');
 $wgCaptchaClass = "Turnstile";
 $wgCaptchaClass = MediaWiki\Extension\ConfirmEdit\Turnstile\Turnstile::class;
+
 
 # DiscordNotifications
 $wgDiscordFromName = "SMO.wiki";
@@ -174,6 +178,10 @@ $wgTranscodeBackgroundTimeLimit = 0;
 # TitleKey
 #$wgSearchType = Mediawiki\Extension\TitleKEy\SearchEngine::class;
 
+# Translate
+$wgPageTranslationLanguageList = "sidebar-fallback";
+$wgTranslatePageTranslationULS = true;
+$wgTranslatePageTranslationDefaultLanguageCode = 'en';
 
 #StopForumSpam
 $wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";

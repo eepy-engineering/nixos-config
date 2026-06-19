@@ -1,4 +1,8 @@
 {
+  imports = [
+    ../components/credentials.nix
+  ];
+
   system.activationScripts = {
     opnix-link = {
       text = ''

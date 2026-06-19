@@ -56,6 +56,8 @@
         geequlim.godot-tools
         pest.pest-ide-tools
         tohoyn2.guile-vscode
+        myriad-dreamin.tinymist
+        tomoki1207.pdf
       ];
     };
   };

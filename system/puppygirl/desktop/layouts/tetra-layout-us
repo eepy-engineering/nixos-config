@@ -18,20 +18,20 @@ xkb_symbols "tetra" {
 	key <AE11>  {[        minus,  underscore,             yen,              emdash ]};
 	key <AE12>  {[        equal,        plus,        notequal,           plusminus ]};
 
-	key <AD01>  {[            q,           Q,      adiaeresis,          Adiaeresis ]}; 
+	key <AD01>  {[            q,           Q,          aacute,              Aacute ]}; 
 	key <AD02>  {[            w,           W,      ediaeresis,          Ediaeresis ]};
 	key <AD03>  {[            e,           E,          eacute,              Eacute ]};
 	key <AD04>  {[            r,           R,      registered,           trademark ]};
 	key <AD05>  {[            t,           T,           thorn,               THORN ]};
-	key <AD06>  {[            y,           Y,      udiaeresis,          Udiaeresis ]};
-	key <AD07>  {[            u,           U,          uacute,              Uacute ]};
+	key <AD06>  {[            y,           Y,          uacute,              Uacute ]};
+	key <AD07>  {[            u,           U,      udiaeresis,          Udiaeresis ]};
 	key <AD08>  {[            i,           I,          iacute,              Iacute ]};
-	key <AD09>  {[            o,           O,          oacute,              Oacute ]};
-	key <AD10>  {[            p,           P,      odiaeresis,          Odiaeresis ]};
+	key <AD09>  {[            o,           O,      odiaeresis,          Odiaeresis ]};
+	key <AD10>  {[            p,           P,          oacute,              Oacute ]};
 	key <AD11>  {[  bracketleft,   braceleft,   guillemetleft, kana_openingbracket ]};
 	key <AD12>  {[ bracketright,  braceright,  guillemetright, kana_closingbracket ]};
 
-	key <AC01>  {[            a,           A,          aacute,              Aacute ]};
+	key <AC01>  {[            a,           A,      adiaeresis,          Adiaeresis ]};
 	key <AC02>  {[            s,           S,          ssharp,               U1E9E ]}; // Capital Letter Sharp S
 	key <AC03>  {[            d,           D,             eth,                 ETH ]};
 	key <AC04>  {[            f,           F,         dstroke,             Dstroke ]};

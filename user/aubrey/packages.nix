@@ -57,6 +57,8 @@
           texstudio
           graphviz
           libreoffice-qt
+          typst
+          typstyle
 
           # social
           (discord-canary.override { withVencord = true; })

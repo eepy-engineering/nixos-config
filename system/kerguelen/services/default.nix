@@ -1,6 +1,6 @@
 {
   imports = [
-    ./owntracks
-    ../../containers/smo-wiki
+    ./traccar
+    ./smo-wiki.nix
   ];
 }
