@@ -13,7 +13,7 @@
 
   programs.ssh.knownHostsFiles = [
     # Personal Servers
-    ./known-hosts/aubrey-server-a
+    # ./known-hosts/kerguelen
     ./known-hosts/rose-desktop
     ./known-hosts/kokuzo
 

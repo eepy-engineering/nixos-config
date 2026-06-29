@@ -96,7 +96,7 @@ $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 
 # User group permissions
-$wgGroupPermissions['*'   ]['createpage'] = false;
+$wgGroupPermissions['*'   ]['createpage'] = true;
 $wgGroupPermissions['user']['createpage'] = true;
 #$wgGroupPermissions['*'   ]['edit'      ] = false;
 $wgCaptchaTriggers['edit'] = true;
@@ -109,6 +109,15 @@ $wgGroupPermissions['sysop']['pagetranslation'] = true;
 $wgGroupPermissions['sysop']['deleterevision'] = true;
 $wgGroupPermissions['sysop']['deletelogentry'] = true;
 
+define("NS_GUIDE", 3000);
+define("NS_GUIDE_TALK", 3001);
+$wgExtraNamespaces[NS_GUIDE] = "Guide";
+$wgExtraNamespaces[NS_GUIDE_TALK] = "Guide_talk";
+
+$wgNamespacesWithSubpages[NS_MAIN] = true;
+$wgNamespaceProtection[NS_PROJECT] = ['editproject'];
+$wgGroupPermissions['bureaucrat']['editproject'] = true;
+
 # ChangeAuthor
 $wgGroupPermissions['sysop']['changeauthor'] = true;
 
@@ -120,6 +129,11 @@ wfLoadExtension('ConfirmEdit');
 $wgCaptchaClass = "Turnstile";
 $wgCaptchaClass = MediaWiki\Extension\ConfirmEdit\Turnstile\Turnstile::class;
 
+# CodeEditor
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+
+# CodeMirror
+$wgDefaultUserOptions['usecodemirror'] = true;
 
 # DiscordNotifications
 $wgDiscordFromName = "SMO.wiki";

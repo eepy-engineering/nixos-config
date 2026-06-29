@@ -24,5 +24,23 @@
     };
   };
 
+  users = {
+    users.traccar = {
+      isSystemUser = true;
+      uid = 500;
+      description = "Traccar";
+      group = "nogroup";
+    };
+  };
+
+  systemd.services.traccar = {
+    serviceConfig = {
+      DynamicUser = lib.mkForce false;
+      User = "traccar";
+      StateDirectory = lib.mkForce "";
+      ReadWritePaths = "/var/lib/traccar";
+    };
+  };
+
   system.stateVersion = "26.11";
 }

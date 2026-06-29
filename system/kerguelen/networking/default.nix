@@ -1,7 +1,7 @@
 {
   imports = [
     ./tailscale.nix
-    ../../components/ssh
+    ./ssh.nix
   ];
 
   networking = {
@@ -10,7 +10,21 @@
       "1.1.1.1#one.one.one.one"
       "1.0.0.1#one.one.one.one"
     ];
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+      allowedTCPPortRanges = [
+        {
+          from = 0;
+          to = 65535;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 0;
+          to = 65535;
+        }
+      ];
+    };
     # nftables.enable = true;
     nat = {
       enable = true;

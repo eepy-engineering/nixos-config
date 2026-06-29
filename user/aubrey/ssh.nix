@@ -7,9 +7,6 @@ _: {
         ForwardAgent = true;
         IdentityAgent = "~/.1password/agent.sock";
       };
-      "sanae6.ca" = {
-        User = "sanae";
-      };
       "titan" = {
         User = "amt693";
         HostName = "titan.cs.uregina.ca";

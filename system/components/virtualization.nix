@@ -1,5 +1,6 @@
 {
   pkgs,
+  isDesktop,
   ...
 }:
 {
@@ -11,6 +12,10 @@
         swtpm.enable = true;
         vhostUserPackages = with pkgs; [ virtiofsd ];
       };
+    };
+    virtualbox.host = {
+      enable = isDesktop;
+      addNetworkInterface = true;
     };
 
     # podman = {

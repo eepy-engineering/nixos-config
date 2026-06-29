@@ -24,19 +24,23 @@
       extensions = {
         "AbuseFilter" = null;
         "CategoryTree" = null;
+        "ChangeAuthor" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/ChangeAuthor";
+          rev = "122d33c4a302e30035c1b958306cea61c4621994";
+          sha256 = "sha256-AtbB/kOqZLOKyY+gqoYExOtS6rNQ6rzcAM7LugWE6ig=";
+        };
         "Cite" = null;
-        # "ConfirmEdit" = null;
-        # "ConfirmEdit/QuestyCaptcha" = null;
         "Comments" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Comments";
           rev = "161348fb15d63a239e95dbb67a4f08318d8000e3"; # master
           sha256 = "sha256-Oq+MvCpNSUzBm/ulD453MmhLHQsqqOV7Z40tPko+ldM=";
         };
         "ConfirmEdit/Turnstile" = null;
-        "ChangeAuthor" = pkgs.fetchgit {
-          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/ChangeAuthor";
-          rev = "122d33c4a302e30035c1b958306cea61c4621994";
-          sha256 = "sha256-AtbB/kOqZLOKyY+gqoYExOtS6rNQ6rzcAM7LugWE6ig=";
+        "CodeEditor" = null;
+        "CodeMirror" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/CodeMirror";
+          rev = "bfd93266efcfabf59062ae09ba54afe41b165e9d";
+          hash = "sha256-aNLnEnqBip7VmE+8CIyJFOY1AI6AHTqcZpw3V8hEAhk=";
         };
         # "DarkMode" = pkgs.fetchgit {
         #   url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode";
@@ -44,10 +48,10 @@
         #   sha256 = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
         # };
         "Diagrams" = pkgs.fetchFromGitHub {
-          owner = "samwilson";
+          owner = "Sanae6";
           repo = "diagrams-extension";
-          rev = "10cfd40b53c5bdff2c47c849e8d24df3b1f9b612";
-          hash = "sha256-i+k6OTttIjwUWfoF/uJkFx/kn+0wzykVlZgskbg31yU=";
+          rev = "cd6a967bd3b59321a81e780db95d822a49cb5970";
+          hash = "sha256-8AVMz7xTgZbeneBwkdEJ7CziROgMnA4o/3q4cEDCxqc=";
         };
         "DiscordNotifications" = pkgs.fetchzip {
           url = "https://github.com/miraheze/DiscordNotifications/archive/997d64722dcd0697d002612d9b890e3c0e3e1906.zip";
