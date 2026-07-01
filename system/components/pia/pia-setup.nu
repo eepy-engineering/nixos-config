@@ -51,8 +51,8 @@ def main [
   ";
   print $config
   $config | save -f /private/pia.wg.conf
-  $json.peer_ip | save -f /tmp/pia.ip
-  $wg_info | merge { token: $user_token } | to json | save -f /tmp/pia.pf.json
+  $json.peer_ip | save -f /private/pia.ip
+  $wg_info | merge { token: $user_token } | to json | save -f /private/pia.pf.json
 
   ip link add dev pia type wireguard
   ip address add dev pia $json.peer_ip
@@ -111,7 +111,7 @@ def "main forwarding" [
   ca_cert: string,
   redirect_port: int,
 ] {
-  let json = open /tmp/pia.pf.json;
+  let json = open /private/pia.pf.json;
 
   let wg_info = $json;
   let user_token = $json.token;
@@ -120,13 +120,13 @@ def "main forwarding" [
     let sigpay = curl --interface pia -G --connect-to $"($wg_info.hostname)::($wg_info.server_ip):" --cacert $ca_cert --data-urlencode $"token=($user_token)" $"https://($wg_info.hostname):19999/getSignature" | from json
     let sigpay = $sigpay | merge ($sigpay.payload | decode base64 | decode | from json)
     $sigpay | print -e
-    $sigpay | save /tmp/pia.pfsig.json -f
+    $sigpay | save /private/pia.pfsig.json -f
     let start = date now;
 
 
     sleep 10sec
 
-    let sigpay = open /tmp/pia.pfsig.json
+    let sigpay = open /private/pia.pfsig.json
     mut session_id = "";
     loop {
       curl --interface pia -G --connect-to $"($wg_info.hostname)::($wg_info.server_ip):" --cacert $ca_cert --data-urlencode $"payload=($sigpay.payload)" --data-urlencode $"signature=($sigpay.signature)"  $"https://($wg_info.hostname):19999/bindPort"

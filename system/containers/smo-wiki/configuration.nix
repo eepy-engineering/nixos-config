@@ -4,6 +4,8 @@
   config,
   site,
   cloudflaredTunnelId,
+  galeraName,
+  readOnly,
   ...
 }:
 {
@@ -146,6 +148,7 @@
       extraConfig = ''
         include "${pkgs.asOpnixPath "smo-wiki/secure-settings.php"}";
         ${builtins.readFile ./LocalSettings.php}
+        ${if readOnly != null then ''$wgReadOnly = "${readOnly}";'' else ""}
         $wgDiff3 = "${pkgs.diffutils}/bin/diff3";
         $wgSVGConverters = [ 'rsvg' => '${pkgs.librsvg}/bin/rsvg-convert -w $width -h $height -o $output $input' ];
         $wgImageMagickConvertCommand = "${pkgs.imagemagick}/bin/convert";
@@ -203,12 +206,17 @@
 
     mysql = {
       enable = true;
-      package = pkgs.mysql84;
+      package = pkgs.mariadb;
       dataDir = "/mnt/mysql";
       settings = {
         mysqld = {
-          bind-address = "127.0.0.1";
+          skip-networking = true;
           log-error = "${config.services.mysql.dataDir}/mysql_err.log";
+          # wsrep_provider_options = ["pc.weight=2"];
+          plugin-wsrep-provider = true;
+          binlog_format = "ROW";
+          default_storage_engine = "InnoDB";
+          innodb_autoinc_lock_mode = 2;
         };
       };
       ensureUsers = [
@@ -219,6 +227,16 @@
           };
         }
       ];
+      galeraCluster = {
+        enable = true;
+        package = pkgs.mariadb-galera;
+        nodeAddresses = [
+          "kokuzo.tailc38f.ts.net"
+          "kerguelen.tail6c2ee5.ts.net"
+        ];
+        localName = galeraName;
+        name = "smowiki";
+      };
     };
 
     mysqlBackup = {
@@ -229,6 +247,41 @@
       location = "/mnt/backup-mysql";
       calendar = "Mon";
       singleTransaction = true;
+    };
+
+    syncthing = {
+      enable = true;
+      user = "mediawiki";
+      group = config.users.users.mediawiki.group;
+      guiAddress = "${galeraName}:8384";
+      cert = pkgs.asOpnixPath "smo-wiki/syncthing-cert.pem";
+      key = pkgs.asOpnixPath "smo-wiki/syncthing-key.pem";
+      settings = {
+        devices = {
+          kokuzo = {
+            id = "LWMJKAA-J7SJBGZ-RXHPDUX-WASDYT7-KKQPOUN-YZB2KTD-ZFKNLOX-IAQBQQY";
+            addresses = [
+              "tcp://kokuzo.tailc38f.ts.net"
+            ];
+          };
+          kerguelen = {
+            id = "ACATTSC-A3OPS5T-UHMYFBP-5DKVSQP-25U6Y4I-ZBNWAMR-OGNW4MA-U6WBWQG";
+            addresses = [
+              "tcp://kerguelen.tail6c2ee5.ts.net"
+            ];
+          };
+        };
+        folders = {
+          "Mediawiki" = {
+            label = "Mediawiki";
+            path = "/var/lib/mediawiki";
+            devices = [
+              "kokuzo"
+              "kerguelen"
+            ];
+          };
+        };
+      };
     };
 
     cloudflared = {
@@ -270,7 +323,7 @@
         ];
         script = ''
           wget -O /tmp/listed_ip.zip https://www.stopforumspam.com/downloads/listed_ip_30_all.zip
-          unzip -d /var/lib/mediawiki/ /tmp/listed_ip.zip
+          unzip -ud /var/lib/mediawiki/ /tmp/listed_ip.zip
         '';
         serviceConfig = {
           Type = "oneshot";

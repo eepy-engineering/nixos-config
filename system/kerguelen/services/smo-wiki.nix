@@ -24,5 +24,8 @@
     cloudflaredPem = "gmvjrreos46vx526brke3s7wnu";
     cloudflaredTunnel = "ponvw3bhpeftm3wgsr2vxd2siq";
     cloudflaredTunnelId = "c608eb58-446a-48e0-bc5f-506c7045d1cb";
+    tailscaleHostName = "kerguelen.tail6c2ee5.ts.net";
+    syncthing = "n47lsqtrqbec5mjcb4oardc77u";
+    readOnly = "this is a test site...";
   };
 }

@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  isDesktop,
+  ...
+}:
 {
   programs.jujutsu =
     let
@@ -16,7 +21,7 @@
           backend = "ssh";
           behavior = "own";
           key = gitCfg.user.signingKey;
-          backends.ssh.program = gitCfg."gpg \"ssh\"".program;
+          backends.ssh.program = lib.mkIf isDesktop gitCfg."gpg \"ssh\"".program;
         };
         ui = {
           default-command = "log";

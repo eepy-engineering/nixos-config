@@ -23,6 +23,8 @@
     cloudflaredPem = "h3ewjwxbus3gops6qi4naiwpn4";
     cloudflaredTunnel = "ty24aofrqct3solie6v2iv7fke";
     cloudflaredTunnelId = "9594cc82-a65e-427b-bc88-35c3985402b6";
+    tailscaleHostName = "kokuzo.tailc38f.ts.net";
+    syncthing = "iwijwbx46bjzbewhly5wik3bba";
   };
 
   virtualisation = {

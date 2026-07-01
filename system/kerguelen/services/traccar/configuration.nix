@@ -15,15 +15,6 @@
     enable = true;
   };
 
-  services.nginx = {
-    enable = true;
-    virtualHosts."kerguelen" = {
-      locations = {
-        "/".alias = "${pkgs.traccar}/web/$1";
-      };
-    };
-  };
-
   users = {
     users.traccar = {
       isSystemUser = true;

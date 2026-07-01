@@ -1,4 +1,5 @@
 #$wgReadOnly = 'Backing up database, access will be restored shortly';
+#$wgReadOnly = 'Under maintenance, access will be restored soon';
 
 $wgFixDoubleRedirects = true;
 $wgDebugLogGroups = [ 'rewrite' => '/tmp/rewrite.log' ];
@@ -58,6 +59,8 @@ $wgMemCachedServers = [];
 ## is writable, then set this to true:
 $wgEnableUploads = true;
 $wgGenerateThumbnailOnParse = true;
+ini_set('post_max_size', '30M');
+ini_set('upload_max_filesize', '20M');
 
 $wgFileExtensions[] = 'svg';
 $wgFileExtensions[] = 'webm';
@@ -67,6 +70,8 @@ $wgAllowTitlesInSVG = true;
 $wgSVGConverter = 'rsvg';
 
 $wgMaxAnimatedGifArea = 10e7;
+
+$wgAllowSiteCSSOnRestrictedPages = true;
 
 # InstantCommons allows wiki to use images from https://commons.wikimedia.org
 $wgUseInstantCommons = false;
@@ -113,6 +118,10 @@ define("NS_GUIDE", 3000);
 define("NS_GUIDE_TALK", 3001);
 $wgExtraNamespaces[NS_GUIDE] = "Guide";
 $wgExtraNamespaces[NS_GUIDE_TALK] = "Guide_talk";
+$wgNamespacesToBeSearchedDefault = [
+	NS_MAIN => true,
+	NS_GUIDE => true,
+];
 
 $wgNamespacesWithSubpages[NS_MAIN] = true;
 $wgNamespaceProtection[NS_PROJECT] = ['editproject'];
