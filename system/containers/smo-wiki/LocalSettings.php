@@ -8,6 +8,21 @@ $wgDebugLogFile = "/tmp/mediawiki-debug.log";
 $wgSitename = "Super Mario Odyssey Wiki";
 $wgMetaNamespace = "SMO_Wiki";
 
+$wgEnableCanonicalServerLink = true;
+$wgServer = "//smo.wiki";
+
+$wgHeaderHeadItems = [
+  '<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Super Mario Odyssey Wiki",
+      "alternateName": "SMO Wiki",
+      "url": "https://smo.wiki/"
+    }
+  </script>'
+];
+
 ## The URL base path to the directory containing the wiki;
 
 ## defaults for all runtime URL paths are based off of this.

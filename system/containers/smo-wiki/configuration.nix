@@ -63,6 +63,12 @@
           url = "https://github.com/StarCitizenWiki/mediawiki-extensions-EmbedVideo/archive/refs/tags/v4.0.0.zip";
           sha256 = "sha256-NheTJxhXkogQutWsy8Ukfvjrh5jePv+bpeFs1V1kf1w=";
         };
+        HeaderExtension = pkgs.fetchFromGitHub {
+          owner = "WikiMANNia";
+          repo = "Mediawiki-Extension-HeaderExtension";
+          rev = "ccd660bcce75699f1cd10c54ee04a18c141c6ade";
+          hash = "sha256-X0YL3781Z4WV63wDedpRPbV3Znxin2jSSs27hYAQzQ8=";
+        };
 
         "Math" = null;
         "MobileFrontend" = pkgs.fetchgit {
