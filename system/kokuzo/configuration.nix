@@ -10,6 +10,7 @@
     ./databases.nix
     ./filesystems.nix
     ./hall-dns.nix
+    ./immich.nix
     ./networking.nix
     ./torrent
     ./music.nix

@@ -116,15 +116,15 @@
 
           "${cfg.modifier}+r" = "mode resize";
           "--locked XF86AudioMute" = "exec ${writeNushellScript "mute" ''
-            ${wireplumber}/bin/wpctl set-mute @DEFAULT_SINK@ toggle
+            ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
             ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
           ''}";
           "--locked XF86AudioLowerVolume" = "exec ${writeNushellScript "mute" ''
-            ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%-
+            ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
             ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
           ''}";
           "--locked XF86AudioRaiseVolume" = "exec ${writeNushellScript "mute" ''
-            ${wireplumber}/bin/wpctl set-volume @DEFAULT_SINK@ 5%+
+            ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
             ${procps}/bin/pkill -SIGRTMIN+3 i3blocks
           ''}";
           "--locked XF86AudioPrev" = "exec ${playerctl}/bin/playerctl previous";

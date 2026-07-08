@@ -45,7 +45,7 @@
         pbkit.vscode-pbkit
         ms-python.python
         haskell.haskell
-        justusadam.language-haskell
+        # justusadam.language-haskell
         ocamllabs.ocaml-platform
         mshr-h.veriloghdl
         veryl-lang.veryl-vscode
@@ -58,6 +58,7 @@
         tohoyn2.guile-vscode
         myriad-dreamin.tinymist
         tomoki1207.pdf
+        theqtcompany.qt-qml
       ];
     };
   };

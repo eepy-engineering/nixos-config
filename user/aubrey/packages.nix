@@ -10,7 +10,6 @@
       ripgrep
       inetutils
       hactool
-      zulip-term
       waypipe
       python3
     ]
@@ -25,7 +24,6 @@
           jetbrains.rust-rover
           android-studio
           bruno
-          ghidra-bin
           renderdoc
           avalonia-ilspy
           digital
@@ -44,12 +42,15 @@
           master-pkgs.godot-mono
           spade
           swim
+          switch-toolbox
+          jdk25
 
           # art
           krita
           material-maker
           blender
           lmms-full
+          pinta
 
           # school
           lorien
@@ -78,7 +79,7 @@
           puddletag
           syncplay
           mpv
-          transmission_4-qt6
+          transmission_4-qt
           vlc
 
           # games
@@ -90,7 +91,6 @@
 
           # tools
           wl-clipboard
-          kdePackages.kcalc
           obsidian
           filezilla
           fontpreview

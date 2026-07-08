@@ -9,7 +9,7 @@ $wgSitename = "Super Mario Odyssey Wiki";
 $wgMetaNamespace = "SMO_Wiki";
 
 $wgEnableCanonicalServerLink = true;
-$wgServer = "//smo.wiki";
+$wgServer = "https://smo.wiki";
 
 $wgHeaderHeadItems = [
   '<script type="application/ld+json">
@@ -76,6 +76,7 @@ $wgEnableUploads = true;
 $wgGenerateThumbnailOnParse = true;
 ini_set('post_max_size', '30M');
 ini_set('upload_max_filesize', '20M');
+$wgAllowExternalImages = true;
 
 $wgFileExtensions[] = 'svg';
 $wgFileExtensions[] = 'webm';
@@ -136,11 +137,13 @@ $wgExtraNamespaces[NS_GUIDE_TALK] = "Guide_talk";
 $wgNamespacesToBeSearchedDefault = [
 	NS_MAIN => true,
 	NS_GUIDE => true,
+	NS_PROJECT => true,
 ];
 
 $wgNamespacesWithSubpages[NS_MAIN] = true;
 $wgNamespaceProtection[NS_PROJECT] = ['editproject'];
 $wgGroupPermissions['bureaucrat']['editproject'] = true;
+$wgContentNamespaces = [ NS_MAIN, NS_HELP, NS_GUIDE ];
 
 # ChangeAuthor
 $wgGroupPermissions['sysop']['changeauthor'] = true;
@@ -171,17 +174,17 @@ $wgDiscordNotificationWikiUrlEndingHistory = "/history";
 $wgDiscordNotificationWikiUrlEndingDiff = "?diff=prev&oldid=";
 $wgDiscordIncludeUserUrls = false;
 
-$wgDiscordNotificationNewUser = false;
-$wgDiscordNotificationBlockedUser = false;
-$wgDiscordNotificationUserGroupsChanged = true;
-$wgDiscordNotificationAddedArticle = true;
-$wgDiscordNotificationRemovedArticle = true;
-$wgDiscordNotificationMovedArticle = true;
-$wgDiscordNotificationEditedArticle = true;
-$wgDiscordNotificationFileUpload = true;
-$wgDiscordNotificationProtectedArticle = true;
-$wgDiscordNotificationFlow = true;
-$wgDiscordNotificationAfterImportPage = true;
+$wgDiscordNotificationEnabledActions["NewUser"] = false;
+$wgDiscordNotificationEnabledActions["BlockedUser"] = false;
+$wgDiscordNotificationEnabledActions["UserGroupsChanged"] = true;
+$wgDiscordNotificationEnabledActions["AddedArticle"] = true;
+$wgDiscordNotificationEnabledActions["RemovedArticle"] = true;
+$wgDiscordNotificationEnabledActions["MovedArticle"] = true;
+$wgDiscordNotificationEnabledActions["EditedArticle"] = true;
+$wgDiscordNotificationEnabledActions["FileUpload"] = true;
+$wgDiscordNotificationEnabledActions["ProtectedArticle"] = true;
+$wgDiscordNotificationEnabledActions["Flow"] = true;
+$wgDiscordNotificationEnabledActions["AfterImportPage"] = true;
 $wgDiscordDisableEmbedFooter = true;
 
 
@@ -234,12 +237,32 @@ $wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";
 #$wgHooks['GetLocalURL::Internal'][] = 'prettyDiffURLs';
 
 #DarkMode
-# this does fuck all
-# $wgDarkModeTogglePosition = "footer";
+$wgDarkModeTogglePosition = "footer";
 $wgVectorNightMode['beta'] = false;
 $wgVectorNightMode['logged_out'] = true;
 $wgVectorNightMode['logged_in'] = true;
 $wgDefaultUserOptions['vector-theme'] = 'os';
+
+#VisualEditor
+$wgVisualEditorAvailableNamespaces = [
+  'User' => true,
+  'File' => true,
+  'Help' => true,
+  'Project' => true,
+  'Talk' => true,
+  'User_talk' => true,
+  'Guide_talk' => true,
+  'Project_talk' => true,
+  'File_talk' => true,
+  'Template_talk' => true,
+  'Help_talk' => true,
+  'Category_talk' => true,
+  'Widget_talk' => true,
+  'Module_talk' => true,
+  'Translations_talk' => true,
+  'MediaWiki_talk' => true,
+  'TimedText_talk' => true,
+];
 
 ## uncomment this to debug mediawiki errors
 $wgShowExceptionDetails = true;

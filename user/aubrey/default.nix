@@ -24,6 +24,7 @@
     ./wezterm
     ./anki.nix
     ./editorconfig.nix
+    ./fonts.nix
     ./fzf.nix
     ./debugging.nix
     ./ghidra.nix

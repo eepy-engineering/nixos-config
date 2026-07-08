@@ -38,12 +38,12 @@
         ExecStartPre = [
           "+${pkgs.writeNushellScript "set-bind-address" ''
             loop {
-              if ("/tmp/pia.ip" | path exists) { break }
+              if ("/private/pia.ip" | path exists) { break }
               sleep 1sec
             }
 
             mut json = open ${settingsDir}/settings.json;
-            let ip = open /tmp/pia.ip
+            let ip = open /private/pia.ip
             $json = $json | upsert "bind-address-ipv4" $ip
             $json | save -f ${settingsDir}/settings.json
           ''}"

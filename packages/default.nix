@@ -3,6 +3,7 @@ pkgs: rec {
   # swim-unstable = pkgs.callPackage ./swim.nix { };
   # surfer-unstable = pkgs.callPackage ./surfer.nix { };
   manpages-l10n = pkgs.callPackage ./manpages-l10n.nix { };
+  switch-toolbox = pkgs.callPackage ./switch-toolbox.nix { };
   gamemaker = pkgs.callPackage ./gamemaker.nix {
     gamemakerFlavor = "Beta";
     gamemakerVersion = "2024.1400.2.941";

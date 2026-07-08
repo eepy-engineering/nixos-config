@@ -24,6 +24,7 @@
         "ja": true
     },
     "editor.unicodeHighlight.ambiguousCharacters": false,
+    "workbench.editor.useModal": "off",
     "evenBetterToml.formatter.indentString": "",
     "evenBetterToml.formatter.inlineTableExpand": false,
     "files.associations": {

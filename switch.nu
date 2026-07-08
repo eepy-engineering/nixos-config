@@ -40,6 +40,15 @@ def --wrapped "main switch" [
   rebuild switch $hostname --user $user ...$rest
 }
 
+def --wrapped "main dry-build" [
+  --hostname (-h): string, # the hostname of the machine to push to
+  --user (-u): string, # the username to SSH as for remote builds
+  ...rest
+] {
+  let hostname = (fetch hostname $hostname);
+  rebuild dry-build $hostname --user $user ...$rest
+}
+
 def --wrapped "main boot" [
   --restart (-r) # restart after building
   --hostname (-h): string, # the hostname of the machine to push to

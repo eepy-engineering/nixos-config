@@ -25,11 +25,16 @@
       passwordFile = pkgs.asOpnixPath "smo-wiki/admin-password";
       extensions = {
         "AbuseFilter" = null;
+        "AnonPrivacy" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/AnonPrivacy";
+          rev = "cfc27f11d1ac6c05d4eb4700e44e89cfa302b665";
+          hash = "sha256-dojCaKfdvpNz8HpyWVtAfP8Dk/s6dFDW9tpdzjCfN6o=";
+        };
         "CategoryTree" = null;
         "ChangeAuthor" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/ChangeAuthor";
-          rev = "122d33c4a302e30035c1b958306cea61c4621994";
-          sha256 = "sha256-AtbB/kOqZLOKyY+gqoYExOtS6rNQ6rzcAM7LugWE6ig=";
+          rev = "69cd2e18fbfaefc8a952389facf5e42de6a8f55d";
+          sha256 = "sha256-YNLpCXJIFAp8OhE6nGZs5mXY65yDLloF7/8H7h0QyS8=";
         };
         "Cite" = null;
         "Comments" = pkgs.fetchgit {
@@ -44,11 +49,11 @@
           rev = "bfd93266efcfabf59062ae09ba54afe41b165e9d";
           hash = "sha256-aNLnEnqBip7VmE+8CIyJFOY1AI6AHTqcZpw3V8hEAhk=";
         };
-        # "DarkMode" = pkgs.fetchgit {
-        #   url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode";
-        #   rev = "ab2578451d5fc99007cd019d174d79c5a8b13aaf";
-        #   sha256 = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
-        # };
+        "DarkMode" = pkgs.fetchgit {
+          url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/DarkMode";
+          rev = "ab2578451d5fc99007cd019d174d79c5a8b13aaf";
+          hash = "sha256-PjPj9k5aLh1jN/xcVOTGByrFA+NXQgz9oIioJnOJUf4=";
+        };
         "Diagrams" = pkgs.fetchFromGitHub {
           owner = "Sanae6";
           repo = "diagrams-extension";
@@ -166,6 +171,8 @@
           "circo" => "${pkgs.graphviz}/bin/circo",
           "twopi" => "${pkgs.graphviz}/bin/twopi",
         ];
+        $wgScribuntoEngineConf['luastandalone']['luaPath'] = "${pkgs.lua5_1}/bin/lua";
+        $wgFFmpegLocation = '${pkgs.ffmpeg}/bin/ffmpeg';
       '';
       path = with pkgs; [
         diffutils
@@ -177,6 +184,13 @@
       nginx = {
         hostName = site;
       };
+    };
+
+    phpfpm.pools.mediawiki = {
+      phpOptions = ''
+        post_max_size = 30M
+        upload_max_filesize = 20M
+      '';
     };
 
     nginx.virtualHosts.${site} = {

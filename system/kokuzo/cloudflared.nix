@@ -23,6 +23,7 @@
         default = "http_status:404";
         ingress = {
           "jellyfin.hall.ly" = "http://localhost:8096";
+          "immich.hall.ly" = "http://localhost:2283";
           "chair.hall.ly" = "http://localhost:5173";
           "cal.hall.ly" = "http://localhost:5232";
           "argocd.hall.ly" = "http://localhost:80";
