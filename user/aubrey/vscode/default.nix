@@ -59,6 +59,8 @@
         myriad-dreamin.tinymist
         tomoki1207.pdf
         theqtcompany.qt-qml
+        theqtcompany.qt-ui
+        theqtcompany.qt-core
       ];
     };
   };

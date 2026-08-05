@@ -1,42 +1,46 @@
 {
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
-    fsType = "btrfs";
-    options = [ "subvol=root" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6B14-24A1";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
-    fsType = "btrfs";
-    options = [ "subvol=nix" ];
-  };
-
-  fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
-    fsType = "btrfs";
-    options = [ "subvol=persist" ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
-    fsType = "btrfs";
-    options = [ "subvol=log" ];
-    neededForBoot = true;
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
-    fsType = "btrfs";
-    options = [ "subvol=home" ];
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/6B14-24A1";
+      fsType = "vfat";
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
+    };
+    "/nix" = {
+      device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
+      fsType = "btrfs";
+      options = [
+        "subvol=nix"
+        "compress=zstd"
+        "norelatime"
+      ];
+    };
+    "/persist" = {
+      device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
+      fsType = "btrfs";
+      options = [ "subvol=persist" ];
+    };
+    "/var/log" = {
+      device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
+      fsType = "btrfs";
+      options = [
+        "subvol=log"
+        "compress=zstd"
+      ];
+      neededForBoot = true;
+    };
+    "/home" = {
+      device = "/dev/disk/by-uuid/bc150328-fa6d-4b25-b6c5-a31d22881a55";
+      fsType = "btrfs";
+      options = [ "subvol=home" ];
+    };
   };
 
   swapDevices = [
