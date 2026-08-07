@@ -1,11 +1,10 @@
 {
   stdenv,
-  fetchzip,
   fetchurl,
   makeDesktopItem,
   wineWow64Packages,
   writeShellScriptBin,
-  unzip,
+  p7zip,
   ...
 }:
 stdenv.mkDerivation rec {
@@ -15,7 +14,7 @@ stdenv.mkDerivation rec {
   src = stdenv.mkDerivation {
     name = "toolbox-zip";
     unpackPhase = ''
-      ${unzip}/bin/unzip -d $out ${./Toolbox-Latest.zip}
+      ${p7zip}/bin/7z x -o"$out" ${./Toolbox.7z}
     '';
   };
   logo = fetchurl {
