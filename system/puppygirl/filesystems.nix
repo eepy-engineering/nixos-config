@@ -60,4 +60,16 @@
       password = "op://Services/Aubrey - Nas SMB/password";
     };
   };
+
+  services.beesd.filesystems = {
+    root = {
+      spec = "LABEL=main";
+      hashTableSizeMB = 1024;
+      verbosity = "crit";
+      extraOptions = [
+        "--loadavg-target"
+        "2.0"
+      ];
+    };
+  };
 }
