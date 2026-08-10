@@ -29,6 +29,7 @@
     ./debugging.nix
     ./ghidra.nix
     ./git.nix
+    ./gtk.nix
     ./hyfetch.nix
     ./jujutsu.nix
     ./kdeconnect.nix

@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 {
@@ -11,22 +12,34 @@
     useHostResolvConf = lib.mkForce false;
   };
 
-  services.firefly-iii = {
-    enable = true;
-    dataDir = "/mnt/firefly-iii";
-    user = "firefly-iii";
+  services = {
+    firefly-iii = {
+      enable = true;
+      dataDir = "/mnt/firefly-iii";
+      user = "firefly-iii";
 
-    settings = {
-      APP_ENV = "production";
-      APP_KEY_FILE = "/mnt/firefly-iii/key-file";
-      SITE_OWNER = "aubrey@sanae6.ca";
-      DB_CONNECTION = "mysql";
-      DB_HOST = "localhost";
-      DB_DATABASE = "firefly";
-      DB_USERNAME = "firefly-iii";
-      DB_SOCKET = "/run/mysqld/mysqld.sock";
+      settings = {
+        APP_ENV = "production";
+        APP_KEY_FILE = "/mnt/firefly-iii/key-file";
+        SITE_OWNER = "aubrey@sanae6.ca";
+        DB_CONNECTION = "mysql";
+        DB_HOST = "localhost";
+        DB_DATABASE = "firefly";
+        DB_USERNAME = "firefly-iii";
+        DB_SOCKET = "/run/mysqld/mysqld.sock";
+      };
+      enableNginx = true;
     };
-    enableNginx = true;
+    nginx = {
+      virtualHosts.${config.services.firefly-iii.virtualHost} = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 8440;
+          }
+        ];
+      };
+    };
   };
 
   services.mysql = {

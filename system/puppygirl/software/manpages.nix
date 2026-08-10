@@ -11,7 +11,7 @@
 
   i18n = {
     extraLocaleSettings = {
-      LC_MESSAGES = "de_DE.UTF-8";
+      # LC_MESSAGES = "de_DE.UTF-8";
     };
   };
 }

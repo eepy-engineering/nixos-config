@@ -24,12 +24,14 @@
     };
   };
 
-  systemd.services.traccar = {
-    serviceConfig = {
-      DynamicUser = lib.mkForce false;
-      User = "traccar";
-      StateDirectory = lib.mkForce "";
-      ReadWritePaths = "/var/lib/traccar";
+  systemd.services = {
+    traccar = {
+      serviceConfig = {
+        DynamicUser = lib.mkForce false;
+        User = "traccar";
+        StateDirectory = lib.mkForce "";
+        ReadWritePaths = "/var/lib/traccar";
+      };
     };
   };
 

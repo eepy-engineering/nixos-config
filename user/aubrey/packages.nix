@@ -39,7 +39,7 @@
           zellij
           gamemakerEnv
           wgsl-analyzer
-          master-pkgs.godot-mono
+          godot-mono
           spade
           swim
           switch-toolbox

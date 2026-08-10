@@ -24,6 +24,11 @@
       ];
     };
 
+    group = lib.mkOption {
+      type = lib.types.str;
+      description = "Group used for credential storage";
+    };
+
     outputDir = lib.mkOption {
       type = lib.types.str;
       default = "/var/lib/opnix/secrets";
@@ -128,6 +133,8 @@
         groups.${opnixGroup} = { };
         users = lib.mkMerge (map (user: { "${user}".extraGroups = [ opnixGroup ]; }) cfg.users);
       };
+
+      opnix.group = "${opnixGroup}";
 
       systemd.services.onepassword-secrets = service;
       boot.initrd.systemd.services.onepassword-secrets = service;
