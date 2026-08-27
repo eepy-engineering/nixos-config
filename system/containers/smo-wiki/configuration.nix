@@ -20,6 +20,7 @@
       enable = true;
       database.createLocally = true;
       phpPackage = pkgs.php83;
+      package = pkgs.smowiki-pkgs.mediawiki;
 
       passwordSender = "supermarioodysseywiki@gmail.com";
       passwordFile = pkgs.asOpnixPath "smo-wiki/admin-password";
@@ -74,7 +75,12 @@
           rev = "ccd660bcce75699f1cd10c54ee04a18c141c6ade";
           hash = "sha256-X0YL3781Z4WV63wDedpRPbV3Znxin2jSSs27hYAQzQ8=";
         };
-
+        InputBox = pkgs.fetchFromGitHub {
+          owner = "wikimedia";
+          repo = "mediawiki-extensions-InputBox";
+          rev = "4d171564dc25db0ee2aac18ae2316e8d9d08d3f8";
+          hash = "sha256-XJVmYFZtbSFJf7fegaIW3AR3ZY3cspskuzTI//aULI8=";
+        };
         "Math" = null;
         "MobileFrontend" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/MobileFrontend";
@@ -104,6 +110,12 @@
           sha256 = "sha256-ICdiiSe7jvo00RuxtuVuipWSHU5UQmi11FKo4kDBMRI=";
         };
         "Scribunto" = null;
+        "SimpleBatchUpload" = pkgs.fetchFromGitHub {
+          owner = "ProfessionalWiki";
+          repo = "SimpleBatchUpload";
+          rev = "9ee51994a3f516264b6355d608ce22dd42e47c23";
+          hash = "sha256-mI54bDSe3Vl0dGwsDGqkPZy6l9J+RChVkdmp9VbVkqA=";
+        };
         "StopForumSpam" = pkgs.fetchgit {
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/StopForumSpam";
           rev = "24fa50804b7cf915756f48cf57f983982d0e0e89";
@@ -112,6 +124,18 @@
         "StubUserWikiAuth" = pkgs.fetchzip {
           url = "https://github.com/ciencia/mediawiki-extensions-StubUserWikiAuth/archive/020e411ee2e794faecc0db471ce433d02936e8a0.zip";
           sha256 = "sha256-tfnU+p5GDGeb6iJ5zt/UoeCdgD6zS1VGDq8fDje8ALk=";
+        };
+        "SyntaxHighlight" = pkgs.fetchFromGitHub {
+          owner = "wikimedia";
+          repo = "mediawiki-extensions-SyntaxHighlight_GeSHi";
+          rev = "2ee318580ad531f0cde17d2d486e79f1b95a70f4";
+          hash = "sha256-jDTVG40wJZ6JhHCsxp/kjtC3hiXiHr/AHZdYQnOXNoI=";
+        };
+        "TabberNeue" = pkgs.fetchFromGitHub {
+          owner = "StarCitizenTools";
+          repo = "mediawiki-extensions-TabberNeue";
+          rev = "d1609fdea5ebc975a4b2cf82c19461fc4adeaf96";
+          hash = "sha256-dJLZMI00ifjQHlkE7uQbxhPFZdt0ZQQnkeuUrYo6vJI=";
         };
         "TextExtracts" = null;
         "TimedMediaHandler" = pkgs.fetchgit {
@@ -129,6 +153,12 @@
           url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/UniversalLanguageSelector";
           rev = "86340981f2cd44bb2f8170b2a7bae9f54763a5f9";
           hash = "sha256-P6VtMoE2fm4aAqXvKB3BDoqxiJvWwXxum9zem/wg4Lo=";
+        };
+        "UploadWizard" = pkgs.fetchFromGitHub {
+          owner = "wikimedia";
+          repo = "mediawiki-extensions-UploadWizard";
+          rev = "73323e2386097bf6458e81247b29c5bf07df371e";
+          hash = "sha256-7fnmc4ojeydJ6AchNrCfAqbcwGlRqf7p3X6ZerM7/7A=";
         };
         "VisualEditor" = null;
         "Widgets" = pkgs.symlinkJoin {
@@ -173,6 +203,9 @@
         ];
         $wgScribuntoEngineConf['luastandalone']['luaPath'] = "${pkgs.lua5_1}/bin/lua";
         $wgFFmpegLocation = '${pkgs.ffmpeg}/bin/ffmpeg';
+        $wgPygmentizePath = '${pkgs.python314Packages.pygments}/bin/pygmentize';
+
+        include "/var/lib/mediawiki/userphp/usersettings.php";
       '';
       path = with pkgs; [
         diffutils
@@ -290,6 +323,12 @@
               "tcp://kerguelen.tail6c2ee5.ts.net"
             ];
           };
+          catbox = {
+            id = "3YPDO3J-LYR47H6-44NUQBX-EJKGYCO-Q4JMHTM-ADR3U4W-MWRJ23O-3E6FVQN";
+            addresses = [
+              "tcp://catbox.tail6c2ee5.ts.net"
+            ];
+          };
         };
         folders = {
           "Mediawiki" = {
@@ -298,6 +337,15 @@
             devices = [
               "kokuzo"
               "kerguelen"
+            ];
+          };
+          "MediawikiPhp" = {
+            label = "Php slop";
+            path = "/var/lib/mediawiki/userphp";
+            devices = [
+              "kokuzo"
+              "kerguelen"
+              "catbox"
             ];
           };
         };

@@ -113,6 +113,7 @@
           qpwgraph
           _010editor
           libfaketime
+          imhex
 
           # desktop
           wev

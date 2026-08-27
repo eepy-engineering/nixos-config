@@ -74,9 +74,12 @@ args@{
   users.users.tetra = {
     isNormalUser = true;
     enable = !isDesktop || config.networking.hostName == "puppygirl";
-    description = "Tetra";
+    description = "tetra";
     shell = pkgs.zsh;
-    extraGroups = [ "media" ];
+    extraGroups = [
+      "media"
+      "wheel"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmGxomnzFUz6CMy9NyghrhN1vQ0oeFw2bBdJEd6M9uH tetraxile@proton.me"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfXC+Ahq8kKXBPJK0IGbsvugMHYF3J8HF8ncWrGjp8v tetra@catbox"

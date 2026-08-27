@@ -63,6 +63,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pia = {
+      url = "path:./system/puppygirl/networking/pia-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fenix (Rust)
     fenix = {
       url = "github:nix-community/fenix";
@@ -98,6 +103,8 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     nixcord.url = "github:FlameFlag/nixcord";
+
+    nixpkgs-smowiki.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
@@ -105,12 +112,14 @@
       nixpkgs,
       nixpkgs-stable,
       nixpkgs-master,
+      nixpkgs-smowiki,
       home-manager,
       opnix,
       extensions,
       zen-browser,
       nix-index,
       fenix,
+      pia,
       microvm,
       nixGL,
       O10editor,
@@ -133,6 +142,9 @@
               system = final.stdenv.hostPlatform.system;
             };
             master-pkgs = import nixpkgs-master {
+              system = final.stdenv.hostPlatform.system;
+            };
+            smowiki-pkgs = import nixpkgs-master {
               system = final.stdenv.hostPlatform.system;
             };
             opnix = opnix.packages.${final.stdenv.hostPlatform.system}.default;
@@ -197,6 +209,7 @@
               modules = [
                 overlaysModule
                 home-manager.nixosModules.home-manager
+                pia.nixosModules.${config.system}.default
                 ./system/${name}/configuration.nix
               ];
             };

@@ -77,6 +77,7 @@ $wgGenerateThumbnailOnParse = true;
 ini_set('post_max_size', '30M');
 ini_set('upload_max_filesize', '20M');
 $wgAllowExternalImages = true;
+$wgNativeImageLazyLoading = true;
 
 $wgFileExtensions[] = 'svg';
 $wgFileExtensions[] = 'webm';
@@ -120,6 +121,7 @@ $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 $wgGroupPermissions['*'   ]['createpage'] = true;
 $wgGroupPermissions['user']['createpage'] = true;
 #$wgGroupPermissions['*'   ]['edit'      ] = false;
+$wgGroupPermissions['*']['move'] = true;
 $wgCaptchaTriggers['edit'] = true;
 $wgGroupPermissions['user']['skipcaptcha'] = true;
 $wgGroupPermissions['*'   ]['createaccount'  ] = true;
@@ -132,8 +134,12 @@ $wgGroupPermissions['sysop']['deletelogentry'] = true;
 
 define("NS_GUIDE", 3000);
 define("NS_GUIDE_TALK", 3001);
+define("NS_DRAFT", 3002);
+define("NS_DRAFT_TALK", 3003);
 $wgExtraNamespaces[NS_GUIDE] = "Guide";
 $wgExtraNamespaces[NS_GUIDE_TALK] = "Guide_talk";
+$wgExtraNamespaces[NS_DRAFT] = "Draft";
+$wgExtraNamespaces[NS_DRAFT_TALK] = "Draft_talk";
 $wgNamespacesToBeSearchedDefault = [
 	NS_MAIN => true,
 	NS_GUIDE => true,
@@ -143,7 +149,7 @@ $wgNamespacesToBeSearchedDefault = [
 $wgNamespacesWithSubpages[NS_MAIN] = true;
 $wgNamespaceProtection[NS_PROJECT] = ['editproject'];
 $wgGroupPermissions['bureaucrat']['editproject'] = true;
-$wgContentNamespaces = [ NS_MAIN, NS_HELP, NS_GUIDE ];
+$wgContentNamespaces = [ NS_MAIN, NS_HELP, NS_GUIDE, NS_DRAFT ];
 
 # ChangeAuthor
 $wgGroupPermissions['sysop']['changeauthor'] = true;
@@ -223,6 +229,17 @@ $wgTranscodeBackgroundTimeLimit = 0;
 $wgPageTranslationLanguageList = "sidebar-fallback";
 $wgTranslatePageTranslationULS = true;
 $wgTranslatePageTranslationDefaultLanguageCode = 'en';
+
+# UploadWizard
+$wgExtensionFunctions[] = function() {
+	$GLOBALS['wgUploadNavigationUrl'] = SpecialPage::getTitleFor( 'UploadWizard' )->getLocalURL();
+	return true;
+};
+$wgUploadWizardConfig = [
+  'tutorial' => [
+    'skip' => true
+  ]
+];
 
 #StopForumSpam
 $wgSFSIPListLocation = "/var/lib/mediawiki/listed_ip_30_all.txt";

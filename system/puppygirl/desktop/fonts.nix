@@ -17,26 +17,26 @@
 
     fontconfig = {
       enable = true;
-      localConf = ''
-        <fontconfig>
-          <match target="pattern">
-            <edit name="family" mode="prepend_first">
-              <string>nasin-nanpa</string>
-            </edit>
-          </match>
-        </fontconfig>
-      '';
+      # localConf = ''
+      #   <fontconfig>
+      #     <match target="pattern">
+      #       <edit name="family" mode="prepend_first">
+      #         <string>nasin-nanpa</string>
+      #       </edit>
+      #     </match>
+      #   </fontconfig>
+      # '';
       defaultFonts = {
         serif = [
-          "nasin-nanpa"
-          "nasin\\-nanpa"
+          # "nasin-nanpa"
+          # "nasin\\-nanpa"
           "Noto Serif"
           "Klee One"
           "Helvetica"
         ];
         sansSerif = [
-          "nasin-nanpa"
-          "nasin\\-nanpa"
+          # "nasin-nanpa"
+          # "nasin\\-nanpa"
           "Noto Sans"
           "Klee One"
           "Helvetica"
