@@ -3,7 +3,11 @@
   opnix.secrets = [
     {
       path = "forgejo/token";
-      reference = "op://Services/Codeberg Runner/password";
+      reference = "op://Services/Codeberg Runner - Sanae6/password";
+    }
+    {
+      path = "forgejo/token";
+      reference = "op://Services/Codeberg Runner - SenobiNX/password";
     }
   ];
   services.forgejo-runner.instances = {
@@ -12,13 +16,20 @@
       settings = {
         runner.labels = [ "alpine:docker://docker.io/fruityloops1/alpine-hakkun:latest" ];
         server.connections = {
-          codeberg = {
+          sanae6 = {
             uuid = "212df6d6-4af2-4dee-ab32-607af7fea60a";
+            url = "https://codeberg.org/";
+          };
+          senobinx = {
+            uuid = "64fe36e5-e6fa-4882-9764-a150b8198ff8";
             url = "https://codeberg.org/";
           };
         };
       };
-      secrets.server.connections.codeberg.token_url = pkgs.asOpnixPath "forgejo/token";
+      secrets.server.connections = {
+        sanae6.token_url = pkgs.asOpnixPath "forgejo/sanae6-token";
+        senobinx.token_url = pkgs.asOpnixPath "forgejo/senobinx-token";
+      };
     };
   };
 }
