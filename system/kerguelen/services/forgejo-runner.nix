@@ -9,7 +9,7 @@
   services.forgejo-runner.instances = {
     hakkun = {
       settings = {
-        runner.labels = [ "alpine" ];
+        runner.labels = [ "alpine:docker://fruityloops1/alpine-hakkun" ];
         server.connections = {
           codeberg = {
             uuid = "212df6d6-4af2-4dee-ab32-607af7fea60a";
