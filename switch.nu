@@ -27,7 +27,7 @@ def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ..
     let remote_user = ($user | default $env.USER);
     let actual_hostname = $hostname_map | get -o $hostname | default $hostname;
     print $"remote switch on ($hostname) \(($actual_hostname)\)";
-    nixos-rebuild --flake $"(get flake uri)#($hostname)" --target-host $"($remote_user)@($actual_hostname)" --sudo $subcmd ...$rest;
+    nixos-rebuild --flake $"(get flake uri)#($hostname)" --build-host $"($remote_user)@($actual_hostname)" --target-host $"($remote_user)@($actual_hostname)" --sudo $subcmd ...$rest;
   }
 };
 
