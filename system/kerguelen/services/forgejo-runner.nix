@@ -1,15 +1,17 @@
 { pkgs, ... }: {
   virtualisation.docker.enable = true;
-  opnix.secrets = [
+  opnix = {secrets = [
     {
-      path = "forgejo/token";
+      path = "forgejo/sanae6-token";
       reference = "op://Services/Codeberg Runner - Sanae6/password";
     }
     {
-      path = "forgejo/token";
+      path = "forgejo/senobinx-token";
       reference = "op://Services/Codeberg Runner - SenobiNX/password";
     }
   ];
+  services = ["forgejo-runner-hakkun.service"];
+  };
   services.forgejo-runner.instances = {
     hakkun = {
       enable = true;
