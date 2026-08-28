@@ -8,6 +8,7 @@
   ];
   services.forgejo-runner.instances = {
     hakkun = {
+      enable = true;
       settings = {
         runner.labels = [ "alpine:docker://docker.io/fruityloops1/alpine-hakkun:latest" ];
         server.connections = {
