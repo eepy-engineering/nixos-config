@@ -15,10 +15,10 @@
           codeberg = {
             uuid = "212df6d6-4af2-4dee-ab32-607af7fea60a";
             url = "https://codeberg.org/";
-            token_url = pkgs.asOpnixPath "forgejo/token";
           };
         };
       };
+      secrets.server.connections.codeberg.token_url = pkgs.asOpnixPath "forgejo/token";
     };
   };
 }
