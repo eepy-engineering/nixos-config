@@ -61,6 +61,7 @@
       smo-wiki = {
         autoStart = true;
         privateNetwork = false;
+        timeoutStartSec = "infinity";
         bindMounts = {
           "/mnt/opnix/smo-wiki" = {
             hostPath = pkgs.asOpnixPath "smo-wiki";

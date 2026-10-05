@@ -45,7 +45,7 @@
         pbkit.vscode-pbkit
         ms-python.python
         haskell.haskell
-        # justusadam.language-haskell
+        pkgs.open-vsx.justusadam.language-haskell
         ocamllabs.ocaml-platform
         mshr-h.veriloghdl
         veryl-lang.veryl-vscode
@@ -61,6 +61,12 @@
         theqtcompany.qt-qml
         theqtcompany.qt-ui
         theqtcompany.qt-core
+        ziglang.vscode-zig
+        spade-lang.spade-syntax
+        pkgs.open-vsx.mechazawa.vscode-spade-lsp
+        basdp.language-gas-x86
+        lu4nscr1pt1ng.fasm2-studio
+        bitlang.cobol
       ];
     };
   };
@@ -68,5 +74,6 @@
   home.packages = with pkgs; [
     pest-ide-tools
     clang-tools
+    zls
   ];
 }

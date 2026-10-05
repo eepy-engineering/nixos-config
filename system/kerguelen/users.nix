@@ -12,17 +12,17 @@
   users = {
     mutableUsers = false;
     users = {
-      walter.enable = false;
-      rose.enable = false;
-      cysabi.enable = false;
-      tetra = {
-        enable = lib.mkForce false;
-        uid = 1001;
-      };
-      tetra.extraGroups = [ "wheel" ];
       aubrey = {
         uid = 1000;
       };
+      tetra = {
+        enable = lib.mkForce false;
+        uid = 1001;
+        extraGroups = [ "wheel" ];
+      };
+      walter.enable = false;
+      rose.enable = false;
+      cysabi.enable = false;
       red = {
         uid = 1002;
         isNormalUser = true;

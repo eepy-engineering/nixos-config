@@ -191,15 +191,16 @@
         { command = "${_1password-gui}/bin/1password"; }
         { command = "${vscodium}/bin/zeditor"; }
         { command = "${vesktop}/bin/vesktop"; }
-        {
-          command = lib.concatStringsSep " " [
-            "swayidle -w"
-            "timeout 300 'swaylock -i ${./lock.png} -f -c 000000; '"
-            "timeout 315 'swaymsg \"output * power off\"'"
-            "resume 'swaymsg \"output * power on\"'"
-            "before-sleep 'swaylock -f -c 000000'"
-          ];
-        }
+        # idle is killing meeee and i don't wanna debug it :sob:
+        # {
+        #   command = lib.concatStringsSep " " [
+        #     "swayidle -w"
+        #     "timeout 300 'swaylock -i ${./lock.png} -f -c 000000; '"
+        #     "timeout 315 'swaymsg \"output * power off\"'"
+        #     "resume 'swaymsg \"output * power on\"'"
+        #     "before-sleep 'swaylock -f -c 000000'"
+        #   ];
+        # }
       ];
 
       terminal = "${wezterm}/bin/wezterm start --always-new-process";

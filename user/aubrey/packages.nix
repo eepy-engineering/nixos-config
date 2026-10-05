@@ -19,9 +19,9 @@
           # development
           gitkraken
           jetbrains.rider
-          jetbrains.clion
-          jetbrains.idea-oss
-          jetbrains.rust-rover
+          # jetbrains.clion
+          # jetbrains.idea-oss
+          # jetbrains.rust-rover
           android-studio
           bruno
           renderdoc
@@ -44,6 +44,10 @@
           swim
           switch-toolbox
           jdk25
+          scrcpy
+
+          # reading
+          foliate
 
           # art
           krita
@@ -87,6 +91,7 @@
           ryubing
           osu-lazer-bin
           everest-mons
+          archipelago
           # wineWowPackages.unstableFull
 
           # tools

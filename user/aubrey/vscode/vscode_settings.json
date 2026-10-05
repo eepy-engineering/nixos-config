@@ -25,6 +25,11 @@
     },
     "editor.unicodeHighlight.ambiguousCharacters": false,
     "workbench.editor.useModal": "off",
+    "workbench.editorAssociations": {
+      "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
+      "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.ui": "default",
+      "*.qrc": "qt-core.qrcEditor"
+    },
     "evenBetterToml.formatter.indentString": "",
     "evenBetterToml.formatter.inlineTableExpand": false,
     "files.associations": {
@@ -174,5 +179,9 @@
         }
     },
     "platformio-ide.useBuiltinPIOCore": false,
-    "terminal.integrated.shellIntegration.enabled": false
+    "terminal.integrated.shellIntegration.enabled": false,
+    "qt-core.showWelcomePageOnActivation": false,
+    "zig.zls.enabled": "on",
+    "zig.zls.path": "zls",
+    "zig.path": "zig"
 }

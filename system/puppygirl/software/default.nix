@@ -17,6 +17,7 @@
     ./programming.nix
     ./qemu.nix
     ./steam.nix
+    ./syncthing.nix
     ./wireshark.nix
   ];
   environment.systemPackages = with pkgs; [
@@ -36,6 +37,7 @@
     tea
     gh
     kubectl
+    distrobox
   ];
 
   # doesn't deserve its own file

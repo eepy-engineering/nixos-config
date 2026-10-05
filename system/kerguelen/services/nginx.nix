@@ -17,12 +17,20 @@ in
             '';
           };
         };
-        "traccar.${domain}" = {
+        "git.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;
           # locations."/" = {
           # proxyPass = "http://localhost:8082";
           # };
+          locations = {
+            "/".proxyPass = "http://localhost:3000";
+            "/.well-known/".root = "/var/lib/acme/acme-challenge/";
+          };
+        };
+        "traccar.${domain}" = {
+          forceSSL = true;
+          useACMEHost = domain;
           locations = {
             "/client" = {
               extraConfig = ''
@@ -58,6 +66,7 @@ in
     certs = {
       ${domain} = {
         domain = "*.${domain}";
+
         group = "nginx";
         dnsProvider = "cloudflare";
         # location of your CLOUDFLARE_DNS_API_TOKEN=[value]

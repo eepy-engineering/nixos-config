@@ -20,7 +20,13 @@ _: {
         RemoteCommand = "bin/nu";
         RequestTTY = "force";
       };
+      # "kerguelen" = {
+      #   Port = 2222;
+      # }
       "catbox" = {
+        User = "tetra";
+      };
+      "raspberry" = {
         User = "tetra";
       };
     };

@@ -6,6 +6,7 @@
     ./forgejo-runner.nix
     # containers
     ./firefly-iii
+    ./forgejo
     ./teamspeak
     ./traccar
     ./smo-wiki.nix

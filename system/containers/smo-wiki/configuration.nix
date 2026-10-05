@@ -259,17 +259,19 @@
 
     mysql = {
       enable = true;
-      package = pkgs.mariadb;
+      package = pkgs.mariadb_114;
       dataDir = "/mnt/mysql";
+
       settings = {
         mysqld = {
           skip-networking = true;
           log-error = "${config.services.mysql.dataDir}/mysql_err.log";
-          # wsrep_provider_options = ["pc.weight=2"];
-          plugin-wsrep-provider = true;
           binlog_format = "ROW";
           default_storage_engine = "InnoDB";
           innodb_autoinc_lock_mode = 2;
+        };
+        galera = {
+          wsrep_recover = 0;
         };
       };
       ensureUsers = [
@@ -281,12 +283,14 @@
         }
       ];
       galeraCluster = {
-        enable = true;
+        enable = false;
         package = pkgs.mariadb-galera;
         nodeAddresses = [
           "kokuzo.tailc38f.ts.net"
           "kerguelen.tail6c2ee5.ts.net"
+          "raspberry.tail6c2ee5.ts.net"
         ];
+
         localName = galeraName;
         name = "smowiki";
       };
@@ -377,7 +381,7 @@
       };
       mysql = {
         serviceConfig = {
-          TimeoutSec = 900;
+          TimeoutSec = 0;
         };
       };
       ip-list-refresh = {
@@ -391,7 +395,7 @@
         ];
         script = ''
           wget -O /tmp/listed_ip.zip https://www.stopforumspam.com/downloads/listed_ip_30_all.zip
-          unzip -ud /var/lib/mediawiki/ /tmp/listed_ip.zip
+          unzip -uod /var/lib/mediawiki/ /tmp/listed_ip.zip
         '';
         serviceConfig = {
           Type = "oneshot";

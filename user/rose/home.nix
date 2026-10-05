@@ -102,7 +102,7 @@
   };
 
   gtk = {
-    enable = true;
+    enable = isDesktop;
 
     gtk4.theme = null;
     iconTheme = {

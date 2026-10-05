@@ -85,7 +85,7 @@ args@{
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfXC+Ahq8kKXBPJK0IGbsvugMHYF3J8HF8ncWrGjp8v tetra@catbox"
     ];
   };
-  home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home";
+  # home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home";
   programs.zsh.enable = true;
 
   # Walter's user

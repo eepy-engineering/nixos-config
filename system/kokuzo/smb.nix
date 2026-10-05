@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       global = {
-        "server max protocol" = "SMB3_11";
+        "server max protocol" = "SMB3";
         "smb3 unix extensions" = "yes";
       };
       tank = {

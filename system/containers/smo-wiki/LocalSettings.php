@@ -149,7 +149,7 @@ $wgNamespacesToBeSearchedDefault = [
 $wgNamespacesWithSubpages[NS_MAIN] = true;
 $wgNamespaceProtection[NS_PROJECT] = ['editproject'];
 $wgGroupPermissions['bureaucrat']['editproject'] = true;
-$wgContentNamespaces = [ NS_MAIN, NS_HELP, NS_GUIDE, NS_DRAFT ];
+$wgContentNamespaces = [ NS_MAIN, NS_HELP, NS_GUIDE ];
 
 # ChangeAuthor
 $wgGroupPermissions['sysop']['changeauthor'] = true;

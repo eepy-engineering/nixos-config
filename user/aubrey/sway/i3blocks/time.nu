@@ -9,11 +9,11 @@ let offset = match $btn {
 };
 
 const timezones = [
-# ["PT", "America/Los_Angeles"],
+  # ["PT", "America/Los_Angeles"],
   ["CST", "Canada/Saskatchewan"],
-# ["ET", "Canada/Eastern"],
-# ["Éire", "Europe/Dublin"],
-  ["CET", "Europe/Berlin"],
+  # ["ET", "Canada/Eastern"],
+  ["Éire", "Europe/Dublin"],
+  # ["CET", "Europe/Berlin"],
 ];
 
 let current_tz = if $btn == 1 { 0 } else { ($current_tz + $offset) mod ($timezones | length) };

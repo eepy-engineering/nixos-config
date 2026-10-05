@@ -91,6 +91,18 @@
         # can't be configured independently
         recursive = "zfs";
       };
+      "apps/smo-wiki" = {
+        hourly = 24;
+        daily = 30;
+        autoprune = true;
+        autosnap = true;
+      };
+      "apps/smo-wiki-mysql" = {
+        hourly = 24;
+        daily = 30;
+        autoprune = true;
+        autosnap = true;
+      };
     };
   };
 }

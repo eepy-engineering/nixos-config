@@ -19,6 +19,7 @@
     config = {
       allowUnfree = true;
       allowInsecurePredicate = pkg: true;
+      android_sdk.accept_license = true;
     };
 
     overlays = [
