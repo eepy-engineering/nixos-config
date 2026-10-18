@@ -17,6 +17,14 @@ in
             '';
           };
         };
+        "pds.${domain}" = {
+          forceSSL = true;
+          useACMEHost = domain;
+          locations = {
+            "/".proxyPass = "http://localhost:3001";
+            "/.well-known/".root = "/var/lib/acme/acme-challenge/";
+          };
+        };
         "git.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;

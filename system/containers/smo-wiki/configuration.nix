@@ -166,8 +166,8 @@
           paths = [
             (pkgs.fetchgit {
               url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Widgets";
-              rev = "f7cdd56fa33f5bdedc659ed57bb88f52fb6a8b49";
-              sha256 = "sha256-Xhd1WtWMvOyuDeKgw/GCs6jYNt2LJBHY7TyTCW0doNA=";
+              rev = "b11807f09fd79b4d415892fbc7fceb3abb8c19bb";
+              sha256 = "sha256-AfFLDk82Mt1M4cikxCVl7tfbArKIZC2OIfzFISPcRXg=";
             })
             (pkgs.writeTextFile {
               name = "autoload.php";

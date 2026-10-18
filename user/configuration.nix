@@ -59,6 +59,7 @@ args@{
     shell = pkgs.nushell;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJZn43IczAtHI49eULTaA3GY7Zdoy/gqeEIhev/3ub09"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAP7gUFYVgHwwMnB2/tU1DMqzvMvA+CywlCSQnKUqola tetraxile@proton.me"
     ];
   };
   home-manager.users.aubrey = {
@@ -83,6 +84,7 @@ args@{
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmGxomnzFUz6CMy9NyghrhN1vQ0oeFw2bBdJEd6M9uH tetraxile@proton.me"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfXC+Ahq8kKXBPJK0IGbsvugMHYF3J8HF8ncWrGjp8v tetra@catbox"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAP7gUFYVgHwwMnB2/tU1DMqzvMvA+CywlCSQnKUqola tetraxile@proton.me"
     ];
   };
   # home-manager.users.tetra = import "${args.inputs.tetra-config.outPath}/home";

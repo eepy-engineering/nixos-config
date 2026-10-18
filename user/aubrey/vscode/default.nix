@@ -67,6 +67,7 @@
         basdp.language-gas-x86
         lu4nscr1pt1ng.fasm2-studio
         bitlang.cobol
+        pkgs.open-vsx.evzen-wybitul.magic-racket
       ];
     };
   };
@@ -75,5 +76,6 @@
     pest-ide-tools
     clang-tools
     zls
+    racket
   ];
 }

@@ -3,6 +3,7 @@
     # top level services
     ./dns.nix
     ./nginx.nix
+    ./bsky-pds.nix
     ./forgejo-runner.nix
     # containers
     ./firefly-iii

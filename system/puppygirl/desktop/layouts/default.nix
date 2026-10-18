@@ -1,7 +1,7 @@
 { config, ... }: {
   services.xserver.xkb = {
     extraLayouts = import ./keyboard-layouts.nix;
-    options = "lv3:ralt_switch";
+    # options = "lv3:ralt_switch";
   };
 
   system.activationScripts.chromiumXkb = ''

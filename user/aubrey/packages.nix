@@ -85,6 +85,8 @@
           mpv
           transmission_4-qt
           vlc
+          cmus
+          cmusfm
 
           # games
           prismlauncher
