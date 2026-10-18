@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./kubernetes-master.nix
+    ./kata.nix
     ./nginx.nix
     ./smb.nix
     ./vms

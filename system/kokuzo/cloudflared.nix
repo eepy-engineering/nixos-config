@@ -30,6 +30,8 @@
           "s3.hall.ly" = "http://localhost:80";
           "aubrey-socket.hall.ly" = "http://64.201.219.20:1984";
           "params.hall.ly" = "http://localhost:5173";
+          # vibes (roobscoob/rc-vibes): its Service's NodePort in the vibes namespace.
+          "vibes.hall.ly" = "http://localhost:30787";
         };
       };
     };
