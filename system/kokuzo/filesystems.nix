@@ -71,4 +71,11 @@
     fsType = "zfs";
     depends = [ "/" ];
   };
+
+  # The onboard SATA ports (HP B140i in RAID mode) bring the SSDs up with their
+  # write cache off, so every write waits on flash. ZFS flushes at every txg, so
+  # turn it on, through the kernel so it knows to pass those flushes on.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="scsi_disk", ATTRS{vendor}=="ATA*", ATTRS{model}=="Samsung SSD*", ATTR{cache_type}="write back"
+  '';
 }
