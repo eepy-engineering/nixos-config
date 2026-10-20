@@ -10,6 +10,8 @@ in
         ${domain} = {
           forceSSL = true;
           useACMEHost = domain;
+          serverAliases = [ "www.${domain}" ];
+          acmeRoot = null;
           locations."/" = {
             return = "200 '<html><body>Hi, I&apos;m Aubrey!</body></html>'";
             extraConfig = ''
@@ -20,25 +22,23 @@ in
         "pds.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;
+          acmeRoot = null;
           locations = {
             "/".proxyPass = "http://localhost:3001";
-            "/.well-known/".root = "/var/lib/acme/acme-challenge/";
           };
         };
         "git.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;
-          # locations."/" = {
-          # proxyPass = "http://localhost:8082";
-          # };
+          acmeRoot = null;
           locations = {
             "/".proxyPass = "http://localhost:3000";
-            "/.well-known/".root = "/var/lib/acme/acme-challenge/";
           };
         };
         "traccar.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;
+          acmeRoot = null;
           locations = {
             "/client" = {
               extraConfig = ''
@@ -47,7 +47,6 @@ in
               proxyPass = "http://localhost:5055";
             };
             "/".proxyPass = "http://localhost:8082";
-            "/.well-known/".root = "/var/lib/acme/acme-challenge/";
           };
         };
       };
@@ -70,16 +69,18 @@ in
     defaults = {
       email = "aubrey@sanae6.ca";
       server = "https://acme-v02.api.letsencrypt.org/directory";
+      dnsProvider = "cloudflare";
+      environmentFile = pkgs.asOpnixPath "acme/cloudflared-token";
+      extraLegoFlags = [ "--dns.propagation.disable-rns=true" ];
     };
     certs = {
       ${domain} = {
-        domain = "*.${domain}";
+        extraDomainNames = [ "*.sanae6.ca" ];
 
         group = "nginx";
-        dnsProvider = "cloudflare";
+        reloadServices = [ "nginx" ];
         # location of your CLOUDFLARE_DNS_API_TOKEN=[value]
         # https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#EnvironmentFile=
-        environmentFile = pkgs.asOpnixPath "acme/cloudflared-token";
       };
     };
   };
