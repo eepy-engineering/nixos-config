@@ -16,7 +16,7 @@
     };
 
     virtualbox.host = {
-      enable = isDesktop;
+      # enable = isDesktop;
       addNetworkInterface = true;
     };
 

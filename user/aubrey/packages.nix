@@ -67,14 +67,11 @@
 
           # social
           (discord-canary.override { withVencord = true; })
-          signal-desktop
           thunderbird
           zulip
-          bluebubbles
 
           # web
           chromium
-          floorp-bin
 
           # media
           strawberry

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.obs-studio = {
     enable = true;
-    enableVirtualCamera = true;
+    enableVirtualCamera = false;
     plugins = with pkgs.obs-studio-plugins; [
       wlrobs
       obs-backgroundremoval

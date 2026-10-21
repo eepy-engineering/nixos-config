@@ -10,12 +10,12 @@
   };
 
   boot.extraModulePackages = [
-    config.boot.kernelPackages.gcadapter-oc-kmod
+    # config.boot.kernelPackages.gcadapter-oc-kmod
   ];
 
   # to autoload at boot:
   boot.kernelModules = [
-    "gcadapter_oc"
+    # "gcadapter_oc"
   ];
 
 }
