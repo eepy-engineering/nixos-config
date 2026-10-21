@@ -15,11 +15,20 @@
     socat
   ];
 
+  nixpkgs.overlays = [
+    (self: super: {
+      # openssh = super.openssh.override {
+      #   hpnSupport = true;
+      #   kerberos = self.libkrb5;
+      # };
+    })
+  ];
+
   services = {
     mediawiki = {
       enable = true;
       database.createLocally = true;
-      phpPackage = pkgs.php83;
+      phpPackage = pkgs.master-pkgs.php85;
       package = pkgs.smowiki-pkgs.mediawiki;
 
       passwordSender = "supermarioodysseywiki@gmail.com";

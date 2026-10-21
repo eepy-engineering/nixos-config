@@ -105,6 +105,20 @@
     nixcord.url = "github:FlameFlag/nixcord";
 
     nixpkgs-smowiki.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    tangled = {
+      url = "git+https://tangled.org/tangled.org/core";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # Disable useless monorepo inputs
+      inputs.actor-typeahead-src.follows = "";
+      inputs.fenix.follows = "";
+      inputs.htmx-src.follows = "";
+      inputs.htmx-ws-src.follows = "";
+      inputs.ibm-plex-mono-src.follows = "";
+      inputs.inter-fonts-src.follows = "";
+      inputs.lucide-src.follows = "";
+      inputs.mermaid-src.follows = "";
+    };
   };
 
   outputs =

@@ -12,19 +12,22 @@ in
           useACMEHost = domain;
           serverAliases = [ "www.${domain}" ];
           acmeRoot = null;
-          locations."/" = {
-            return = "200 '<html><body>Hi, I&apos;m Aubrey!</body></html>'";
-            extraConfig = ''
-              default_type text/html;
-            '';
-          };
-        };
-        "pds.${domain}" = {
-          forceSSL = true;
-          useACMEHost = domain;
-          acmeRoot = null;
           locations = {
-            "/".proxyPass = "http://localhost:3001";
+            "/" = {
+              return = "200 '<html><body>Hi, I&apos;m Aubrey!</body></html>'";
+              extraConfig = ''
+                default_type text/html;
+              '';
+            };
+            "/xrpc" = {
+              proxyPass = "http://localhost:3001";
+            };
+            "/.well-known/webfinger" = {
+              return = ''200 '{"links":[{"href":"https://atlogin.net","rel":"http://openid.net/specs/connect/1.0/issuer"}],"subject":"acct:user@sanae6.ca"}' '';
+              extraConfig = ''
+                default_type application/jrd+json;
+              '';
+            };
           };
         };
         "git.${domain}" = {
