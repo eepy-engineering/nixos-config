@@ -118,19 +118,20 @@ $wgRightsIcon = "$wgResourceBasePath/resources/assets/licenses/cc-by-sa.png";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 
 # User group permissions
-$wgGroupPermissions['*'   ]['createpage'] = true;
-$wgGroupPermissions['user']['createpage'] = true;
-#$wgGroupPermissions['*'   ]['edit'      ] = false;
-$wgGroupPermissions['*']['move'] = true;
+#$wgGroupPermissions['*'           ]['edit'] = false;
+$wgGroupPermissions['*'            ]['createpage'] = true;
+$wgGroupPermissions['user'         ]['createpage'] = true;
+$wgGroupPermissions['*'            ]['move'] = false;
+$wgGroupPermissions['autoconfirmed']['move'] = true;
+$wgAutoConfirmAge = 86400*3;
+$wgAutoConfirmCount = 10;
+$wgGroupPermissions['user'         ]['skipcaptcha'] = true;
+$wgGroupPermissions['*'            ]['createaccount'] = true;
+$wgGroupPermissions['user'         ]['translate'] = true;
+$wgGroupPermissions['sysop'        ]['pagetranslation'] = true;
+$wgGroupPermissions['sysop'        ]['deleterevision'] = true;
+$wgGroupPermissions['sysop'        ]['deletelogentry'] = true;
 $wgCaptchaTriggers['edit'] = true;
-$wgGroupPermissions['user']['skipcaptcha'] = true;
-$wgGroupPermissions['*'   ]['createaccount'  ] = true;
-
-$wgGroupPermissions['user']['translate'] = true;
-$wgGroupPermissions['sysop']['pagetranslation'] = true;
-
-$wgGroupPermissions['sysop']['deleterevision'] = true;
-$wgGroupPermissions['sysop']['deletelogentry'] = true;
 
 define("NS_GUIDE", 3000);
 define("NS_GUIDE_TALK", 3001);

@@ -6,8 +6,9 @@ def main [
   route_exit_node_traffic: bool
 ] {
   if (sys net | any {|r| $r.name == "pia"}) {
-    print "pia link has already been created, nothing to do"
-    exit
+    print "pia link has already been created, destroying it first"
+    ip link del dev pia
+  #   exit
   }
   let servers = http get https://serverlist.piaservers.net/vpninfo/servers/v6 | lines | get 0 | from json;
   let wg_port = $servers.groups.wg.ports.0.0

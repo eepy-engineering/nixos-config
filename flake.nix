@@ -142,6 +142,7 @@
       catppuccin,
       fcitx-passthrough,
       komisch-mono,
+      tangled,
       ...
     }:
     let
@@ -225,6 +226,9 @@
                 overlaysModule
                 home-manager.nixosModules.home-manager
                 pia.nixosModules.${config.system}.default
+                tangled.nixosModules.knot
+                tangled.nixosModules.spindle
+                tangled.nixosModules.knotmirror
                 ./system/${name}/configuration.nix
               ];
             };

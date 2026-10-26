@@ -173,11 +173,11 @@
           pos = "0 0";
           res = "2560x1600";
         };
-        DP-2 = {
+        DP-4 = {
           pos = "2560 260";
           res = "1920x1080";
         };
-        DP-4 = {
+        DP-2 = {
           pos = "4480 260";
           res = "1920x1080";
         };
@@ -223,19 +223,19 @@
           workspace = "8";
         }
         {
-          output = "DP-2";
+          output = "DP-4";
           workspace = "2";
         }
         {
-          output = "DP-2";
+          output = "DP-4";
           workspace = "3";
         }
         {
-          output = "DP-2";
+          output = "DP-4";
           workspace = "1";
         }
         {
-          output = "DP-4";
+          output = "eDP-1";
           workspace = "9";
         }
       ];

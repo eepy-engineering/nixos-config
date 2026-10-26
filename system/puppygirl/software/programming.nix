@@ -16,5 +16,7 @@
       dotnet-sdk_10
       dotnet-sdk_11
     ])
+
+    cef-binary
   ];
 }

@@ -13,7 +13,7 @@
   ];
   containers = {
     immich = {
-      autoStart = true;
+      autoStart = false;
       config =
         { ... }:
         {

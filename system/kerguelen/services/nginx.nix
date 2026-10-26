@@ -10,7 +10,10 @@ in
         ${domain} = {
           forceSSL = true;
           useACMEHost = domain;
-          serverAliases = [ "www.${domain}" ];
+          serverAliases = [
+            "www.${domain}"
+            "aubrey.${domain}"
+          ];
           acmeRoot = null;
           locations = {
             "/" = {
@@ -19,15 +22,23 @@ in
                 default_type text/html;
               '';
             };
-            "/xrpc" = {
+            "~ ^/(\\.well-known/(oauth-|atproto-did)|@atproto|oauth|xrpc)" = {
               proxyPass = "http://localhost:3001";
-            };
-            "/.well-known/webfinger" = {
-              return = ''200 '{"links":[{"href":"https://atlogin.net","rel":"http://openid.net/specs/connect/1.0/issuer"}],"subject":"acct:user@sanae6.ca"}' '';
               extraConfig = ''
-                default_type application/jrd+json;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
               '';
             };
+            # "/.well-known/webfinger" = {
+            #   return = ''200 '{"links":[{"href":"https://atlogin.net","rel":"http://openid.net/specs/connect/1.0/issuer"}],"subject":"acct:aubrey@sanae6.ca"}' '';
+            #   extraConfig = ''
+            #     default_type application/jrd+json;
+            #   '';
+            # };
           };
         };
         "git.${domain}" = {

@@ -156,6 +156,7 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.layoutControl.enabled": false,
     "workbench.startupEditor": "none",
+    "workbench.experimental.modernUI": false,
     "zenMode.fullScreen": false,
     "zenMode.hideLineNumbers": false,
     "zenMode.hideStatusBar": false,
@@ -184,4 +185,5 @@
     "zig.zls.enabled": "on",
     "zig.zls.path": "zls",
     "zig.path": "zig"
+
 }
