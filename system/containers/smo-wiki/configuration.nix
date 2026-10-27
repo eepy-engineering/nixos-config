@@ -75,8 +75,8 @@
           sha256 = "sha256-yJaCcq1S8sRLnnlswy0R5Nv/j2ZboLLdKxoOtMjp2BM=";
         };
         "EmbedVideo" = pkgs.fetchzip {
-          url = "https://github.com/StarCitizenWiki/mediawiki-extensions-EmbedVideo/archive/refs/tags/v4.0.0.zip";
-          sha256 = "sha256-NheTJxhXkogQutWsy8Ukfvjrh5jePv+bpeFs1V1kf1w=";
+          url = "https://github.com/StarCitizenWiki/mediawiki-extensions-EmbedVideo/archive/refs/tags/v4.2.0.zip";
+          sha256 = "sha256-l/npA13t/mKfKd5VooRqYcblbWqWeHFNo8isRp/NDn8=";
         };
         HeaderExtension = pkgs.fetchFromGitHub {
           owner = "WikiMANNia";
@@ -175,13 +175,13 @@
           paths = [
             (pkgs.fetchgit {
               url = "https://gerrit.wikimedia.org/r/mediawiki/extensions/Widgets";
-              rev = "b11807f09fd79b4d415892fbc7fceb3abb8c19bb";
-              sha256 = "sha256-AfFLDk82Mt1M4cikxCVl7tfbArKIZC2OIfzFISPcRXg=";
+              rev = "e67d0bd7ba410ad2ec1020c9d5ad3f8690bb5677";
+              sha256 = "sha256-wQcGVDhog4RrHshLlevDDcFDTEvchScp91whhUmFJEE=";
             })
             (pkgs.writeTextFile {
               name = "autoload.php";
               destination = "/vendor/autoload.php";
-              text = ''<?php include "${pkgs.smarty3}/Smarty.class.php" ?>'';
+              text = ''<?php include "${pkgs.callPackage ./smarty4.nix { }}/Smarty.class.php" ?>'';
             })
           ];
           postBuild = ''
