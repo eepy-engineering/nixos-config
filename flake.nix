@@ -105,7 +105,7 @@
     catppuccin.url = "github:catppuccin/nix";
     nixcord.url = "github:FlameFlag/nixcord";
 
-    nixpkgs-smowiki.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-smowiki.url = "github:nixos/nixpkgs/cf2189fe1559195d441e39d77127fbad17e83101";
 
     tangled = {
       url = "git+https://tangled.org/tangled.org/core";
@@ -160,7 +160,7 @@
             master-pkgs = import nixpkgs-master {
               system = final.stdenv.hostPlatform.system;
             };
-            smowiki-pkgs = import nixpkgs-master {
+            smowiki-pkgs = import nixpkgs-smowiki {
               system = final.stdenv.hostPlatform.system;
             };
             opnix = opnix.packages.${final.stdenv.hostPlatform.system}.default;

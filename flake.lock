@@ -730,17 +730,17 @@
     },
     "nixpkgs-smowiki": {
       "locked": {
-        "lastModified": 1786247143,
-        "narHash": "sha256-8S3Kcxs7D4UtxJxSJZz0m14CGhuW0MxfrIwJxeGWGnQ=",
+        "lastModified": 1792596251,
+        "narHash": "sha256-y+9pVesrXBSy81BCf3MKeY9mMb2TUl3GLXAp1URS7V4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "279b4a8275f032c566576b3f181fa0f27197f588",
+        "rev": "cf2189fe1559195d441e39d77127fbad17e83101",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "rev": "cf2189fe1559195d441e39d77127fbad17e83101",
         "type": "github"
       }
     },
