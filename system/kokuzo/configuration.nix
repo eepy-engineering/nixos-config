@@ -64,6 +64,15 @@
     useRoutingFeatures = "server";
   };
 
+  # The router forwards UDP 41641 to kokuzo (a static port forward, added
+  # 2026-10-28). Tell peers so, so that ones behind hard NATs (rclamp, on
+  # RC's network) connect directly instead of through a DERP relay: the
+  # router's own UPnP mapping only takes packets from addresses kokuzo has
+  # already sent to. A tailscaled debug knob; the address is the Fios one
+  # that hall-dns.nix keeps hall.ly pointed at, and goes stale if that
+  # changes (peers then fall back to the relay).
+  systemd.services.tailscaled.environment.TS_DEBUG_PRETENDPOINT = "108.30.87.159:41641";
+
   services.openssh = {
     hostKeys = [
       {
