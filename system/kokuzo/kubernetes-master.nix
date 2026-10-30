@@ -11,7 +11,8 @@
     extraFlags = [
       "--tls-san=100.70.181.9"
       "--tls-san=kokuzo.tailc38f.ts.net"
-      "--node-ip=0.0.0.0"
+      # Where etcd is registered (networking.nix), rather than whatever k3s picks.
+      "--node-ip=192.168.2.1"
       "--node-external-ip=100.70.181.9"
       "--debug"
     ];
