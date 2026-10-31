@@ -11,7 +11,12 @@
       inetutils
       hactool
       waypipe
-      python3
+      (python3.withPackages (
+        ps: with ps; [
+          binsync
+          pyghidra
+        ]
+      ))
     ]
     ++ (
       if isDesktop then
@@ -20,7 +25,7 @@
           gitkraken
           jetbrains.rider
           # jetbrains.clion
-          # jetbrains.idea-oss
+          intellij-idea
           # jetbrains.rust-rover
           android-studio
           bruno
@@ -84,6 +89,7 @@
           vlc
           cmus
           cmusfm
+          jellyfin-desktop
 
           # games
           prismlauncher
@@ -118,6 +124,7 @@
           _010editor
           libfaketime
           imhex
+          xxd
 
           # desktop
           wev

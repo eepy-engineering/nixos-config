@@ -14,7 +14,7 @@ const hostname_map = {
   "kerguelen": "kerguelen.tail6c2ee5.ts.net"
 };
 
-def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ...rest] {
+def --wrapped rebuild [subcmd: string, hostname: string, --remote-build (-r), --user (-u): string, ...rest] {
   prebuild
 
   let hn = hostname;
@@ -27,7 +27,8 @@ def --wrapped rebuild [subcmd: string, hostname: string, --user (-u): string, ..
     let remote_user = ($user | default $env.USER);
     let actual_hostname = $hostname_map | get -o $hostname | default $hostname;
     print $"remote switch on ($hostname) \(($actual_hostname)\)";
-    nixos-rebuild --flake $"(get flake uri)#($hostname)" --build-host $"($remote_user)@($actual_hostname)" --target-host $"($remote_user)@($actual_hostname)" --sudo $subcmd ...$rest;
+    let remote_build_args = if $remote_build { [--build-host $"($remote_user)@($actual_hostname)"] } else { [] };
+    nixos-rebuild --flake $"(get flake uri)#($hostname)" ...$remote_build_args --target-host $"($remote_user)@($actual_hostname)" --sudo $subcmd ...$rest;
   }
 };
 

@@ -3,6 +3,8 @@
     ../components/credentials.nix
   ];
 
+  opnix.outputDir = "/persist/credentials/directory";
+
   system.activationScripts = {
     opnix-link = {
       text = ''

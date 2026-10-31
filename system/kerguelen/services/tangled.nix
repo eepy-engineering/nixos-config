@@ -5,21 +5,33 @@
   ...
 }:
 let
-  cfg = config.services.tangled.knot;
+  cfg = config.services.tangled.knot-rs;
 in
 {
+  users = {
+    users.git.uid = 504;
+    groups.git.gid = 504;
+  };
   services = {
     tangled = {
-      knot = {
+      knot-rs = {
         enable = true;
-        gitUser = "git";
-        stateDir = "/var/lib/tangled-knot";
-        repo.scanPath = "${cfg.stateDir}/repos";
-        server = {
-          listenAddr = "0.0.0.0:3002";
-          hostname = "sanae6.ca";
-          internalListenAddr = "127.0.0.1:3003";
-          owner = "did:plc:wylibiungpfmooaz6ld5fdbg";
+        user = "git";
+        group = "git";
+        stateDir = "/persist/tangled";
+        environmentFile = "/persist/tangled/knot.env";
+        settings = {
+          server = {
+            hostname = "sanae6.ca";
+            admins = [ "did:plc:wylibiungpfmooaz6ld5fdbg" ];
+            ssh_listen_addr = "[::]:2223";
+          };
+          repo.scan_path = "/persist/git";
+          lfs.store_path = "/persist/tangled/lfs";
+          atproto.plc_directory = "https://plc.directory";
+          contact = {
+            email = "aubrey@sanae6.ca";
+          };
         };
       };
       spindle = {
@@ -33,7 +45,7 @@ in
       };
     };
     openssh = {
-      settings.AllowUsers = [ "git" ];
+      settings.AllowUsers = [ "git" "aubrey" ];
       settings.AllowGroups = [ "git" ];
     };
   };

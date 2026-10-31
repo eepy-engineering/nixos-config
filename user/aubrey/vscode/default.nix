@@ -68,6 +68,7 @@
         lu4nscr1pt1ng.fasm2-studio
         bitlang.cobol
         pkgs.open-vsx.evzen-wybitul.magic-racket
+        macabeus.vscode-fluent
       ];
     };
   };

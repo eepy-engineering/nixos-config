@@ -235,7 +235,7 @@
           workspace = "1";
         }
         {
-          output = "eDP-1";
+          output = "DP-2";
           workspace = "9";
         }
       ];

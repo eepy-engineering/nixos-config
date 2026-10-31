@@ -16,17 +16,20 @@
         uid = 1000;
       };
       tetra = {
-        enable = lib.mkForce false;
+        # enable = lib.mkForce false;
         uid = 1001;
         extraGroups = [ "wheel" ];
       };
+      # defaults from generic user configuration
       walter.enable = false;
       rose.enable = false;
       cysabi.enable = false;
+      # brother
       red = {
         uid = 1002;
         isNormalUser = true;
         description = "red";
+        createHome = false;
         shell = "${pkgs.shadow}/bin/nologin";
         openssh.authorizedKeys.keys = [
           (builtins.readFile ./red.pub)
