@@ -45,8 +45,11 @@ in
       };
     };
     openssh = {
-      settings.AllowUsers = [ "git" "aubrey" ];
-      settings.AllowGroups = [ "git" ];
+      settings.AllowUsers = [
+        "git"
+        "aubrey"
+      ];
+      settings.AllowGroups = [ "git" "users" ];
     };
   };
 }
