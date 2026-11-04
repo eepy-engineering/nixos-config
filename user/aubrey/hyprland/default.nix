@@ -6,7 +6,8 @@
 }:
 {
   wayland.windowManager.hyprland = {
-    enable = isDesktop;
+    # enable = isDesktop;
+    enable = false;
     package = pkgs.hyprland;
     xwayland.enable = true;
     systemd.enable = true;

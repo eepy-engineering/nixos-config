@@ -6,6 +6,7 @@ _: {
       "*" = {
         ForwardAgent = true;
         IdentityAgent = "~/.1password/agent.sock";
+        IdentityFile = ./main.pub;
       };
       "titan" = {
         User = "amt693";

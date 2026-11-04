@@ -1,4 +1,4 @@
-{ isDesktop, ... }: {
+{ isDesktop, lib, ... }: {
   xdg.configFile."1Password/ssh/agent.toml" = {
     enable = isDesktop;
     force = true;
@@ -6,5 +6,9 @@
       [[ssh-keys]]
       vault = "Private"
     '';
+  };
+
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = lib.mkIf isDesktop "$HOME/.1password/agent.sock";
   };
 }

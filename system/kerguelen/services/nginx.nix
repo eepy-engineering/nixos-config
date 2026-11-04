@@ -33,12 +33,6 @@ in
                 proxy_set_header Connection $connection_upgrade;
               '';
             };
-            # "/.well-known/webfinger" = {
-            #   return = ''200 '{"links":[{"href":"https://atlogin.net","rel":"http://openid.net/specs/connect/1.0/issuer"}],"subject":"acct:aubrey@sanae6.ca"}' '';
-            #   extraConfig = ''
-            #     default_type application/jrd+json;
-            #   '';
-            # };
           };
         };
         "git.${domain}" = {
@@ -78,12 +72,28 @@ in
     services = [ "acme-order-renew-sanae6.ca.service" ];
   };
 
+  # system.activationScripts = {
+  #   acme-persistence = {
+  #     text = ''
+  #       mkdir -p /var
+  #       # if [ /var/lib/acme -d ]; then /var/lib/acme fi
+  #       ln -s /persist/acme /var/lib/acme
+  #     '';
+  #   };
+  # };
+  fileSystems."/var/lib/acme" = {
+    device = "/persist/acme";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults = {
       email = "aubrey@sanae6.ca";
       server = "https://acme-v02.api.letsencrypt.org/directory";
       dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1";
       environmentFile = pkgs.asOpnixPath "acme/cloudflared-token";
       extraLegoFlags = [ "--dns.propagation.disable-rns=true" ];
     };

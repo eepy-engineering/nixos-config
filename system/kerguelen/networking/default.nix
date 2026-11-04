@@ -7,8 +7,9 @@
   networking = {
     useNetworkd = true;
     nameservers = [
-      "1.1.1.1#one.one.one.one"
-      "1.0.0.1#one.one.one.one"
+      "192.168.1.1"
+      # "1.1.1.1#one.one.one.one"
+      # "1.0.0.1#one.one.one.one"
     ];
     firewall = {
       enable = true;
@@ -32,6 +33,8 @@
       externalInterface = "enp0s25";
       enableIPv6 = true;
     };
+    hosts = {
+    };
   };
   systemd.network = {
     enable = true;
@@ -47,7 +50,7 @@
     enable = true;
     settings = {
       Resolve = {
-        DNSSEC = "true";
+        # DNSSEC = "true";
         Domains = [ "~." ];
         FallbackDNS = [
           "1.1.1.1#one.one.one.one"
@@ -55,7 +58,7 @@
           "2606:4700:4700::1111"
           "2606:4700:4700::1001"
         ];
-        DNSOverTLS = "true";
+        # DNSOverTLS = "true";
       };
     };
   };

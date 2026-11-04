@@ -106,20 +106,6 @@
     nixcord.url = "github:FlameFlag/nixcord";
 
     nixpkgs-smowiki.url = "github:nixos/nixpkgs/cf2189fe1559195d441e39d77127fbad17e83101";
-
-    tangled = {
-      url = "git+https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # Disable useless monorepo inputs
-      # inputs.actor-typeahead-src.follows = "";
-      # inputs.fenix.follows = "";
-      # inputs.htmx-src.follows = "";
-      # inputs.htmx-ws-src.follows = "";
-      # inputs.ibm-plex-mono-src.follows = "";
-      # inputs.inter-fonts-src.follows = "";
-      # inputs.lucide-src.follows = "";
-      # inputs.mermaid-src.follows = "";
-    };
   };
 
   outputs =
@@ -142,7 +128,6 @@
       catppuccin,
       fcitx-passthrough,
       komisch-mono,
-      tangled,
       ...
     }:
     let
@@ -226,8 +211,6 @@
                 overlaysModule
                 home-manager.nixosModules.home-manager
                 pia.nixosModules.${config.system}.default
-                tangled.nixosModules.knot-rs
-                tangled.nixosModules.spindle
                 ./system/${name}/configuration.nix
               ];
             };

@@ -1,9 +1,4 @@
 {
-  inputs,
-  opnix,
-  ...
-}:
-{
   home = {
     stateVersion = "24.11";
 
@@ -12,38 +7,46 @@
   };
 
   imports = [
-    opnix.homeManagerModules.default
-    inputs.catppuccin.homeModules.catppuccin
+    # general
+    ./packages.nix
+    # ./secrets.nix
     ../components/nix-index.nix
-    ./fcitx5
-    ./neovim
-    ./nushell
-    ./sway
-    ./vesktop
-    ./vscode
-    ./wezterm
-    ./anki.nix
-    ./editorconfig.nix
-    ./fonts.nix
-    ./fzf.nix
-    ./debugging.nix
-    ./ghidra.nix
-    ./git.nix
-    ./gtk.nix
-    ./hyfetch.nix
-    ./jujutsu.nix
-    ./kdeconnect.nix
     ./nix.nix
+
+    # desktop
+    ./fcitx5
+    ./fonts.nix
+    ./gtk.nix
+    ./kdeconnect.nix
+    ./sway
+
+    # apps
+    ./anki.nix
+    ./vesktop
+    ./zen.nix
+
+    # terminal
+    ./fzf.nix
+    ./hyfetch.nix
+    ./nushell
+    # ./rio.nix
+    ./tmux.nix
+    ./wezterm
+    ./zoxide.nix
+
+    # development
+    ./debugging.nix
+    ./editorconfig.nix
+    ./ghidra.nix
+    ./git
     ./micro.nix
     ./misc.nix
-    ./packages.nix
-    ./rio.nix
-    ./secrets.nix
-    ./ssh.nix
-    ./tmux.nix
-    ./zen.nix
+    ./neovim
+    ./vscode
     ./zed.nix
-    ./zoxide.nix
+
     ./1password.nix
+    ./keepassxc.nix
+    ./ssh
   ];
 }

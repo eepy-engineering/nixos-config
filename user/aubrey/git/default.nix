@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ./jujutsu.nix
+    ./radicle.nix
+  ];
   programs.git = {
     enable = true;
     package = pkgs.stable-pkgs.git;

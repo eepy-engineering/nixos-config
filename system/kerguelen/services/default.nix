@@ -5,7 +5,6 @@
     ./nginx.nix
     ./forgejo-runner.nix
     ./bsky-pds.nix
-    ./tangled.nix
     # containers
     ./firefly-iii
     ./forgejo

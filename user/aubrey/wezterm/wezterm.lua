@@ -24,4 +24,6 @@ config.window_padding = {
   bottom = 0,
 }
 
+config.mux_enable_ssh_agent = false
+
 return config
