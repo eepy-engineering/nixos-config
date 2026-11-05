@@ -21,6 +21,7 @@
     ./analytics
     ./calibre.nix
     ./syncplay.nix
+    ./batchmate-dev.nix
     ../components/virtualization.nix
 
     ../configuration.nix
