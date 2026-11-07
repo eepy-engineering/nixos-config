@@ -35,6 +35,33 @@ in
             };
           };
         };
+        "knot.${domain}" = {
+          forceSSL = true;
+          useACMEHost = domain;
+          acmeRoot = null;
+          locations = {
+            "/" = {
+              proxyPass = "http://localhost:3002";
+              extraConfig = ''
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_http_version 1.1;
+              '';
+            };
+            "/xrpc/com.atproto.sync.subscribeRepos" = {
+              proxyPass = "http://localhost:3002";
+              extraConfig = ''
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
+              '';
+            };
+          };
+        };
         "git.${domain}" = {
           forceSSL = true;
           useACMEHost = domain;
@@ -72,30 +99,17 @@ in
     services = [ "acme-order-renew-sanae6.ca.service" ];
   };
 
-  # system.activationScripts = {
-  #   acme-persistence = {
-  #     text = ''
-  #       mkdir -p /var
-  #       # if [ /var/lib/acme -d ]; then /var/lib/acme fi
-  #       ln -s /persist/acme /var/lib/acme
-  #     '';
-  #   };
-  # };
-  fileSystems."/var/lib/acme" = {
-    device = "/persist/acme";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults = {
       email = "aubrey@sanae6.ca";
       server = "https://acme-v02.api.letsencrypt.org/directory";
       dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1";
       environmentFile = pkgs.asOpnixPath "acme/cloudflared-token";
-      extraLegoFlags = [ "--dns.propagation.disable-rns=true" ];
+      extraLegoFlags = [
+        "--dns.propagation.disable-rns=true"
+        "--dns.resolvers=1.1.1.1,1.0.0.1"
+      ];
     };
     certs = {
       ${domain} = {

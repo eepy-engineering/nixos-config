@@ -106,6 +106,8 @@
     nixcord.url = "github:FlameFlag/nixcord";
 
     nixpkgs-smowiki.url = "github:nixos/nixpkgs/cf2189fe1559195d441e39d77127fbad17e83101";
+
+    tangled.url = "git+https://tangled.org/did:plc:j5hmlfdrwkvtxm7cjmu7j2is";
   };
 
   outputs =
