@@ -40,7 +40,7 @@
     # Applications
     zen-browser = {
       # fix: revert to youwen5 when resolved upstream
-      url = "github:turtley12/zen-browser-flake";
+      url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index = {
