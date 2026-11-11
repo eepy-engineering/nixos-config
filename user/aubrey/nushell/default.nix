@@ -8,6 +8,7 @@
     nushell = {
       enable = true;
       package = pkgs.nushell;
+      loadSessionVariables = true;
       configFile.source = lib.mkAfter ./config.nu;
       extraConfig = ''
          def "nu-complete zoxide path" [context: string] {

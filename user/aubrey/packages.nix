@@ -13,7 +13,6 @@
       waypipe
       (python3.withPackages (
         ps: with ps; [
-          binsync
           pyghidra
         ]
       ))
@@ -31,12 +30,9 @@
           bruno
           renderdoc
           avalonia-ilspy
-          digital
           nixfmt-tree
           nixd
           logisim-evolution
-          surfer
-          swim
           arduino
           arduino-cli
           platformio
@@ -45,8 +41,10 @@
           gamemakerEnv
           wgsl-analyzer
           godot-mono
-          spade
-          swim
+          # broke 11-11-2026
+          # surfer
+          # spade
+          # swim
           switch-toolbox
           jdk25
           scrcpy

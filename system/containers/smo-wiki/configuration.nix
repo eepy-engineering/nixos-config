@@ -28,7 +28,7 @@
     mediawiki = {
       enable = true;
       database.createLocally = true;
-      phpPackage = pkgs.master-pkgs.php85;
+      phpPackage = pkgs.php85;
       package = pkgs.smowiki-pkgs.mediawiki;
 
       passwordSender = "supermarioodysseywiki@gmail.com";

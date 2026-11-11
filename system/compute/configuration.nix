@@ -11,12 +11,9 @@
   hardware.enableAllFirmware = true;
 
   boot.initrd.network.enable = true;
-  boot.initrd.systemd = {
+  boot.initrd.systemd.network = {
     enable = true;
-    network = {
-      enable = true;
-      wait-online.extraArgs = [ "--dns" ];
-    };
+    wait-online.extraArgs = [ "--dns" ];
   };
 
   networking.useDHCP = true;

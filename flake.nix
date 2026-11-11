@@ -152,7 +152,15 @@
             };
             opnix = opnix.packages.${final.stdenv.hostPlatform.system}.default;
             zen-browser = zen-browser.packages.${final.stdenv.hostPlatform.system}.default;
-            nix-index = nix-index.packages.${final.stdenv.hostPlatform.system}.default;
+            # nix-index = nix-index.packages.${final.stdenv.hostPlatform.system}.default.overrideAttrs (
+            #   prev: with final; {
+            #     buildInputs = [
+            #       zstd
+            #       sqlite
+            #     ];
+            #     nativeBuildInputs = [ pkg-config ];
+            #   }
+            # );
             home-manager = home-manager.packages.${final.stdenv.hostPlatform.system};
             _010editor = O10editor.packages.${final.stdenv.hostPlatform.system}.default;
             antigravity = antigravity-nix.packages.${final.stdenv.hostPlatform.system}.default;

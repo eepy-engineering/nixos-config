@@ -27,7 +27,6 @@
       kernelModules = [ "amdgpu" ];
       network.enable = true;
       systemd = {
-        enable = true;
         network = {
           enable = true;
           wait-online.extraArgs = [ "--dns" ];
