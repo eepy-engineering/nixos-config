@@ -4,6 +4,6 @@
   ];
   services.pia-vpn = {
     enable = true;
-    region = "ca_toronto";
+    region = "ca_vancouver";
   };
 }

@@ -95,7 +95,8 @@
           osu-lazer-bin
           everest-mons
           archipelago
-          # wineWowPackages.unstableFull
+          wineWow64Packages.waylandFull
+          (bottles.override { removeWarningPopup = true; })
 
           # tools
           wl-clipboard
